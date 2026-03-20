@@ -2140,6 +2140,88 @@
 
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
+    /* ─── MOBILE ARC REPLACEMENT ─── */
+    .sp-mobile {
+      display: none; /* hidden on desktop */
+    }
+
+    @media (max-width: 768px) {
+      /* Hide the JS-driven arc canvas */
+      .sp-container { display: none; }
+
+      /* Show the static mobile layout */
+      .sp-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 24px 48px;
+        text-align: center;
+      }
+
+      .sp-mobile .sp-visuanza-m {
+        width: 96px; height: 96px;
+        border-radius: 50%;
+        background: #2e27b8;
+        box-shadow: 0 12px 40px rgba(46,39,184,0.5), 0 0 0 6px rgba(46,39,184,0.16), 0 0 0 12px rgba(46,39,184,0.06);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      .sp-mobile .sp-visuanza-m img {
+        width: 62px; height: auto;
+        filter: brightness(0) invert(1);
+      }
+
+      .sp-mobile .sp-text-m h2 {
+        font-size: 1.75rem;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        color: #111;
+        margin-bottom: 24px;
+      }
+      .sp-mobile .sp-text-m h2 .accent { color: var(--blue); }
+
+      .sp-logos-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 28px;
+      }
+
+      .sp-logos-row .sp-logo-m {
+        width: 72px; height: 72px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.14);
+        overflow: hidden;
+      }
+      .sp-logos-row .sp-logo-m img {
+        width: 68%; height: 68%;
+        object-fit: contain;
+        display: block;
+      }
+
+      /* Fix panel negative margin (phones hidden, so no overlap needed) */
+      .platforms-panel {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+      }
+
+      /* Hide floating glassmorphism cards — no room on mobile */
+      .panel-glass-card { display: none !important; }
+
+      /* Panel inner: tighten padding on mobile */
+      .platforms-panel-inner {
+        padding: 28px 20px;
+        border-radius: 16px;
+      }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 1100px) {
       .steps-grid,
@@ -2534,6 +2616,25 @@
       <div class="sp-cta-wrap">
         <a href="#contacto" class="btn-primary sp-cta">Solicite un presupuesto gratuito</a>
       </div>
+    </div>
+
+    <!-- Mobile-only static logo grid (arc canvas hidden on mobile) -->
+    <div class="sp-mobile">
+      <div class="sp-visuanza-m">
+        <img src="SynsLogo.png" alt="Visuanza" />
+      </div>
+      <div class="sp-text-m">
+        <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
+      </div>
+      <div class="sp-logos-row">
+        <div class="sp-logo-m" style="background:#FBEEED;"><img src="logos/MLG.png" alt=""/></div>
+        <div class="sp-logo-m" style="background:#DFF4F6;"><img src="logos/2logga.png" alt=""/></div>
+        <div class="sp-logo-m" style="background:#1a1a2e;"><img src="logos/bramspng.png" alt=""/></div>
+        <div class="sp-logo-m" style="background:#FDF6EA;"><img src="logos/mamma_thai.png" alt=""/></div>
+        <div class="sp-logo-m" style="background:#1a0e00;"><img src="logos/mazraa.png" alt=""/></div>
+        <div class="sp-logo-m" style="background:#FBEAEC;"><img src="logos/KimliLogoNoTxt.png" alt=""/></div>
+      </div>
+      <a href="#contacto" class="btn-primary sp-cta">Solicite un presupuesto gratuito</a>
     </div>
     </div><!-- /social-proof -->
   </section><!-- /hero + proof -->
