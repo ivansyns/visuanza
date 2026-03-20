@@ -2679,12 +2679,12 @@
         <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
       </div>
       <div class="sp-logos-row">
-        <div class="sp-logo-m"><img src="logos/MLG.png" alt="" style="width:68%;height:68%;object-fit:contain;filter:brightness(0) invert(1);"/></div>
+        <div class="sp-logo-m"><img src="logos/MLG.png" alt="" style="width:68%;height:68%;object-fit:contain;"/></div>
         <div class="sp-logo-m"><img src="logos/2logga.png" alt="" style="width:68%;height:68%;object-fit:contain;"/></div>
         <div class="sp-logo-m"><img src="logos/bramspng.png" alt="" style="width:68%;height:68%;object-fit:contain;"/></div>
-        <div class="sp-logo-m"><img src="logos/mamma_thai.png" alt="" style="width:68%;height:68%;object-fit:contain;filter:brightness(0) invert(1);"/></div>
+        <div class="sp-logo-m"><img src="logos/mamma_thai.png" alt="" style="width:68%;height:68%;object-fit:contain;"/></div>
         <div class="sp-logo-m"><img src="logos/mazraa.png" alt="" style="width:68%;height:68%;object-fit:contain;"/></div>
-        <div class="sp-logo-m"><img src="logos/KimliLogoNoTxt.png" alt="" style="width:68%;height:68%;object-fit:contain;filter:brightness(0) invert(1);"/></div>
+        <div class="sp-logo-m"><img src="logos/KimliLogoNoTxt.png" alt="" style="width:68%;height:68%;object-fit:contain;"/></div>
       </div>
       <a href="#contacto" class="btn-primary sp-cta">Solicite un presupuesto gratuito</a>
     </div>
@@ -3199,20 +3199,20 @@
 
       const D = 'rgba(255,255,255,0.08)'; // uniform dark glassmorphism bg
       const logoData = [
-        { img: 'logos/2logga.png',            bg: D },                                      // teal — colorful, keep
-        { img: 'logos/BERRABURRA_Ikon_1.png', bg: D, filter: 'brightness(0) invert(1)' },  // dark navy — invert
-        { img: 'logos/Din stycketext.png',    bg: D, filter: 'brightness(0) invert(1)' },  // dark gray — invert
-        { img: 'logos/KimliLogoNoTxt.png',    bg: D, filter: 'brightness(0) invert(1)' },  // dark red — invert
-        { img: 'logos/LogoPNG.png',           bg: D, filter: 'brightness(0) invert(1)' },  // dark purple — invert
-        { img: 'logos/MLG.png',               bg: D, filter: 'brightness(0) invert(1)' },  // dark red — invert
-        { img: 'logos/NP-Logo.png',           bg: D },                                      // gold — colorful, keep
-        { img: 'logos/Namnlös design.png',    bg: D, filter: 'brightness(0) invert(1)' },  // near-black — invert
-        { img: 'logos/Sams-Cafe-Logo.png',    bg: D },                                      // warm brown — colorful, keep
-        { img: 'logos/bramspng.png',          bg: D },                                      // white — visible on dark
-        { img: 'logos/logo.png',              bg: D },                                      // light pink/red — keep
-        { img: 'logos/mamma_thai.png',        bg: D, filter: 'brightness(0) invert(1)' },  // dark brown — invert
-        { img: 'logos/mazraa.png',            bg: D },                                      // orange — colorful, keep
-        { img: 'logos/partille.png',          bg: D, filter: 'brightness(0) invert(1)' },  // dark red — invert
+        { img: 'logos/2logga.png',            bg: D },
+        { img: 'logos/BERRABURRA_Ikon_1.png', bg: D },
+        { img: 'logos/Din stycketext.png',    bg: D },
+        { img: 'logos/KimliLogoNoTxt.png',    bg: D },
+        { img: 'logos/LogoPNG.png',           bg: D },
+        { img: 'logos/MLG.png',               bg: D },
+        { img: 'logos/NP-Logo.png',           bg: D },
+        { img: 'logos/Namnlös design.png',    bg: D },
+        { img: 'logos/Sams-Cafe-Logo.png',    bg: D },
+        { img: 'logos/bramspng.png',          bg: D },
+        { img: 'logos/logo.png',              bg: D },
+        { img: 'logos/mamma_thai.png',        bg: D },
+        { img: 'logos/mazraa.png',            bg: D },
+        { img: 'logos/partille.png',          bg: D },
       ];
       const N = logoData.length; // 14
 
@@ -3223,8 +3223,7 @@
         const img = document.createElement('img');
         img.src = l.img;
         img.alt = '';
-        img.style.cssText = 'width:70%;height:70%;object-fit:contain;display:block;pointer-events:none;' +
-          (l.filter ? 'filter:' + l.filter + ';' : '');
+        img.style.cssText = 'width:70%;height:70%;object-fit:contain;display:block;pointer-events:none;';
         el.appendChild(img);
         container.appendChild(el);
         return el;
