@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visuanza – Visibilidad Local para Restaurantes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #4F7EFF;
+      --blue-dark: #3a6be8;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --gray-dark: #1a1a1a;
+      --gray-mid: #555;
+      --gray-light: #f5f5f5;
+      --white: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #666;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ─── CONTAINER ─── */
+    .container {
+      width: 100%;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      height: 64px;
+    }
+
+    .nav-inner {
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    .nav-logo span {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-links li { margin-right: 32px; }
+    .nav-links li:last-child { margin-right: 0; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-links a .chevron {
+      font-size: 0.65rem;
+      opacity: 0.5;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .lang-flag { font-size: 1.1rem; }
+
+    .btn-primary {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: #333;
+      transform: translateY(-1px);
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-blue:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 130px 0 0;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -120px;
+      width: 820px; height: 960px;
+      background: radial-gradient(ellipse at 45% 30%,
+        rgba(139,92,246,0.16) 0%,
+        rgba(99,102,241,0.09) 35%,
+        rgba(79,126,255,0.05) 55%,
+        transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f4ff;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(79,126,255,0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .accent {
+      color: var(--blue);
+    }
+
+    /* Word carousel — clips the sliding word to one line */
+    .word-carousel-wrap {
+      display: inline-block;
+      overflow: hidden;
+      height: 1.1em;        /* matches h1 line-height: 1.1 */
+      vertical-align: bottom;
+      line-height: 1.1;
+    }
+
+    #hero-word {
+      display: inline-block;
+      color: #2563EB;        /* cobalt blue */
+      font-weight: 900;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .hero-cta { margin-bottom: 44px; }
+
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .stat-item .stat-logo {
+      width: 28px;
+      height: 28px;
+    }
+
+    .stat-item .stat-number {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--black);
+    }
+
+    .stat-item .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 32px;
+      background: #e0e0e0;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      min-height: 700px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Concentric orbit rings */
+    .orbit-rings-wrap {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 1;
+      /* explicit size = largest ring so clip-path has a real box to work with */
+      width: 730px; height: 730px;
+      /* show only bottom half — rings appear below/around the phone */
+      clip-path: inset(50% -600px 0px -600px);
+    }
+    .orbit-ring {
+      position: absolute;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .orbit-ring-1 { width: 430px; height: 430px; border: 1.5px solid rgba(79,126,255,0.20); }
+    .orbit-ring-2 { width: 580px; height: 580px; border: 1.5px solid rgba(79,126,255,0.20); }
+    .orbit-ring-3 { width: 730px; height: 730px; border: 1.5px solid rgba(79,126,255,0.20); }
+
+    /* Soft glow behind phone — matches page purple/lavender accent */
+    .phone-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 560px; height: 560px;
+      background: radial-gradient(ellipse,
+        rgba(139,92,246,0.26) 0%,
+        rgba(99,102,241,0.14) 38%,
+        rgba(79,126,255,0.06) 62%,
+        transparent 80%);
+      border-radius: 50%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Phone with real PNG frame */
+    .phone-wrap {
+      width: 340px;
+      height: 716px; /* 750 * (340/356) */
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Real phone frame — sits on top, covers bezel/chrome */
+    .phone-frame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Screen content fills the transparent hole in phoneMock.png */
+    .phone-screen-inner {
+      position: absolute;
+      top: 15px;   /* 16 * (340/356) */
+      left: 15px;  /* 16 * (340/356) */
+      width: 306px; /* 320 * (340/356) */
+      height: 685px; /* 717 * (340/356) */
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      z-index: 5;
+      padding-top: 4px;
+    }
+
+    /* Status bar with dynamic island */
+    .phone-notch-area {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 16px 0;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .dynamic-island-pill {
+      position: absolute;
+      left: 50%; top: 8px;
+      transform: translateX(-50%);
+      width: 86px; height: 28px;
+      background: #0d0d0d;
+      border-radius: 22px;
+      z-index: 5;
+    }
+    .phone-time {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #111;
+      z-index: 6;
+    }
+    .phone-status-right {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      z-index: 6;
+    }
+
+    /* ─── PHONE SCREEN CONTENT ─── */
+    .search-header {
+      background: #fff;
+      padding: 0 10px 6px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border-bottom: 1px solid #f0f0f0;
+      flex-shrink: 0;
+    }
+    .google-logo-sm { width: 56px; flex-shrink: 0; }
+    .phone-search-bar {
+      flex: 1;
+      background: #f1f3f4;
+      border-radius: 22px;
+      padding: 6px 10px;
+      font-size: 0.65rem;
+      color: #444;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .phone-tabs-row {
+      display: flex;
+      background: #fff;
+      border-bottom: 1.5px solid #e8eaed;
+      overflow-x: hidden;
+      flex-shrink: 0;
+    }
+    .phone-tab {
+      padding: 7px 10px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #5f6368;
+      white-space: nowrap;
+    }
+    .phone-tab.active {
+      color: #1a73e8;
+      border-bottom: 2.5px solid #1a73e8;
+      margin-bottom: -1.5px;
+    }
+    .phone-filters-row {
+      display: flex;
+      gap: 5px;
+      padding: 7px 10px;
+      background: #fff;
+      overflow-x: hidden;
+      flex-shrink: 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .phone-pill {
+      background: #f1f3f4;
+      border: 1px solid #dadce0;
+      border-radius: 14px;
+      padding: 3px 8px;
+      font-size: 0.58rem;
+      font-weight: 600;
+      color: #3c4043;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .phone-pill.active { background: #e8f0fe; border-color: #1a73e8; color: #1a73e8; }
+    /* Map section — ~35% of 685px screen */
+    .map-section {
+      height: 240px;
+      background: linear-gradient(160deg, #dceefb 0%, #c9e3f3 60%, #b8d8ed 100%);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .map-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.22) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .mrd { position: absolute; background: rgba(255,255,255,0.8); border-radius: 2px; }
+    .mrh { height: 4px; left: 0; right: 0; }
+    .mrh.w { height: 7px; background: rgba(255,255,255,0.95); }
+    .mrv { width: 4px; top: 0; bottom: 0; }
+    .mrv.w { width: 7px; background: rgba(255,255,255,0.95); }
+    .mblk {
+      position: absolute;
+      background: rgba(255,255,255,0.28);
+      border-radius: 2px;
+    }
+    .mpin {
+      position: absolute;
+      width: 20px; height: 20px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .mpin::after {
+      content: '';
+      position: absolute;
+      width: 8px; height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .mpin.red { background: #ea4335; }
+    .mpin.grn { background: #34a853; }
+    .mpin.blu { background: #4285f4; }
+    .mpin.big { width: 26px; height: 26px; }
+    .mpin.big::after { width: 10px; height: 10px; }
+    /* Listings — fill remaining height */
+    .listings-section { flex: 1; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+    .listing-item {
+      flex: 1;
+      display: flex;
+      gap: 10px;
+      padding: 0 12px;
+      border-bottom: 1px solid #f3f3f3;
+      align-items: center;
+    }
+    .listing-thumb {
+      width: 66px; height: 66px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    .listing-info { flex: 1; min-width: 0; }
+    .listing-name {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+    .listing-row {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.58rem;
+      color: #555;
+      margin-bottom: 2px;
+    }
+    .ls-stars { color: #fbbc04; }
+    .ls-open { color: #2e7d32; font-weight: 600; }
+
+    /* ─── FLOATING GBP CARD ─── */
+    .gbp-float-card {
+      position: absolute;
+      right: -24px;
+      bottom: 100px;
+      top: auto;
+      width: 210px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 13px 14px;
+      box-shadow:
+        0 24px 64px rgba(0,0,0,0.20),
+        0 8px 24px rgba(0,0,0,0.10),
+        0 0 0 1px rgba(0,0,0,0.05);
+      z-index: 15;
+      animation: floatCard 4.2s ease-in-out infinite;
+    }
+    @keyframes floatCard {
+      0%, 100% { transform: rotate(-6deg) translateY(0px); }
+      50%       { transform: rotate(-6deg) translateY(-8px); }
+    }
+    .gbp-top { display: flex; gap: 8px; align-items: flex-start; margin-bottom: 9px; }
+    .gbp-info { flex: 1; min-width: 0; }
+    .gbp-photo-thumb {
+      width: 52px; height: 68px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      background: linear-gradient(150deg, #ff9a3c 0%, #ff6b6b 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      overflow: hidden;
+    }
+    .gbp-name { font-size: 0.68rem; font-weight: 800; color: #1a1a1a; line-height: 1.2; margin-bottom: 2px; }
+    .gbp-cat  { font-size: 0.54rem; color: #777; margin-bottom: 4px; }
+    .gbp-rating-row { display: flex; align-items: center; gap: 3px; margin-bottom: 3px; }
+    .gbp-score { font-size: 0.7rem; font-weight: 800; color: #1a1a1a; }
+    .gbp-stars-span { color: #fbbc04; font-size: 0.58rem; }
+    .gbp-count { font-size: 0.54rem; color: #777; }
+    .gbp-hours { font-size: 0.54rem; color: #2e7d32; font-weight: 600; }
+    .gbp-btns { display: flex; gap: 4px; }
+    .gbp-btn {
+      flex: 1; padding: 5px 2px;
+      border: none; border-radius: 8px;
+      font-size: 0.46rem; font-weight: 700;
+      cursor: pointer; background: #e8f0fe; color: #1a73e8;
+      white-space: nowrap;
+    }
+    .gbp-btn:nth-child(2) { background: #f1f8e9; color: #2e7d32; }
+    .gbp-btn:nth-child(3) { background: #fce4ec; color: #c62828; }
+
+    /* Floating app icons */
+    .app-icon {
+      position: absolute;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.08);
+      animation: floatIcon ease-in-out infinite;
+      z-index: 3;
+    }
+
+    /* Four icons — Google Maps, Instagram, TikTok, Facebook */
+    /* Google Maps — top right */
+    .icon-maps {
+      width: 58px; height: 58px;
+      top: 4%; right: 6%;
+      background: transparent;
+      box-shadow: none;
+      animation-duration: 3.1s; animation-delay: 0.2s;
+      animation-name: floatIconR5;
+    }
+    /* Instagram — right mid: raw SVG only, no container chrome */
+    .icon-ig {
+      width: 54px; height: 54px;
+      top: 40%; right: 1%;
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      animation-duration: 3.6s; animation-delay: 0.9s;
+      animation-name: floatIconRn6;
+    }
+    /* TikTok — top left */
+    .icon-tiktok {
+      width: 52px; height: 52px;
+      top: 8%; left: 4%;
+      background: #010101;
+      animation-duration: 2.9s; animation-delay: 0.5s;
+      animation-name: floatIconRn4;
+    }
+    /* Facebook — left mid */
+    .icon-fb {
+      width: 56px; height: 56px;
+      top: 44%; left: 2%;
+      background: #1877f2; color: #fff;
+      animation-duration: 3.4s; animation-delay: 1.1s;
+      animation-name: floatIconR3;
+    }
+
+    @keyframes floatIconR5   { 0%,100%{transform:translateY(0) rotate(5deg)}  50%{transform:translateY(-10px) rotate(5deg)} }
+    @keyframes floatIconRn6  { 0%,100%{transform:translateY(0) rotate(-6deg)} 50%{transform:translateY(-10px) rotate(-6deg)} }
+    @keyframes floatIconRn4  { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-10px) rotate(-4deg)} }
+    @keyframes floatIconR3   { 0%,100%{transform:translateY(0) rotate(3deg)}  50%{transform:translateY(-10px) rotate(3deg)} }
+
+    /* brands strip removed */
+
+    /* ─── SOCIAL PROOF ─── */
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .social-proof {
+      position: relative;
+      padding-top: 90px;
+    }
+
+    /* Conveyor belt container */
+    .sp-container {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+    }
+
+    /* Visuanza — fixed at top center, the belt's highest point */
+    .sp-visuanza {
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #2e27b8;
+      box-shadow: 0 16px 56px rgba(46,39,184,0.55), 0 0 0 7px rgba(46,39,184,0.18), 0 0 0 14px rgba(46,39,184,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+    }
+    .sp-visuanza img {
+      width: 90px;
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    /* Logo tiles — always exactly 120px, never scale */
+    .sp-logo {
+      position: absolute;
+      top: 0; left: 0;
+      width: 120px;
+      height: 120px;
+      border-radius: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      line-height: 1;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.16);
+      will-change: transform, filter, opacity;
+      z-index: 5;
+    }
+
+    /* Text — centered in section, below Visuanza */
+    .sp-text {
+      position: absolute;
+      top: 215px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      width: 660px;
+      max-width: 88vw;
+      z-index: 20;
+      pointer-events: none;
+    }
+    .sp-text h2 {
+      font-size: clamp(1.9rem, 3.2vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+    .sp-text h2 .accent { color: var(--blue); }
+
+    /* CTA — below text, still in center */
+    .sp-cta-wrap {
+      position: absolute;
+      top: 330px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      white-space: nowrap;
+    }
+    .sp-cta { padding: 14px 32px; }
+
+    /* ─── PLATFORMS SHOWCASE ─── */
+    /* ─── OMNIPRESENCIA DIGITAL ─── */
+    .platforms {
+      background: var(--black);
+      background-image:
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      padding: 100px 0 0;
+      position: relative;
+      overflow: visible;
+    }
+
+    /* Ambient top glow */
+    .platforms::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 400px;
+      background: radial-gradient(ellipse, rgba(79,126,255,0.13) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Part 1: two-column headline + description */
+    .platforms-top {
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      padding-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .platforms-top-left .section-label { color: rgba(255,255,255,0.42); }
+
+    .platforms-top-left h2 {
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+
+    .platforms-top-left h2 .accent { color: var(--blue); }
+
+    .platforms-top-right { padding-top: 10px; }
+
+    .platforms-top-right > p {
+      color: rgba(255,255,255,0.52);
+      font-size: 1rem;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .platform-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .platform-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 100px;
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.62);
+      white-space: nowrap;
+    }
+
+    /* Part 1: Phones fan — poker card style, overlapping cluster */
+    .phones-fan-wrap {
+      position: relative;
+      height: 530px;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+      overflow: visible;
+      z-index: 1;
+    }
+
+    /* Ambient glow beneath the cluster */
+    .phones-fan-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 860px; height: 180px;
+      background: radial-gradient(ellipse, rgba(79,126,255,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    /* Shared phone shell */
+    .showcase-phone {
+      background: #111;
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow:
+        0 24px 48px rgba(0,0,0,0.45),
+        0 0 0 1px rgba(255,255,255,0.06),
+        inset 0 0 0 1px rgba(255,255,255,0.02);
+      position: absolute;
+      bottom: 0;
+      transform-origin: bottom center;
+    }
+
+    .sp-screen {
+      border-radius: 30px;
+      overflow: hidden;
+      background: white;
+    }
+
+    /* Phone 1 – Facebook · far left, most tilted */
+    .sp-fb {
+      width: 215px;
+      left: 50%; margin-left: -360px;
+      transform: rotate(-18deg);
+      z-index: 1;
+    }
+    .sp-fb .sp-screen { height: 415px; background: #f0f2f5; overflow: hidden; }
+
+    /* Phone 2 – Apple Maps · centre-left */
+    .sp-gmb {
+      width: 228px;
+      left: 50%; margin-left: -212px;
+      transform: rotate(-6deg);
+      z-index: 2;
+    }
+    .sp-gmb .sp-screen { height: 442px; background: #1c1c1e; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* Phone 3 – Google Maps listing · centre-right */
+    .sp-chat {
+      width: 228px;
+      left: 50%; margin-left: -50px;
+      transform: rotate(6deg);
+      z-index: 3;
+    }
+    .sp-chat .sp-screen { height: 442px; background: white; overflow: hidden; }
+
+    /* Phone 4 – ChatGPT · far right */
+    .sp-stats {
+      width: 215px;
+      left: 50%; margin-left: 110px;
+      transform: rotate(18deg);
+      z-index: 4;
+    }
+    .sp-stats .sp-screen { height: 415px; background: #343541; display: flex; flex-direction: column; overflow: hidden; }
+
+    /* Part 2: Conversion panel — overlaps phones above, bleeds into white below */
+    .platforms-panel {
+      max-width: 1530px;
+      margin: -220px auto 0;
+      margin-bottom: -80px;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+      padding-bottom: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    .platforms-panel-inner {
+      background: #0d0d1c;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 28px;
+      padding: clamp(32px, 4vw, 64px);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Top-center radial light source */
+    /* Spotlight centered above the phone (right column ≈ 79% across panel) */
+    .platforms-panel-inner::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 79%;
+      transform: translateX(-50%);
+      width: 500px; height: 280px;
+      background: radial-gradient(ellipse, rgba(99,130,255,0.22) 0%, rgba(79,126,255,0.07) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Scattered particle dots */
+    .platforms-panel-inner::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.38);
+      box-shadow:
+        68px  110px 0 1px rgba(255,255,255,0.40),
+        230px  62px 0 0px rgba(255,255,255,0.30),
+        410px 148px 0 1px rgba(255,255,255,0.36),
+        630px  54px 0 0px rgba(255,255,255,0.42),
+        840px  98px 0 1px rgba(255,255,255,0.28),
+       1070px 170px 0 0px rgba(255,255,255,0.34),
+        150px 330px 0 1px rgba(255,255,255,0.26),
+        490px 290px 0 0px rgba(255,255,255,0.38),
+        770px 360px 0 1px rgba(255,255,255,0.30),
+        980px 250px 0 0px rgba(255,255,255,0.32);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Raise panel content above pseudo-elements */
+    .panel-left,
+    .panel-right { position: relative; z-index: 1; }
+
+    .panel-left .section-label { color: rgba(255,255,255,0.38); margin-bottom: 14px; }
+
+    .panel-left h3 {
+      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+
+    .panel-left h3 .accent { color: var(--blue); }
+
+    .panel-checklist {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .panel-checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.88rem;
+      line-height: 1.55;
+    }
+
+    .check-icon {
+      width: 20px; height: 20px;
+      background: rgba(79,126,255,0.16);
+      border: 1px solid rgba(79,126,255,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: #6b9fff;
+      font-size: 0.58rem;
+      font-weight: 800;
+    }
+
+    .panel-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel-phone-wrap { position: relative; }
+
+    .panel-phone {
+      width: 220px;
+      background: #111;
+      border-radius: 36px;
+      padding: 10px;
+      box-shadow: none;
+      transform: rotate(-4deg);
+    }
+
+    /* Glassmorphism floating cards around panel phone */
+    .panel-glass-card {
+      position: absolute;
+      background: rgba(14, 14, 34, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 14px;
+      padding: 11px 14px;
+      z-index: 10;
+    }
+
+    /* Float animation for panel cards */
+    @keyframes panelFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+    @keyframes panelFloatBadge {
+      0%, 100% { transform: rotate(5deg) translateY(0px); }
+      50%       { transform: rotate(5deg) translateY(-8px); }
+    }
+
+    /* Revenue trend card — top-left of phone */
+    .panel-glass-revenue {
+      top: 18px;
+      left: -190px;
+      width: 182px;
+      animation: panelFloat 3s ease-in-out infinite;
+    }
+
+    .pgc-title {
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 9px;
+      line-height: 1.3;
+    }
+
+    .pgc-chart {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 7px;
+    }
+
+    .pgc-sub {
+      font-size: 0.58rem;
+      color: rgba(255,255,255,0.42);
+    }
+
+    /* Visibility badge — top-right of phone */
+    .panel-glass-visibility {
+      top: 80px;
+      right: -170px;
+      width: 160px;
+      animation: panelFloat 3s ease-in-out infinite 0.5s;
+    }
+
+    .pgc-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .pgc-label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pgc-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .pgc-value .pgc-arrow {
+      color: #4fce82;
+      font-size: 0.85rem;
+    }
+
+    .panel-phone-screen {
+      border-radius: 28px;
+      overflow: hidden;
+      background: white;
+      height: 390px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Revenue badge overlaying the panel phone */
+    .panel-revenue-badge {
+      position: absolute;
+      bottom: -14px;
+      right: -44px;
+      background: white;
+      border-radius: 18px;
+      padding: 14px 18px;
+      box-shadow: 0 14px 36px rgba(0,0,0,0.28);
+      min-width: 158px;
+      animation: panelFloatBadge 3s ease-in-out infinite 1s;
+    }
+
+    .panel-rev-label {
+      font-size: 0.65rem;
+      color: #70757a;
+      margin-bottom: 3px;
+      font-weight: 500;
+    }
+
+    .panel-rev-number {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: #1e8e3e;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .panel-rev-change {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.62rem;
+      color: #1e8e3e;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* Screen contents */
+    .fb-header {
+      background: #1877f2;
+      color: white;
+      padding: 8px 10px;
+      font-size: 0.55rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .fb-body {
+      padding: 8px;
+    }
+
+    .fb-profile-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+
+    .fb-avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5rem;
+      color: white;
+      font-weight: 700;
+    }
+
+    .fb-name { font-size: 0.55rem; font-weight: 700; color: #1c1e21; }
+    .fb-meta { font-size: 0.45rem; color: #65676b; }
+
+    .fb-post-text {
+      font-size: 0.5rem;
+      color: #1c1e21;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .fb-img {
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(135deg, #8B4513, #D2691E, #CD853F);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+
+    .fb-actions {
+      display: flex;
+      gap: 4px;
+      border-top: 1px solid #e4e6ea;
+      padding-top: 4px;
+    }
+
+    .fb-act-btn {
+      flex: 1;
+      font-size: 0.45rem;
+      color: #65676b;
+      text-align: center;
+      padding: 3px 0;
+    }
+
+    /* GMB Screen */
+    .gmb-header {
+      background: #fff;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .gmb-g-logo {
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .g-blue { color: #4285f4; }
+    .g-red  { color: #ea4335; }
+    .g-yellow { color: #fbbc05; }
+    .g-green  { color: #34a853; }
+
+    .gmb-search {
+      flex: 1;
+      background: #f1f3f4;
+      border-radius: 20px;
+      padding: 3px 8px;
+      font-size: 0.45rem;
+      color: #555;
+    }
+
+    .gmb-map {
+      height: 90px;
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .gmb-map-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px);
+      background-size: 14px 14px;
+    }
+
+    .gmb-pin {
+      position: absolute;
+      top: 30%; left: 45%;
+      width: 18px; height: 18px;
+      background: #ea4335;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 2px 6px rgba(234,67,53,0.5);
+    }
+
+    .gmb-pin::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%) rotate(45deg);
+      width: 6px; height: 6px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .gmb-body {
+      padding: 8px;
+    }
+
+    .gmb-biz-name {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+
+    .gmb-category {
+      font-size: 0.5rem;
+      color: #70757a;
+      margin-bottom: 4px;
+    }
+
+    .gmb-rating-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .gmb-stars { color: #fbbc04; font-size: 0.5rem; }
+    .gmb-rating-num { font-size: 0.5rem; color: #1a1a1a; font-weight: 600; }
+    .gmb-reviews { font-size: 0.45rem; color: #70757a; }
+
+    .gmb-actions {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .gmb-act-btn {
+      flex: 1;
+      padding: 4px 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.45rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .gmb-act-blue { background: #e8f0fe; color: #1a73e8; }
+    .gmb-act-outline { background: transparent; color: #1a73e8; border: 1px solid #1a73e8; }
+
+    .gmb-hours-row {
+      font-size: 0.45rem;
+      color: #1e8e3e;
+    }
+
+    .gmb-info-row {
+      font-size: 0.45rem;
+      color: #70757a;
+      margin-top: 2px;
+    }
+
+    /* ChatGPT Screen */
+    .chat-header {
+      background: #343541;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chat-title {
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+
+    .chat-openai {
+      width: 16px; height: 16px;
+      background: #10a37f;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.4rem;
+      color: white;
+      font-weight: 700;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .chat-msg-user {
+      background: #40414f;
+      color: rgba(255,255,255,0.9);
+      border-radius: 10px 10px 2px 10px;
+      padding: 6px 8px;
+      font-size: 0.48rem;
+      line-height: 1.4;
+      align-self: flex-end;
+      max-width: 85%;
+    }
+
+    .chat-msg-ai {
+      background: #444654;
+      color: rgba(255,255,255,0.85);
+      border-radius: 10px 10px 10px 2px;
+      padding: 6px 8px;
+      font-size: 0.48rem;
+      line-height: 1.5;
+      align-self: flex-start;
+      max-width: 90%;
+    }
+
+    .chat-msg-ai strong {
+      color: white;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .chat-restaurant-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .chat-rest-num {
+      width: 12px; height: 12px;
+      background: #10a37f;
+      border-radius: 50%;
+      font-size: 0.38rem;
+      color: white;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .chat-rest-name { font-size: 0.45rem; color: rgba(255,255,255,0.8); }
+
+    /* Stats Phone Screen */
+    .stats-header {
+      background: #1a73e8;
+      padding: 8px 10px;
+      color: white;
+    }
+
+    .stats-header-title {
+      font-size: 0.55rem;
+      font-weight: 700;
+    }
+
+    .stats-header-sub {
+      font-size: 0.45rem;
+      opacity: 0.8;
+    }
+
+    .stats-body {
+      padding: 10px;
+      background: white;
+    }
+
+    .stats-big-number {
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: #1e8e3e;
+      letter-spacing: -0.03em;
+    }
+
+    .stats-period {
+      font-size: 0.5rem;
+      color: #70757a;
+      margin-bottom: 8px;
+    }
+
+    .stats-chart {
+      width: 100%;
+      height: 60px;
+      background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .stats-chart-line {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background: linear-gradient(to top, rgba(52,168,83,0.4), transparent);
+    }
+
+    .stats-mini-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .stats-mini-card {
+      flex: 1;
+      background: #f8f9fa;
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+    }
+
+    .stats-mini-val {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: #1a73e8;
+    }
+
+    .stats-mini-lbl {
+      font-size: 0.42rem;
+      color: #70757a;
+    }
+
+    .maps-stats-map {
+      height: 80px;
+      background: linear-gradient(135deg, #e8f4fd, #c5e3f0);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-it-works {
+      padding: 200px 0 110px;
+      padding-bottom: 80px;
+      background: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 64px;
+      max-width: 1530px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 .accent { color: var(--blue); }
+
+    .section-header p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    .step-card {
+      background: var(--gray-light);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    }
+
+    .step-number {
+      width: 40px; height: 40px;
+      background: var(--blue);
+      color: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+
+    .step-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── SERVICES ─── */
+    .services {
+      padding: 110px 0;
+      background: var(--gray-light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    .service-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      border: 1px solid #f0f0f0;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      border-color: rgba(79,126,255,0.2);
+    }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+
+    .icon-bg-blue { background: #e8f0fe; }
+    .icon-bg-green { background: #e8f5e9; }
+    .icon-bg-orange { background: #fff3e0; }
+    .icon-bg-purple { background: #f3e5f5; }
+    .icon-bg-red { background: #fce4ec; }
+    .icon-bg-teal { background: #e0f2f1; }
+
+    .service-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--black);
+    }
+
+    .service-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── STATS SECTION ─── */
+    .stats-section {
+      background: var(--black);
+      padding: 110px 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      max-width: 1530px;
+      margin: 0 auto 48px;
+      padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px);
+      text-align: center;
+    }
+
+    .stat-block .number {
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .stat-block .number .accent { color: var(--blue); }
+
+    .stat-block .label {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+    }
+
+    .stats-section .section-header h2 { color: white; }
+    .stats-section .section-header p { color: rgba(255,255,255,0.55); }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      padding: 110px 0;
+      background: var(--white);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    .testimonial-card {
+      background: #fafafa;
+      border: 1px solid #f0f0f0;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.06);
+    }
+
+    .testimonial-stars {
+      color: #fbbc04;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+    }
+
+    .testimonial-text {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .author-biz {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      background: var(--blue);
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -20%;
+      width: 60%; height: 200%;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta-section::after {
+      content: '';
+      position: absolute;
+      top: -30%; right: -10%;
+      width: 40%; height: 160%;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.8);
+      max-width: 500px;
+      margin: 0 auto 32px;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--blue);
+      border: none;
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #0d0d0d;
+      color: rgba(255,255,255,0.6);
+      padding: 60px 0 30px;
+    }
+
+    .footer-inner {
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    /* footer-inner padding handled by clamp */
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
+
+    .footer-logo img {
+      height: 32px;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-logo span {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .footer-desc {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      max-width: 240px;
+    }
+
+    .footer-col h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.82rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+
+    .footer-newsletter h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 8px;
+    }
+
+    .footer-newsletter p {
+      font-size: 0.78rem;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .footer-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-input {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: white;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .footer-input::placeholder { color: rgba(255,255,255,0.3); }
+
+    .footer-input:focus {
+      border-color: rgba(79,126,255,0.5);
+    }
+
+    .btn-submit {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover { background: var(--blue-dark); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-legal a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .steps-grid,
+      .services-grid,
+      .stats-grid,
+      .testimonials-grid { padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 0;
+        min-height: unset;
+      }
+
+      .hero { padding-top: 90px; padding-bottom: 0; }
+
+      .hero p, .hero-stats { justify-content: center; }
+
+      .hero-visual { display: none; }
+
+      .steps-grid, .services-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .nav-links { display: none; }
+
+      .phones-fan-wrap { display: none; }
+      .platforms-top { grid-template-columns: 1fr; gap: 24px; }
+      .platforms-panel-inner { grid-template-columns: 1fr; }
+      .panel-right { display: none; }
+
+      .platforms { padding: 60px 0 0; }
+    }
+
+    @media (max-width: 600px) {
+      .steps-grid,
+      .services-grid,
+      .stats-grid,
+      .testimonials-grid { padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px); }
+
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* Scroll animations — CSS-driven, no hidden-by-default */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="SynsLogo.png" alt="Visuanza" />
+        <span>Visuanza</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#servicios">Servicios <span class="chevron">▾</span></a></li>
+        <li><a href="#producto">Producto</a></li>
+        <li><a href="#estrategia">Estrategia</a></li>
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="#contacto">Contactar</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
+        <a href="#contacto" class="btn-primary">Pedir propuesta</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO + SOCIAL PROOF (one continuous section) ─── -->
+  <section class="hero" id="producto">
+    <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        📍 Visibilidad local para negocios
+      </div>
+      <h1>Qué tan visible es<br /><span class="accent">Tu <span class="word-carousel-wrap"><span id="hero-word">tienda</span></span></span><br />en línea</h1>
+      <p>Pon tu negocio en el mapa con Visuanza. Te ayudamos a posicionarte en los buscadores más utilizados y a atraer a más clientes potenciales.</p>
+      <div class="hero-cta">
+        <a href="#contacto" class="btn-primary" style="padding: 14px 28px; font-size: 0.9rem;">Solicite un análisis gratuito</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <svg class="stat-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          <div>
+            <div class="stat-number">1000+</div>
+            <div class="stat-label">Clientes satisfechos</div>
+          </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div>
+            <div class="stat-number">6</div>
+            <div class="stat-label">países</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- Floating app icons: Google Maps, Instagram, TikTok, Facebook -->
+
+      <!-- Google Maps — top right, outer ring -->
+      <div class="app-icon icon-maps" title="Google Maps">
+        <svg width="42" height="48" viewBox="0 0 30 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- White pin body -->
+          <path d="M15 1C8.37 1 3 6.37 3 13c0 9.5 12 22 12 22s12-12.5 12-22C27 6.37 21.63 1 15 1z" fill="white" filter="url(#maps-shadow)"/>
+          <!-- Red top-left quadrant -->
+          <path d="M15 5 A8 8 0 0 0 7 13 L15 13Z" fill="#EA4335"/>
+          <!-- Blue top-right quadrant -->
+          <path d="M15 5 A8 8 0 0 1 23 13 L15 13Z" fill="#4285F4"/>
+          <!-- Green bottom-left quadrant -->
+          <path d="M7 13 A8 8 0 0 0 15 21 L15 13Z" fill="#34A853"/>
+          <!-- Yellow bottom-right quadrant -->
+          <path d="M23 13 A8 8 0 0 1 15 21 L15 13Z" fill="#FBBC04"/>
+          <!-- White center dot -->
+          <circle cx="15" cy="13" r="3.8" fill="white"/>
+          <defs>
+            <filter id="maps-shadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="rgba(0,0,0,0.25)"/>
+            </filter>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Instagram — right mid: SVG fills container, no extra wrapper bg -->
+      <div class="app-icon icon-ig" title="Instagram">
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="none">
+          <rect x="0" y="0" width="24" height="24" rx="6" fill="url(#ig-bg2)"/>
+          <rect x="5.5" y="5.5" width="13" height="13" rx="4" stroke="white" stroke-width="1.6" fill="none"/>
+          <circle cx="12" cy="12" r="3.2" stroke="white" stroke-width="1.6" fill="none"/>
+          <circle cx="17" cy="7" r="1.1" fill="white"/>
+          <defs>
+            <linearGradient id="ig-bg2" x1="0" y1="24" x2="24" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#f09433"/>
+              <stop offset="25%" stop-color="#e6683c"/>
+              <stop offset="50%" stop-color="#dc2743"/>
+              <stop offset="75%" stop-color="#cc2366"/>
+              <stop offset="100%" stop-color="#bc1888"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- TikTok — top left -->
+      <div class="app-icon icon-tiktok" title="TikTok">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+          <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.79a4.85 4.85 0 01-1.01-.1z" fill="white"/>
+          <path d="M17.58 6.59A4.83 4.83 0 0113.81 2.34h-1v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89" stroke="#69C9D0" stroke-width="0.5" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Facebook — left mid -->
+      <div class="app-icon icon-fb" title="Facebook">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+        </svg>
+      </div>
+
+      <!-- Concentric orbit rings -->
+      <div class="orbit-rings-wrap" aria-hidden="true">
+        <div class="orbit-ring orbit-ring-1"></div>
+        <div class="orbit-ring orbit-ring-2"></div>
+        <div class="orbit-ring orbit-ring-3"></div>
+      </div>
+
+      <!-- Soft purple glow behind phone -->
+      <div class="phone-glow"></div>
+
+      <!-- Phone Mockup with real PNG frame -->
+      <div class="phone-wrap">
+        <div class="phone-screen-inner">
+          <!-- Status bar — full width, no notch on this phone frame -->
+          <div class="phone-notch-area">
+            <span class="phone-time">9:41</span>
+            <div class="phone-status-right">
+              <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+                <rect x="0" y="6" width="2" height="4" rx="0.5" fill="#111"/>
+                <rect x="3.5" y="4" width="2" height="6" rx="0.5" fill="#111"/>
+                <rect x="7" y="2" width="2" height="8" rx="0.5" fill="#111"/>
+                <rect x="10.5" y="0" width="2" height="10" rx="0.5" fill="#111"/>
+              </svg>
+              <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+                <path d="M6.5 8a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z" fill="#111"/>
+                <path d="M3 5.2a4.6 4.6 0 017 0" stroke="#111" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+                <path d="M0.5 2.8a8 8 0 0112 0" stroke="#111" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+              </svg>
+              <svg width="20" height="11" viewBox="0 0 20 11" fill="none">
+                <rect x="0.5" y="0.5" width="16" height="10" rx="2.5" stroke="#111" stroke-width="1.1"/>
+                <rect x="17" y="3.5" width="2.5" height="4" rx="1.2" fill="#111"/>
+                <rect x="2" y="2" width="11" height="7" rx="1.5" fill="#111"/>
+              </svg>
+            </div>
+          </div><!-- /phone-notch-area -->
+          <!-- Search header -->
+          <div class="search-header">
+            <svg class="google-logo-sm" viewBox="0 0 272 92" xmlns="http://www.w3.org/2000/svg">
+              <path d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#EA4335"/><path d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z" fill="#FBBC05"/><path d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z" fill="#4285F4"/><path d="M225 3v65h-9.5V3h9.5z" fill="#34A853"/><path d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z" fill="#EA4335"/>
+              <path d="M35.29 41.41V32h34.2c.34 1.76.51 3.85.51 6.11 0 7.56-2.07 16.89-8.74 23.56-6.5 6.76-14.81 10.37-25.98 10.37C16.32 72.04.86 57.09.86 38.09.86 19.09 16.32 4.14 35.29 4.14c11.42 0 19.57 4.45 25.68 10.31l-7.22 7.22c-4.37-4.11-10.31-7.31-18.46-7.31-15.11 0-26.92 12.18-26.92 27.27 0 15.09 11.81 27.27 26.92 27.27 9.82 0 15.42-3.95 19.02-7.55 2.91-2.91 4.83-7.07 5.58-12.76l-24.6.01z" fill="#4285F4"/>
+            </svg>
+            <div class="phone-search-bar">🔍 restaurante cerca de mí</div>
+          </div>
+          <!-- Search tabs -->
+          <div class="phone-tabs-row">
+            <div class="phone-tab active">Todo</div>
+            <div class="phone-tab">Mapas</div>
+            <div class="phone-tab">Imágenes</div>
+            <div class="phone-tab">Compras</div>
+            <div class="phone-tab">Vídeos</div>
+          </div>
+          <!-- Filter pills -->
+          <div class="phone-filters-row">
+            <div class="phone-pill active">Abierto ahora</div>
+            <div class="phone-pill">Mejor valorados</div>
+            <div class="phone-pill">Barato</div>
+            <div class="phone-pill">Elegante</div>
+          </div>
+          <!-- Map -->
+          <div class="map-section">
+            <div class="map-grid-bg"></div>
+            <!-- Wide roads -->
+            <div class="mrd mrh w" style="top:35%;"></div>
+            <div class="mrd mrh w" style="top:65%;"></div>
+            <div class="mrd mrv w" style="left:32%;"></div>
+            <div class="mrd mrv w" style="left:68%;"></div>
+            <!-- Secondary roads -->
+            <div class="mrd mrh" style="top:20%;"></div>
+            <div class="mrd mrh" style="top:50%;"></div>
+            <div class="mrd mrh" style="top:80%;"></div>
+            <div class="mrd mrv" style="left:18%;"></div>
+            <div class="mrd mrv" style="left:50%;"></div>
+            <div class="mrd mrv" style="left:82%;"></div>
+            <!-- Building blocks -->
+            <div class="mblk" style="top:5%;left:5%;width:11%;height:13%;"></div>
+            <div class="mblk" style="top:5%;left:37%;width:14%;height:13%;"></div>
+            <div class="mblk" style="top:5%;left:72%;width:10%;height:13%;"></div>
+            <div class="mblk" style="top:23%;left:5%;width:12%;height:10%;"></div>
+            <div class="mblk" style="top:23%;left:37%;width:14%;height:10%;"></div>
+            <div class="mblk" style="top:23%;left:72%;width:11%;height:10%;"></div>
+            <div class="mblk" style="top:40%;left:5%;width:12%;height:22%;"></div>
+            <div class="mblk" style="top:40%;left:37%;width:14%;height:22%;"></div>
+            <div class="mblk" style="top:40%;left:72%;width:11%;height:22%;"></div>
+            <div class="mblk" style="top:70%;left:5%;width:12%;height:25%;"></div>
+            <div class="mblk" style="top:70%;left:37%;width:14%;height:25%;"></div>
+            <div class="mblk" style="top:70%;left:72%;width:11%;height:25%;"></div>
+            <!-- Pins -->
+            <div class="mpin red big" style="top:28%;left:42%;"></div>
+            <div class="mpin red" style="top:14%;left:64%;"></div>
+            <div class="mpin grn" style="top:52%;left:24%;"></div>
+            <div class="mpin blu" style="top:42%;left:74%;"></div>
+          </div>
+          <!-- Listing cards -->
+          <div class="listings-section">
+            <div class="listing-item">
+              <div class="listing-thumb" style="background:linear-gradient(135deg,#ff9a3c,#ff6b6b);">🍕</div>
+              <div class="listing-info">
+                <div class="listing-name">La Trattoria Napolitana</div>
+                <div class="listing-row"><span class="ls-stars">★★★★★</span> <span>4.8 (342) · $$$</span></div>
+                <div class="listing-row"><span class="ls-open">Abierto</span> <span>· Cierra 22:00</span></div>
+                <div class="listing-row">Italiana · 0.3 km</div>
+              </div>
+            </div>
+            <div class="listing-item">
+              <div class="listing-thumb" style="background:linear-gradient(135deg,#43b89c,#2d8b6f);">🥗</div>
+              <div class="listing-info">
+                <div class="listing-name">Bistró del Mercado</div>
+                <div class="listing-row"><span class="ls-stars">★★★★☆</span> <span>4.6 (218) · $$</span></div>
+                <div class="listing-row"><span class="ls-open">Abierto</span> <span>· Cierra 21:30</span></div>
+                <div class="listing-row">Mediterránea · 0.6 km</div>
+              </div>
+            </div>
+            <div class="listing-item">
+              <div class="listing-thumb" style="background:linear-gradient(135deg,#5b8dee,#4269d0);">🍜</div>
+              <div class="listing-info">
+                <div class="listing-name">Casa Pepe</div>
+                <div class="listing-row"><span class="ls-stars">★★★★★</span> <span>4.7 (189) · $$</span></div>
+                <div class="listing-row"><span class="ls-open">Abierto</span> <span>· Cierra 23:00</span></div>
+                <div class="listing-row">Española · 0.9 km</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Real iPhone frame overlay (transparent screen hole, opaque chrome) -->
+        <img class="phone-frame" src="phoneMock.png" alt="" />
+      </div>
+
+      <!-- Floating Google Business Profile card — bottom right, tilted -6deg -->
+      <div class="gbp-float-card">
+        <div class="gbp-top">
+          <div class="gbp-info">
+            <div class="gbp-name">Tu Negocio<br>con Visuanza</div>
+            <div class="gbp-cat">Restaurante · $$</div>
+            <div class="gbp-rating-row">
+              <span class="gbp-score">4.8</span>
+              <span class="gbp-stars-span">★★★★★</span>
+              <span class="gbp-count">(342)</span>
+            </div>
+            <div class="gbp-hours">● Abierto ahora · 22:00</div>
+          </div>
+          <div class="gbp-photo-thumb">🍽️</div>
+        </div>
+        <div class="gbp-btns">
+          <button class="gbp-btn">Sitio web</button>
+          <button class="gbp-btn">Reservar</button>
+          <button class="gbp-btn">Llamar</button>
+        </div>
+      </div>
+    </div>
+    </div><!-- /hero-inner -->
+
+    <!-- Arc carousel flows directly below as part of the same section -->
+    <div class="social-proof">
+    <div class="sp-container" id="sp-container">
+      <!-- Visuanza: fixed at the top — the belt's peak -->
+      <div class="sp-visuanza">
+        <img src="SynsLogo.png" alt="Visuanza" />
+      </div>
+      <!-- Logo tiles injected by JS -->
+      <!-- Text centered below Visuanza -->
+      <div class="sp-text">
+        <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
+      </div>
+      <!-- CTA below text -->
+      <div class="sp-cta-wrap">
+        <a href="#contacto" class="btn-primary sp-cta">Solicite un presupuesto gratuito</a>
+      </div>
+    </div>
+    </div><!-- /social-proof -->
+  </section><!-- /hero + proof -->
+
+  <!-- ─── PLATFORMS SHOWCASE ─── -->
+  <section class="platforms" id="estrategia">
+
+    <!-- PART 1: Two-column headline -->
+    <div class="platforms-top fade-in">
+      <div class="platforms-top-left">
+        <p class="section-label">Omnipresencia digital</p>
+        <h2>Sincronice su información en <span class="accent">todas partes</span> con un solo clic</h2>
+      </div>
+      <div class="platforms-top-right">
+        <p>Desde Google hasta ChatGPT, nos aseguramos de que tus clientes te encuentren donde sea que busquen. Actualizamos tu presencia en todas las plataformas de forma simultánea, sin esfuerzo manual.</p>
+        <div class="platform-badges">
+          <div class="platform-badge">
+            <svg width="12" height="12" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            Google
+          </div>
+          <div class="platform-badge">📍 Maps</div>
+          <div class="platform-badge">🤖 ChatGPT</div>
+          <div class="platform-badge">📘 Facebook</div>
+          <div class="platform-badge">📸 Instagram</div>
+          <div class="platform-badge">🎵 TikTok</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 1: Phones fan — bursting upward -->
+    <div class="phones-fan-wrap">
+
+      <!-- Facebook Phone -->
+      <div class="showcase-phone sp-fb">
+        <div class="sp-screen">
+          <div class="fb-header">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            facebook
+          </div>
+          <div class="fb-body">
+            <div class="fb-profile-row">
+              <div class="fb-avatar">TV</div>
+              <div>
+                <div class="fb-name">Tu Restaurante</div>
+                <div class="fb-meta">Restaurante · 1.2k seguidores</div>
+              </div>
+            </div>
+            <div class="fb-post-text">¡Nuevo menú de temporada disponible! Reserva tu mesa y disfruta de nuestros platos especiales.</div>
+            <div class="fb-img">🍽️</div>
+            <div style="font-size:0.48rem;color:#1877f2;margin-bottom:4px;">👍 Me gusta · 💬 Comentar · ↗ Compartir</div>
+            <div class="fb-actions">
+              <div class="fb-act-btn">👍 Me gusta</div>
+              <div class="fb-act-btn">💬 Comentar</div>
+              <div class="fb-act-btn">↗ Compartir</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apple Maps Phone -->
+      <div class="showcase-phone sp-gmb">
+        <div class="sp-screen">
+          <!-- Apple Maps dark header -->
+          <div style="background:#1c1c1e;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FF3B30"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
+            <span style="font-size:0.58rem;font-weight:700;color:white;letter-spacing:-0.01em;">Mapas</span>
+            <div style="flex:1;background:#2c2c2e;border-radius:10px;padding:4px 8px;font-size:0.46rem;color:rgba(255,255,255,0.55);">Tu Restaurante</div>
+          </div>
+          <!-- Map area — Apple Maps warm beige -->
+          <div style="flex:1;background:linear-gradient(160deg,#f2ece0 0%,#ece5d5 50%,#e5dece 100%);position:relative;overflow:hidden;min-height:200px;">
+            <!-- Roads -->
+            <div style="position:absolute;top:0;bottom:0;left:42%;width:5px;background:rgba(255,255,255,0.95);"></div>
+            <div style="position:absolute;top:0;bottom:0;left:62%;width:3px;background:rgba(255,255,255,0.8);"></div>
+            <div style="position:absolute;left:0;right:0;top:44%;height:5px;background:rgba(255,255,255,0.95);"></div>
+            <div style="position:absolute;left:0;right:0;top:66%;height:3px;background:rgba(255,255,255,0.8);"></div>
+            <!-- Park -->
+            <div style="position:absolute;top:8%;left:5%;width:28%;height:28%;background:#c2d9a0;border-radius:8px;opacity:0.75;"></div>
+            <!-- Buildings -->
+            <div style="position:absolute;top:48%;left:22%;width:11%;height:22%;background:#ddd6c8;border-radius:3px;"></div>
+            <div style="position:absolute;top:52%;left:63%;width:9%;height:18%;background:#ddd6c8;border-radius:3px;"></div>
+            <!-- Apple Maps red pin -->
+            <div style="position:absolute;top:30%;left:39%;width:22px;height:22px;background:#FF3B30;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 10px rgba(255,59,48,0.45);">
+              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);width:7px;height:7px;background:white;border-radius:50%;"></div>
+            </div>
+          </div>
+          <!-- Bottom listing card — Apple Maps dark -->
+          <div style="background:#1c1c1e;padding:11px 13px;border-top:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+            <div style="font-size:0.68rem;font-weight:700;color:white;margin-bottom:3px;">Tu Restaurante</div>
+            <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;">
+              <span style="color:#FF9500;font-size:0.5rem;">★★★★★</span>
+              <span style="font-size:0.44rem;color:rgba(255,255,255,0.55);">4.8 (489) · Restaurante</span>
+            </div>
+            <div style="display:flex;gap:6px;">
+              <button style="flex:1;background:#2c2c2e;border:none;border-radius:10px;padding:6px;font-size:0.44rem;color:#0A84FF;font-weight:600;">Ruta</button>
+              <button style="flex:1;background:#2c2c2e;border:none;border-radius:10px;padding:6px;font-size:0.44rem;color:#0A84FF;font-weight:600;">Llamar</button>
+              <button style="flex:1;background:#2c2c2e;border:none;border-radius:10px;padding:6px;font-size:0.44rem;color:#0A84FF;font-weight:600;">Web</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Maps Listing Phone -->
+      <div class="showcase-phone sp-chat">
+        <div class="sp-screen">
+          <div class="gmb-header">
+            <span class="gmb-g-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></span>
+            <div class="gmb-search">restaurante cerca de mí</div>
+          </div>
+          <div class="gmb-map">
+            <div class="gmb-map-grid"></div>
+            <div class="gmb-pin"></div>
+          </div>
+          <div class="gmb-body">
+            <div class="gmb-biz-name">Tu Restaurante</div>
+            <div class="gmb-category">Restaurante · Italiano</div>
+            <div class="gmb-rating-row">
+              <span class="gmb-stars">★★★★★</span>
+              <span class="gmb-rating-num">4.8</span>
+              <span class="gmb-reviews">(489 reseñas)</span>
+            </div>
+            <div class="gmb-actions">
+              <button class="gmb-act-btn gmb-act-blue">Cómo llegar</button>
+              <button class="gmb-act-btn gmb-act-outline">Reservar</button>
+            </div>
+            <div class="gmb-hours-row">✓ Abierto ahora · Cierra 22:30</div>
+            <div class="gmb-info-row">📍 Calle Mayor 15, Madrid</div>
+            <div class="gmb-info-row">📞 +34 91 234 5678</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ChatGPT Phone -->
+      <div class="showcase-phone sp-stats">
+        <div class="sp-screen">
+          <div class="chat-header">
+            <div class="chat-title">ChatGPT</div>
+            <div class="chat-openai">AI</div>
+          </div>
+          <div class="chat-messages">
+            <div class="chat-msg-user">Buenos restaurantes cerca de mí en Madrid</div>
+            <div class="chat-msg-ai">
+              <strong>Aquí tienes los restaurantes mejor valorados:</strong>
+              <div class="chat-restaurant-item"><div class="chat-rest-num">1</div><span class="chat-rest-name">Tu Restaurante — ★★★★★ · 4.8</span></div>
+              <div class="chat-restaurant-item"><div class="chat-rest-num">2</div><span class="chat-rest-name">La Tasca Madrileña — ★★★★ · 4.5</span></div>
+              <div class="chat-restaurant-item"><div class="chat-rest-num">3</div><span class="chat-rest-name">El Rincón Español — ★★★★ · 4.3</span></div>
+              <div style="margin-top:4px;font-size:0.42rem;color:rgba(255,255,255,0.5);">6 recomendaciones disponibles</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 2: Conversion panel -->
+    <div class="platforms-panel fade-in">
+      <div class="platforms-panel-inner">
+
+        <!-- Left: headline + checklist + CTA -->
+        <div class="panel-left">
+          <p class="section-label">Resultados</p>
+          <h3>De ser <span class="accent">invisible</span> a convertirte en el favorito local</h3>
+          <ul class="panel-checklist">
+            <li><div class="check-icon">✓</div><span>Perfil de Google optimizado para aparecer en el top 3 de búsquedas locales en tu zona</span></li>
+            <li><div class="check-icon">✓</div><span>Presencia sincronizada en Google, Maps, Facebook, Instagram, ChatGPT y más — sin esfuerzo manual</span></li>
+            <li><div class="check-icon">✓</div><span>Gestión profesional de reseñas para construir una reputación de 5 estrellas que atraiga clientes</span></li>
+            <li><div class="check-icon">✓</div><span>Reportes mensuales con métricas reales: llamadas, rutas, visitas al perfil y crecimiento comparado</span></li>
+          </ul>
+          <a href="#contacto" class="btn-primary" style="display:inline-flex;padding:14px 28px;font-size:0.9rem;text-decoration:none;">Obtenga una propuesta</a>
+        </div>
+
+        <!-- Right: phone showing Google Maps + revenue overlay -->
+        <div class="panel-right">
+          <div class="panel-phone-wrap">
+
+            <!-- Glassmorphism card: revenue trend -->
+            <div class="panel-glass-card panel-glass-revenue">
+              <div class="pgc-title">Ingresos de la empresa</div>
+              <svg class="pgc-chart" viewBox="0 0 120 34" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="rcg" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4fce82" stop-opacity="0.4"/>
+                    <stop offset="100%" stop-color="#4fce82" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,28 L15,24 L30,20 L48,15 L65,10 L85,6 L100,3 L120,1 L120,34 L0,34Z" fill="url(#rcg)"/>
+                <polyline points="0,28 15,24 30,20 48,15 65,10 85,6 100,3 120,1" fill="none" stroke="#4fce82" stroke-width="1.8"/>
+              </svg>
+              <div class="pgc-sub">Últimos 30 días</div>
+            </div>
+
+            <!-- Glassmorphism badge: visibility -->
+            <div class="panel-glass-card panel-glass-visibility">
+              <div class="pgc-icon-row">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+                  <circle cx="12" cy="12" r="3" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+                </svg>
+                <span class="pgc-label">Visibilidad</span>
+              </div>
+              <div class="pgc-value">24,2% <span class="pgc-arrow">→</span> 50,8%</div>
+            </div>
+
+            <div class="panel-phone">
+              <div class="panel-phone-screen">
+                <!-- Google Maps header -->
+                <div style="background:#1a73e8;padding:8px 10px;display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5" fill="rgba(255,255,255,0.7)"/></svg>
+                  <span style="font-size:0.55rem;font-weight:700;color:white;">Google Maps</span>
+                </div>
+                <!-- Map area -->
+                <div style="flex:1;background:linear-gradient(160deg,#e8f4fd 0%,#d0eaf6 40%,#c8e6e0 100%);position:relative;overflow:hidden;min-height:160px;">
+                  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.35) 1px,transparent 1px);background-size:18px 18px;"></div>
+                  <!-- Roads -->
+                  <div style="position:absolute;top:0;bottom:0;left:45%;width:4px;background:rgba(255,255,255,0.7);"></div>
+                  <div style="position:absolute;left:0;right:0;top:52%;height:4px;background:rgba(255,255,255,0.7);"></div>
+                  <div style="position:absolute;top:0;bottom:0;left:70%;width:2px;background:rgba(255,255,255,0.5);"></div>
+                  <div style="position:absolute;left:0;right:0;top:28%;height:2px;background:rgba(255,255,255,0.5);"></div>
+                  <!-- Google Maps pin -->
+                  <div style="position:absolute;top:30%;left:43%;width:24px;height:24px;background:#ea4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 10px rgba(234,67,53,0.5);">
+                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);width:8px;height:8px;background:white;border-radius:50%;"></div>
+                  </div>
+                  <!-- Nearby pins (competitors, smaller) -->
+                  <div style="position:absolute;top:55%;left:62%;width:14px;height:14px;background:#bbb;border-radius:50% 50% 50% 0;transform:rotate(-45deg);"></div>
+                  <div style="position:absolute;top:22%;left:55%;width:14px;height:14px;background:#bbb;border-radius:50% 50% 50% 0;transform:rotate(-45deg);"></div>
+                </div>
+                <!-- Business info -->
+                <div style="padding:8px 10px;background:white;">
+                  <div style="font-size:0.65rem;font-weight:800;color:#1a1a1a;margin-bottom:2px;">Tu Restaurante</div>
+                  <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
+                    <span style="color:#fbbc04;font-size:0.5rem;">★★★★★</span>
+                    <span style="font-size:0.48rem;font-weight:700;color:#1a1a1a;">4.8</span>
+                    <span style="font-size:0.44rem;color:#70757a;">(1,243 reseñas)</span>
+                  </div>
+                  <!-- Mini revenue chart -->
+                  <div style="width:100%;height:50px;background:#f8fdf9;border-radius:6px;overflow:hidden;position:relative;margin-top:4px;">
+                    <svg width="100%" height="100%" viewBox="0 0 100 50" preserveAspectRatio="none">
+                      <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34a853" stop-opacity="0.3"/><stop offset="100%" stop-color="#34a853" stop-opacity="0"/></linearGradient></defs>
+                      <path d="M0,42 L12,38 L25,32 L38,26 L52,18 L68,12 L82,6 L100,3 L100,50 L0,50Z" fill="url(#pg)"/>
+                      <polyline points="0,42 12,38 25,32 38,26 52,18 68,12 82,6 100,3" fill="none" stroke="#34a853" stroke-width="2"/>
+                    </svg>
+                    <div style="position:absolute;top:4px;right:6px;font-size:0.48rem;font-weight:800;color:#1e8e3e;">↑ 50.8%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Floating revenue badge -->
+            <div class="panel-revenue-badge">
+              <div class="panel-rev-label">Ingresos este mes</div>
+              <div class="panel-rev-number">+€2,840</div>
+              <div class="panel-rev-change">↑ vs mes anterior</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── HOW IT WORKS ─── -->
+  <section class="how-it-works" id="servicios">
+    <div class="section-header fade-in">
+      <p class="section-label">Proceso</p>
+      <h2>Cómo <span class="accent">funciona</span></h2>
+      <p>Un proceso simple y efectivo para llevar tu negocio al siguiente nivel de visibilidad.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card fade-in">
+        <div class="step-number">1</div>
+        <h3>Análisis inicial gratuito</h3>
+        <p>Evaluamos tu presencia digital actual, identificamos oportunidades clave y te presentamos un informe detallado de tu visibilidad en línea.</p>
+      </div>
+      <div class="step-card fade-in">
+        <div class="step-number">2</div>
+        <h3>Estrategia personalizada</h3>
+        <p>Diseñamos un plan a medida para tu negocio: optimización de perfiles, gestión de reseñas, presencia en múltiples plataformas y más.</p>
+      </div>
+      <div class="step-card fade-in">
+        <div class="step-number">3</div>
+        <h3>Resultados medibles</h3>
+        <p>Seguimos tu crecimiento con reportes mensuales detallados y ajustamos la estrategia continuamente para maximizar tu retorno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ─── -->
+  <section class="services">
+    <div class="section-header fade-in">
+      <p class="section-label">Nuestros servicios</p>
+      <h2>Todo lo que necesitas para<br /><span class="accent">dominar el mercado local</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <div class="service-icon icon-bg-blue">📍</div>
+        <h3>SEO Local</h3>
+        <p>Posicionamos tu negocio en los primeros resultados de búsqueda local de Google y otros buscadores para atraer clientes cercanos.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon icon-bg-green">🌐</div>
+        <h3>Visuanza Web</h3>
+        <p>Diseñamos y optimizamos tu página web para convertir visitas en clientes, con foco en velocidad, diseño y conversión.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon icon-bg-orange">💳</div>
+        <h3>Visuanza Wallet</h3>
+        <p>Sistema de fidelización digital que recompensa a tus clientes habituales y aumenta la frecuencia de visitas a tu negocio.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon icon-bg-purple">📊</div>
+        <h3>Google Ads</h3>
+        <p>Campañas publicitarias en Google optimizadas para negocios locales, maximizando el retorno de tu inversión publicitaria.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon icon-bg-red">📱</div>
+        <h3>Meta Ads</h3>
+        <p>Anuncios estratégicos en Facebook e Instagram para llegar a tu público objetivo y generar tráfico cualificado hacia tu negocio.</p>
+      </div>
+      <div class="service-card fade-in">
+        <div class="service-icon icon-bg-teal">⭐</div>
+        <h3>Gestión de Reseñas</h3>
+        <p>Monitorizamos y gestionamos tu reputación online, respondiendo reseñas y construyendo una imagen positiva de tu marca.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STATS ─── -->
+  <section class="stats-section">
+    <div class="section-header fade-in">
+      <p class="section-label" style="color:rgba(255,255,255,0.5);">Resultados reales</p>
+      <h2 style="color:white;">Números que<br /><span style="color:var(--blue);">hablan por sí solos</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-block fade-in">
+        <div class="number">1000<span class="accent">+</span></div>
+        <div class="label">Negocios gestionados</div>
+      </div>
+      <div class="stat-block fade-in">
+        <div class="number"><span class="accent">+</span>47<span class="accent">%</span></div>
+        <div class="label">Aumento medio de visibilidad</div>
+      </div>
+      <div class="stat-block fade-in">
+        <div class="number">6</div>
+        <div class="label">Países con presencia</div>
+      </div>
+      <div class="stat-block fade-in">
+        <div class="number">98<span class="accent">%</span></div>
+        <div class="label">Satisfacción de clientes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ─── -->
+  <section class="testimonials" id="quienes">
+    <div class="section-header fade-in">
+      <p class="section-label">Testimonios</p>
+      <h2>Lo que dicen<br /><span class="accent">nuestros clientes</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Desde que empezamos con Visuanza, nuestras reservas en línea aumentaron un 60%. Aparecemos en los primeros resultados de Google y ChatGPT nos recomienda constantemente."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">MR</div>
+          <div>
+            <div class="author-name">María Rodríguez</div>
+            <div class="author-biz">Restaurante La Terraza, Madrid</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"El equipo de Visuanza transformó por completo nuestra presencia digital. Pasamos de ser invisibles en Google Maps a tener colas los fines de semana."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">CG</div>
+          <div>
+            <div class="author-name">Carlos García</div>
+            <div class="author-biz">Pizzería Bella Napoli, Barcelona</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Increíble el trabajo que hacen. En solo 3 meses nuestras visitas al perfil de Google se triplicaron y el número de llamadas directas se disparó."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">AL</div>
+          <div>
+            <div class="author-name">Ana López</div>
+            <div class="author-biz">Café Moderno, Valencia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="cta-section" id="contacto">
+    <div class="container" style="text-align:center;">
+      <h2>¿Listo para ser más visible?</h2>
+      <p>Únete a más de 1000 negocios que ya confían en Visuanza para dominar su mercado local.</p>
+      <a href="mailto:hola@visuanza.com" class="btn-white">Solicita tu análisis gratuito →</a>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <img src="SynsLogo.png" alt="Visuanza" />
+          <span>Visuanza</span>
+        </a>
+        <p class="footer-desc">Con Visuanza, tu empresa local puede mejorar su clasificación en los principales motores de búsqueda, lo que te ayuda a atraer a más clientes locales.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#">SEO Local</a></li>
+          <li><a href="#">Visuanza Web</a></li>
+          <li><a href="#">Visuanza Wallet</a></li>
+          <li><a href="#">Google Ads</a></li>
+          <li><a href="#">Meta Ads</a></li>
+          <li><a href="#">Gestión de Reseñas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegar</h4>
+        <ul>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Sociales</h4>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-newsletter">
+        <h4>Descubra sus oportunidades locales</h4>
+        <p>Comparta su nombre y te contactaremos con un plan personalizado para mejorar tu alcance local.</p>
+        <div class="footer-form">
+          <input type="text" class="footer-input" placeholder="Nombre" />
+          <input type="email" class="footer-input" placeholder="Email address" />
+          <button class="btn-submit">Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
+      <div class="footer-legal">
+        <a href="#">Condiciones de servicio</a>
+        <a href="#">Política de privacidad</a>
+      </div>
+    </div>
+    </div><!-- /footer-inner -->
+  </footer>
+
+  <script>
+    // Scroll fade-in — observe elements; also reveal all after 300ms as fallback
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Fallback: ensure nothing stays permanently hidden
+    setTimeout(() => {
+      document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 300);
+
+    // Nav shadow on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // ── Conveyor Belt Carousel ────────────────────────────────────────────
+    // Logos travel a parabolic arc: enter bottom-left → peak top-center → exit bottom-right
+    (function initConveyorBelt() {
+      const container = document.getElementById('sp-container');
+      if (!container) return;
+
+      const logoData = [
+        { img: 'logos/2logga.png',            bg: '#DFF4F6' }, // dark teal logo  → light teal bg
+        { img: 'logos/BERRABURRA_Ikon_1.png', bg: '#EBF0F8' }, // dark navy logo  → light blue bg
+        { img: 'logos/Din stycketext.png',    bg: '#F2F2F2' }, // dark gray logo  → light gray bg
+        { img: 'logos/KimliLogoNoTxt.png',    bg: '#FBEAEC' }, // dark red logo   → light pink bg
+        { img: 'logos/LogoPNG.png',           bg: '#F4EFF4' }, // dark purple     → light lavender bg
+        { img: 'logos/MLG.png',               bg: '#FBEEED' }, // dark red logo   → light rose bg
+        { img: 'logos/NP-Logo.png',           bg: '#1a1400' }, // gold logo       → near-black bg
+        { img: 'logos/Namnlös design.png',    bg: '#F5EFE6' }, // near-black logo → warm cream bg
+        { img: 'logos/Sams-Cafe-Logo.png',    bg: '#FBF2EE' }, // brown logo      → light warm bg
+        { img: 'logos/bramspng.png',          bg: '#1a1a2e' }, // white logo      → dark navy bg
+        { img: 'logos/logo.png',              bg: '#2a0e0e' }, // white+red logo  → dark bg
+        { img: 'logos/mamma_thai.png',        bg: '#FDF6EA' }, // dark brown logo → warm cream bg
+        { img: 'logos/mazraa.png',            bg: '#1a0e00' }, // orange logo     → near-black bg
+        { img: 'logos/partille.png',          bg: '#FBEAEC' }, // dark red logo   → light pink bg
+      ];
+      const N = logoData.length; // 14
+
+      const logos = logoData.map(l => {
+        const el = document.createElement('div');
+        el.className = 'sp-logo';
+        el.style.background = l.bg;
+        const img = document.createElement('img');
+        img.src = l.img;
+        img.alt = '';
+        img.style.cssText = 'width:70%;height:70%;object-fit:contain;display:block;pointer-events:none;';
+        el.appendChild(img);
+        container.appendChild(el);
+        return el;
+      });
+
+      // Parabola: y(t) = B*(t-0.5)^2 + TOP_Y  where t ∈ [0,1]
+      // t=0 → bottom-left,  t=0.5 → top-center (under Visuanza),  t=1 → bottom-right
+      // Visuanza center is at y=100px (top:45px + height/2=55px)
+      const TOP_Y = 100;  // logo centers at t=0.5, aligns with Visuanza center
+      const B     = 1600; // tighter arc — logos cluster closer to the top peak
+      // At t=0 or t=1: y = 1600*0.25 + 100 = 500px (at section bottom → faded/clipped)
+
+      const HALF = 60;    // 120px / 2
+
+      let phase   = 0;
+      let running = false;
+      let raf;
+
+      function tick() {
+        phase = (phase + 0.0007) % 1;  // slow, smooth — full loop ≈ 24 seconds
+
+        const W = container.offsetWidth  || 1440;
+        const H = container.offsetHeight || 500;
+
+        logos.forEach((el, i) => {
+          const t = (phase + i / N) % 1;
+
+          // Parabolic path — tighter horizontal span (6%–94% of width)
+          const x = W * 0.06 + t * W * 0.88;
+          const y = B * (t - 0.5) * (t - 0.5) + TOP_Y;
+
+          el.style.transform = `translate(${(x - HALF).toFixed(1)}px, ${(y - HALF).toFixed(1)}px)`;
+
+          // Smooth blur gradient: purely based on x position
+          // Left edge (x=6%W) → max blur; center (x=50%W) → clear; right → crystal clear
+          const xRatio = x / W;
+          // leftFraction: 1.0 at far-left, 0.0 at center and beyond
+          const leftFraction = Math.max(0, 1 - xRatio * 2);
+          const blur  = leftFraction * 14;          // 14px max at far left, 0 at center+
+          let opacity = 1 - leftFraction * 0.72;   // 0.28 at far left, 1.0 at center+
+
+          // Fade out as logos sink toward the bottom (entering from left, exiting to right)
+          // y > 72% of H → start fading; clipped by overflow:hidden below H
+          const fadeY = Math.max(0, (y - H * 0.72) / (H * 0.28));
+          opacity *= Math.max(0, 1 - fadeY);
+
+          el.style.filter  = blur > 0 ? `blur(${blur}px)` : 'none';
+          el.style.opacity = opacity.toFixed(3);
+        });
+
+        if (running) raf = requestAnimationFrame(tick);
+      }
+
+      function start() { if (!running) { running = true; requestAnimationFrame(tick); } }
+      function stop()  { running = false; cancelAnimationFrame(raf); }
+
+      start();
+
+      const section = document.querySelector('.social-proof');
+      if (section && window.IntersectionObserver) {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => { e.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.05 }).observe(section);
+      }
+    })();
+
+    // ── Hero word carousel ──────────────────────────────────────────
+    (function () {
+      const words = ['restaurante', 'bar', 'cafetería', 'tienda', 'salón', 'hotel', 'negocio'];
+      let current = words.indexOf('tienda');
+      const el = document.getElementById('hero-word');
+      if (!el) return;
+
+      function cycle() {
+        const next = (current + 1) % words.length;
+
+        // Slide current word OUT — upward + fade
+        el.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+        el.style.transform = 'translateY(-110%)';
+        el.style.opacity = '0';
+
+        setTimeout(function () {
+          // Instantly jump to below, update text (no transition)
+          el.style.transition = 'none';
+          el.style.transform = 'translateY(110%)';
+          el.style.opacity = '0';
+          el.textContent = words[next];
+
+          // Force reflow so the jump registers before we re-enable transition
+          void el.offsetHeight;
+
+          // Slide new word IN — from below + fade
+          el.style.transition = 'transform 0.5s ease, opacity 0.5s ease';
+          el.style.transform = 'translateY(0)';
+          el.style.opacity = '1';
+
+          current = next;
+        }, 500);
+      }
+
+      setInterval(cycle, 3000);
+    })();
+  </script>
+</body>
+</html>
