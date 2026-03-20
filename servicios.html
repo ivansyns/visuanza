@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios – Visuanza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:       #4F7EFF;
+      --blue-dark:  #3a6be8;
+      --black:      #0a0a0a;
+      --dark:       #111111;
+      --gray-mid:   #555;
+      --gray-light: #f5f5f5;
+      --white:      #ffffff;
+      --text:       #1a1a1a;
+      --text-muted: #666;
+      --radius:     12px;
+      --radius-lg:  20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* ─── CONTAINER ─── */
+    .container {
+      width: 100%;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      height: 64px;
+    }
+
+    .nav-inner {
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo img { height: 36px; width: auto; }
+
+    .nav-logo span {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
+    .nav-links li { margin-right: 32px; }
+    .nav-links li:last-child { margin-right: 0; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; }
+    .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .lang-flag { font-size: 1.1rem; }
+
+    .btn-primary {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+    }
+    .btn-primary:hover { background: #333; transform: translateY(-1px); }
+
+    .btn-blue {
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+    }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid rgba(0,0,0,0.14);
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, transform 0.1s;
+      text-decoration: none;
+      display: inline-block;
+      font-family: inherit;
+    }
+    .btn-outline:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      transform: translateY(-1px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 140px 0 80px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      width: 1100px; height: 700px;
+      background: radial-gradient(ellipse at 50% 30%,
+        rgba(79,126,255,0.10) 0%,
+        rgba(139,92,246,0.07) 40%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0f4ff;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      border: 1px solid rgba(79,126,255,0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .accent { color: var(--blue); }
+
+    .hero p {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+
+    .hero-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      margin: 0 auto 60px;
+      opacity: 0.5;
+    }
+
+    /* ─── SERVICES GRID ─── */
+    .services-section {
+      padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px);
+      background: var(--white);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid #EBEBEB;
+      border-radius: 20px;
+      padding: clamp(32px, 3.5vw, 52px);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 16px 56px rgba(79,126,255,0.10);
+      transform: translateY(-4px);
+      border-color: rgba(79,126,255,0.25);
+    }
+
+    /* Subtle gradient accent top-left on hover */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 300px; height: 200px;
+      border-radius: 20px;
+      background: radial-gradient(ellipse at 0% 0%, rgba(79,126,255,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: #f0f4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      transition: background 0.3s ease;
+    }
+    .service-card:hover .service-icon-wrap { background: var(--blue); }
+    .service-card:hover .service-icon-wrap svg { color: white; }
+    .service-icon-wrap svg {
+      width: 26px; height: 26px;
+      color: var(--blue);
+      transition: color 0.3s ease;
+    }
+
+    .service-number {
+      position: absolute;
+      top: 28px; right: 32px;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: rgba(0,0,0,0.04);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .service-card h2 {
+      font-size: clamp(1.25rem, 2vw, 1.55rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .service-tagline {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--blue);
+      margin-bottom: 16px;
+      letter-spacing: 0.01em;
+    }
+
+    .service-desc {
+      font-size: 0.975rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .service-benefits {
+      list-style: none;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .service-benefits li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .service-benefits li::before {
+      content: '';
+      flex-shrink: 0;
+      margin-top: 5px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #eef2ff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%234F7EFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 10px 8px;
+    }
+
+    .service-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .service-divider {
+      width: 100%;
+      height: 1px;
+      background: #F0F0F0;
+      margin-bottom: 36px;
+    }
+
+    /* ─── CTA BANNER ─── */
+    .cta-banner {
+      background: var(--black);
+      padding: clamp(56px, 7vw, 96px) clamp(8px, 1.5vw, 24px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 400px;
+      background: radial-gradient(ellipse at 50% 30%,
+        rgba(79,126,255,0.22) 0%,
+        rgba(139,92,246,0.12) 45%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-banner-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .cta-banner h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .cta-banner h2 .accent { color: var(--blue); }
+
+    .cta-banner p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .cta-banner-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 32px clamp(8px, 1.5vw, 24px);
+    }
+
+    .footer-bottom-inner {
+      max-width: 1530px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .footer-logo img { height: 30px; filter: brightness(0) invert(1); }
+    .footer-logo span { font-size: 1rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ─── SCROLL FADE ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr; gap: 20px; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .service-number { font-size: 3rem; }
+      .nav-right .lang-toggle { display: none; }
+      .footer-bottom-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="SynsLogo.png" alt="Visuanza" />
+        <span>Visuanza</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="servicios.html" class="active">Servicios <span class="chevron">▾</span></a></li>
+        <li><a href="index.html#producto">Producto</a></li>
+        <li><a href="index.html#estrategia">Estrategia</a></li>
+        <li><a href="index.html#quienes">Quiénes somos</a></li>
+        <li><a href="index.html#contacto">Contactar</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
+        <a href="index.html#contacto" class="btn-primary">Pedir propuesta</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✦ Lo que hacemos</div>
+      <h1>Nuestros <span class="accent">Servicios</span></h1>
+      <p>Todo lo que tu restaurante necesita para ser el más visible del barrio. Sin agencias intermediarias, sin letra pequeña.</p>
+      <div class="hero-divider"></div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICES ─── -->
+  <section class="services-section">
+    <div class="services-grid">
+
+      <!-- 1. Redes Sociales -->
+      <div class="service-card fade-in">
+        <span class="service-number">01</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
+          </svg>
+        </div>
+        <h2>Redes Sociales</h2>
+        <p class="service-tagline">La mejor forma de ganar visibilidad online</p>
+        <div class="service-divider"></div>
+        <p class="service-desc">Gestión profesional de redes sociales para restaurantes. Creamos y publicamos contenido de calidad que atrae seguidores reales y convierte visitas en clientes.</p>
+        <ul class="service-benefits">
+          <li>Estrategia de contenido personalizada para tu restaurante</li>
+          <li>Publicaciones diarias en Instagram, Facebook y TikTok</li>
+          <li>Diseño gráfico profesional incluido en el servicio</li>
+          <li>Gestión de comentarios y mensajes directos</li>
+          <li>Informe mensual de resultados con métricas reales</li>
+        </ul>
+        <div class="service-cta">
+          <a href="index.html#contacto" class="btn-blue">Saber más</a>
+          <a href="index.html#contacto" class="btn-outline">Ver ejemplos</a>
+        </div>
+      </div>
+
+      <!-- 2. Diseño Web -->
+      <div class="service-card fade-in" style="transition-delay: 0.1s;">
+        <span class="service-number">02</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <h2>Diseño Web</h2>
+        <p class="service-tagline">Diseño profesional que convierte visitas en reservas</p>
+        <div class="service-divider"></div>
+        <p class="service-desc">Páginas web a medida para restaurantes. Rápidas, modernas y optimizadas para que los clientes encuentren tu restaurante y reserven en segundos.</p>
+        <ul class="service-benefits">
+          <li>Diseño único adaptado a tu identidad de marca</li>
+          <li>Integración de sistema de reservas online</li>
+          <li>Carta digital con fotos de alta calidad</li>
+          <li>Optimización SEO local desde el primer día</li>
+          <li>Compatible con móvil, tablet y ordenador</li>
+        </ul>
+        <div class="service-cta">
+          <a href="index.html#contacto" class="btn-blue">Saber más</a>
+          <a href="index.html#contacto" class="btn-outline">Ver ejemplos</a>
+        </div>
+      </div>
+
+      <!-- 3. Fotografía de Menú -->
+      <div class="service-card fade-in" style="transition-delay: 0.15s;">
+        <span class="service-number">03</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>
+          </svg>
+        </div>
+        <h2>Fotografía de Menú</h2>
+        <p class="service-tagline">Imágenes que abren el apetito</p>
+        <div class="service-divider"></div>
+        <p class="service-desc">Fotografiamos todo tu menú para pedidos online y redes sociales. Imágenes profesionales que hacen que tus platos sean irresistibles antes de que lleguen a la mesa.</p>
+        <ul class="service-benefits">
+          <li>Sesión fotográfica completa en tu local</li>
+          <li>Fotos optimizadas para plataformas de delivery</li>
+          <li>Edición y retoque profesional incluidos</li>
+          <li>Entrega en 48 horas en alta resolución</li>
+          <li>Derechos de uso ilimitados para tu negocio</li>
+        </ul>
+        <div class="service-cta">
+          <a href="index.html#contacto" class="btn-blue">Saber más</a>
+          <a href="index.html#contacto" class="btn-outline">Ver ejemplos</a>
+        </div>
+      </div>
+
+      <!-- 4. Marketing Digital -->
+      <div class="service-card fade-in" style="transition-delay: 0.2s;">
+        <span class="service-number">04</span>
+        <div class="service-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/>
+          </svg>
+        </div>
+        <h2>Marketing Digital</h2>
+        <p class="service-tagline">Del folleto al feed, todo integrado</p>
+        <div class="service-divider"></div>
+        <p class="service-desc">Desde folletos impresos hasta contenido digital para redes sociales y newsletters. Una estrategia de marketing completa para que tu restaurante no pare de crecer.</p>
+        <ul class="service-benefits">
+          <li>Campañas de email marketing segmentadas</li>
+          <li>Diseño de folletos y materiales impresos</li>
+          <li>Publicidad en Google y redes sociales</li>
+          <li>Gestión de Google My Business y reseñas</li>
+          <li>Newsletter mensual para clientes fidelizados</li>
+        </ul>
+        <div class="service-cta">
+          <a href="index.html#contacto" class="btn-blue">Saber más</a>
+          <a href="index.html#contacto" class="btn-outline">Ver ejemplos</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── CTA BANNER ─── -->
+  <section class="cta-banner">
+    <div class="cta-banner-inner fade-in">
+      <h2>¿Listo para ser el restaurante<br/><span class="accent">más visible</span> de tu zona?</h2>
+      <p>Solicita un análisis gratuito de tu presencia digital. Sin compromiso, sin letra pequeña.</p>
+      <div class="cta-banner-btns">
+        <a href="index.html#contacto" class="btn-blue" style="padding: 14px 32px; font-size: 0.95rem;">Solicitar análisis gratis</a>
+        <a href="index.html" class="btn-outline" style="padding: 14px 32px; font-size: 0.95rem; border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.7);">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-bottom-inner">
+      <a href="index.html" class="footer-logo">
+        <img src="SynsLogo.png" alt="Visuanza" />
+        <span>Visuanza</span>
+      </a>
+      <p class="footer-copy">© 2025 Visuanza · SynsNu AB · Todos los derechos reservados</p>
+      <ul class="footer-links">
+        <li><a href="#">Privacidad</a></li>
+        <li><a href="#">Términos</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
