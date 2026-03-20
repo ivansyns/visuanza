@@ -110,6 +110,131 @@
     .nav-links a .chevron {
       font-size: 0.65rem;
       opacity: 0.5;
+      transition: transform 0.2s ease;
+    }
+
+    /* ─── SERVICES DROPDOWN ─── */
+    .nav-has-dropdown {
+      position: relative;
+    }
+
+    .nav-has-dropdown > a .chevron {
+      transition: transform 0.2s ease, opacity 0.2s;
+    }
+
+    .nav-has-dropdown:hover > a .chevron {
+      transform: rotate(180deg);
+      opacity: 0.8;
+    }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 14px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 480px;
+      background: var(--white);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 16px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      padding: 8px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%) translateY(-6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 200;
+    }
+
+    /* Small arrow pointing up */
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px; height: 12px;
+      background: var(--white);
+      border-left: 1px solid rgba(0,0,0,0.08);
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-has-dropdown:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .nav-dropdown-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.15s ease;
+    }
+
+    .nav-dropdown-item:hover {
+      background: #f5f7ff;
+      color: var(--text);
+    }
+
+    .nav-dropdown-item:hover .ndi-icon {
+      background: var(--blue);
+    }
+
+    .nav-dropdown-item:hover .ndi-icon svg {
+      color: white;
+    }
+
+    .ndi-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: #f0f4ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+      margin-top: 1px;
+    }
+
+    .ndi-icon svg {
+      width: 17px; height: 17px;
+      color: var(--blue);
+      transition: color 0.15s ease;
+    }
+
+    .ndi-text { flex: 1; }
+
+    .ndi-title {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 2px;
+      letter-spacing: -0.01em;
+    }
+
+    .ndi-desc {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Mobile accordion */
+    @media (max-width: 900px) {
+      .nav-dropdown {
+        display: none;
+      }
     }
 
     .nav-right {
@@ -2092,7 +2217,49 @@
         <span>Visuanza</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#servicios">Servicios <span class="chevron">▾</span></a></li>
+        <li class="nav-has-dropdown">
+          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-grid">
+              <a href="servicios.html#redes-sociales" class="nav-dropdown-item">
+                <span class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                </span>
+                <span class="ndi-text">
+                  <span class="ndi-title">Redes Sociales</span>
+                  <span class="ndi-desc">Gestión profesional para ganar visibilidad online</span>
+                </span>
+              </a>
+              <a href="servicios.html#diseno-web" class="nav-dropdown-item">
+                <span class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </span>
+                <span class="ndi-text">
+                  <span class="ndi-title">Diseño Web</span>
+                  <span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span>
+                </span>
+              </a>
+              <a href="servicios.html#fotografia-menu" class="nav-dropdown-item">
+                <span class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                </span>
+                <span class="ndi-text">
+                  <span class="ndi-title">Fotografía de Menú</span>
+                  <span class="ndi-desc">Imágenes de platos que abren el apetito</span>
+                </span>
+              </a>
+              <a href="servicios.html#marketing-digital" class="nav-dropdown-item">
+                <span class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+                </span>
+                <span class="ndi-text">
+                  <span class="ndi-title">Marketing Digital</span>
+                  <span class="ndi-desc">Del folleto al feed, estrategia completa</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </li>
         <li><a href="#producto">Producto</a></li>
         <li><a href="#estrategia">Estrategia</a></li>
         <li><a href="#quienes">Quiénes somos</a></li>
