@@ -27,7 +27,11 @@
       --radius-lg:  20px;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -2269,6 +2273,10 @@
         padding: 28px 20px;
         border-radius: 16px;
       }
+
+      /* Contain horizontal overflow on mobile */
+      .platforms { overflow-x: hidden; }
+      .bg-glow { display: none; }
     }
 
     /* ─── RESPONSIVE ─── */
