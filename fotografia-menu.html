@@ -183,13 +183,15 @@
 
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
-    height: calc(100vh + 80vh);
+    height: calc(100vh + 180vh);
     position: relative;
     background: #ffffff;
   }
   #cam-sticky {
-    position: sticky;
+    /* JS toggles position:fixed (pinned) ↔ position:absolute (before/after section) */
+    position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     background: #ffffff;
@@ -197,16 +199,48 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    padding: clamp(32px, 5vh, 64px) clamp(24px, 5vw, 80px);
+    box-sizing: border-box;
     overflow: hidden;
   }
+  #cam-intro {
+    text-align: center;
+    margin-bottom: clamp(18px, 3vh, 40px);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
+  }
+  #cam-intro.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  #cam-eyebrow {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.58rem, 0.85vw, 0.7rem);
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: #2563EB;
+    margin-bottom: 10px;
+  }
+  #cam-headline {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.7rem, 3.2vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    color: #111827;
+    margin: 0;
+  }
   #cam-wrap {
-    max-width: 70%;
-    max-height: 60vh;
+    max-width: min(55vw, 820px);
+    max-height: 50vh;
     width: 100%;
     aspect-ratio: 960 / 540;
     flex-shrink: 0;
-    background: url('assets/camstart.jpeg') center/contain no-repeat #ffffff;
+    background: url('assets/frames/frame_0000.webp') center/contain no-repeat #ffffff;
   }
   #cam-canvas {
     display: block;
@@ -214,21 +248,22 @@
     height: 100%;
   }
   #cam-label {
-    font-family: 'Geist', 'Inter', sans-serif;
-    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
-    font-weight: 700;
-    letter-spacing: -0.03em;
-    color: #111111;
-    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(0.875rem, 1.5vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: #6B7280;
+    margin-top: clamp(16px, 2.5vh, 30px);
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
     pointer-events: none;
     flex-shrink: 0;
   }
   #cam-section + .sp-section { border-top: none; }
   @media (max-width: 768px) {
-    #cam-section { height: calc(100vh + 50vh); }
-    #cam-wrap { max-width: 90%; max-height: 55vh; }
+    #cam-section { height: calc(100vh + 120vh); }
+    #cam-wrap { max-width: 80vw; max-height: 45vh; }
+    #cam-headline { letter-spacing: -0.03em; }
   }
   </style>
 </head>
@@ -293,6 +328,10 @@
   <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
   <section id="cam-section" aria-label="Animación cámara">
     <div id="cam-sticky">
+      <div id="cam-intro">
+        <span id="cam-eyebrow">— NUESTRA TECNOLOGÍA</span>
+        <h2 id="cam-headline">Cada detalle, capturado.</h2>
+      </div>
       <div id="cam-wrap">
         <canvas id="cam-canvas"></canvas>
       </div>
@@ -432,35 +471,38 @@
 <script>
 (function () {
   'use strict';
-  const TOTAL = 121;
-  const FRAMES = [];
-  let curIndex = 0;
-  let rafPending = false;
+  var TOTAL = 121;
+  var FRAMES = [];
+  var curIndex = 0;
+  var rafPending = false;
+  var introShown = false;
 
-  const section = document.getElementById('cam-section');
-  const canvas  = document.getElementById('cam-canvas');
-  const label   = document.getElementById('cam-label');
+  var section = document.getElementById('cam-section');
+  var sticky  = document.getElementById('cam-sticky');
+  var canvas  = document.getElementById('cam-canvas');
+  var label   = document.getElementById('cam-label');
+  var intro   = document.getElementById('cam-intro');
   if (!section || !canvas) return;
-  const ctx = canvas.getContext('2d');
+  var ctx = canvas.getContext('2d');
 
   function frameSrc(i) {
-    return 'assets/frames/frame_' + String(i).padStart(4, '0') + '.jpg';
+    return 'assets/frames/frame_' + String(i).padStart(4, '0') + '.webp';
   }
 
   function resizeCanvas() {
-    const dpr = window.devicePixelRatio || 1;
+    var dpr = window.devicePixelRatio || 1;
     canvas.width  = canvas.offsetWidth  * dpr;
     canvas.height = canvas.offsetHeight * dpr;
   }
 
   function drawContain(img) {
-    const dpr = window.devicePixelRatio || 1;
-    const cw = canvas.offsetWidth;
-    const ch = canvas.offsetHeight;
-    const drawAreaH = ch * 0.92; // reserve 8% bottom for shadow breathing room
-    const ia = img.naturalWidth / img.naturalHeight;
-    const ba = cw / drawAreaH;
-    let dw, dh, dx, dy;
+    var dpr = window.devicePixelRatio || 1;
+    var cw = canvas.offsetWidth;
+    var ch = canvas.offsetHeight;
+    var drawAreaH = ch * 0.92;
+    var ia = img.naturalWidth / img.naturalHeight;
+    var ba = cw / drawAreaH;
+    var dw, dh, dx, dy;
     if (ia > ba) { dw = cw; dh = cw / ia; dx = 0; dy = (drawAreaH - dh) / 2; }
     else         { dh = drawAreaH; dw = drawAreaH * ia; dy = 0; dx = (cw - dw) / 2; }
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -470,47 +512,75 @@
   }
 
   function drawFrame(index) {
-    const i = Math.max(0, Math.min(TOTAL - 1, index));
+    var i = Math.max(0, Math.min(TOTAL - 1, index));
     if (FRAMES[i]) { drawContain(FRAMES[i]); return; }
-    for (let j = i - 1; j >= 0; j--) {
+    for (var j = i - 1; j >= 0; j--) {
       if (FRAMES[j]) { drawContain(FRAMES[j]); return; }
     }
   }
 
   function loadFrom(i) {
     if (i >= TOTAL) return;
-    const img = new Image();
+    var img = new Image();
     img.onload  = function() { FRAMES[i] = img; if (i === curIndex) drawFrame(i); loadFrom(i + 1); };
     img.onerror = function() { loadFrom(i + 1); };
     img.src = frameSrc(i);
   }
 
   function preload() {
-    const first = new Image();
+    var first = new Image();
     first.onload  = function() { FRAMES[0] = first; resizeCanvas(); drawFrame(0); loadFrom(1); };
     first.onerror = function() { loadFrom(1); };
     first.src = frameSrc(0);
   }
 
+  // ── JS fake sticky: fixed when section spans viewport, absolute before/after ──
+  // Required because overflow-x:hidden on html/body breaks CSS position:sticky
+  function updateSticky() {
+    var rect = section.getBoundingClientRect();
+    var viewH = window.innerHeight;
+    if (rect.top > 0) {
+      sticky.style.position = 'absolute';
+      sticky.style.top = '0px';
+      sticky.style.left = '';
+      sticky.style.width = '';
+    } else if (rect.bottom <= viewH) {
+      sticky.style.position = 'absolute';
+      sticky.style.top = (section.offsetHeight - viewH) + 'px';
+      sticky.style.left = '';
+      sticky.style.width = '';
+    } else {
+      sticky.style.position = 'fixed';
+      sticky.style.top = '0px';
+      sticky.style.left = section.getBoundingClientRect().left + 'px';
+      sticky.style.width = section.offsetWidth + 'px';
+    }
+  }
+
   function getProgress() {
-    const rect = section.getBoundingClientRect();
-    const max  = section.offsetHeight - window.innerHeight;
+    var rect = section.getBoundingClientRect();
+    var max  = section.offsetHeight - window.innerHeight;
     if (max <= 0) return 0;
     return Math.max(0, Math.min(1, -rect.top / max));
   }
 
   function update() {
     rafPending = false;
-    const p = getProgress();
-    const i = Math.floor(p * (TOTAL - 1));
+    updateSticky();
+    var p = getProgress();
+    var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
-    if (p >= 0.70) {
-      const t = Math.min(1, (p - 0.70) / 0.15);
+    if (!introShown && p > 0 && intro) {
+      intro.classList.add('visible');
+      introShown = true;
+    }
+    if (p >= 0.60) {
+      var t = Math.min(1, (p - 0.60) / 0.15);
       label.style.opacity = t;
-      label.style.transform = 'translateY(' + Math.round(20 * (1 - t)) + 'px)';
+      label.style.transform = 'translateY(' + Math.round(16 * (1 - t)) + 'px)';
     } else {
       label.style.opacity = 0;
-      label.style.transform = 'translateY(20px)';
+      label.style.transform = 'translateY(16px)';
     }
   }
 
@@ -521,11 +591,10 @@
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() { resizeCanvas(); drawFrame(curIndex); }, 150);
+    resizeTimer = setTimeout(function() { updateSticky(); resizeCanvas(); drawFrame(curIndex); }, 150);
   }, { passive: true });
 
   preload();
-  resizeCanvas();
   update();
 })();
 </script>
