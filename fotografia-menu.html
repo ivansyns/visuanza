@@ -63,7 +63,7 @@
     @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } }
     @media (min-width: 769px) { .mobile-menu { display: none !important; } }
     .container { width: 100%; max-width: 1100px; margin: 0 auto; padding-left: clamp(16px,3vw,48px); padding-right: clamp(16px,3vw,48px); }
-    .sp-hero { padding: 150px 0 100px; position: relative; text-align: center; }
+    .sp-hero { padding: 60px 0 100px; position: relative; text-align: center; }
     .sp-hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse, rgba(79,126,255,0.14) 0%, transparent 70%); pointer-events: none; }
     .sp-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
     .sp-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,126,255,0.12); color: var(--blue); font-size: 0.78rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; border: 1px solid rgba(79,126,255,0.25); }
@@ -186,6 +186,7 @@
     height: calc(100vh + 180vh);
     position: relative;
     background: #ffffff;
+    margin-bottom: 0;
   }
   #cam-sticky {
     /* JS toggles position:fixed (pinned) ↔ position:absolute (before/after section) */
@@ -199,7 +200,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 20px 0 0 0;
+    box-sizing: border-box;
     overflow: hidden;
   }
   #cam-wrap {
@@ -231,8 +233,8 @@
     #cam-sticky { height: 60vh; }
   }
   @media (max-width: 768px) {
-    #cam-section { height: calc(100vh + 80vh); }
-    #cam-sticky { height: 50vh; }
+    #cam-section { height: calc(100vh + 80vh); margin-bottom: 0; }
+    #cam-sticky { height: 65vh; padding-top: 16px; }
   }
   </style>
 </head>
