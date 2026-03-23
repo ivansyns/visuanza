@@ -180,6 +180,49 @@
   .lang-toggle { color: rgba(0,0,0,0.7); }
   .hamburger span { background: rgba(0,0,0,0.75); }
   .hamburger:hover { background: rgba(0,0,0,0.06); }
+
+  /* ─── CAMERA SCROLL ANIMATION ─── */
+  #cam-section {
+    height: calc(100vh + 80vh);
+    position: relative;
+    background: #ffffff;
+  }
+  #cam-sticky {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: #ffffff url('assets/camstart.jpeg') center/contain no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #cam-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #cam-label {
+    position: absolute;
+    bottom: clamp(40px, 8vh, 80px);
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Geist', 'Inter', sans-serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #111111;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    text-shadow: 0 1px 20px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.6);
+  }
+  #cam-section + .sp-section { border-top: none; }
+  @media (max-width: 768px) {
+    #cam-section { height: calc(100vh + 50vh); }
+  }
   </style>
 </head>
 <body>
@@ -237,6 +280,14 @@
         <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
         <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-lbl">Derechos de uso ilimitados</div></div>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
+  <section id="cam-section" aria-label="Animación cámara">
+    <div id="cam-sticky">
+      <canvas id="cam-canvas"></canvas>
+      <p id="cam-label">Cada detalle importa.</p>
     </div>
   </section>
 
@@ -368,5 +419,106 @@
     hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
   </script>
+
+<script>
+(function () {
+  'use strict';
+  const TOTAL = 121;
+  const FRAMES = [];
+  let curIndex = 0;
+  let rafPending = false;
+
+  const section = document.getElementById('cam-section');
+  const canvas  = document.getElementById('cam-canvas');
+  const label   = document.getElementById('cam-label');
+  if (!section || !canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function frameSrc(i) {
+    return 'assets/frames/frame_' + String(i).padStart(4, '0') + '.jpg';
+  }
+
+  function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width  = canvas.offsetWidth  * dpr;
+    canvas.height = canvas.offsetHeight * dpr;
+  }
+
+  function drawContain(img) {
+    const dpr = window.devicePixelRatio || 1;
+    const cw = canvas.offsetWidth;
+    const ch = canvas.offsetHeight;
+    const ia = img.naturalWidth / img.naturalHeight;
+    const ba = cw / ch;
+    let dw, dh, dx, dy;
+    if (ia > ba) { dw = cw; dh = cw / ia; dx = 0; dy = (ch - dh) / 2; }
+    else         { dh = ch; dw = ch * ia; dy = 0; dx = (cw - dw) / 2; }
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, dx * dpr, dy * dpr, dw * dpr, dh * dpr);
+  }
+
+  function drawFrame(index) {
+    const i = Math.max(0, Math.min(TOTAL - 1, index));
+    if (FRAMES[i]) { drawContain(FRAMES[i]); return; }
+    for (let j = i - 1; j >= 0; j--) {
+      if (FRAMES[j]) { drawContain(FRAMES[j]); return; }
+    }
+  }
+
+  function loadFrom(i) {
+    if (i >= TOTAL) return;
+    const img = new Image();
+    img.onload  = function() { FRAMES[i] = img; if (i === curIndex) drawFrame(i); loadFrom(i + 1); };
+    img.onerror = function() { loadFrom(i + 1); };
+    img.src = frameSrc(i);
+  }
+
+  function preload() {
+    const first = new Image();
+    first.onload  = function() { FRAMES[0] = first; resizeCanvas(); drawFrame(0); loadFrom(1); };
+    first.onerror = function() { loadFrom(1); };
+    first.src = frameSrc(0);
+  }
+
+  function getProgress() {
+    const rect = section.getBoundingClientRect();
+    const max  = section.offsetHeight - window.innerHeight;
+    if (max <= 0) return 0;
+    return Math.max(0, Math.min(1, -rect.top / max));
+  }
+
+  function labelOpacity(p) {
+    if (p < 0.40) return 0;
+    if (p < 0.50) return (p - 0.40) / 0.10;
+    if (p < 0.75) return 1;
+    if (p < 0.85) return (0.85 - p) / 0.10;
+    return 0;
+  }
+
+  function update() {
+    rafPending = false;
+    const p = getProgress();
+    const i = Math.floor(p * (TOTAL - 1));
+    if (i !== curIndex) { curIndex = i; drawFrame(i); }
+    label.style.opacity = labelOpacity(p);
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!rafPending) { rafPending = true; requestAnimationFrame(update); }
+  }, { passive: true });
+
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() { resizeCanvas(); drawFrame(curIndex); }, 150);
+  }, { passive: true });
+
+  preload();
+  resizeCanvas();
+  update();
+})();
+</script>
 </body>
 </html>
