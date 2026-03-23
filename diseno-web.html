@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diseño Web para Restaurantes – Visuanza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --blue: #4F7EFF; --blue-dark: #3a6be8; --black: #09090b; --dark: #111118; --text: #F8FAFC; --text-muted: #94A3B8; --border: rgba(255,255,255,0.08); --surface: rgba(255,255,255,0.04); }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--black); overflow-x: hidden; line-height: 1.6; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 28px 28px; }
+    h1, h2, h3, h4 { font-family: 'Geist', 'Inter', sans-serif; }
+    .bg-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 1000px; height: 1000px; background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, rgba(59,130,246,0.08) 40%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(9,9,11,0.88), rgba(9,9,11,0.72)); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06); pointer-events: auto; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,0.92); letter-spacing: -0.02em; font-family: 'Geist','Inter',sans-serif; }
+    .nav-links { display: flex; align-items: center; list-style: none; }
+    .nav-links li { margin-right: 4px; }
+    .nav-links li:last-child { margin-right: 0; }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
+    .nav-links a:hover { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.06); }
+    .nav-links a.active { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.08); }
+    .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
+    .nav-has-dropdown { position: relative; }
+    .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
+    .nav-dropdown { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(9,9,11,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.5); backdrop-filter: blur(20px); padding: 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
+    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: rgba(14,14,22,0.98); border-left: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1); }
+    .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.75); transition: background 0.15s ease; }
+    .nav-dropdown-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.95); }
+    .nav-dropdown-item:hover .ndi-icon { background: #4F7EFF; }
+    .nav-dropdown-item:hover .ndi-icon svg { color: white; }
+    .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
+    .ndi-icon svg { width: 17px; height: 17px; color: #4F7EFF; transition: color 0.15s ease; }
+    .ndi-text { flex: 1; }
+    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 2px; }
+    .ndi-desc { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.42); line-height: 1.4; }
+    @media (max-width: 900px) { .nav-dropdown { display: none; } .nav-links, .nav-right { display: none !important; } }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .lang-toggle { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.85); cursor: pointer; background: none; border: none; }
+    .lang-flag { font-size: 1.1rem; }
+    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s; }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 8px; transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
+    .hamburger:hover { background: rgba(255,255,255,0.08); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.85); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { position: fixed; inset: 0; z-index: 150; background: rgba(9,9,11,0.92); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px 48px; opacity: 0; pointer-events: none; transform: translateX(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .mobile-menu-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 320px; }
+    .mobile-menu-links li { width: 100%; }
+    .mobile-menu-links a { display: block; text-align: center; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 1.35rem; font-weight: 600; font-family: 'Geist','Inter',sans-serif; letter-spacing: -0.02em; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; }
+    .mobile-menu-links a:hover { color: #fff; }
+    .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
+    .mobile-lang { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.45); background: none; border: none; cursor: pointer; }
+    .mobile-cta { width: 100%; text-align: center; background: #4F7EFF; color: #fff; border: none; padding: 15px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; display: block; transition: background 0.2s; }
+    .mobile-cta:hover { background: #3a6be8; }
+    @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } }
+    @media (min-width: 769px) { .mobile-menu { display: none !important; } }
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding-left: clamp(16px,3vw,48px); padding-right: clamp(16px,3vw,48px); }
+    .sp-hero { padding: 150px 0 100px; position: relative; text-align: center; }
+    .sp-hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse, rgba(79,126,255,0.14) 0%, transparent 70%); pointer-events: none; }
+    .sp-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
+    .sp-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,126,255,0.12); color: var(--blue); font-size: 0.78rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; border: 1px solid rgba(79,126,255,0.25); }
+    .sp-hero h1 { font-size: clamp(2.6rem,5.5vw,4.2rem); font-weight: 900; line-height: 1.06; letter-spacing: -0.04em; margin-bottom: 24px; }
+    .sp-hero h1 .accent { color: var(--blue); }
+    .sp-hero p { font-size: clamp(1rem,1.8vw,1.15rem); color: var(--text-muted); max-width: 580px; margin: 0 auto 40px; line-height: 1.75; }
+    .sp-hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-blue { background: var(--blue); color: #fff; border: none; padding: 14px 28px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(79,126,255,0.4); }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(79,126,255,0.5); }
+    .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.12); padding: 14px 28px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, color 0.2s; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .stats-row { display: flex; gap: 0; justify-content: center; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); backdrop-filter: blur(8px); margin-top: 64px; overflow: hidden; }
+    .stat-item { flex: 1; padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.04em; color: var(--text); font-family: 'Geist','Inter',sans-serif; }
+    .stat-num span { color: var(--blue); }
+    .stat-lbl { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+    .sp-section { padding: clamp(72px,8vw,120px) 0; position: relative; z-index: 1; }
+    .sp-section + .sp-section { border-top: 1px solid var(--border); }
+    .section-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
+    .section-label::before { content: ''; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
+    .sp-section h2 { font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 18px; line-height: 1.1; }
+    .sp-section h2 .accent { color: var(--blue); }
+    .sp-section > .container > p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; max-width: 620px; margin-bottom: 48px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .feature-grid { grid-template-columns: 1fr; } }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.2s, background 0.2s; }
+    .feature-card:hover { border-color: rgba(79,126,255,0.3); background: rgba(79,126,255,0.04); }
+    .feature-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .feature-icon svg { width: 20px; height: 20px; color: var(--blue); }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+    .feature-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+    .includes-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    @media (max-width: 768px) { .includes-split { grid-template-columns: 1fr; gap: 32px; } }
+    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .includes-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 0.95rem; font-weight: 500; color: var(--text); }
+    .includes-list li::before { content: ''; flex-shrink: 0; margin-top: 4px; width: 18px; height: 18px; border-radius: 50%; background: rgba(79,126,255,0.15); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%234F7EFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; background-size: 10px 8px; }
+    .includes-aside { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
+    .includes-aside h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .includes-aside p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
+    .includes-aside .btn-blue { width: 100%; text-align: center; }
+    .sp-cta { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.07); padding: clamp(72px,8vw,120px) 0; text-align: center; position: relative; overflow: hidden; }
+    .sp-cta::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, rgba(79,126,255,0.08) 45%, transparent 70%); pointer-events: none; }
+    .sp-cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
+    .sp-cta h2 { font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
+    .sp-cta h2 .accent { color: var(--blue); }
+    .sp-cta p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; }
+    .sp-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    footer { background: var(--black); border-top: 1px solid var(--border); padding: 32px 0; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px,3vw,48px); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+    .footer-logo span { font-size: 1rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+    .footer-links { display: flex; gap: 20px; list-style: none; }
+    .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 600px) { .stats-row { flex-direction: column; } .stat-item { border-right: none; border-bottom: 1px solid var(--border); } .stat-item:last-child { border-bottom: none; } .footer-inner { flex-direction: column; text-align: center; } }
+  </style>
+</head>
+<body>
+  <div class="bg-glow" aria-hidden="true"></div>
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo"><img src="SynsLogo.png" alt="Visuanza" /><span>Visuanza</span></a>
+      <ul class="nav-links">
+        <li class="nav-has-dropdown">
+          <a href="servicios.html" class="active">Servicios <span class="chevron">▾</span></a>
+          <div class="nav-dropdown"><div class="nav-dropdown-grid">
+            <a href="redes-sociales.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span><span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span></a>
+            <a href="diseno-web.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span></span></a>
+            <a href="fotografia-menu.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Imágenes de platos que abren el apetito</span></span></a>
+            <a href="marketing-digital.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg></span><span class="ndi-text"><span class="ndi-title">Marketing Digital</span><span class="ndi-desc">Del folleto al feed, estrategia completa</span></span></a>
+          </div></div>
+        </li>
+        <li><a href="index.html#producto">Producto</a></li>
+        <li><a href="index.html#estrategia">Estrategia</a></li>
+        <li><a href="index.html#quienes">Quiénes somos</a></li>
+        <li><a href="index.html#contacto">Contactar</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
+        <a href="index.html#contacto" class="btn-primary">Pedir propuesta</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="mobile-menu-links">
+      <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
+      <li><a href="index.html#producto" class="mobile-menu-link">Producto</a></li>
+      <li><a href="index.html#estrategia" class="mobile-menu-link">Estrategia</a></li>
+      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
+      <li><a href="index.html#contacto" class="mobile-menu-link">Contactar</a></li>
+    </ul>
+    <div class="mobile-menu-bottom">
+      <button class="mobile-lang">🇪🇸 ES ▾</button>
+      <a href="index.html#contacto" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
+    </div>
+  </div>
+
+  <section class="sp-hero">
+    <div class="sp-hero-inner">
+      <div class="sp-badge">✦ Servicio 02 · Diseño Web</div>
+      <h1>Tu restaurante merece una web que<br/><span class="accent">llene mesas.</span></h1>
+      <p>Diseñamos páginas web rápidas, modernas y optimizadas para restaurantes. Tu carta online, tu sistema de reservas y tu historia — todo en un solo lugar.</p>
+      <div class="sp-hero-cta">
+        <a href="index.html#contacto" class="btn-blue">Pedir propuesta gratis</a>
+        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+      </div>
+      <div class="stats-row fade-in">
+        <div class="stat-item"><div class="stat-num">+<span>60</span>%</div><div class="stat-lbl">Más reservas online</div></div>
+        <div class="stat-item"><div class="stat-num"><span>7</span>d</div><div class="stat-lbl">Entrega en 7 días</div></div>
+        <div class="stat-item"><div class="stat-num"><span>100</span>%</div><div class="stat-lbl">Optimizada para móvil</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-section">
+    <div class="container">
+      <p class="section-label">Lo que construimos</p>
+      <h2>Una web diseñada para <span class="accent">restaurantes</span></h2>
+      <p>No una plantilla genérica. Una web pensada específicamente para tu restaurante, con todo lo que tus clientes necesitan para encontrarte, conocerte y reservar.</p>
+      <div class="feature-grid fade-in">
+        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><h3>Diseño único a medida</h3><p>Tu paleta de colores, tu tipografía, tu identidad. Sin plantillas genéricas, sin "aire de restaurante cualquiera".</p></div>
+        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Carta digital integrada</h3><p>Tu menú online con fotos, precios y categorías. Actualizable en cualquier momento sin tocar código.</p></div>
+        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></div><h3>Sistema de reservas</h3><p>Reservas online 24/7 directamente en tu web. Reduce llamadas, aumenta conversiones.</p></div>
+        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div><h3>SEO local desde el día 1</h3><p>Optimizada para que aparezcas cuando alguien busca "restaurante en [tu ciudad]". Sin trucos, con estructura correcta.</p></div>
+        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div><h3>100% responsive</h3><p>Perfecta en móvil, tablet y ordenador. Más del 70% de tus clientes te buscan desde el teléfono.</p></div>
+        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div><h3>Velocidad de carga</h3><p>Webs que cargan en menos de 2 segundos. Cada segundo que tardas pierdes el 7% de conversiones.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-section">
+    <div class="container">
+      <div class="includes-split">
+        <div>
+          <p class="section-label">Todo incluido</p>
+          <h2>Lo que recibes en tu <span class="accent">proyecto</span></h2>
+          <p style="margin-bottom: 32px;">Un proyecto completo, entregado en 7 días, listo para publicar y con todo lo que necesita tu restaurante.</p>
+          <ul class="includes-list">
+            <li>Diseño personalizado para tu restaurante</li>
+            <li>Carta digital con fotos de alta calidad</li>
+            <li>Integración de reservas online (TheFork, Covermanager, formulario propio)</li>
+            <li>Sección de historia y equipo del restaurante</li>
+            <li>Galería de fotos con imágenes del local y los platos</li>
+            <li>Mapa de ubicación y horarios de apertura</li>
+            <li>Optimización SEO local completa</li>
+            <li>Hosting incluido el primer año</li>
+            <li>Formación para que puedas actualizar el menú tú mismo</li>
+          </ul>
+        </div>
+        <div class="includes-aside fade-in">
+          <h3>Entrega garantizada en 7 días</h3>
+          <p>Desde el brief inicial hasta la web publicada en menos de una semana. Proceso ágil, comunicación constante y sin sorpresas al final.</p>
+          <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">Todos nuestros clientes ven un aumento de reservas online en los primeros 30 días post-lanzamiento.</p>
+          <br/>
+          <a href="index.html#contacto" class="btn-blue">Solicitar presupuesto</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sp-cta">
+    <div class="sp-cta-inner">
+      <p class="section-label" style="justify-content: center;">Empieza hoy</p>
+      <h2>Tu web lista en <span class="accent">7 días.</span></h2>
+      <p>Solicita tu presupuesto gratuito. Sin compromiso, sin letra pequeña.</p>
+      <div class="sp-cta-btns">
+        <a href="index.html#contacto" class="btn-blue">Solicitar presupuesto gratis</a>
+        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo"><img src="SynsLogo.png" alt="Visuanza" /><span>Visuanza</span></a>
+      <p class="footer-copy">© 2025 Visuanza · SynsNu AB · Todos los derechos reservados</p>
+      <ul class="footer-links"><li><a href="#">Privacidad</a></li><li><a href="#">Términos</a></li><li><a href="index.html#contacto">Contacto</a></li></ul>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible')), 300);
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+  </script>
+</body>
+</html>
