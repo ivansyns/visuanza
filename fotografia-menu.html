@@ -155,21 +155,31 @@
     background-size: 28px 28px;
   }
   .bg-glow { opacity: 0.25; }
-  /* Restore dark variables for CTA and footer */
-  .sp-cta, footer {
+  /* Restore dark variables for footer only */
+  footer {
     --text: #F8FAFC;
     --text-muted: #94A3B8;
     --border: rgba(255,255,255,0.08);
     --surface: rgba(255,255,255,0.04);
   }
   footer { background: #09090b; }
-  .sp-cta { background: #111118; }
+  /* White CTA section */
+  .sp-cta { background: #ffffff; border-top: 1px solid rgba(0,0,0,0.08); }
+  .sp-cta::before { opacity: 0.06; }
   /* btn-ghost light override */
   .btn-ghost { background: #f0f0f0; color: #444444; border: 1px solid #d1d5db; }
   .btn-ghost:hover { background: #e5e7eb; color: #111111; }
-  /* Restore btn-ghost inside CTA section */
-  .sp-cta-btns .btn-ghost { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.15); }
-  .sp-cta-btns .btn-ghost:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  /* Light navbar */
+  nav { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .nav-inner { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+  .nav-logo img { filter: brightness(0); }
+  .nav-logo span { color: #111111; }
+  .nav-links a { color: rgba(0,0,0,0.55); }
+  .nav-links a:hover { color: #111111; background: rgba(0,0,0,0.05); }
+  .nav-links a.active { color: #111111; background: rgba(0,0,0,0.07); }
+  .lang-toggle { color: rgba(0,0,0,0.7); }
+  .hamburger span { background: rgba(0,0,0,0.75); }
+  .hamburger:hover { background: rgba(0,0,0,0.06); }
   </style>
 </head>
 <body>
