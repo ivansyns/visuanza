@@ -183,7 +183,7 @@
 
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
-    height: calc(100vh + 100vh);
+    height: calc(100vh + 70vh);
     position: relative;
     background: #ffffff;
     margin-bottom: 0;
@@ -526,7 +526,7 @@
     var rect = section.getBoundingClientRect();
     var max  = section.offsetHeight - window.innerHeight;
     if (max <= 0) return 0;
-    return Math.max(0, Math.min(1, -rect.top / max));
+    return Math.max(0, Math.min(1, (-rect.top / max) / 0.85));
   }
 
   function update() {
