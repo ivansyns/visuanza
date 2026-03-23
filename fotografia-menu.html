@@ -199,11 +199,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: clamp(32px, 5vh, 64px) clamp(24px, 5vw, 80px);
-    box-sizing: border-box;
+    padding: 0;
     overflow: hidden;
   }
   #cam-wrap {
+    position: relative;
     max-width: min(55vw, 820px);
     max-height: 50vh;
     width: 100%;
@@ -217,22 +217,22 @@
     height: 100%;
   }
   #cam-label {
+    position: absolute;
+    bottom: clamp(8px, 3%, 20px);
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
     font-family: 'Inter', sans-serif;
-    font-size: clamp(0.875rem, 1.5vw, 1.1rem);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    color: #6B7280;
-    margin-top: clamp(16px, 2.5vh, 30px);
+    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #111827;
+    white-space: nowrap;
     opacity: 0;
-    transform: translateY(16px);
     pointer-events: none;
-    flex-shrink: 0;
   }
-  #cam-section + .sp-section { border-top: none; }
   @media (max-width: 768px) {
     #cam-section { height: calc(100vh + 80vh); }
-    #cam-sticky { padding: 12px 16px; }
-    #cam-wrap { max-width: 88vw; max-height: 48vh; }
+    #cam-wrap { max-width: 92vw; max-height: 52vh; }
   }
   </style>
 </head>
@@ -277,6 +277,16 @@
     </div>
   </div>
 
+  <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
+  <section id="cam-section" aria-label="Animación cámara">
+    <div id="cam-sticky">
+      <div id="cam-wrap">
+        <canvas id="cam-canvas"></canvas>
+        <p id="cam-label">Cada detalle importa.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="sp-hero">
     <div class="sp-hero-inner">
       <div class="sp-badge">✦ Servicio 03 · Fotografía de Menú</div>
@@ -291,16 +301,6 @@
         <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
         <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-lbl">Derechos de uso ilimitados</div></div>
       </div>
-    </div>
-  </section>
-
-  <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
-  <section id="cam-section" aria-label="Animación cámara">
-    <div id="cam-sticky">
-      <div id="cam-wrap">
-        <canvas id="cam-canvas"></canvas>
-      </div>
-      <p id="cam-label">Cada detalle importa.</p>
     </div>
   </section>
 
@@ -497,23 +497,6 @@
     first.src = frameSrc(0);
   }
 
-  // ── Mobile: move section between CTA and stats row ──
-  // CSS can't reorder elements across different parents, so JS does it
-  function positionSection() {
-    var statsRow = document.querySelector('.stats-row');
-    var spHero   = document.querySelector('.sp-hero');
-    if (!statsRow || !spHero) return;
-    if (window.innerWidth < 768) {
-      // Insert cam-section before stats-row (inside .sp-hero-inner)
-      statsRow.parentNode.insertBefore(section, statsRow);
-    } else {
-      // Restore cam-section after .sp-hero (its original desktop position)
-      if (section.parentNode !== spHero.parentNode) {
-        spHero.parentNode.insertBefore(section, spHero.nextSibling);
-      }
-    }
-  }
-
   // ── JS fake sticky: fixed when section spans viewport, absolute before/after ──
   // Required because overflow-x:hidden on html/body breaks CSS position:sticky
   function updateSticky() {
@@ -553,10 +536,10 @@
     if (p >= 0.60) {
       var t = Math.min(1, (p - 0.60) / 0.15);
       label.style.opacity = t;
-      label.style.transform = 'translateY(' + Math.round(16 * (1 - t)) + 'px)';
+      label.style.transform = 'translateX(-50%) translateY(' + Math.round(12 * (1 - t)) + 'px)';
     } else {
       label.style.opacity = 0;
-      label.style.transform = 'translateY(16px)';
+      label.style.transform = 'translateX(-50%) translateY(12px)';
     }
   }
 
@@ -567,10 +550,9 @@
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() { positionSection(); updateSticky(); resizeCanvas(); drawFrame(curIndex); }, 150);
+    resizeTimer = setTimeout(function() { updateSticky(); resizeCanvas(); drawFrame(curIndex); }, 150);
   }, { passive: true });
 
-  positionSection();
   preload();
   update();
 })();
