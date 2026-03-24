@@ -213,26 +213,6 @@
     flex-shrink: 0;
     background: url('assets/frames/frame_0000.webp') center/contain no-repeat #ffffff;
   }
-  #cam-heading {
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 8px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-  }
-  #cam-heading h1 {
-    font-size: clamp(2.6rem, 5.5vw, 4.2rem);
-    font-weight: 900;
-    line-height: 1.06;
-    letter-spacing: -0.04em;
-    color: #111827;
-    margin: 0;
-  }
-  #cam-heading h1 .accent { color: var(--blue); }
   #cam-canvas {
     display: block;
     width: 100%;
@@ -256,10 +236,9 @@
     #cam-wrap { height: 60vh; }
   }
   @media (max-width: 768px) {
-    #cam-section { height: calc(100vh + 80vh); margin-bottom: 0; }
-    #cam-sticky { padding-top: 16px; }
-    #cam-wrap { height: 55vh; }
-    #cam-heading h1 { font-size: clamp(1.8rem, 6vw, 2.6rem); }
+    #cam-section { height: calc(100vh + 80vh); margin-bottom: 0; padding-bottom: 0; }
+    #cam-sticky { padding-top: 16px; margin-bottom: 0; padding-bottom: 0; }
+    #cam-wrap { height: 70vh; }
   }
   </style>
 </head>
@@ -311,15 +290,13 @@
         <canvas id="cam-canvas"></canvas>
         <p id="cam-label">Cada detalle importa.</p>
       </div>
-      <div id="cam-heading">
-        <h1>Platos que se ven tan bien que<br/><span class="accent">se piden solos.</span></h1>
-      </div>
     </div>
   </section>
 
   <section class="sp-hero">
     <div class="sp-hero-inner">
       <div class="sp-badge">✦ Servicio 03 · Fotografía de Menú</div>
+      <h1>Platos que se ven tan bien que<br/><span class="accent">se piden solos.</span></h1>
       <p>Fotografiamos todo tu menú con luz natural, composición profesional y edición que hace que cada plato parezca irresistible. Más clics, más pedidos.</p>
       <div class="sp-hero-cta">
         <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
@@ -465,7 +442,7 @@
 <script>
 (function () {
   'use strict';
-  var TOTAL = 107;
+  var TOTAL = 100;
   var FRAMES = [];
   var curIndex = 0;
   var rafPending = false;
@@ -474,7 +451,6 @@
   var sticky  = document.getElementById('cam-sticky');
   var canvas  = document.getElementById('cam-canvas');
   var label   = document.getElementById('cam-label');
-  var heading = document.getElementById('cam-heading');
   if (!section || !canvas) return;
   var ctx = canvas.getContext('2d');
 
@@ -563,28 +539,13 @@
     var p = getProgress();
     var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
-    if (p >= 0.60 && p < 0.70) {
-      if (p < 0.65) {
-        var t = (p - 0.60) / 0.05;
-        label.style.opacity = t;
-        label.style.transform = 'translateX(-50%) translateY(' + Math.round(12 * (1 - t)) + 'px)';
-      } else {
-        label.style.opacity = Math.max(0, 1 - (p - 0.65) / 0.05);
-        label.style.transform = 'translateX(-50%) translateY(0px)';
-      }
+    if (p >= 0.60) {
+      var t = Math.min(1, (p - 0.60) / 0.15);
+      label.style.opacity = t;
+      label.style.transform = 'translateX(-50%) translateY(' + Math.round(12 * (1 - t)) + 'px)';
     } else {
       label.style.opacity = 0;
       label.style.transform = 'translateX(-50%) translateY(12px)';
-    }
-    if (heading) {
-      if (p >= 0.75) {
-        var ht = Math.min(1, (p - 0.75) / 0.15);
-        heading.style.opacity = ht;
-        heading.style.transform = 'translateY(' + Math.round(20 * (1 - ht)) + 'px)';
-      } else {
-        heading.style.opacity = 0;
-        heading.style.transform = 'translateY(20px)';
-      }
     }
   }
 
