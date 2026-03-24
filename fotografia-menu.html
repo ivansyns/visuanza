@@ -186,6 +186,7 @@
     height: calc(100vh + 100vh);
     position: relative;
     background: #ffffff;
+    margin-top: 80px;
   }
   #cam-sticky {
     position: sticky;
@@ -439,11 +440,11 @@
 (function () {
   'use strict';
 
-  var TOTAL    = 100;
-  var FRAMES   = new Array(TOTAL);
-  var curIndex = 0;
+  var TOTAL      = 100;
+  var FRAMES     = new Array(TOTAL);
+  var curIndex   = 0;
   var rafPending = false;
-  var allLoaded  = false;
+  var initDone   = false;
 
   var section = document.getElementById('cam-section');
   var sticky  = document.getElementById('cam-sticky');
@@ -451,21 +452,23 @@
   if (!section || !sticky || !canvas) return;
   var ctx = canvas.getContext('2d');
 
-  // ── Layout cache — populated on init and resize, never read during scroll ──
-  var CW = 0, CH = 0, DPR = 1, scrollMax = 0;
+  // ── Layout cache — set once on init/resize, zero reads during scroll ──
+  var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
 
   function initLayout() {
-    DPR  = Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
-    CW   = canvas.offsetWidth;
-    CH   = canvas.offsetHeight;
-    scrollMax = section.offsetHeight - sticky.offsetHeight;
+    DPR          = Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
+    CW           = canvas.offsetWidth;
+    CH           = canvas.offsetHeight;
+    // Cache document-relative top of section (getBCR only runs here, not on scroll)
+    sectionOffset = window.scrollY + section.getBoundingClientRect().top;
+    scrollMax    = section.offsetHeight - sticky.offsetHeight;
     if (!CW || !CH) return false;
     canvas.width  = Math.round(CW * DPR);
     canvas.height = Math.round(CH * DPR);
     return true;
   }
 
-  // ── Draw — no layout reads, all values from cache ──
+  // ── Draw — pure math, no DOM reads ──
   function draw(img) {
     if (!CW || !CH) return;
     var ia = img.naturalWidth / img.naturalHeight;
@@ -478,6 +481,7 @@
                        Math.round(dw * DPR), Math.round(dh * DPR));
   }
 
+  // Draw target frame, fall back to nearest loaded frame below it
   function drawFrame(i) {
     i = Math.max(0, Math.min(TOTAL - 1, i));
     if (FRAMES[i]) { draw(FRAMES[i]); return; }
@@ -486,62 +490,49 @@
     }
   }
 
-  // ── Preload: frame 0 first for immediate paint, then rest in parallel ──
-  var loaded = 0;
-
-  function onLoad(idx, img) {
-    FRAMES[idx] = img;
-    loaded++;
-    if (idx === 0) {
-      if (!initLayout()) {
-        requestAnimationFrame(function () { initLayout(); draw(FRAMES[0]); });
-      } else {
-        draw(img);
-      }
-    }
-    if (loaded === TOTAL) {
-      allLoaded = true;
-      console.log('[cam] ' + TOTAL + ' frames ready');
-    }
-  }
-
-  function preload() {
-    // Frame 0: load first so the canvas paints immediately
-    var f0 = new Image();
-    f0.onload  = function () { onLoad(0, f0); };
-    f0.onerror = function () { loaded++; };
-    f0.src = 'assets/frames/frame_0000.webp';
-
-    // Frames 1–99: load in parallel after frame 0 fires
-    f0.onload = function () {
-      onLoad(0, f0);
-      for (var i = 1; i < TOTAL; i++) {
-        (function (idx) {
-          var img = new Image();
-          img.onload  = function () { onLoad(idx, img); };
-          img.onerror = function () { loaded++; };
-          img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
-        })(i);
-      }
-    };
-  }
-
-  // ── Progress: single getBCR call per tick ──
+  // ── Progress: window.scrollY only — zero layout cost ──
   function getProgress() {
     if (scrollMax <= 0) return 0;
-    return Math.max(0, Math.min(1, -section.getBoundingClientRect().top / scrollMax));
+    return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
   }
 
-  // ── Update: progress + draw only — no style mutations ──
+  // ── Update: respond immediately with whatever frames are loaded ──
   function update() {
     rafPending = false;
-    if (!allLoaded) return;
+    if (!initDone) return;
     var p = getProgress();
     var i = Math.round(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
   }
 
-  // ── IntersectionObserver gate: skip scroll work when section is off-screen ──
+  // ── Preload: all frames in parallel, animate as soon as frame 0 is ready ──
+  var loaded = 0;
+  function onLoad(idx, img) {
+    FRAMES[idx] = img;
+    loaded++;
+    if (idx === 0) {
+      if (!initLayout()) {
+        requestAnimationFrame(function () { initLayout(); drawFrame(0); });
+      } else {
+        drawFrame(0);
+      }
+      initDone = true;
+    }
+    if (loaded === TOTAL) console.log('[cam] all frames ready');
+  }
+
+  function preload() {
+    for (var i = 0; i < TOTAL; i++) {
+      (function (idx) {
+        var img = new Image();
+        img.onload  = function () { onLoad(idx, img); };
+        img.onerror = function () { loaded++; };
+        img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
+      })(i);
+    }
+  }
+
+  // ── IntersectionObserver gate ──
   var inView = false;
   new IntersectionObserver(function (entries) {
     inView = entries[0].isIntersecting;
@@ -555,7 +546,7 @@
     requestAnimationFrame(update);
   }, { passive: true });
 
-  // ── Resize: re-cache layout, re-size canvas, redraw ──
+  // ── Resize: re-cache layout, redraw ──
   var rTimer;
   window.addEventListener('resize', function () {
     clearTimeout(rTimer);
