@@ -235,8 +235,10 @@
   }
   @media (max-width: 768px) {
     #cam-section { height: calc(100vh + 120vh); margin-bottom: 0 !important; padding-bottom: 0 !important; }
-    #cam-sticky { position: sticky; top: 0; height: 55vh; padding-top: 70px !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
-    #cam-wrap { height: 55vh; }
+    /* position/top left to JS fake-sticky — CSS sticky broken by overflow-x:hidden on html/body */
+    #cam-sticky { height: 55vh; padding-top: 70px !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
+    /* height = sticky height minus padding-top so canvas fills exactly available space */
+    #cam-wrap { height: calc(55vh - 70px); }
     #cam-canvas { width: 100%; height: 100%; }
     #cam-heading { display: block; }
     #cam-heading h1 {
@@ -471,8 +473,12 @@
 
   function resizeCanvas() {
     var dpr = window.devicePixelRatio || 1;
-    canvas.width  = canvas.offsetWidth  * dpr;
-    canvas.height = canvas.offsetHeight * dpr;
+    var w = canvas.offsetWidth;
+    var h = canvas.offsetHeight;
+    if (!w || !h) return false; // layout not ready
+    canvas.width  = w * dpr;
+    canvas.height = h * dpr;
+    return true;
   }
 
   function drawContain(img) {
@@ -508,7 +514,16 @@
 
   function preload() {
     var first = new Image();
-    first.onload  = function() { FRAMES[0] = first; resizeCanvas(); drawFrame(0); loadFrom(1); };
+    first.onload = function() {
+      FRAMES[0] = first;
+      if (!resizeCanvas()) {
+        // Layout not ready yet — retry on next frame
+        requestAnimationFrame(function() { resizeCanvas(); drawFrame(0); });
+      } else {
+        drawFrame(0);
+      }
+      loadFrom(1);
+    };
     first.onerror = function() { loadFrom(1); };
     first.src = frameSrc(0);
   }
@@ -516,14 +531,6 @@
   // ── JS fake sticky: fixed when section spans viewport, absolute before/after ──
   // Required because overflow-x:hidden on html/body breaks CSS position:sticky
   function updateSticky() {
-    if (window.innerWidth <= 768) {
-      // CSS sticky handles mobile — clear any JS-set inline styles
-      sticky.style.position = '';
-      sticky.style.top = '';
-      sticky.style.left = '';
-      sticky.style.width = '';
-      return;
-    }
     var rect = section.getBoundingClientRect();
     var stickyH = sticky.offsetHeight;
     if (rect.top > 0) {
