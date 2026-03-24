@@ -218,13 +218,34 @@
     width: 100%;
     height: 100%;
   }
+  #cam-heading {
+    display: none; /* mobile only */
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 8px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
   @media (max-width: 1024px) and (min-width: 769px) {
     #cam-wrap { height: 60vh; }
   }
   @media (max-width: 768px) {
     #cam-section { height: calc(100vh + 80vh); margin-bottom: 0; padding-bottom: 0; }
-    #cam-sticky { padding-top: 16px; margin-bottom: 0; padding-bottom: 0; }
+    #cam-sticky { padding-top: 60px; margin-bottom: 0; padding-bottom: 0; }
     #cam-wrap { height: 70vh; }
+    #cam-heading { display: block; }
+    #cam-heading h1 {
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+      color: #111827;
+      margin: 0;
+    }
   }
   </style>
 </head>
@@ -274,6 +295,9 @@
     <div id="cam-sticky">
       <div id="cam-wrap">
         <canvas id="cam-canvas"></canvas>
+      </div>
+      <div id="cam-heading">
+        <h1>Cada detalle importa.</h1>
       </div>
     </div>
   </section>
@@ -435,6 +459,7 @@
   var section = document.getElementById('cam-section');
   var sticky  = document.getElementById('cam-sticky');
   var canvas  = document.getElementById('cam-canvas');
+  var heading = document.getElementById('cam-heading');
 
   if (!section || !canvas) return;
   var ctx = canvas.getContext('2d');
@@ -524,6 +549,16 @@
     var p = getProgress();
     var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
+    if (heading) {
+      if (p >= 0.75) {
+        var ht = Math.min(1, (p - 0.75) / 0.15);
+        heading.style.opacity = ht;
+        heading.style.transform = 'translateY(' + Math.round(20 * (1 - ht)) + 'px)';
+      } else {
+        heading.style.opacity = 0;
+        heading.style.transform = 'translateY(20px)';
+      }
+    }
   }
 
   window.addEventListener('scroll', function() {
