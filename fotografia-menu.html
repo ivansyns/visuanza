@@ -466,6 +466,7 @@
   var FRAMES = [];
   var curIndex = 0;
   var rafPending = false;
+  var loadedCount = 0;
 
   var section = document.getElementById('cam-section');
   var sticky  = document.getElementById('cam-sticky');
@@ -474,24 +475,44 @@
   if (!section || !canvas) return;
   var ctx = canvas.getContext('2d');
 
+  // ── Capped DPR: 2x desktop, 1.5x mobile — uncapped DPR causes 3x canvas work on iPhone ──
+  function getDPR() {
+    var raw = window.devicePixelRatio || 1;
+    return window.innerWidth <= 768 ? Math.min(raw, 1.5) : Math.min(raw, 2);
+  }
+
+  // ── Layout cache: offsetHeight/Width reads are forced reflows — cache on init + resize only ──
+  var cStickyH = 0, cSectionH = 0, cSectionW = 0, cCanvasW = 0, cCanvasH = 0;
+
+  function cacheLayout() {
+    cStickyH  = sticky.offsetHeight;
+    cSectionH = section.offsetHeight;
+    cSectionW = section.offsetWidth;
+    cCanvasW  = canvas.offsetWidth;
+    cCanvasH  = canvas.offsetHeight;
+  }
+
   function frameSrc(i) {
     return 'assets/frames/frame_' + String(i).padStart(4, '0') + '.webp';
   }
 
   function resizeCanvas() {
-    var dpr = window.devicePixelRatio || 1;
     var w = canvas.offsetWidth;
     var h = canvas.offsetHeight;
-    if (!w || !h) return false; // layout not ready
+    if (!w || !h) return false;
+    var dpr = getDPR();
     canvas.width  = w * dpr;
     canvas.height = h * dpr;
+    cCanvasW = w;
+    cCanvasH = h;
     return true;
   }
 
   function drawContain(img) {
-    var dpr = window.devicePixelRatio || 1;
-    var cw = canvas.offsetWidth;
-    var ch = canvas.offsetHeight;
+    var cw = cCanvasW || canvas.offsetWidth;
+    var ch = cCanvasH || canvas.offsetHeight;
+    if (!cw || !ch) return;
+    var dpr = getDPR();
     var ia = img.naturalWidth / img.naturalHeight;
     var ba = cw / ch;
     var dw, dh, dx, dy;
@@ -514,7 +535,13 @@
   function loadFrom(i) {
     if (i >= TOTAL) return;
     var img = new Image();
-    img.onload  = function() { FRAMES[i] = img; if (i === curIndex) drawFrame(i); loadFrom(i + 1); };
+    img.onload = function() {
+      FRAMES[i] = img;
+      loadedCount++;
+      if (loadedCount === TOTAL) console.log('[cam] All ' + TOTAL + ' frames loaded.');
+      if (i === curIndex) drawFrame(i);
+      loadFrom(i + 1);
+    };
     img.onerror = function() { loadFrom(i + 1); };
     img.src = frameSrc(i);
   }
@@ -523,8 +550,9 @@
     var first = new Image();
     first.onload = function() {
       FRAMES[0] = first;
+      loadedCount++;
+      cacheLayout();
       if (!resizeCanvas()) {
-        // Layout not ready yet — retry on next frame
         requestAnimationFrame(function() { resizeCanvas(); drawFrame(0); });
       } else {
         drawFrame(0);
@@ -535,45 +563,43 @@
     first.src = frameSrc(0);
   }
 
-  // ── JS fake sticky: fixed when section spans viewport, absolute before/after ──
-  // Required because overflow-x:hidden on html/body breaks CSS position:sticky
-  function updateSticky() {
-    var rect = section.getBoundingClientRect();
-    var stickyH = sticky.offsetHeight;
+  // ── JS fake sticky ── single getBCR() per tick, all other reads from layout cache ──
+  function updateSticky(rect) {
     if (rect.top > 0) {
       sticky.style.position = 'absolute';
       sticky.style.top = '0px';
       sticky.style.left = '';
       sticky.style.width = '';
-    } else if (rect.bottom <= stickyH) {
+    } else if (rect.bottom <= cStickyH) {
       sticky.style.position = 'absolute';
-      sticky.style.top = (section.offsetHeight - stickyH) + 'px';
+      sticky.style.top = (cSectionH - cStickyH) + 'px';
       sticky.style.left = '';
       sticky.style.width = '';
     } else {
       sticky.style.position = 'fixed';
       sticky.style.top = '0px';
-      sticky.style.left = section.getBoundingClientRect().left + 'px';
-      sticky.style.width = section.offsetWidth + 'px';
+      sticky.style.left = rect.left + 'px';   // reuse rect — no second getBCR
+      sticky.style.width = cSectionW + 'px';
     }
   }
 
-  function getProgress() {
-    var rect = section.getBoundingClientRect();
-    var max  = section.offsetHeight - sticky.offsetHeight;
+  function getProgress(rect) {
+    var max = cSectionH - cStickyH;
     if (max <= 0) return 0;
     return Math.max(0, Math.min(1, (-rect.top / max) / 0.85));
   }
 
+  // ── Single RAF loop — one getBCR() per tick shared by sticky + progress ──
   function update() {
     rafPending = false;
-    updateSticky();
-    var p = getProgress();
+    var rect = section.getBoundingClientRect();
+    updateSticky(rect);
+    var p = getProgress(rect);
     var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
   }
 
-  // IntersectionObserver gate — skip scroll events when #cam-section is off-screen
+  // IntersectionObserver gate — skip scroll events when section is off-screen
   var camVisible = false;
   new IntersectionObserver(function(entries) {
     camVisible = entries[0].isIntersecting;
@@ -588,7 +614,13 @@
   var resizeTimer;
   window.addEventListener('resize', function() {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(function() { updateSticky(); resizeCanvas(); drawFrame(curIndex); }, 150);
+    resizeTimer = setTimeout(function() {
+      cacheLayout();
+      var rect = section.getBoundingClientRect();
+      updateSticky(rect);
+      resizeCanvas();
+      drawFrame(curIndex);
+    }, 150);
   }, { passive: true });
 
   preload();
