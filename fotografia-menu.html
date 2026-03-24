@@ -225,19 +225,13 @@
     #cam-wrap { height: 60vh; }
   }
   @media (max-width: 768px) {
-    #cam-section { height: calc(55vh + 120vh); margin-bottom: 0 !important; padding-bottom: 0 !important; }
-    /* position/top left to JS fake-sticky — CSS sticky broken by overflow-x:hidden on html/body */
-    #cam-sticky { height: 55vh; padding-top: 70px !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
-    /* height = sticky height minus padding-top so canvas fills exactly available space */
-    #cam-wrap { height: calc(55vh - 70px); }
+    #cam-section { height: calc(50vh + 120vh); margin-bottom: 0 !important; padding-bottom: 0 !important; }
+    /* position/top/left/width managed by JS fake-sticky */
+    #cam-sticky { height: 50vh; padding-top: 70px !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
+    /* canvas fills sticky height minus padding-top */
+    #cam-wrap { height: calc(50vh - 70px); }
     #cam-canvas { width: 100%; height: 100%; }
     .sp-hero { margin-top: 0 !important; }
-    #cam-section + * {
-      margin-top: -80vh !important;
-      position: relative;
-      z-index: 10;
-      background: #ffffff;
-    }
   }
 
   /* ─── HERO ENTRANCE ANIMATION ─── */
@@ -579,7 +573,15 @@
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
   }
 
+  // IntersectionObserver gate — skip scroll events when #cam-section is off-screen
+  var camVisible = false;
+  new IntersectionObserver(function(entries) {
+    camVisible = entries[0].isIntersecting;
+    if (camVisible && !rafPending) { rafPending = true; requestAnimationFrame(update); }
+  }, { threshold: 0 }).observe(section);
+
   window.addEventListener('scroll', function() {
+    if (!camVisible) return;
     if (!rafPending) { rafPending = true; requestAnimationFrame(update); }
   }, { passive: true });
 
