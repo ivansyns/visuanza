@@ -218,20 +218,6 @@
     width: 100%;
     height: 100%;
   }
-  #cam-label {
-    position: absolute;
-    bottom: clamp(8px, 3%, 20px);
-    left: 50%;
-    transform: translateX(-50%) translateY(12px);
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(0.85rem, 1.4vw, 1.05rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #111827;
-    white-space: nowrap;
-    opacity: 0;
-    pointer-events: none;
-  }
   @media (max-width: 1024px) and (min-width: 769px) {
     #cam-wrap { height: 60vh; }
   }
@@ -288,7 +274,6 @@
     <div id="cam-sticky">
       <div id="cam-wrap">
         <canvas id="cam-canvas"></canvas>
-        <p id="cam-label">Cada detalle importa.</p>
       </div>
     </div>
   </section>
@@ -450,7 +435,7 @@
   var section = document.getElementById('cam-section');
   var sticky  = document.getElementById('cam-sticky');
   var canvas  = document.getElementById('cam-canvas');
-  var label   = document.getElementById('cam-label');
+
   if (!section || !canvas) return;
   var ctx = canvas.getContext('2d');
 
@@ -539,14 +524,6 @@
     var p = getProgress();
     var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
-    if (p >= 0.60) {
-      var t = Math.min(1, (p - 0.60) / 0.15);
-      label.style.opacity = t;
-      label.style.transform = 'translateX(-50%) translateY(' + Math.round(12 * (1 - t)) + 'px)';
-    } else {
-      label.style.opacity = 0;
-      label.style.transform = 'translateX(-50%) translateY(12px)';
-    }
   }
 
   window.addEventListener('scroll', function() {
