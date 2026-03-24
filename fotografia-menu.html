@@ -181,8 +181,8 @@
   .hamburger span { background: rgba(0,0,0,0.75); }
   .hamburger:hover { background: rgba(0,0,0,0.06); }
 
-  /* Spacer hidden on desktop — only used on mobile */
-  #cam-spacer { display: none; }
+  /* Scroll driver hidden on desktop — only used on mobile */
+  #scroll-driver { display: none; }
 
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
@@ -210,10 +210,21 @@
     transform: translateZ(0);
   }
   @media (max-width: 768px) {
-    /* Scroll spacer: provides animation scroll distance; camera and content are fixed */
-    #cam-spacer { display: block; height: 200vh; }
+    /* Single scroll source — transparent overlay, no pointer events */
+    #scroll-driver {
+      display: block;
+      position: fixed;
+      inset: 0;
+      overflow-y: scroll;
+      z-index: 15;
+      background: transparent;
+      pointer-events: none;
+      scrollbar-width: none;
+    }
+    #scroll-driver::-webkit-scrollbar { display: none; }
+    #scroll-spacer { width: 1px; } /* height set by JS */
 
-    /* Row 1: camera panel — fixed, always visible below nav */
+    /* Row 1: camera panel — fixed below nav, always visible */
     #cam-section {
       position: fixed !important;
       top: 70px;
@@ -230,7 +241,7 @@
       overflow: hidden;
     }
 
-    /* Row 2: content panel — fixed, fills rest of screen, scrolls independently */
+    /* Row 2: content panel — fixed, no native scroll, moves via transform */
     #cam-content {
       position: fixed !important;
       top: calc(52vh + 70px);
@@ -239,8 +250,7 @@
       bottom: 0;
       margin-top: 0;
       max-height: none;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      overflow: hidden;
       background: #fff;
       z-index: 9;
     }
@@ -305,7 +315,7 @@
   </div>
 
   <!-- Mobile scroll spacer: provides animation scroll distance; hidden on desktop -->
-  <div id="cam-spacer" aria-hidden="true"></div>
+  <div id="scroll-driver" aria-hidden="true"><div id="scroll-spacer"></div></div>
 
   <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
   <section id="cam-section" aria-label="Animación cámara">
@@ -317,6 +327,7 @@
   </section>
 
   <div id="cam-content">
+  <div id="content-inner">
   <section class="sp-hero">
     <div class="sp-hero-inner">
       <div class="sp-badge hero-el">✦ Servicio 03 · Fotografía de Menú</div>
@@ -450,6 +461,7 @@
     </div>
     </div><!-- /footer-inner -->
   </footer>
+  </div><!-- /#content-inner -->
   </div><!-- /#cam-content -->
 
   <script>
@@ -491,25 +503,32 @@
   var rafPending = false;
   var initDone   = false;
 
-  var section = document.getElementById('cam-section');
-  var sticky  = document.getElementById('cam-sticky');
-  var canvas  = document.getElementById('cam-canvas');
+  var section      = document.getElementById('cam-section');
+  var sticky       = document.getElementById('cam-sticky');
+  var canvas       = document.getElementById('cam-canvas');
+  var scrollDriver = document.getElementById('scroll-driver');
   if (!section || !sticky || !canvas) return;
   var ctx = canvas.getContext('2d');
 
   // Layout cache — set once on init/resize, never touched during scroll
   var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
+  var ANIM_DIST = 0;
+  var isMob     = false;
 
   function initLayout() {
-    var isMob     = window.innerWidth <= 768;
-    DPR           = Math.min(window.devicePixelRatio || 1, isMob ? 1.5 : 2);
-    CW            = canvas.offsetWidth;
-    CH            = canvas.offsetHeight;
-    if (isMob) {
-      // Mobile: animation driven by scroll through #cam-spacer
-      var spacer    = document.getElementById('cam-spacer');
+    isMob = window.innerWidth <= 768;
+    DPR   = Math.min(window.devicePixelRatio || 1, isMob ? 1.5 : 2);
+    CW    = canvas.offsetWidth;
+    CH    = canvas.offsetHeight;
+    if (isMob && scrollDriver) {
+      // Mobile: animation driven by scrollDriver.scrollTop
+      ANIM_DIST = Math.round(window.innerHeight * 2);
+      var camContent = document.getElementById('cam-content');
+      var contentH   = camContent ? camContent.scrollHeight : 0;
+      var spacer     = document.getElementById('scroll-spacer');
+      if (spacer) spacer.style.height = (ANIM_DIST + contentH) + 'px';
       sectionOffset = 0;
-      scrollMax     = spacer ? spacer.offsetHeight : 0;
+      scrollMax     = ANIM_DIST;
     } else {
       // Desktop: animation driven by scroll through #cam-section (unchanged)
       sectionOffset = window.scrollY + section.getBoundingClientRect().top;
@@ -545,14 +564,24 @@
     }
   }
 
-  // Progress — window.scrollY only, zero layout reads on scroll
+  // Translate inner content up within the fixed #cam-content panel
+  function updateContentTransform() {
+    if (!isMob || !scrollDriver) return;
+    var inner      = document.getElementById('content-inner');
+    var camContent = document.getElementById('cam-content');
+    if (!inner || !camContent) return;
+    var excess       = scrollDriver.scrollTop - ANIM_DIST;
+    var maxTranslate = Math.max(0, inner.offsetHeight - camContent.clientHeight);
+    var translate    = excess > 0 ? Math.min(excess, maxTranslate) : 0;
+    inner.style.transform = translate > 0 ? 'translateY(' + (-translate) + 'px)' : '';
+  }
+
+  // Progress — reads scrollDriver on mobile, window.scrollY on desktop
   function getProgress() {
     if (scrollMax <= 0) return 0;
-    if (window.innerWidth <= 768) {
-      // Mobile: progress = scrollY / spacer height
-      return Math.max(0, Math.min(1, window.scrollY / scrollMax));
+    if (isMob && scrollDriver) {
+      return Math.max(0, Math.min(1, scrollDriver.scrollTop / scrollMax));
     }
-    // Desktop: progress = (scrollY - sectionOffset) / scrollMax
     return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
   }
 
@@ -563,9 +592,10 @@
     var p = getProgress();
     var i = Math.round(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
+    updateContentTransform();
   }
 
-  // Preload — all 100 frames in parallel; animate as soon as frame 0 is ready
+  // Preload — all frames in parallel; animate as soon as frame 0 is ready
   var loaded = 0;
   function onLoad(idx, img) {
     FRAMES[idx] = img;
@@ -592,18 +622,59 @@
     }
   }
 
-  // IntersectionObserver gate — skip all scroll work when section is off-screen
+  // IntersectionObserver gate — skip scroll work when section is off-screen (desktop)
   var inView = false;
   new IntersectionObserver(function (entries) {
     inView = entries[0].isIntersecting;
     if (inView && !rafPending) { rafPending = true; requestAnimationFrame(update); }
   }, { threshold: 0 }).observe(section);
 
-  // Single passive scroll listener + RAF gate
+  // Desktop: window scroll listener
   window.addEventListener('scroll', function () {
     if (!inView || rafPending) return;
     rafPending = true;
     requestAnimationFrame(update);
+  }, { passive: true });
+
+  // Mobile: scroll-driver listener (fires when scrollTop set programmatically)
+  if (scrollDriver) {
+    scrollDriver.addEventListener('scroll', function () {
+      if (rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+  }
+
+  // Mobile: intercept document touches → drive scrollDriver.scrollTop
+  var touchStartY = 0;
+  var touchVelY   = 0;
+  var momentumRaf = null;
+
+  document.addEventListener('touchstart', function (e) {
+    if (!isMob || !scrollDriver) return;
+    touchStartY = e.touches[0].clientY;
+    touchVelY   = 0;
+    if (momentumRaf) { cancelAnimationFrame(momentumRaf); momentumRaf = null; }
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function (e) {
+    if (!isMob || !scrollDriver) return;
+    var dy      = touchStartY - e.touches[0].clientY;
+    touchVelY   = dy;
+    touchStartY = e.touches[0].clientY;
+    scrollDriver.scrollTop += dy;
+    e.preventDefault();
+  }, { passive: false });
+
+  document.addEventListener('touchend', function () {
+    if (!isMob || !scrollDriver) return;
+    function applyMomentum() {
+      if (Math.abs(touchVelY) < 0.5) return;
+      scrollDriver.scrollTop += touchVelY;
+      touchVelY *= 0.92;
+      momentumRaf = requestAnimationFrame(applyMomentum);
+    }
+    momentumRaf = requestAnimationFrame(applyMomentum);
   }, { passive: true });
 
   // Resize — re-cache layout, resize canvas, redraw
