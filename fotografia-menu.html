@@ -210,17 +210,20 @@
     transform: translateZ(0);
   }
   @media (max-width: 768px) {
-    /* Hide desktop scroll animation — mobile uses inline autoplay instead */
+    /* Hide desktop scroll animation on mobile */
     #cam-section { display: none; }
 
-    /* Inline animation container */
+    /* Inline scroll-driven animation — tall container, sticky canvas */
     #cam-mobile {
       display: block;
-      margin: 32px 0;
-      overflow: hidden;
+      height: 150vh;
+      position: relative;
+      margin-top: 16px;
     }
     #cam-canvas-mobile {
       display: block;
+      position: sticky;
+      top: 70px;
       width: 100%;
       aspect-ratio: 16 / 9;
     }
@@ -477,18 +480,24 @@
     ctx.drawImage(img, (cW - dw) / 2, (cH - dh) / 2, dw, dh);
   }
 
-  // ── MOBILE: inline autoplay ───────────────────────────────────────────────
+  // ── MOBILE: scroll-driven animation ──────────────────────────────────────
   if (isMob) {
 
-    var mCanvas = document.getElementById('cam-canvas-mobile');
-    if (!mCanvas) return;
+    var mSection = document.getElementById('cam-mobile');
+    var mCanvas  = document.getElementById('cam-canvas-mobile');
+    if (!mSection || !mCanvas) return;
     var mCtx = mCanvas.getContext('2d');
 
+    var mScrollMax = 0, mSectionOffset = 0;
+    var mCurIndex = 0, mRafPending = false, mInitDone = false;
+
     function mInitLayout() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-      var mW  = mCanvas.offsetWidth;
-      var mH  = mCanvas.offsetHeight;
-      if (!mW || !mH) return false;
+      var dpr        = Math.min(window.devicePixelRatio || 1, 1.5);
+      var mW         = mCanvas.offsetWidth;
+      var mH         = mCanvas.offsetHeight;
+      mSectionOffset = window.scrollY + mSection.getBoundingClientRect().top;
+      mScrollMax     = mSection.offsetHeight - mH;
+      if (!mW || !mH || mScrollMax <= 0) return false;
       mCanvas.width  = Math.round(mW * dpr);
       mCanvas.height = Math.round(mH * dpr);
       return true;
@@ -502,44 +511,37 @@
       }
     }
 
-    // 24fps one-shot autoplay — holds last frame
-    var INTERVAL = 1000 / 24;
-    var mFrame   = 0;
-    var mPlaying = false;
-    var mLast    = 0;
-
-    function mTick(ts) {
-      if (!mPlaying) return;
-      if (ts - mLast >= INTERVAL) {
-        mLast += INTERVAL;
-        mDrawFrame(mFrame);
-        if (mFrame < TOTAL - 1) {
-          mFrame++;
-          requestAnimationFrame(mTick);
-        } else {
-          mPlaying = false; // done — holds last frame
-        }
-      } else {
-        requestAnimationFrame(mTick);
-      }
+    function mGetProgress() {
+      if (mScrollMax <= 0) return 0;
+      return Math.max(0, Math.min(1, (window.scrollY - mSectionOffset) / mScrollMax));
     }
 
-    function mStart() {
-      if (!mInitLayout()) {
-        requestAnimationFrame(function () { mInitLayout(); mStart(); });
-        return;
-      }
-      mDrawFrame(0);         // show first frame immediately
-      mPlaying = true;
-      mFrame   = 1;          // next frame for autoplay
-      mLast    = performance.now();
-      requestAnimationFrame(mTick);
+    function mUpdate() {
+      mRafPending = false;
+      if (!mInitDone) return;
+      var p = mGetProgress();
+      var i = Math.round(p * (TOTAL - 1));
+      if (i !== mCurIndex) { mCurIndex = i; mDrawFrame(i); }
     }
+
+    var mInView = false;
+    new IntersectionObserver(function (entries) {
+      mInView = entries[0].isIntersecting;
+      if (mInView && !mRafPending) { mRafPending = true; requestAnimationFrame(mUpdate); }
+    }, { threshold: 0 }).observe(mSection);
+
+    window.addEventListener('scroll', function () {
+      if (!mInView || mRafPending) return;
+      mRafPending = true;
+      requestAnimationFrame(mUpdate);
+    }, { passive: true });
 
     var rTimer;
     window.addEventListener('resize', function () {
       clearTimeout(rTimer);
-      rTimer = setTimeout(function () { mInitLayout(); mDrawFrame(mFrame); }, 150);
+      rTimer = setTimeout(function () {
+        if (mInitLayout()) mDrawFrame(mCurIndex);
+      }, 150);
     }, { passive: true });
 
     for (var i = 0; i < TOTAL; i++) {
@@ -548,7 +550,14 @@
         img.onload = function () {
           FRAMES[idx] = img;
           loaded++;
-          if (idx === 0) mStart();
+          if (idx === 0) {
+            if (!mInitLayout()) {
+              requestAnimationFrame(function () { mInitLayout(); mDrawFrame(0); });
+            } else {
+              mDrawFrame(0);
+            }
+            mInitDone = true;
+          }
           if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
         };
         img.onerror = function () { loaded++; };
