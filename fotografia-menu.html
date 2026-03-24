@@ -215,7 +215,8 @@
   }
   #cam-heading {
     position: absolute;
-    bottom: clamp(24px, 5vh, 60px);
+    bottom: 0;
+    padding-bottom: 8px;
     left: 0;
     right: 0;
     text-align: center;
@@ -562,10 +563,15 @@
     var p = getProgress();
     var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
-    if (p >= 0.60) {
-      var t = Math.min(1, (p - 0.60) / 0.15);
-      label.style.opacity = t;
-      label.style.transform = 'translateX(-50%) translateY(' + Math.round(12 * (1 - t)) + 'px)';
+    if (p >= 0.60 && p < 0.70) {
+      if (p < 0.65) {
+        var t = (p - 0.60) / 0.05;
+        label.style.opacity = t;
+        label.style.transform = 'translateX(-50%) translateY(' + Math.round(12 * (1 - t)) + 'px)';
+      } else {
+        label.style.opacity = Math.max(0, 1 - (p - 0.65) / 0.05);
+        label.style.transform = 'translateX(-50%) translateY(0px)';
+      }
     } else {
       label.style.opacity = 0;
       label.style.transform = 'translateX(-50%) translateY(12px)';
