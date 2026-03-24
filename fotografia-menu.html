@@ -170,7 +170,7 @@
   .btn-ghost { background: #f0f0f0; color: #444444; border: 1px solid #d1d5db; }
   .btn-ghost:hover { background: #e5e7eb; color: #111111; }
   /* Light navbar */
-  nav { border-bottom: 1px solid rgba(0,0,0,0.08); }
+  nav { border-bottom: 1px solid rgba(0,0,0,0.08); background: #ffffff; }
   .nav-inner { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
   .nav-logo img { filter: brightness(0); }
   .nav-logo span { color: #111111; }
@@ -181,11 +181,13 @@
   .hamburger span { background: rgba(0,0,0,0.75); }
   .hamburger:hover { background: rgba(0,0,0,0.06); }
 
+  #cam-mobile { display: none; } /* hidden on desktop */
+
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
     height: 200vh;
     position: relative;
-    background: #ffffff;
+    background: transparent;
   }
   #cam-sticky {
     position: sticky;
@@ -194,6 +196,7 @@
     height: calc(100vh - 70px);
     background: #ffffff;
     overflow: hidden;
+    z-index: 10;
   }
   #cam-wrap {
     width: 100%;
@@ -207,11 +210,20 @@
     transform: translateZ(0);
   }
   @media (max-width: 768px) {
-    /* Camera panel: sticky, shorter height so content fits below */
-    #cam-sticky { height: 52vh; }
+    /* Hide desktop scroll animation — mobile uses inline autoplay instead */
+    #cam-section { display: none; }
 
-    /* Content panel: sticky just below camera, stays in view during animation */
-    #cam-content { position: sticky; top: calc(52vh + 70px); }
+    /* Inline animation container */
+    #cam-mobile {
+      display: block;
+      margin: 32px 0;
+      overflow: hidden;
+    }
+    #cam-canvas-mobile {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
 
     .sp-hero { padding: 20px 0 16px; margin-top: 0; }
     .stats-row { margin-top: 16px; }
@@ -290,6 +302,7 @@
         <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
       </div>
+      <div id="cam-mobile"><canvas id="cam-canvas-mobile"></canvas></div>
       <div class="stats-row hero-el">
         <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
         <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
@@ -449,122 +462,185 @@
 (function () {
   'use strict';
 
-  var TOTAL      = 121;
-  var FRAMES     = new Array(TOTAL);
-  var curIndex   = 0;
-  var rafPending = false;
-  var initDone   = false;
-
-  var section = document.getElementById('cam-section');
-  var sticky  = document.getElementById('cam-sticky');
-  var canvas  = document.getElementById('cam-canvas');
-  if (!section || !sticky || !canvas) return;
-  var ctx = canvas.getContext('2d');
-
-  // Layout cache — set once on init/resize, never touched during scroll
-  var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
-
-  function initLayout() {
-    var isMob     = window.innerWidth <= 768;
-    DPR           = Math.min(window.devicePixelRatio || 1, isMob ? 1.5 : 2);
-    CW            = canvas.offsetWidth;
-    CH            = canvas.offsetHeight;
-    sectionOffset = window.scrollY + section.getBoundingClientRect().top;
-    scrollMax     = section.offsetHeight - sticky.offsetHeight;
-    if (!CW || !CH) return false;
-    canvas.width  = Math.round(CW * DPR);
-    canvas.height = Math.round(CH * DPR);
-    return true;
-  }
-
-  // Draw — contain fit (letterbox), white fill, zero DOM reads
-  function draw(img) {
-    if (!CW || !CH) return;
-    var iw    = img.naturalWidth;
-    var ih    = img.naturalHeight;
-    var scale = Math.min(canvas.width / iw, canvas.height / ih);
-    var dw    = iw * scale;
-    var dh    = ih * scale;
-    var dx    = (canvas.width  - dw) / 2;
-    var dy    = (canvas.height - dh) / 2;
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, dx, dy, dw, dh);
-  }
-
-  // Draw target frame; fall back to nearest loaded frame below if not ready
-  function drawFrame(i) {
-    i = Math.max(0, Math.min(TOTAL - 1, i));
-    if (FRAMES[i]) { draw(FRAMES[i]); return; }
-    for (var j = i - 1; j >= 0; j--) {
-      if (FRAMES[j]) { draw(FRAMES[j]); return; }
-    }
-  }
-
-  // Progress — window.scrollY only, zero layout reads on scroll
-  function getProgress() {
-    if (scrollMax <= 0) return 0;
-    return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
-  }
-
-  // Update — called in RAF
-  function update() {
-    rafPending = false;
-    if (!initDone) return;
-    var p = getProgress();
-    var i = Math.round(p * (TOTAL - 1));
-    if (i !== curIndex) { curIndex = i; drawFrame(i); }
-  }
-
-  // Preload — all frames in parallel; animate as soon as frame 0 is ready
+  var TOTAL  = 121;
+  var FRAMES = new Array(TOTAL);
   var loaded = 0;
-  function onLoad(idx, img) {
-    FRAMES[idx] = img;
-    loaded++;
-    if (idx === 0) {
-      if (!initLayout()) {
-        requestAnimationFrame(function () { initLayout(); drawFrame(0); });
-      } else {
-        drawFrame(0);
-      }
-      initDone = true;
-    }
-    if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
+  var isMob  = window.innerWidth <= 768;
+
+  // Shared contain-fit draw (white letterbox fill)
+  function drawTo(ctx, cW, cH, img) {
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var sc = Math.min(cW / iw, cH / ih);
+    var dw = iw * sc, dh = ih * sc;
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, cW, cH);
+    ctx.drawImage(img, (cW - dw) / 2, (cH - dh) / 2, dw, dh);
   }
 
-  function preload() {
+  // ── MOBILE: inline autoplay ───────────────────────────────────────────────
+  if (isMob) {
+
+    var mCanvas = document.getElementById('cam-canvas-mobile');
+    if (!mCanvas) return;
+    var mCtx = mCanvas.getContext('2d');
+
+    function mInitLayout() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      var mW  = mCanvas.offsetWidth;
+      var mH  = mCanvas.offsetHeight;
+      if (!mW || !mH) return false;
+      mCanvas.width  = Math.round(mW * dpr);
+      mCanvas.height = Math.round(mH * dpr);
+      return true;
+    }
+
+    function mDrawFrame(i) {
+      i = Math.max(0, Math.min(TOTAL - 1, i));
+      if (FRAMES[i]) { drawTo(mCtx, mCanvas.width, mCanvas.height, FRAMES[i]); return; }
+      for (var j = i - 1; j >= 0; j--) {
+        if (FRAMES[j]) { drawTo(mCtx, mCanvas.width, mCanvas.height, FRAMES[j]); return; }
+      }
+    }
+
+    // 24fps one-shot autoplay — holds last frame
+    var INTERVAL = 1000 / 24;
+    var mFrame   = 0;
+    var mPlaying = false;
+    var mLast    = 0;
+
+    function mTick(ts) {
+      if (!mPlaying) return;
+      if (ts - mLast >= INTERVAL) {
+        mLast += INTERVAL;
+        mDrawFrame(mFrame);
+        if (mFrame < TOTAL - 1) {
+          mFrame++;
+          requestAnimationFrame(mTick);
+        } else {
+          mPlaying = false; // done — holds last frame
+        }
+      } else {
+        requestAnimationFrame(mTick);
+      }
+    }
+
+    function mStart() {
+      if (!mInitLayout()) {
+        requestAnimationFrame(function () { mInitLayout(); mStart(); });
+        return;
+      }
+      mDrawFrame(0);         // show first frame immediately
+      mPlaying = true;
+      mFrame   = 1;          // next frame for autoplay
+      mLast    = performance.now();
+      requestAnimationFrame(mTick);
+    }
+
+    var rTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(rTimer);
+      rTimer = setTimeout(function () { mInitLayout(); mDrawFrame(mFrame); }, 150);
+    }, { passive: true });
+
     for (var i = 0; i < TOTAL; i++) {
       (function (idx) {
-        var img    = new Image();
-        img.onload  = function () { onLoad(idx, img); };
+        var img = new Image();
+        img.onload = function () {
+          FRAMES[idx] = img;
+          loaded++;
+          if (idx === 0) mStart();
+          if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
+        };
+        img.onerror = function () { loaded++; };
+        img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
+      })(i);
+    }
+
+  // ── DESKTOP: scroll-driven animation (unchanged) ─────────────────────────
+  } else {
+
+    var section = document.getElementById('cam-section');
+    var sticky  = document.getElementById('cam-sticky');
+    var canvas  = document.getElementById('cam-canvas');
+    if (!section || !sticky || !canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
+    var curIndex = 0, rafPending = false, initDone = false;
+
+    function initLayout() {
+      DPR           = Math.min(window.devicePixelRatio || 1, 2);
+      CW            = canvas.offsetWidth;
+      CH            = canvas.offsetHeight;
+      sectionOffset = window.scrollY + section.getBoundingClientRect().top;
+      scrollMax     = section.offsetHeight - sticky.offsetHeight;
+      if (!CW || !CH) return false;
+      canvas.width  = Math.round(CW * DPR);
+      canvas.height = Math.round(CH * DPR);
+      return true;
+    }
+
+    function drawFrame(i) {
+      i = Math.max(0, Math.min(TOTAL - 1, i));
+      if (FRAMES[i]) { drawTo(ctx, canvas.width, canvas.height, FRAMES[i]); return; }
+      for (var j = i - 1; j >= 0; j--) {
+        if (FRAMES[j]) { drawTo(ctx, canvas.width, canvas.height, FRAMES[j]); return; }
+      }
+    }
+
+    function getProgress() {
+      if (scrollMax <= 0) return 0;
+      return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
+    }
+
+    function update() {
+      rafPending = false;
+      if (!initDone) return;
+      var p = getProgress();
+      var i = Math.round(p * (TOTAL - 1));
+      if (i !== curIndex) { curIndex = i; drawFrame(i); }
+    }
+
+    var inView = false;
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      if (inView && !rafPending) { rafPending = true; requestAnimationFrame(update); }
+    }, { threshold: 0 }).observe(section);
+
+    window.addEventListener('scroll', function () {
+      if (!inView || rafPending) return;
+      rafPending = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+
+    var rTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(rTimer);
+      rTimer = setTimeout(function () { initLayout(); drawFrame(curIndex); }, 150);
+    }, { passive: true });
+
+    for (var i = 0; i < TOTAL; i++) {
+      (function (idx) {
+        var img = new Image();
+        img.onload = function () {
+          FRAMES[idx] = img;
+          loaded++;
+          if (idx === 0) {
+            if (!initLayout()) {
+              requestAnimationFrame(function () { initLayout(); drawFrame(0); });
+            } else {
+              drawFrame(0);
+            }
+            initDone = true;
+          }
+          if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
+        };
         img.onerror = function () { loaded++; };
         img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
       })(i);
     }
   }
 
-  // IntersectionObserver gate — skip scroll work when section is off-screen
-  var inView = false;
-  new IntersectionObserver(function (entries) {
-    inView = entries[0].isIntersecting;
-    if (inView && !rafPending) { rafPending = true; requestAnimationFrame(update); }
-  }, { threshold: 0 }).observe(section);
-
-  // Single passive scroll listener + RAF gate
-  window.addEventListener('scroll', function () {
-    if (!inView || rafPending) return;
-    rafPending = true;
-    requestAnimationFrame(update);
-  }, { passive: true });
-
-  // Resize — re-cache layout, resize canvas, redraw
-  var rTimer;
-  window.addEventListener('resize', function () {
-    clearTimeout(rTimer);
-    rTimer = setTimeout(function () { initLayout(); drawFrame(curIndex); }, 150);
-  }, { passive: true });
-
-  preload();
 })();
 </script>
 </body>
