@@ -234,9 +234,9 @@
     #cam-wrap { height: 60vh; }
   }
   @media (max-width: 768px) {
-    #cam-section { height: calc(100vh + 80vh); margin-bottom: 0; padding-bottom: 0; }
-    #cam-sticky { padding-top: 60px; margin-bottom: 0; padding-bottom: 0; }
-    #cam-wrap { height: 70vh; }
+    #cam-section { height: auto !important; margin: 0 !important; padding: 0 !important; }
+    #cam-sticky { position: sticky !important; top: 0 !important; height: 45vh !important; padding: 0 !important; margin: 0 !important; }
+    #cam-wrap { height: 45vh; }
     #cam-heading { display: block; }
     #cam-heading h1 {
       font-size: clamp(1.8rem, 6vw, 2.6rem);
@@ -515,8 +515,15 @@
   // ── JS fake sticky: fixed when section spans viewport, absolute before/after ──
   // Required because overflow-x:hidden on html/body breaks CSS position:sticky
   function updateSticky() {
+    if (window.innerWidth <= 768) {
+      // CSS sticky handles mobile — clear any JS-set inline styles
+      sticky.style.position = '';
+      sticky.style.top = '';
+      sticky.style.left = '';
+      sticky.style.width = '';
+      return;
+    }
     var rect = section.getBoundingClientRect();
-    var viewH = window.innerHeight;
     var stickyH = sticky.offsetHeight;
     if (rect.top > 0) {
       sticky.style.position = 'absolute';
@@ -537,6 +544,11 @@
   }
 
   function getProgress() {
+    if (window.innerWidth <= 768) {
+      // Section is height:auto (~45vh); drive animation from overall page scroll
+      var pageMax = Math.max(1, document.body.scrollHeight - window.innerHeight);
+      return Math.max(0, Math.min(1, window.scrollY / (pageMax * 0.4)));
+    }
     var rect = section.getBoundingClientRect();
     var max  = section.offsetHeight - window.innerHeight;
     if (max <= 0) return 0;
