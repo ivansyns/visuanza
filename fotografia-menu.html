@@ -181,6 +181,9 @@
   .hamburger span { background: rgba(0,0,0,0.75); }
   .hamburger:hover { background: rgba(0,0,0,0.06); }
 
+  /* Spacer hidden on desktop — only used on mobile */
+  #cam-spacer { display: none; }
+
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
     height: 200vh;
@@ -207,29 +210,42 @@
     transform: translateZ(0);
   }
   @media (max-width: 768px) {
-    /* Camera container — 200vh gives full animation scroll distance */
-    #cam-section { height: 200vh; }
-    /* Sticky camera pane — pins below the fixed nav */
-    #cam-sticky  { top: 70px; height: 52vh; }
-    /* Content pane — pulled up with negative margin so it's visible
-       alongside the camera at page load, then sticky keeps it there
-       while outer-page scroll drives the animation */
-    #cam-content {
-      position: sticky;
-      top: calc(52vh + 70px);
-      /* Negative margin = -(section_height - sticky_height - 70px)
-         = -(200vh - 52vh - 70px) = 70px - 148vh
-         This pulls #cam-content from its natural position (200vh in the document)
-         up to viewport y = 52vh + 70px so it's immediately visible at page load */
-      margin-top: calc(70px - 148vh);
-      max-height: calc(100vh - 52vh - 70px);
-      overflow-y: auto;
+    /* Scroll spacer: provides animation scroll distance; camera and content are fixed */
+    #cam-spacer { display: block; height: 200vh; }
+
+    /* Row 1: camera panel — fixed, always visible below nav */
+    #cam-section {
+      position: fixed !important;
+      top: 70px;
+      left: 0; right: 0;
+      height: 52vh;
+      z-index: 10;
       background: #fff;
-      z-index: 5;
-      /* -webkit-overflow-scrolling for smooth momentum scroll on iOS */
-      -webkit-overflow-scrolling: touch;
     }
-    /* Compact hero padding so the key content fits the visible pane height */
+    /* Reset sticky — parent is already fixed */
+    #cam-sticky {
+      position: static;
+      top: auto;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* Row 2: content panel — fixed, fills rest of screen, scrolls independently */
+    #cam-content {
+      position: fixed !important;
+      top: calc(52vh + 70px);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin-top: 0;
+      max-height: none;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      background: #fff;
+      z-index: 9;
+    }
+
+    /* Compact hero to fit visible pane */
     .sp-hero { padding: 20px 0 16px; margin-top: 0; }
     .stats-row { margin-top: 16px; }
   }
@@ -287,6 +303,9 @@
       <a href="index.html#contacto" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
+
+  <!-- Mobile scroll spacer: provides animation scroll distance; hidden on desktop -->
+  <div id="cam-spacer" aria-hidden="true"></div>
 
   <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
   <section id="cam-section" aria-label="Animación cámara">
@@ -482,12 +501,20 @@
   var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
 
   function initLayout() {
-    DPR           = Math.min(window.devicePixelRatio || 1, window.innerWidth <= 768 ? 1.5 : 2);
+    var isMob     = window.innerWidth <= 768;
+    DPR           = Math.min(window.devicePixelRatio || 1, isMob ? 1.5 : 2);
     CW            = canvas.offsetWidth;
     CH            = canvas.offsetHeight;
-    // getBCR only here — sectionOffset used during scroll instead of repeated BCR calls
-    sectionOffset = window.scrollY + section.getBoundingClientRect().top;
-    scrollMax     = section.offsetHeight - sticky.offsetHeight;
+    if (isMob) {
+      // Mobile: animation driven by scroll through #cam-spacer
+      var spacer    = document.getElementById('cam-spacer');
+      sectionOffset = 0;
+      scrollMax     = spacer ? spacer.offsetHeight : 0;
+    } else {
+      // Desktop: animation driven by scroll through #cam-section (unchanged)
+      sectionOffset = window.scrollY + section.getBoundingClientRect().top;
+      scrollMax     = section.offsetHeight - sticky.offsetHeight;
+    }
     if (!CW || !CH) return false;
     canvas.width  = Math.round(CW * DPR);
     canvas.height = Math.round(CH * DPR);
@@ -521,6 +548,11 @@
   // Progress — window.scrollY only, zero layout reads on scroll
   function getProgress() {
     if (scrollMax <= 0) return 0;
+    if (window.innerWidth <= 768) {
+      // Mobile: progress = scrollY / spacer height
+      return Math.max(0, Math.min(1, window.scrollY / scrollMax));
+    }
+    // Desktop: progress = (scrollY - sectionOffset) / scrollMax
     return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
   }
 
