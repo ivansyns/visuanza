@@ -189,9 +189,9 @@
   }
   #cam-sticky {
     position: sticky;
-    top: 0;
+    top: 70px;
     width: 100%;
-    height: 70vh;
+    height: calc(100vh - 70px);
     background: #ffffff;
     overflow: hidden;
   }
@@ -207,8 +207,31 @@
     transform: translateZ(0);
   }
   @media (max-width: 768px) {
-    #cam-section { height: 220vh; }
-    #cam-sticky  { height: 55vh; }
+    /* Camera container — 200vh gives full animation scroll distance */
+    #cam-section { height: 200vh; }
+    /* Sticky camera pane — pins below the fixed nav */
+    #cam-sticky  { top: 70px; height: 52vh; }
+    /* Content pane — pulled up with negative margin so it's visible
+       alongside the camera at page load, then sticky keeps it there
+       while outer-page scroll drives the animation */
+    #cam-content {
+      position: sticky;
+      top: calc(52vh + 70px);
+      /* Negative margin = -(section_height - sticky_height - 70px)
+         = -(200vh - 52vh - 70px) = 70px - 148vh
+         This pulls #cam-content from its natural position (200vh in the document)
+         up to viewport y = 52vh + 70px so it's immediately visible at page load */
+      margin-top: calc(70px - 148vh);
+      max-height: calc(100vh - 52vh - 70px);
+      overflow-y: auto;
+      background: #fff;
+      z-index: 5;
+      /* -webkit-overflow-scrolling for smooth momentum scroll on iOS */
+      -webkit-overflow-scrolling: touch;
+    }
+    /* Compact hero padding so the key content fits the visible pane height */
+    .sp-hero { padding: 20px 0 16px; margin-top: 0; }
+    .stats-row { margin-top: 16px; }
   }
 
   /* ─── HERO ENTRANCE ANIMATION ─── */
@@ -274,6 +297,7 @@
     </div>
   </section>
 
+  <div id="cam-content">
   <section class="sp-hero">
     <div class="sp-hero-inner">
       <div class="sp-badge hero-el">✦ Servicio 03 · Fotografía de Menú</div>
@@ -407,6 +431,7 @@
     </div>
     </div><!-- /footer-inner -->
   </footer>
+  </div><!-- /#cam-content -->
 
   <script>
     const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
@@ -441,7 +466,7 @@
 (function () {
   'use strict';
 
-  var TOTAL      = 100;
+  var TOTAL      = 121;
   var FRAMES     = new Array(TOTAL);
   var curIndex   = 0;
   var rafPending = false;
