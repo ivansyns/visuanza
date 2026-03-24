@@ -218,38 +218,29 @@
     width: 100%;
     height: 100%;
   }
-  #cam-heading {
-    display: none; /* mobile only */
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 8px;
-    left: 0;
-    right: 0;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-  }
   @media (max-width: 1024px) and (min-width: 769px) {
     #cam-wrap { height: 60vh; }
   }
   @media (max-width: 768px) {
-    #cam-section { height: calc(100vh + 120vh); margin-bottom: 0 !important; padding-bottom: 0 !important; }
+    #cam-section { height: calc(55vh + 40vh); margin-bottom: 0 !important; padding-bottom: 0 !important; }
     /* position/top left to JS fake-sticky — CSS sticky broken by overflow-x:hidden on html/body */
     #cam-sticky { height: 55vh; padding-top: 70px !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
     /* height = sticky height minus padding-top so canvas fills exactly available space */
     #cam-wrap { height: calc(55vh - 70px); }
     #cam-canvas { width: 100%; height: 100%; }
-    #cam-heading { display: block; }
-    #cam-heading h1 {
-      font-size: clamp(1.8rem, 6vw, 2.6rem);
-      font-weight: 900;
-      line-height: 1.06;
-      letter-spacing: -0.04em;
-      color: #111827;
-      margin: 0;
-    }
   }
+
+  /* ─── HERO ENTRANCE ANIMATION ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-el {
+    opacity: 0;
+    animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-play-state: paused;
+  }
+  .hero-el.in-view { animation-play-state: running; }
   </style>
 </head>
 <body>
@@ -299,22 +290,19 @@
       <div id="cam-wrap">
         <canvas id="cam-canvas"></canvas>
       </div>
-      <div id="cam-heading">
-        <h1>Cada detalle importa.</h1>
-      </div>
     </div>
   </section>
 
   <section class="sp-hero">
     <div class="sp-hero-inner">
-      <div class="sp-badge">✦ Servicio 03 · Fotografía de Menú</div>
-      <h1>Cada detalle importa.</h1>
-      <p>Fotografiamos todo tu menú con luz natural, composición profesional y edición que hace que cada plato parezca irresistible. Más clics, más pedidos.</p>
-      <div class="sp-hero-cta">
+      <div class="sp-badge hero-el">✦ Servicio 03 · Fotografía de Menú</div>
+      <h1 class="hero-el">Cada detalle importa.</h1>
+      <p class="hero-el">Fotografiamos todo tu menú con luz natural, composición profesional y edición que hace que cada plato parezca irresistible. Más clics, más pedidos.</p>
+      <div class="sp-hero-cta hero-el">
         <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
       </div>
-      <div class="stats-row fade-in">
+      <div class="stats-row hero-el">
         <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
         <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
         <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-lbl">Derechos de uso ilimitados</div></div>
@@ -443,6 +431,22 @@
     const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible')), 300);
+    // Hero entrance animation
+    (function() {
+      var heroInner = document.querySelector('.sp-hero-inner');
+      if (!heroInner) return;
+      var heroEls = heroInner.querySelectorAll('.hero-el');
+      heroEls.forEach(function(el, i) { el.style.animationDelay = (i * 0.15) + 's'; });
+      var heroObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            heroEls.forEach(function(el) { el.classList.add('in-view'); });
+            heroObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      heroObs.observe(heroInner);
+    })();
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
@@ -462,7 +466,6 @@
   var section = document.getElementById('cam-section');
   var sticky  = document.getElementById('cam-sticky');
   var canvas  = document.getElementById('cam-canvas');
-  var heading = document.getElementById('cam-heading');
 
   if (!section || !canvas) return;
   var ctx = canvas.getContext('2d');
@@ -553,7 +556,7 @@
 
   function getProgress() {
     var rect = section.getBoundingClientRect();
-    var max  = section.offsetHeight - window.innerHeight;
+    var max  = section.offsetHeight - sticky.offsetHeight;
     if (max <= 0) return 0;
     return Math.max(0, Math.min(1, (-rect.top / max) / 0.85));
   }
@@ -564,16 +567,6 @@
     var p = getProgress();
     var i = Math.floor(p * (TOTAL - 1));
     if (i !== curIndex) { curIndex = i; drawFrame(i); }
-    if (heading) {
-      if (p >= 0.75) {
-        var ht = Math.min(1, (p - 0.75) / 0.15);
-        heading.style.opacity = ht;
-        heading.style.transform = 'translateY(' + Math.round(20 * (1 - ht)) + 'px)';
-      } else {
-        heading.style.opacity = 0;
-        heading.style.transform = 'translateY(20px)';
-      }
-    }
   }
 
   window.addEventListener('scroll', function() {
