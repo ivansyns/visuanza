@@ -181,7 +181,7 @@
   .hamburger span { background: rgba(0,0,0,0.75); }
   .hamburger:hover { background: rgba(0,0,0,0.06); }
 
-  #cam-mobile { display: none; } /* hidden on desktop */
+  #cam-scroll-zone { display: none; } /* hidden on desktop */
 
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
@@ -210,26 +210,38 @@
     transform: translateZ(0);
   }
   @media (max-width: 768px) {
-    /* Hide desktop scroll animation on mobile */
     #cam-section { display: none; }
 
-    /* Inline scroll-driven animation — tall container, sticky canvas */
-    #cam-mobile {
+    #cam-scroll-zone {
       display: block;
-      height: 150vh;
+      height: calc(260px + 80vh);
       position: relative;
-      margin-top: 16px;
+      margin-top: 20px;
+    }
+    #cam-mobile {
+      position: sticky;
+      top: 70px;
+      height: 260px;
+      width: 100%;
+      background: #ffffff;
+      overflow: hidden;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.07);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
     }
     #cam-canvas-mobile {
       display: block;
-      position: sticky;
-      top: 70px;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 100%;
+      background: #ffffff;
     }
-
-    .sp-hero { padding: 20px 0 16px; margin-top: 0; }
-    .stats-row { margin-top: 16px; }
+    .sp-hero { padding-top: 90px; padding-bottom: 0; background: #ffffff; }
+    .sp-hero::before { display: none; }
+    .stats-row {
+      margin-top: 16px;
+      background: #ffffff;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
   }
 
   /* ─── HERO ENTRANCE ANIMATION ─── */
@@ -305,7 +317,9 @@
         <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
       </div>
-      <div id="cam-mobile"><canvas id="cam-canvas-mobile"></canvas></div>
+      <div id="cam-scroll-zone">
+        <div id="cam-mobile"><canvas id="cam-canvas-mobile"></canvas></div>
+      </div>
       <div class="stats-row hero-el">
         <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
         <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
@@ -483,20 +497,20 @@
   // ── MOBILE: scroll-driven animation ──────────────────────────────────────
   if (isMob) {
 
-    var mSection = document.getElementById('cam-mobile');
+    var mSection = document.getElementById('cam-scroll-zone');
+    var mFrame   = document.getElementById('cam-mobile');
     var mCanvas  = document.getElementById('cam-canvas-mobile');
-    if (!mSection || !mCanvas) return;
+    if (!mSection || !mFrame || !mCanvas) return;
     var mCtx = mCanvas.getContext('2d');
 
-    var mScrollMax = 0, mSectionOffset = 0;
+    var mScrollMax = 0;
     var mCurIndex = 0, mRafPending = false, mInitDone = false;
 
     function mInitLayout() {
-      var dpr        = Math.min(window.devicePixelRatio || 1, 1.5);
-      var mW         = mCanvas.offsetWidth;
-      var mH         = mCanvas.offsetHeight;
-      mSectionOffset = window.scrollY + mSection.getBoundingClientRect().top;
-      mScrollMax     = mSection.offsetHeight - mH;
+      var dpr    = Math.min(window.devicePixelRatio || 1, 1.5);
+      var mW     = mCanvas.offsetWidth;
+      var mH     = mCanvas.offsetHeight;
+      mScrollMax = mSection.offsetHeight - mFrame.offsetHeight;
       if (!mW || !mH || mScrollMax <= 0) return false;
       mCanvas.width  = Math.round(mW * dpr);
       mCanvas.height = Math.round(mH * dpr);
@@ -513,7 +527,7 @@
 
     function mGetProgress() {
       if (mScrollMax <= 0) return 0;
-      return Math.max(0, Math.min(1, (window.scrollY - mSectionOffset) / mScrollMax));
+      return Math.max(0, Math.min(1, -mSection.getBoundingClientRect().top / mScrollMax));
     }
 
     function mUpdate() {
@@ -551,12 +565,16 @@
           FRAMES[idx] = img;
           loaded++;
           if (idx === 0) {
-            if (!mInitLayout()) {
-              requestAnimationFrame(function () { mInitLayout(); mDrawFrame(0); });
-            } else {
+            if (mInitLayout()) {
               mDrawFrame(0);
+              mInitDone = true;
+            } else {
+              requestAnimationFrame(function () {
+                mInitLayout();
+                mDrawFrame(0);
+                mInitDone = true;
+              });
             }
-            mInitDone = true;
           }
           if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
         };
