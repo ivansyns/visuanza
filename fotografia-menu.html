@@ -287,6 +287,27 @@
     animation-play-state: paused;
   }
   .hero-el.in-view { animation-play-state: running; }
+
+  /* ─── STACKED CARDS SCROLL ─── */
+  .stack-container { position: relative; }
+  .stack-container > section {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    transform: translateY(40px);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .stack-container > section.in-view { transform: translateY(0); }
+  .stack-container > section:nth-child(1) { z-index: 1; }
+  .stack-container > section:nth-child(2) { z-index: 2; }
+  .stack-container > section:nth-child(3) { z-index: 3; }
+  .stack-container > section:nth-child(4) { z-index: 4; }
+  /* Solid backgrounds so each card covers the one below */
+  .sp-hero    { background: #ffffff; }
+  .sp-section { background: #ffffff; }
+  @media (max-width: 768px) {
+    .stack-container > section { min-height: 100svh; }
+  }
   </style>
 </head>
 <body>
@@ -407,6 +428,7 @@
   </section>
 
   <div id="cam-content">
+  <div class="stack-container">
   <section class="sp-hero">
     <div class="sp-hero-inner">
       <div class="sp-badge hero-el">✦ Servicio 03 · Fotografía de Menú</div>
@@ -480,6 +502,7 @@
       </div>
     </div>
   </section>
+  </div><!-- /.stack-container -->
 
   <footer>
     <div class="footer-inner">
@@ -546,6 +569,11 @@
     const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible')), 300);
+    // ─── STACKED CARDS: slide-up on entry ───
+    const stackObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.stack-container > section').forEach(s => stackObs.observe(s));
     // Hero entrance animation
     (function() {
       var heroInner = document.querySelector('.sp-hero-inner');
