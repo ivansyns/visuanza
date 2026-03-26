@@ -200,11 +200,12 @@
     z-index: 10;
     display: flex; flex-direction: row;
   }
-  #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; }
+  #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; display: flex; flex-direction: column; }
   #cam-canvas {
     display: block;
     width: 100%;
-    height: 100%;
+    flex: 1 1 0;
+    min-height: 0;
   }
   #cam-right {
     flex: 0 0 55%;
@@ -287,32 +288,114 @@
   .hero-el.in-view { animation-play-state: running; }
 
   /* ─── CAM REVEAL TEXT (desktop only) ─── */
-  #cam-reveal-text {
-    position: relative;
-    z-index: 5;
-    background: #ffffff;
-    padding: 80px clamp(24px,6vw,120px) 48px;
-    text-align: center;
+  /* ─── CADA DETALLE IMPORTA — desktop only, inside left camera column ─── */
+  #cada-detalle {
     display: none;
   }
   @media (min-width: 769px) {
-    #cam-reveal-text { display: block; }
+    #cada-detalle {
+      display: block;
+      flex-shrink: 0;
+      padding: 22px 28px 24px;
+      font-family: 'Geist','Inter',sans-serif;
+      font-size: clamp(1.2rem, 2vw, 1.7rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #111111;
+      line-height: 1.1;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      background: #ffffff;
+      border-top: 1px solid rgba(0,0,0,0.07);
+    }
+    #cada-detalle.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  .cam-reveal-heading {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(2.4rem,4vw,3.6rem);
+
+  /* ─── PANEL MINI PRICING ─── */
+  .panel-plans {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+  .panel-plan {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: #f7f8fc;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 12px;
+    position: relative;
+    transition: border-color 0.2s;
+  }
+  .panel-plan:hover { border-color: rgba(79,126,255,0.3); }
+  .panel-plan.panel-plan-pro {
+    border-color: rgba(79,126,255,0.35);
+    background: rgba(79,126,255,0.04);
+  }
+  .pp-badge {
+    position: absolute;
+    top: -10px; right: 14px;
+    background: #4F7EFF;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  .plan-name-sm {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #4F7EFF;
+    width: 48px;
+    flex-shrink: 0;
+  }
+  .plan-price-sm {
+    font-size: 1.15rem;
     font-weight: 900;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
     color: #111111;
-    line-height: 1.05;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    font-family: 'Geist','Inter',sans-serif;
+    flex-shrink: 0;
+    width: 80px;
   }
-  .cam-reveal-heading.revealed {
-    opacity: 1;
-    transform: translateY(0);
+  .plan-price-sm span { font-size: 0.72rem; font-weight: 500; color: #777; }
+  .plan-perks {
+    list-style: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
   }
+  .plan-perks li {
+    font-size: 0.76rem;
+    color: #444;
+    line-height: 1.4;
+  }
+  .plan-perks li::before { content: '✓ '; color: #4F7EFF; font-weight: 700; }
+  .btn-ghost-sm, .btn-blue-sm {
+    flex-shrink: 0;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .btn-ghost-sm { background: #efefef; color: #333; border: 1px solid #d1d5db; }
+  .btn-ghost-sm:hover { background: #e5e7eb; }
+  .btn-blue-sm { background: #4F7EFF; color: #fff; border: none; }
+  .btn-blue-sm:hover { background: #3a6be8; }
 
   /* ─── PRICING SECTION ─── */
   .pricing-section {
@@ -541,6 +624,7 @@
     <div id="cam-sticky">
       <div id="cam-wrap">
         <canvas id="cam-canvas"></canvas>
+        <p id="cada-detalle">Cada detalle importa.</p>
       </div>
       <div id="cam-right">
         <div id="cam-panels">
@@ -552,11 +636,6 @@
             <div class="sp-hero-cta">
               <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
               <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
-            </div>
-            <div class="stats-row">
-              <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
-              <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
-              <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-lbl">Derechos ilimitados</div></div>
             </div>
           </div>
 
@@ -575,23 +654,43 @@
             </div>
           </div>
 
-          <!-- Panel 2: Todo incluido -->
+          <!-- Panel 2: Planes y precios -->
           <div class="cam-panel">
-            <p class="section-label">Todo incluido</p>
-            <h2>Lo que recibes en tu <span class="accent">sesión</span></h2>
-            <p style="margin:12px 0 20px;font-size:0.9rem;color:var(--text-muted);">Una sesión completa pensada para maximizar el impacto visual de cada plato de tu carta.</p>
-            <ul class="includes-list">
-              <li>Sesión fotográfica completa en tu local</li>
-              <li>Fotografía de todos los platos de la carta</li>
-              <li>Fotografías del local, ambiente e interior</li>
-              <li>Edición y retoque profesional de todas las fotos</li>
-              <li>Versiones para web, redes y plataformas de delivery</li>
-              <li>Fotos en formato vertical y horizontal</li>
-              <li>Entrega de archivos en alta resolución en 48 horas</li>
-              <li>Derechos de uso ilimitados y permanentes</li>
-            </ul>
-            <div style="margin-top:24px;">
-              <a href="index.html#contacto" class="btn-blue">Reservar sesión</a>
+            <p class="section-label">Planes y precios</p>
+            <h2>El plan que <span class="accent">se adapta a ti</span></h2>
+            <p style="margin:12px 0 22px;font-size:0.85rem;color:var(--text-muted);line-height:1.65;">Tres niveles, un solo objetivo: más pedidos, más visibilidad, más ventas para tu restaurante.</p>
+            <div class="panel-plans">
+              <div class="panel-plan">
+                <div class="plan-name-sm">Basic</div>
+                <div class="plan-price-sm">€700<span>/mes</span></div>
+                <ul class="plan-perks">
+                  <li>1 sesión fotográfica/mes</li>
+                  <li>6 fotos editadas</li>
+                  <li>Formatos web y delivery</li>
+                </ul>
+                <a href="index.html#contacto" class="btn-ghost-sm">Empezar</a>
+              </div>
+              <div class="panel-plan panel-plan-pro">
+                <span class="pp-badge">Popular</span>
+                <div class="plan-name-sm">Pro</div>
+                <div class="plan-price-sm">€1.100<span>/mes</span></div>
+                <ul class="plan-perks">
+                  <li>1 sesión + 4 vídeos/mes</li>
+                  <li>Gestión redes sociales</li>
+                  <li>Estrategia de contenido</li>
+                </ul>
+                <a href="index.html#contacto" class="btn-blue-sm">Empezar</a>
+              </div>
+              <div class="panel-plan">
+                <div class="plan-name-sm">Turbo</div>
+                <div class="plan-price-sm">€2.200<span>/mes</span></div>
+                <ul class="plan-perks">
+                  <li>12 vídeos + 8 fotos/mes</li>
+                  <li>Marketing + IA targeting</li>
+                  <li>Crecimiento acelerado</li>
+                </ul>
+                <a href="index.html#contacto" class="btn-ghost-sm">Empezar</a>
+              </div>
             </div>
           </div>
 
@@ -611,11 +710,6 @@
     </div>
   </section>
 
-  <!-- "Cada detalle importa" — desktop reveal after camera finishes -->
-  <div id="cam-reveal-text">
-    <h2 class="cam-reveal-heading">Cada detalle importa.</h2>
-  </div>
-
   <div id="cam-content">
   <section class="sp-hero">
     <div class="sp-hero-inner">
@@ -624,11 +718,6 @@
       <div class="sp-hero-cta hero-el">
         <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
-      </div>
-      <div class="stats-row hero-el">
-        <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
-        <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
-        <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-lbl">Derechos de uso ilimitados</div></div>
       </div>
     </div>
   </section>
@@ -1064,9 +1153,9 @@
       var p = getProgress();
       var i = Math.round(p * (TOTAL - 1));
       if (i !== curIndex) { curIndex = i; drawFrame(i); }
-      // Reveal text when animation is nearly complete
+      // Reveal "Cada detalle importa" when animation is nearly complete
       if (p >= 0.95) {
-        var revealEl = document.querySelector('.cam-reveal-heading');
+        var revealEl = document.getElementById('cada-detalle');
         if (revealEl) revealEl.classList.add('revealed');
       }
       updatePanels(p);
