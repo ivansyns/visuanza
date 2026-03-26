@@ -10,25 +10,77 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --blue: #4F7EFF; --blue-dark: #3a6be8; --black: #09090b; --dark: #111118; --text: #F8FAFC; --text-muted: #94A3B8; --border: rgba(255,255,255,0.08); --surface: rgba(255,255,255,0.04); }
+
+    :root {
+      --blue:      #4F7EFF;
+      --blue-dark: #3a6be8;
+      --black:     #09090b;
+      --dark:      #111118;
+      --text:      #F8FAFC;
+      --text-muted:#94A3B8;
+      --border:    rgba(255,255,255,0.08);
+      --surface:   rgba(255,255,255,0.04);
+    }
+
     html { scroll-behavior: smooth; overflow-x: clip; }
-    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--black); overflow-x: clip; line-height: 1.6; background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 28px 28px; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--black);
+      overflow-x: clip;
+      line-height: 1.6;
+      background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
     h1, h2, h3, h4 { font-family: 'Geist', 'Inter', sans-serif; }
-    .bg-glow { position: fixed; top: -300px; left: 50%; transform: translateX(-50%); width: 1000px; height: 1000px; background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, rgba(59,130,246,0.08) 40%, transparent 70%); border-radius: 50%; pointer-events: none; z-index: 0; }
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
-    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(9,9,11,0.88), rgba(9,9,11,0.72)); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06); pointer-events: auto; }
+
+    .bg-glow {
+      position: fixed; top: -300px; left: 50%;
+      transform: translateX(-50%);
+      width: 1000px; height: 1000px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200; padding: 14px clamp(8px,1.5vw,24px);
+      background: transparent; pointer-events: none;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 10px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(180deg, rgba(9,9,11,0.88), rgba(9,9,11,0.72));
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.1); border-radius: 999px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06);
+      pointer-events: auto;
+    }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); }
     .nav-logo span { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,0.92); letter-spacing: -0.02em; font-family: 'Geist','Inter',sans-serif; }
     .nav-links { display: flex; align-items: center; list-style: none; }
-    .nav-links li { margin-right: 4px; } .nav-links li:last-child { margin-right: 0; }
+    .nav-links li { margin-right: 4px; }
+    .nav-links li:last-child { margin-right: 0; }
     .nav-links a { text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
     .nav-links a:hover { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.06); }
     .nav-links a.active { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.08); }
     .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
     .nav-has-dropdown { position: relative; }
     .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
-    .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(9,9,11,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.5); backdrop-filter: blur(20px); padding: 16px 8px 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
+    .nav-dropdown {
+      position: absolute; top: calc(100% + 6px); left: 50%;
+      transform: translateX(-50%) translateY(-6px); width: 480px;
+      background: rgba(9,9,11,0.95); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+      backdrop-filter: blur(20px); padding: 16px 8px 8px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
+    }
     .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: rgba(14,14,22,0.98); border-left: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1); }
     .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
     .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
@@ -38,19 +90,25 @@
     .nav-dropdown-item:hover .ndi-icon svg { color: white; }
     .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
     .ndi-icon svg { width: 17px; height: 17px; color: #4F7EFF; transition: color 0.15s ease; }
-    .ndi-text { flex: 1; } .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 2px; } .ndi-desc { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.42); line-height: 1.4; }
+    .ndi-text { flex: 1; }
+    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 2px; }
+    .ndi-desc { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.42); line-height: 1.4; }
     @media (max-width: 900px) { .nav-dropdown { display: none; } .nav-links, .nav-right { display: none !important; } }
     .nav-right { display: flex; align-items: center; gap: 1rem; }
     .lang-toggle { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.85); cursor: pointer; background: none; border: none; }
     .lang-flag { font-size: 1.1rem; }
     .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s; }
     .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    /* ─── HAMBURGER ─── */
     .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 8px; transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
     .hamburger:hover { background: rgba(255,255,255,0.08); }
     .hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.85); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── MOBILE MENU ─── */
     .mobile-menu { position: fixed; inset: 0; z-index: 150; background: rgba(9,9,11,0.92); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px 48px; opacity: 0; pointer-events: none; transform: translateX(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
     .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
     .mobile-menu-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 320px; }
@@ -63,57 +121,85 @@
     .mobile-cta:hover { background: #3a6be8; }
     @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } }
     @media (min-width: 769px) { .mobile-menu { display: none !important; } }
-    .container { width: 100%; max-width: 900px; margin: 0 auto; padding-left: clamp(16px,4vw,48px); padding-right: clamp(16px,4vw,48px); }
-    .sp-hero { padding: 60px 0 100px; position: relative; text-align: center; margin-top: 0; }
-    .sp-hero::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse, rgba(79,126,255,0.14) 0%, transparent 70%); pointer-events: none; }
+
+    /* ─── CONTAINER ─── */
+    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding-left: clamp(16px,3vw,48px); padding-right: clamp(16px,3vw,48px); }
+
+    /* ─── HERO ─── */
+    .sp-hero {
+      padding: 150px 0 100px;
+      position: relative; text-align: center;
+    }
+    .sp-hero::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(79,126,255,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
     .sp-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
-    .sp-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,126,255,0.12); color: var(--blue); font-size: 0.78rem; font-weight: 600; padding: 6px 16px; border-radius: 100px; margin-bottom: 28px; border: 1px solid rgba(79,126,255,0.25); }
-    .sp-hero h1 { font-size: clamp(2.6rem,5.5vw,4.2rem); font-weight: 900; line-height: 1.06; letter-spacing: -0.04em; margin-bottom: 24px; }
+    .sp-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(79,126,255,0.12); color: var(--blue);
+      font-size: 0.78rem; font-weight: 600; padding: 6px 16px; border-radius: 100px;
+      margin-bottom: 28px; border: 1px solid rgba(79,126,255,0.25);
+    }
+    .sp-hero h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 900; line-height: 1.06; letter-spacing: -0.04em; margin-bottom: 24px; }
     .sp-hero h1 .accent { color: var(--blue); }
-    .sp-hero p { font-size: clamp(1rem,1.8vw,1.15rem); color: var(--text-muted); max-width: 580px; margin: 0 auto 40px; line-height: 1.75; }
+    .sp-hero p { font-size: clamp(1rem, 1.8vw, 1.15rem); color: var(--text-muted); max-width: 580px; margin: 0 auto 40px; line-height: 1.75; }
     .sp-hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .btn-blue { background: var(--blue); color: #fff; border: none; padding: 14px 28px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; box-shadow: 0 4px 24px rgba(79,126,255,0.4); }
     .btn-blue:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(79,126,255,0.5); }
     .btn-ghost { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.12); padding: 14px 28px; border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, color 0.2s; }
     .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #fff; }
-    .stats-row { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); backdrop-filter: blur(8px); margin-top: 64px; overflow: hidden; }
+
+    /* ─── STATS ROW ─── */
+    .stats-row { display: flex; gap: 0; justify-content: center; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); backdrop-filter: blur(8px); margin-top: 64px; overflow: hidden; }
     .stat-item { flex: 1; padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.04em; color: var(--text); font-family: 'Geist','Inter',sans-serif; }
     .stat-num span { color: var(--blue); }
     .stat-lbl { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+
+    /* ─── SECTION ─── */
     .sp-section { padding: clamp(72px,8vw,120px) 0; position: relative; z-index: 1; }
     .sp-section + .sp-section { border-top: 1px solid var(--border); }
     .section-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; }
     .section-label::before { content: ''; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
-    .sp-section h2 { font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 18px; line-height: 1.1; }
+    .sp-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 18px; line-height: 1.1; }
     .sp-section h2 .accent { color: var(--blue); }
     .sp-section > .container > p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; max-width: 620px; margin-bottom: 48px; }
-    .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+
+    /* ─── FEATURE GRID ─── */
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 580px) { .feature-grid { grid-template-columns: 1fr; } }
     .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: border-color 0.2s, background 0.2s; }
     .feature-card:hover { border-color: rgba(79,126,255,0.3); background: rgba(79,126,255,0.04); }
     .feature-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
     .feature-icon svg { width: 20px; height: 20px; color: var(--blue); }
-    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
     .feature-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ─── INCLUDES LIST ─── */
     .includes-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
     @media (max-width: 768px) { .includes-split { grid-template-columns: 1fr; gap: 32px; } }
     .includes-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
     .includes-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 0.95rem; font-weight: 500; color: var(--text); }
     .includes-list li::before { content: ''; flex-shrink: 0; margin-top: 4px; width: 18px; height: 18px; border-radius: 50%; background: rgba(79,126,255,0.15); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%234F7EFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; background-size: 10px 8px; }
     .includes-aside { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
-    .includes-aside h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
+    .includes-aside h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
     .includes-aside p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
     .includes-aside .btn-blue { width: 100%; text-align: center; }
+
+    /* ─── CTA SECTION ─── */
     .sp-cta { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.07); padding: clamp(72px,8vw,120px) 0; text-align: center; position: relative; overflow: hidden; }
     .sp-cta::before { content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, rgba(79,126,255,0.08) 45%, transparent 70%); pointer-events: none; }
     .sp-cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
-    .sp-cta h2 { font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
+    .sp-cta h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
     .sp-cta h2 .accent { color: var(--blue); }
     .sp-cta p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; }
     .sp-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
     /* ─── FOOTER ─── */
     footer { background: #09090b; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
     .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
@@ -139,514 +225,249 @@
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ─── SCROLL FADE ─── */
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
-    @media (max-width: 600px) { .stats-row { flex-direction: column; } .stat-item { border-right: none; border-bottom: 1px solid var(--border); } .stat-item:last-child { border-bottom: none; } .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } }
 
-  /* ─── LIGHT THEME ─── */
-  :root {
-    --text: #111111;
-    --text-muted: #555555;
-    --border: rgba(0,0,0,0.1);
-    --surface: #f5f5f5;
-  }
-  body {
-    background: #ffffff;
-    background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
-  .bg-glow { opacity: 0.25; }
-  /* Restore dark variables for footer only */
-  footer {
-    --text: #F8FAFC;
-    --text-muted: #94A3B8;
-    --border: rgba(255,255,255,0.08);
-    --surface: rgba(255,255,255,0.04);
-  }
-  footer { background: #09090b; }
-  /* White CTA section */
-  .sp-cta { background: #ffffff; border-top: 1px solid rgba(0,0,0,0.08); }
-  .sp-cta::before { opacity: 0.06; }
-  /* btn-ghost light override */
-  .btn-ghost { background: #f0f0f0; color: #444444; border: 1px solid #d1d5db; }
-  .btn-ghost:hover { background: #e5e7eb; color: #111111; }
-  /* Light navbar */
-  nav { border-bottom: 1px solid rgba(0,0,0,0.08); background: #ffffff; }
-  .nav-inner { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
-  .nav-logo img { filter: brightness(0); }
-  .nav-logo span { color: #111111; }
-  .nav-links a { color: rgba(0,0,0,0.55); }
-  .nav-links a:hover { color: #111111; background: rgba(0,0,0,0.05); }
-  .nav-links a.active { color: #111111; background: rgba(0,0,0,0.07); }
-  .lang-toggle { color: rgba(0,0,0,0.7); }
-  .hamburger span { background: rgba(0,0,0,0.75); }
-  .hamburger:hover { background: rgba(0,0,0,0.06); }
-
-  #cam-scroll-zone { display: none; } /* hidden on desktop */
-
-  /* ─── CAMERA SCROLL ANIMATION ─── */
-  #cam-section {
-    height: 500vh;
-    position: relative;
-    background: transparent;
-  }
-  #cam-sticky {
-    position: sticky;
-    top: 70px;
-    width: 100%;
-    height: calc(100vh - 70px);
-    background: #ffffff;
-    overflow: clip;
-    z-index: 10;
-    display: flex; flex-direction: row;
-  }
-  #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; display: flex; flex-direction: column; }
-  #cam-canvas {
-    display: block;
-    width: 100%;
-    flex: 1 1 0;
-    min-height: 0;
-  }
-  #cam-right {
-    flex: 0 0 55%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    background: #ffffff;
-    border-left: 1px solid rgba(0,0,0,0.08);
-  }
-  #cam-panels {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-  }
-  .cam-panel {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    overflow-y: auto;
-    padding: clamp(32px,4vw,64px) clamp(24px,4vw,56px);
-    will-change: transform, opacity;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .cam-panel::-webkit-scrollbar { width: 4px; }
-  .cam-panel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
-  .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); }
-  .cam-panel .includes-split { grid-template-columns: 1fr; gap: 20px; }
-  .cam-panel .stats-row { margin-top: 28px; }
-  .cam-panel h1 { font-size: clamp(1.8rem,3vw,2.8rem); }
-  .cam-panel h2 { font-size: clamp(1.4rem,2.2vw,2rem); }
-  .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 20px; }
-  @media (min-width: 769px) { #cam-content { display: none; } }
-  @media (max-width: 768px) {
-    #cam-section { display: none; }
-
-    #cam-scroll-zone {
-      display: block;
-      height: calc(260px + 80vh);
-      position: relative;
-      margin-top: 20px;
+    @media (max-width: 600px) {
+      .stats-row { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
-    #cam-mobile {
+
+    /* ─── LIGHT THEME ─── */
+    :root {
+      --text: #111111;
+      --text-muted: #555555;
+      --border: rgba(0,0,0,0.1);
+      --surface: #f5f5f5;
+    }
+    body {
+      background: #ffffff;
+      background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .bg-glow { opacity: 0.25; }
+    /* Restore dark variables for footer only */
+    footer {
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border: rgba(255,255,255,0.08);
+      --surface: rgba(255,255,255,0.04);
+    }
+    footer { background: #09090b; }
+    /* White CTA section */
+    .sp-cta { background: #ffffff; border-top: 1px solid rgba(0,0,0,0.08); }
+    .sp-cta::before { opacity: 0.06; }
+    /* btn-ghost light override */
+    .btn-ghost { background: #f0f0f0; color: #444444; border: 1px solid #d1d5db; }
+    .btn-ghost:hover { background: #e5e7eb; color: #111111; }
+    /* Light navbar */
+    nav { border-bottom: 1px solid rgba(0,0,0,0.08); background: #ffffff; }
+    .nav-inner { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+    .nav-logo img { filter: brightness(0); }
+    .nav-logo span { color: #111111; }
+    .nav-links a { color: rgba(0,0,0,0.55); }
+    .nav-links a:hover { color: #111111; background: rgba(0,0,0,0.05); }
+    .nav-links a.active { color: #111111; background: rgba(0,0,0,0.07); }
+    .lang-toggle { color: rgba(0,0,0,0.7); }
+    .hamburger span { background: rgba(0,0,0,0.75); }
+    .hamburger:hover { background: rgba(0,0,0,0.06); }
+
+    /* ─── CAMERA SCROLL ANIMATION ─── */
+    #cam-section {
+      height: 500vh;
+      position: relative;
+      background: transparent;
+    }
+    #cam-sticky {
       position: sticky;
       top: 70px;
-      height: 260px;
       width: 100%;
+      height: calc(100vh - 70px);
       background: #ffffff;
-      overflow: hidden;
-      border-radius: 14px;
-      border: 1px solid rgba(0,0,0,0.07);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      overflow: clip;
+      z-index: 10;
+      display: flex; flex-direction: row;
     }
-    #cam-canvas-mobile {
-      display: block;
-      width: 100%;
+    #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; display: flex; flex-direction: column; }
+    #cam-canvas { display: block; width: 100%; flex: 1 1 0; min-height: 0; }
+    #cam-right {
+      flex: 0 0 55%;
       height: 100%;
+      position: relative;
+      overflow: hidden;
       background: #ffffff;
+      border-left: 1px solid rgba(0,0,0,0.08);
     }
-    .sp-hero { padding-top: 90px; padding-bottom: 0; background: #ffffff; }
-    .sp-hero::before { display: none; }
-    .stats-row {
-      margin-top: 16px;
-      background: #ffffff;
-      border: 1px solid rgba(0,0,0,0.06);
+    #cam-panels { position: absolute; inset: 0; overflow: hidden; }
+    .cam-panel {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      overflow-y: auto;
+      padding: clamp(32px,4vw,64px) clamp(24px,4vw,56px);
+      will-change: transform, opacity;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-  }
+    .cam-panel::-webkit-scrollbar { width: 4px; }
+    .cam-panel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); }
+    .cam-panel h1 { font-size: clamp(1.8rem,3vw,2.8rem); }
+    .cam-panel h2 { font-size: clamp(1.4rem,2.2vw,2rem); }
+    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 20px; }
+    @media (min-width: 769px) { #cam-content { display: none; } }
+    @media (max-width: 768px) {
+      #cam-section { display: none; }
+      #cam-scroll-zone {
+        display: block;
+        height: calc(260px + 80vh);
+        position: relative;
+        margin-top: 20px;
+      }
+      #cam-mobile {
+        position: sticky;
+        top: 70px;
+        height: 260px;
+        width: 100%;
+        background: #ffffff;
+        overflow: hidden;
+        border-radius: 14px;
+        border: 1px solid rgba(0,0,0,0.07);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      }
+      #cam-canvas-mobile { display: block; width: 100%; height: 100%; background: #ffffff; }
+      .sp-hero { padding-top: 100px; }
+      .stats-row { margin-top: 32px; background: #ffffff; border: 1px solid rgba(0,0,0,0.06); }
+    }
 
-  /* ─── HERO ENTRANCE ANIMATION ─── */
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(28px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .hero-el {
-    opacity: 0;
-    animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-play-state: paused;
-  }
-  .hero-el.in-view { animation-play-state: running; }
-
-  /* ─── CAM REVEAL TEXT (desktop only) ─── */
-  /* ─── CADA DETALLE IMPORTA — desktop only, inside left camera column ─── */
-  #cada-detalle {
-    display: none;
-  }
-  @media (min-width: 769px) {
-    #cada-detalle {
-      display: block;
-      flex-shrink: 0;
-      padding: 22px 28px 24px;
-      font-family: 'Geist','Inter',sans-serif;
-      font-size: clamp(1.2rem, 2vw, 1.7rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      color: #111111;
-      line-height: 1.1;
+    /* ─── HERO ENTRANCE ANIMATION ─── */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-el {
       opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      background: #ffffff;
-      border-top: 1px solid rgba(0,0,0,0.07);
+      animation: fadeSlideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation-play-state: paused;
     }
-    #cada-detalle.revealed {
-      opacity: 1;
-      transform: translateY(0);
+    .hero-el.in-view { animation-play-state: running; }
+
+    /* ─── CADA DETALLE IMPORTA — desktop only, inside left camera column ─── */
+    #cada-detalle { display: none; }
+    @media (min-width: 769px) {
+      #cada-detalle {
+        display: block;
+        flex-shrink: 0;
+        padding: 22px 28px 24px;
+        font-family: 'Geist','Inter',sans-serif;
+        font-size: clamp(1.2rem, 2vw, 1.7rem);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        color: #111111;
+        line-height: 1.1;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        background: #ffffff;
+        border-top: 1px solid rgba(0,0,0,0.07);
+      }
+      #cada-detalle.revealed { opacity: 1; transform: translateY(0); }
     }
-  }
 
-  /* ─── PANEL MINI PRICING ─── */
-  .panel-plans {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-  .panel-plan {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 14px 18px;
-    background: #f7f8fc;
-    border: 1px solid rgba(0,0,0,0.07);
-    border-radius: 12px;
-    position: relative;
-    transition: border-color 0.2s;
-  }
-  .panel-plan:hover { border-color: rgba(79,126,255,0.3); }
-  .panel-plan.panel-plan-pro {
-    border-color: rgba(79,126,255,0.35);
-    background: rgba(79,126,255,0.04);
-  }
-  .pp-badge {
-    position: absolute;
-    top: -10px; right: 14px;
-    background: #4F7EFF;
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 3px 10px;
-    border-radius: 999px;
-  }
-  .plan-name-sm {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #4F7EFF;
-    width: 48px;
-    flex-shrink: 0;
-  }
-  .plan-price-sm {
-    font-size: 1.15rem;
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    color: #111111;
-    font-family: 'Geist','Inter',sans-serif;
-    flex-shrink: 0;
-    width: 80px;
-  }
-  .plan-price-sm span { font-size: 0.72rem; font-weight: 500; color: #777; }
-  .plan-perks {
-    list-style: none;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  .plan-perks li {
-    font-size: 0.76rem;
-    color: #444;
-    line-height: 1.4;
-  }
-  .plan-perks li::before { content: '✓ '; color: #4F7EFF; font-weight: 700; }
-  .btn-ghost-sm, .btn-blue-sm {
-    flex-shrink: 0;
-    font-size: 0.76rem;
-    font-weight: 600;
-    padding: 7px 14px;
-    border-radius: 8px;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: background 0.2s;
-  }
-  .btn-ghost-sm { background: #efefef; color: #333; border: 1px solid #d1d5db; }
-  .btn-ghost-sm:hover { background: #e5e7eb; }
-  .btn-blue-sm { background: #4F7EFF; color: #fff; border: none; }
-  .btn-blue-sm:hover { background: #3a6be8; }
+    /* ─── PANEL MINI PRICING ─── */
+    .panel-plans { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+    .panel-plan { display: flex; align-items: center; gap: 16px; padding: 14px 18px; background: #f7f8fc; border: 1px solid rgba(0,0,0,0.07); border-radius: 12px; position: relative; transition: border-color 0.2s; }
+    .panel-plan:hover { border-color: rgba(79,126,255,0.3); }
+    .panel-plan.panel-plan-pro { border-color: rgba(79,126,255,0.35); background: rgba(79,126,255,0.04); }
+    .pp-badge { position: absolute; top: -10px; right: 14px; background: #4F7EFF; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; }
+    .plan-name-sm { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #4F7EFF; width: 48px; flex-shrink: 0; }
+    .plan-price-sm { font-size: 1.15rem; font-weight: 900; letter-spacing: -0.03em; color: #111111; font-family: 'Geist','Inter',sans-serif; flex-shrink: 0; width: 80px; }
+    .plan-price-sm span { font-size: 0.72rem; font-weight: 500; color: #777; }
+    .plan-perks { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .plan-perks li { font-size: 0.76rem; color: #444; line-height: 1.4; }
+    .plan-perks li::before { content: '✓ '; color: #4F7EFF; font-weight: 700; }
+    .btn-ghost-sm, .btn-blue-sm { flex-shrink: 0; font-size: 0.76rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+    .btn-ghost-sm { background: #efefef; color: #333; border: 1px solid #d1d5db; }
+    .btn-ghost-sm:hover { background: #e5e7eb; }
+    .btn-blue-sm { background: #4F7EFF; color: #fff; border: none; }
+    .btn-blue-sm:hover { background: #3a6be8; }
 
-  /* ─── POST-CAMERA CONTENT STYLES ─── */
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
-  }
-  .reveal.in-view { opacity: 1; transform: none; }
-  .reveal-d1 { transition-delay: 0.08s; }
-  .reveal-d2 { transition-delay: 0.16s; }
-  .reveal-d3 { transition-delay: 0.24s; }
-  .reveal-d4 { transition-delay: 0.32s; }
-
-  /* ─── OPENING STATEMENT (dark) ─── */
-  .stmt-section {
-    background: #0a0a0e;
-    padding: clamp(80px,10vw,140px) clamp(28px,7vw,110px);
-    position: relative; overflow: hidden;
-  }
-  .stmt-section::before {
-    content: ''; position: absolute;
-    top: -80px; left: -5%; width: 65%; height: 600px;
-    background: radial-gradient(ellipse at top left, rgba(79,126,255,0.11) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .stmt-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: rgba(79,126,255,0.8);
-    margin-bottom: 36px;
-  }
-  .stmt-eyebrow::before {
-    content: ''; width: 24px; height: 2px;
-    background: #4F7EFF; border-radius: 2px; flex-shrink: 0;
-  }
-  .stmt-heading {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(2.8rem,5.5vw,5.2rem);
-    font-weight: 900; letter-spacing: -0.04em;
-    line-height: 1.0; color: #ffffff;
-    max-width: 960px; margin-bottom: 48px;
-  }
-  .stmt-heading em { font-style: normal; color: #4F7EFF; }
-  .stmt-rule { width: 100%; height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 48px; }
-  .stmt-body { display: flex; align-items: flex-start; gap: clamp(40px,6vw,100px); flex-wrap: wrap; }
-  .stmt-text {
-    flex: 1; min-width: 260px;
-    font-size: clamp(0.95rem,1.4vw,1.12rem);
-    color: rgba(255,255,255,0.58); line-height: 1.82;
-    max-width: 520px;
-  }
-  .stmt-callout {
-    flex-shrink: 0; padding: 28px 44px;
-    background: rgba(79,126,255,0.09);
-    border: 1px solid rgba(79,126,255,0.22);
-    border-radius: 20px; text-align: center;
-  }
-  .stmt-big-num {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(3rem,4.5vw,4.2rem);
-    font-weight: 900; letter-spacing: -0.04em;
-    color: #4F7EFF; line-height: 1;
-  }
-  .stmt-callout-label {
-    font-size: 0.76rem; color: rgba(255,255,255,0.42);
-    line-height: 1.6; margin-top: 8px;
-  }
-  @media (max-width: 640px) {
-    .stmt-body { flex-direction: column; }
-    .stmt-callout { width: 100%; }
-  }
-
-  /* ─── MOBILE HERO (inside #cam-content) ─── */
-  .mob-hero {
-    padding: clamp(36px,6vw,72px) clamp(20px,5vw,40px) 48px;
-    background: #ffffff;
-  }
-  .mob-hero h1 {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(2rem,7vw,3rem);
-    font-weight: 900; letter-spacing: -0.04em;
-    line-height: 1.05; color: #111111; margin-bottom: 16px;
-  }
-  .mob-hero h1 em { font-style: normal; color: #4F7EFF; }
-  .mob-hero p {
-    font-size: 0.95rem; color: #666666;
-    line-height: 1.75; margin-bottom: 28px; max-width: 480px;
-  }
-  .mob-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
-
-  /* ─── WHAT'S INCLUDED (light) ─── */
-  .included-section {
-    background: #ffffff;
-    padding: clamp(72px,8vw,120px) clamp(28px,7vw,110px);
-    border-top: 1px solid rgba(0,0,0,0.06);
-  }
-  .section-eyebrow {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
-    text-transform: uppercase; color: #4F7EFF; margin-bottom: 16px;
-  }
-  .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: #4F7EFF; border-radius: 2px; }
-  .included-heading {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(2rem,4vw,3.2rem);
-    font-weight: 900; letter-spacing: -0.04em;
-    line-height: 1.05; color: #111111; margin-bottom: 56px;
-  }
-  .included-heading .accent { color: #4F7EFF; }
-  .included-list { display: flex; flex-direction: column; }
-  .inc-row {
-    display: grid; grid-template-columns: 76px 1fr;
-    gap: 32px; padding: 28px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.07);
-    align-items: start;
-  }
-  .inc-row:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
-  .inc-idx {
-    font-size: 0.68rem; font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    color: rgba(79,126,255,0.45); padding-top: 4px;
-    font-family: 'Geist','Inter',sans-serif;
-  }
-  .inc-body h3 {
-    font-size: clamp(1.05rem,1.8vw,1.4rem); font-weight: 800;
-    letter-spacing: -0.02em; color: #111111;
-    margin-bottom: 7px; line-height: 1.2;
-  }
-  .inc-body p { font-size: 0.88rem; color: #666666; line-height: 1.72; max-width: 580px; }
-  @media (max-width: 560px) { .inc-row { grid-template-columns: 44px 1fr; gap: 14px; } }
-
-  /* ─── PRICING (dark) ─── */
-  .pn-section {
-    background: #09090b;
-    padding: clamp(72px,8vw,120px) clamp(28px,6vw,80px);
-    position: relative; overflow: hidden;
-  }
-  .pn-section::before {
-    content: ''; position: absolute;
-    top: 0; left: 50%; transform: translateX(-50%);
-    width: 900px; height: 500px;
-    background: radial-gradient(ellipse at top, rgba(79,126,255,0.09) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .pn-head { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
-  .pn-head h2 {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(2rem,4vw,3.2rem);
-    font-weight: 900; letter-spacing: -0.04em;
-    line-height: 1.05; color: #ffffff; margin-bottom: 14px;
-  }
-  .pn-head h2 .accent { color: #4F7EFF; }
-  .pn-head p { font-size: 0.95rem; color: rgba(255,255,255,0.42); max-width: 440px; margin: 0 auto; line-height: 1.65; }
-  .pn-grid {
-    display: grid; grid-template-columns: repeat(3,1fr);
-    gap: 18px; max-width: 960px; margin: 0 auto;
-    position: relative; z-index: 1;
-  }
-  @media (max-width: 860px) { .pn-grid { grid-template-columns: 1fr; max-width: 400px; } }
-  .pn-card {
-    padding: 36px 28px; border-radius: 20px;
-    display: flex; flex-direction: column;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    position: relative; transition: border-color 0.2s;
-  }
-  .pn-card:hover { border-color: rgba(255,255,255,0.14); }
-  .pn-card.pn-featured {
-    background: #ffffff; border-color: transparent;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.45);
-  }
-  .pn-pop {
-    position: absolute; top: -11px; left: 50%;
-    transform: translateX(-50%);
-    background: #4F7EFF; color: #fff;
-    font-size: 0.68rem; font-weight: 700;
-    letter-spacing: 0.06em; text-transform: uppercase;
-    padding: 4px 14px; border-radius: 999px; white-space: nowrap;
-  }
-  .pn-tier { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #4F7EFF; margin-bottom: 10px; }
-  .pn-price {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: 2.6rem; font-weight: 900;
-    letter-spacing: -0.04em; color: #ffffff; line-height: 1; margin-bottom: 8px;
-  }
-  .pn-card.pn-featured .pn-price { color: #111111; }
-  .pn-price span { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.32); letter-spacing: 0; }
-  .pn-card.pn-featured .pn-price span { color: #999999; }
-  .pn-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.36); line-height: 1.55; margin-bottom: 24px; }
-  .pn-card.pn-featured .pn-subtitle { color: #666666; }
-  .pn-list { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-  .pn-list li { font-size: 0.84rem; color: rgba(255,255,255,0.52); display: flex; align-items: flex-start; gap: 9px; line-height: 1.45; }
-  .pn-card.pn-featured .pn-list li { color: #444444; }
-  .pn-list li::before { content: ''; flex-shrink: 0; margin-top: 6px; width: 4px; height: 4px; border-radius: 50%; background: #4F7EFF; }
-  .pn-action { display: block; text-align: center; padding: 13px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-  .pn-outline { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); }
-  .pn-outline:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.26); }
-  .pn-solid { background: #4F7EFF; color: #fff; border: none; box-shadow: 0 4px 20px rgba(79,126,255,0.4); }
-  .pn-solid:hover { background: #3a6be8; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(79,126,255,0.5); }
-
-  /* ─── FINAL CTA (light) ─── */
-  .final-cta {
-    background: #ffffff;
-    padding: clamp(80px,8vw,120px) clamp(28px,6vw,80px);
-    text-align: center; position: relative; overflow: hidden;
-    border-top: 1px solid rgba(0,0,0,0.06);
-  }
-  .final-cta::before {
-    content: ''; position: absolute;
-    top: -60px; left: 50%; transform: translateX(-50%);
-    width: 700px; height: 400px;
-    background: radial-gradient(ellipse, rgba(79,126,255,0.07) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .final-cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
-  .final-cta h2 {
-    font-family: 'Geist','Inter',sans-serif;
-    font-size: clamp(2rem,4vw,3.4rem);
-    font-weight: 900; letter-spacing: -0.04em;
-    line-height: 1.05; color: #111111; margin-bottom: 18px;
-  }
-  .final-cta h2 .accent { color: #4F7EFF; }
-  .final-cta p { font-size: 0.98rem; color: #777777; line-height: 1.7; margin-bottom: 40px; }
-  .btn-reserve {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: #111111; color: #ffffff; border: none;
-    padding: 16px 32px; border-radius: 12px;
-    font-size: 1rem; font-weight: 700; text-decoration: none;
-    letter-spacing: -0.01em;
-    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  }
-  .btn-reserve:hover { background: #222222; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
+    /* ─── PRICING SECTION ─── */
+    .pn-section {
+      background: #09090b;
+      padding: clamp(72px,8vw,120px) clamp(28px,6vw,80px);
+      position: relative; overflow: hidden;
+    }
+    .pn-section::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse at top, rgba(79,126,255,0.09) 0%, transparent 60%); pointer-events: none; }
+    .pn-head { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
+    .pn-head h2 { font-family: 'Geist','Inter',sans-serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 900; letter-spacing: -0.04em; line-height: 1.05; color: #ffffff; margin-bottom: 14px; }
+    .pn-head h2 .accent { color: #4F7EFF; }
+    .pn-head p { font-size: 0.95rem; color: rgba(255,255,255,0.42); max-width: 440px; margin: 0 auto; line-height: 1.65; }
+    .pn-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(79,126,255,0.82); margin-bottom: 16px; justify-content: center; }
+    .pn-eyebrow::before { content: ''; width: 20px; height: 2px; background: #4F7EFF; border-radius: 2px; }
+    .pn-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    @media (max-width: 860px) { .pn-grid { grid-template-columns: 1fr; max-width: 400px; } }
+    .pn-card { padding: 36px 28px; border-radius: 20px; display: flex; flex-direction: column; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); position: relative; transition: border-color 0.2s; }
+    .pn-card:hover { border-color: rgba(255,255,255,0.14); }
+    .pn-card.pn-featured { background: #ffffff; border-color: transparent; box-shadow: 0 24px 64px rgba(0,0,0,0.45); }
+    .pn-pop { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: #4F7EFF; color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 14px; border-radius: 999px; white-space: nowrap; }
+    .pn-tier { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #4F7EFF; margin-bottom: 10px; }
+    .pn-price { font-family: 'Geist','Inter',sans-serif; font-size: 2.6rem; font-weight: 900; letter-spacing: -0.04em; color: #ffffff; line-height: 1; margin-bottom: 8px; }
+    .pn-card.pn-featured .pn-price { color: #111111; }
+    .pn-price span { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.32); letter-spacing: 0; }
+    .pn-card.pn-featured .pn-price span { color: #999999; }
+    .pn-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.36); line-height: 1.55; margin-bottom: 24px; }
+    .pn-card.pn-featured .pn-subtitle { color: #666666; }
+    .pn-list { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .pn-list li { font-size: 0.84rem; color: rgba(255,255,255,0.52); display: flex; align-items: flex-start; gap: 9px; line-height: 1.45; }
+    .pn-card.pn-featured .pn-list li { color: #444444; }
+    .pn-list li::before { content: ''; flex-shrink: 0; margin-top: 6px; width: 4px; height: 4px; border-radius: 50%; background: #4F7EFF; }
+    .pn-action { display: block; text-align: center; padding: 13px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .pn-outline { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); }
+    .pn-outline:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.26); }
+    .pn-solid { background: #4F7EFF; color: #fff; border: none; box-shadow: 0 4px 20px rgba(79,126,255,0.4); }
+    .pn-solid:hover { background: #3a6be8; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(79,126,255,0.5); }
   </style>
 </head>
 <body>
   <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- ─── NAV ─── -->
   <nav>
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><img src="assets/SynsLogo.png" alt="Visuanza" /><span>Visuanza</span></a>
+      <a href="index.html" class="nav-logo">
+        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <span>Visuanza</span>
+      </a>
       <ul class="nav-links">
         <li class="nav-has-dropdown">
           <a href="servicios.html" class="active">Servicios <span class="chevron">▾</span></a>
-          <div class="nav-dropdown"><div class="nav-dropdown-grid">
-            <a href="redes-sociales.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span><span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span></a>
-            <a href="diseno-web.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span><span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span></span></a>
-            <a href="fotografia-menu.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Imágenes de platos que abren el apetito</span></span></a>
-            <a href="marketing-digital.html" class="nav-dropdown-item"><span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg></span><span class="ndi-text"><span class="ndi-title">Marketing Digital</span><span class="ndi-desc">Del folleto al feed, estrategia completa</span></span></a>
-          </div></div>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-grid">
+              <a href="redes-sociales.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span>
+              </a>
+              <a href="diseno-web.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span></span>
+              </a>
+              <a href="fotografia-menu.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Imágenes de platos que abren el apetito</span></span>
+              </a>
+              <a href="marketing-digital.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Marketing Digital</span><span class="ndi-desc">Del folleto al feed, estrategia completa</span></span>
+              </a>
+            </div>
+          </div>
         </li>
         <li><a href="index.html#producto">Producto</a></li>
         <li><a href="index.html#estrategia">Estrategia</a></li>
@@ -657,9 +478,12 @@
         <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
         <a href="index.html#contacto" class="btn-primary">Pedir propuesta</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul class="mobile-menu-links">
       <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
@@ -674,7 +498,34 @@
     </div>
   </div>
 
-  <!-- ─── CAMERA DECONSTRUCTION SCROLL ANIMATION ─── -->
+  <!-- ─── HERO ─── -->
+  <section class="sp-hero">
+    <div class="sp-hero-inner">
+      <div class="sp-badge hero-el">✦ Servicio 03 · Fotografía de Menú</div>
+      <h1 class="hero-el">Platos que se ven tan bien que<br/><span class="accent">se piden solos.</span></h1>
+      <p class="hero-el">Fotografiar bien tu menú no es un lujo — es el paso más rápido que puedes dar para vender más online. Cada plato, irresistible.</p>
+      <div class="sp-hero-cta hero-el">
+        <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+      </div>
+      <div class="stats-row fade-in">
+        <div class="stat-item">
+          <div class="stat-num">+<span>30</span>%</div>
+          <div class="stat-lbl">Más pedidos online</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span>48</span>h</div>
+          <div class="stat-lbl">Entrega de fotos editadas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num"><span>∞</span></div>
+          <div class="stat-lbl">Derechos ilimitados</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CAMERA SCROLL ANIMATION (desktop only) ─── -->
   <section id="cam-section" aria-label="Animación cámara">
     <div id="cam-sticky">
       <div id="cam-wrap">
@@ -684,13 +535,14 @@
       <div id="cam-right">
         <div id="cam-panels">
 
-          <!-- Panel 0: Hero -->
+          <!-- Panel 0: Intro -->
           <div class="cam-panel">
-            <h1>Platos que se ven tan bien que <span class="accent">se piden solos.</span></h1>
-            <p style="margin:16px 0;color:var(--text-muted);line-height:1.7;">Fotografiar bien tu menú no es un lujo — es el paso más rápido que puedes dar para vender más online.</p>
+            <p class="section-label">Fotografía de Menú</p>
+            <h2>Cada foto es una razón para <span class="accent">pedir.</span></h2>
+            <p style="margin:16px 0;color:var(--text-muted);line-height:1.7;">Fotografiamos todos tus platos con luz natural, composición profesional y edición que transforma cada imagen en el argumento más poderoso para vender.</p>
             <div class="sp-hero-cta">
-              <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
-              <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+              <a href="index.html#contacto" class="btn-blue">Reservar sesión</a>
+              <a href="servicios.html" class="btn-ghost">Ver servicios</a>
             </div>
           </div>
 
@@ -698,14 +550,14 @@
           <div class="cam-panel">
             <p class="section-label">Lo que incluye cada sesión</p>
             <h2>Fotografía que <span class="accent">vende</span></h2>
-            <p style="margin:12px 0 20px;color:var(--text-muted);line-height:1.65;font-size:0.95rem;">Una foto mediocre de un plato excelente hace que el cliente lo pase por alto. Una foto profesional puede multiplicar sus pedidos por tres.</p>
+            <p style="margin:12px 0 20px;color:var(--text-muted);line-height:1.65;font-size:0.95rem;">Una foto mediocre de un plato excelente hace que el cliente lo pase por alto. Una foto profesional puede multiplicar sus pedidos.</p>
             <div class="feature-grid">
-              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div><h3>Sesión en tu local</h3><p>Llegamos con todo el equipo. Fotografiamos en tu entorno real para máxima autenticidad.</p></div>
-              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h3>Entrega en 48 horas</h3><p>Fotos editadas y listas para usar en menos de 48 horas. Sin esperas.</p></div>
-              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Formatos para todo</h3><p>Alta resolución para imprenta, web optimizado y recortes para redes sociales.</p></div>
-              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Optimizadas para delivery</h3><p>Tamaños perfectos para Glovo, Just Eat, Uber Eats y cualquier plataforma.</p></div>
-              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><h3>Retoque profesional</h3><p>Color, brillo, contraste y eliminación de imperfecciones en cada foto.</p></div>
-              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Derechos ilimitados</h3><p>Todas las fotos son tuyas para siempre. Web, redes, carta, menú digital — sin límites.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div><h3>Sesión en tu local</h3><p>Llegamos con todo el equipo. Fotografiamos en tu entorno real.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h3>Entrega en 48 horas</h3><p>Fotos editadas y listas para usar. Sin esperas.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Todos los formatos</h3><p>Web, imprenta, redes y plataformas de delivery.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Optimizadas para delivery</h3><p>Tamaños perfectos para Glovo, Just Eat y Uber Eats.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><h3>Retoque profesional</h3><p>Color, brillo, contraste y eliminación de imperfecciones.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Derechos ilimitados</h3><p>Todas las fotos son tuyas para siempre, sin restricciones.</p></div>
             </div>
           </div>
 
@@ -713,7 +565,7 @@
           <div class="cam-panel">
             <p class="section-label">Planes y precios</p>
             <h2>El plan que <span class="accent">se adapta a ti</span></h2>
-            <p style="margin:12px 0 22px;font-size:0.85rem;color:var(--text-muted);line-height:1.65;">Tres niveles, un solo objetivo: más pedidos, más visibilidad, más ventas para tu restaurante.</p>
+            <p style="margin:12px 0 22px;font-size:0.85rem;color:var(--text-muted);line-height:1.65;">Tres niveles, un solo objetivo: más pedidos, más visibilidad, más ventas.</p>
             <div class="panel-plans">
               <div class="panel-plan">
                 <div class="plan-name-sm">Basic</div>
@@ -765,89 +617,95 @@
     </div>
   </section>
 
-  <!-- Mobile-only: camera scroll zone + hero -->
+  <!-- ─── MOBILE: camera scroll zone ─── -->
   <div id="cam-content">
     <div id="cam-scroll-zone">
       <div id="cam-mobile">
         <canvas id="cam-canvas-mobile"></canvas>
       </div>
     </div>
-    <div class="mob-hero">
-      <h1>Platos que se ven tan bien que <em>se piden solos.</em></h1>
-      <p>Fotografiar bien tu menú no es un lujo — es el paso más rápido que puedes dar para vender más online.</p>
-      <div class="mob-cta-row">
-        <a href="index.html#contacto" class="btn-blue">Reservar sesión</a>
-        <a href="servicios.html" class="btn-ghost">Ver servicios</a>
-      </div>
-    </div>
   </div><!-- /#cam-content -->
 
-  <!-- ─── OPENING STATEMENT ─── -->
-  <section class="stmt-section">
-    <div class="stmt-eyebrow reveal">Fotografía de menú · Visuanza</div>
-    <h2 class="stmt-heading reveal">Platos que se ven tan bien que <em>se piden solos.</em></h2>
-    <div class="stmt-rule reveal"></div>
-    <div class="stmt-body reveal">
-      <p class="stmt-text">Los clientes deciden con los ojos antes de leer una sola palabra. Una foto mediocre de un plato excelente es ventas perdidas — el cliente lo pasa por alto. Una foto profesional del mismo plato es el argumento más rápido y más barato que existe para vender más.</p>
-      <div class="stmt-callout">
-        <div class="stmt-big-num">×3</div>
-        <div class="stmt-callout-label">más pedidos con foto<br/>profesional vs. sin foto</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── WHAT'S INCLUDED ─── -->
-  <section class="included-section">
-    <div class="section-eyebrow reveal">Todo lo que incluye tu sesión</div>
-    <h2 class="included-heading reveal">Una sesión completa.<br/><span class="accent">Sin complicaciones.</span></h2>
-    <div class="included-list">
-      <div class="inc-row reveal">
-        <span class="inc-idx">01</span>
-        <div class="inc-body">
+  <!-- ─── LO QUE HACEMOS ─── -->
+  <section class="sp-section">
+    <div class="container">
+      <p class="section-label">Lo que capturamos</p>
+      <h2>Fotografía que convierte visitas en <span class="accent">pedidos</span></h2>
+      <p>No solo sacamos fotos. Construimos una identidad visual que hace que cada plato de tu carta parezca irresistible — en la web, en el delivery y en las redes.</p>
+      <div class="feature-grid fade-in">
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div>
           <h3>Sesión en tu local</h3>
-          <p>Llegamos con todo el equipo. Fotografiamos tus platos en su entorno real, con la luz y el contexto que los hace irresistibles — no en un estudio genérico.</p>
+          <p>Venimos a tu restaurante con todo el equipo. Fotografiamos los platos en su entorno real, con la luz y el contexto que los hace irresistibles.</p>
         </div>
-      </div>
-      <div class="inc-row reveal reveal-d1">
-        <span class="inc-idx">02</span>
-        <div class="inc-body">
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
           <h3>Entrega en 48 horas</h3>
-          <p>Fotos editadas, retocadas y listas para usar en menos de dos días desde la sesión. Sin esperas, sin rondas infinitas de revisión.</p>
+          <p>Fotos editadas y listas para usar en menos de 48 horas desde la sesión. Sin esperas, sin rondas infinitas de revisión.</p>
         </div>
-      </div>
-      <div class="inc-row reveal reveal-d2">
-        <span class="inc-idx">03</span>
-        <div class="inc-body">
-          <h3>Todos los formatos</h3>
-          <p>Alta resolución para imprenta, versión web optimizada, recortes para redes sociales y tamaños exactos para Glovo, Just Eat y Uber Eats.</p>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+          <h3>Formatos para todo</h3>
+          <p>Alta resolución para imprenta, versión web optimizada y recortes exactos para redes sociales e Instagram.</p>
         </div>
-      </div>
-      <div class="inc-row reveal reveal-d3">
-        <span class="inc-idx">04</span>
-        <div class="inc-body">
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Optimizadas para delivery</h3>
+          <p>Tamaños perfectos para Glovo, Just Eat, Uber Eats y cualquier plataforma de pedidos online.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
           <h3>Retoque profesional</h3>
-          <p>Corrección de color, brillo, contraste y eliminación de imperfecciones. Cada foto sale perfecta — no solo buena.</p>
+          <p>Edición de color, brillo, contraste y eliminación de imperfecciones. Cada foto sale perfecta — no solo buena.</p>
         </div>
-      </div>
-      <div class="inc-row reveal reveal-d4">
-        <span class="inc-idx">05</span>
-        <div class="inc-body">
-          <h3>Derechos de uso ilimitados</h3>
-          <p>Todas las fotos son tuyas para siempre. Web, redes, carta impresa, menú digital, delivery — sin restricciones ni facturas adicionales.</p>
+        <div class="feature-card">
+          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Derechos ilimitados</h3>
+          <p>Todas las fotos son tuyas para siempre. Web, redes, carta, menú digital — sin restricciones ni facturas adicionales.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── PRICING ─── -->
+  <!-- ─── TODO INCLUIDO ─── -->
+  <section class="sp-section">
+    <div class="container">
+      <div class="includes-split">
+        <div>
+          <p class="section-label">Todo incluido</p>
+          <h2>Lo que recibes en tu <span class="accent">sesión</span></h2>
+          <p style="margin-bottom: 32px;">Una sesión completa, pensada para que cada foto maximice el impacto visual de tu carta.</p>
+          <ul class="includes-list">
+            <li>Sesión fotográfica completa en tu local</li>
+            <li>Fotografía de todos los platos de la carta</li>
+            <li>Fotografías del local, ambiente e interior</li>
+            <li>Edición y retoque profesional de todas las fotos</li>
+            <li>Versiones para web, redes y plataformas de delivery</li>
+            <li>Fotos en formato vertical y horizontal</li>
+            <li>Entrega de archivos en alta resolución en 48 horas</li>
+            <li>Derechos de uso ilimitados y permanentes</li>
+          </ul>
+        </div>
+        <div class="includes-aside fade-in">
+          <h3>¿Por qué Visuanza?</h3>
+          <p>Trabajamos exclusivamente con restaurantes. Sabemos cómo iluminar, encuadrar y editar cada plato para que el cliente sienta que ya lo ha probado antes de pedirlo.</p>
+          <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">Restaurantes que actualizan su fotografía de menú consiguen de media un 30% más de pedidos en sus primeras semanas.</p>
+          <br/>
+          <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRECIOS ─── -->
   <section class="pn-section">
-    <div class="pn-head reveal">
-      <div class="section-eyebrow" style="color:rgba(79,126,255,0.82);justify-content:center;margin-bottom:16px;">Planes y precios</div>
+    <div class="pn-head fade-in">
+      <p class="pn-eyebrow">Planes y precios</p>
       <h2>El plan que <span class="accent">se adapta a ti</span></h2>
-      <p>Tres niveles, un objetivo: más pedidos, más visibilidad, más ventas.</p>
+      <p>Tres niveles, un objetivo: más pedidos, más visibilidad, más ventas para tu restaurante.</p>
     </div>
     <div class="pn-grid">
-      <div class="pn-card reveal">
+      <div class="pn-card fade-in">
         <div class="pn-tier">Basic</div>
         <div class="pn-price">€700<span>/mes</span></div>
         <p class="pn-subtitle">Para restaurantes que quieren empezar a destacar en digital</p>
@@ -860,7 +718,7 @@
         </ul>
         <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
       </div>
-      <div class="pn-card pn-featured reveal reveal-d1">
+      <div class="pn-card pn-featured fade-in">
         <span class="pn-pop">Más popular</span>
         <div class="pn-tier">Pro</div>
         <div class="pn-price">€1.100<span>/mes</span></div>
@@ -874,7 +732,7 @@
         </ul>
         <a href="index.html#contacto" class="pn-action pn-solid">Empezar</a>
       </div>
-      <div class="pn-card reveal reveal-d2">
+      <div class="pn-card fade-in">
         <div class="pn-tier">Turbo</div>
         <div class="pn-price">€2.200<span>/mes</span></div>
         <p class="pn-subtitle">Para restaurantes que quieren crecer rápido con nuevos clientes</p>
@@ -890,79 +748,90 @@
     </div>
   </section>
 
-  <!-- ─── FINAL CTA ─── -->
-  <section class="final-cta">
-    <div class="final-cta-inner reveal">
+  <!-- ─── CTA ─── -->
+  <section class="sp-cta">
+    <div class="sp-cta-inner">
+      <p class="section-label" style="justify-content: center;">Empieza hoy</p>
       <h2>¿Listo para que tus platos <span class="accent">se pidan solos?</span></h2>
-      <p>Sin compromiso. Sin letra pequeña. Solo fotos que venden.</p>
-      <a href="index.html#contacto" class="btn-reserve">Reservar sesión fotográfica</a>
+      <p>Reserva tu sesión fotográfica. Sin compromiso, sin letra pequeña.</p>
+      <div class="sp-cta-btns">
+        <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+      </div>
     </div>
   </section>
 
+  <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Visuanza" />
-          <span>Visuanza</span>
-        </a>
-        <p class="footer-desc">Con Visuanza, tu empresa local puede mejorar su clasificación en los principales motores de búsqueda, lo que te ayuda a atraer a más clientes locales.</p>
-      </div>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/SynsLogo.png" alt="Visuanza" />
+            <span>Visuanza</span>
+          </a>
+          <p class="footer-desc">Con Visuanza, tu empresa local puede mejorar su clasificación en los principales motores de búsqueda, lo que te ayuda a atraer a más clientes locales.</p>
+        </div>
 
-      <div class="footer-col">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="redes-sociales.html">Redes Sociales</a></li>
-          <li><a href="diseno-web.html">Diseño Web</a></li>
-          <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="marketing-digital.html">Marketing Digital</a></li>
-        </ul>
-      </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="redes-sociales.html">Redes Sociales</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
+            <li><a href="marketing-digital.html">Marketing Digital</a></li>
+          </ul>
+        </div>
 
-      <div class="footer-col">
-        <h4>Navegar</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
-        </ul>
-      </div>
+        <div class="footer-col">
+          <h4>Navegar</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </div>
 
-      <div class="footer-col">
-        <h4>Sociales</h4>
-        <ul>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">LinkedIn</a></li>
-        </ul>
-      </div>
+        <div class="footer-col">
+          <h4>Sociales</h4>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ul>
+        </div>
 
-      <div class="footer-newsletter">
-        <h4>Descubra sus oportunidades locales</h4>
-        <p>Comparta su nombre y te contactaremos con un plan personalizado para mejorar tu alcance local.</p>
-        <div class="footer-form">
-          <input type="text" class="footer-input" placeholder="Nombre" />
-          <input type="email" class="footer-input" placeholder="Email address" />
-          <button class="btn-submit">Enviar</button>
+        <div class="footer-newsletter">
+          <h4>Descubra sus oportunidades locales</h4>
+          <p>Comparta su nombre y te contactaremos con un plan personalizado para mejorar tu alcance local.</p>
+          <div class="footer-form">
+            <input type="text" class="footer-input" placeholder="Nombre" />
+            <input type="email" class="footer-input" placeholder="Email address" />
+            <button class="btn-submit">Enviar</button>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
-      <div class="footer-legal">
-        <a href="#">Condiciones de servicio</a>
-        <a href="#">Política de privacidad</a>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
+        <div class="footer-legal">
+          <a href="#">Condiciones de servicio</a>
+          <a href="#">Política de privacidad</a>
+        </div>
       </div>
-    </div>
     </div><!-- /footer-inner -->
   </footer>
 
   <script>
-    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }); }, { threshold: 0.1 });
+    // Scroll fade-in
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
     setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible')), 300);
+
     // Hero entrance animation
     (function() {
       var heroInner = document.querySelector('.sp-hero-inner');
@@ -979,236 +848,231 @@
       }, { threshold: 0.15 });
       heroObs.observe(heroInner);
     })();
+
+    // Hamburger
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
     function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
     function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
     hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
-    // Scroll reveal for post-camera sections
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); revealObs.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   </script>
 
+  <script>
+  (function () {
+    'use strict';
 
-<script>
-(function () {
-  'use strict';
+    var TOTAL  = 121;
+    var FRAMES = new Array(TOTAL);
+    var loaded = 0;
+    var isMob  = window.innerWidth <= 768;
 
-  var TOTAL  = 121;
-  var FRAMES = new Array(TOTAL);
-  var loaded = 0;
-  var isMob  = window.innerWidth <= 768;
-
-  // Shared contain-fit draw (white letterbox fill)
-  function drawTo(ctx, cW, cH, img) {
-    var iw = img.naturalWidth, ih = img.naturalHeight;
-    var sc = Math.min(cW / iw, cH / ih);
-    var dw = iw * sc, dh = ih * sc;
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, cW, cH);
-    ctx.drawImage(img, (cW - dw) / 2, (cH - dh) / 2, dw, dh);
-  }
-
-  // ── MOBILE: scroll-driven animation ──────────────────────────────────────
-  if (isMob) {
-
-    var mSection = document.getElementById('cam-scroll-zone');
-    var mFrame   = document.getElementById('cam-mobile');
-    var mCanvas  = document.getElementById('cam-canvas-mobile');
-    if (!mSection || !mFrame || !mCanvas) return;
-    var mCtx = mCanvas.getContext('2d');
-
-    var mScrollMax = 0;
-    var mCurIndex = 0, mRafPending = false, mInitDone = false;
-
-    function mInitLayout() {
-      var dpr    = Math.min(window.devicePixelRatio || 1, 1.5);
-      var mW     = mCanvas.offsetWidth;
-      var mH     = mCanvas.offsetHeight;
-      mScrollMax = mSection.offsetHeight - mFrame.offsetHeight;
-      if (!mW || !mH || mScrollMax <= 0) return false;
-      mCanvas.width  = Math.round(mW * dpr);
-      mCanvas.height = Math.round(mH * dpr);
-      return true;
+    // Shared contain-fit draw (white letterbox fill)
+    function drawTo(ctx, cW, cH, img) {
+      var iw = img.naturalWidth, ih = img.naturalHeight;
+      var sc = Math.min(cW / iw, cH / ih);
+      var dw = iw * sc, dh = ih * sc;
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, cW, cH);
+      ctx.drawImage(img, (cW - dw) / 2, (cH - dh) / 2, dw, dh);
     }
 
-    function mDrawFrame(i) {
-      i = Math.max(0, Math.min(TOTAL - 1, i));
-      if (FRAMES[i]) { drawTo(mCtx, mCanvas.width, mCanvas.height, FRAMES[i]); return; }
-      for (var j = i - 1; j >= 0; j--) {
-        if (FRAMES[j]) { drawTo(mCtx, mCanvas.width, mCanvas.height, FRAMES[j]); return; }
+    // ── MOBILE: scroll-driven animation ──────────────────────────────────────
+    if (isMob) {
+
+      var mSection = document.getElementById('cam-scroll-zone');
+      var mFrame   = document.getElementById('cam-mobile');
+      var mCanvas  = document.getElementById('cam-canvas-mobile');
+      if (!mSection || !mFrame || !mCanvas) return;
+      var mCtx = mCanvas.getContext('2d');
+
+      var mScrollMax = 0;
+      var mCurIndex = 0, mRafPending = false, mInitDone = false;
+
+      function mInitLayout() {
+        var dpr    = Math.min(window.devicePixelRatio || 1, 1.5);
+        var mW     = mCanvas.offsetWidth;
+        var mH     = mCanvas.offsetHeight;
+        mScrollMax = mSection.offsetHeight - mFrame.offsetHeight;
+        if (!mW || !mH || mScrollMax <= 0) return false;
+        mCanvas.width  = Math.round(mW * dpr);
+        mCanvas.height = Math.round(mH * dpr);
+        return true;
       }
-    }
 
-    function mGetProgress() {
-      if (mScrollMax <= 0) return 0;
-      return Math.max(0, Math.min(1, -mSection.getBoundingClientRect().top / mScrollMax));
-    }
+      function mDrawFrame(i) {
+        i = Math.max(0, Math.min(TOTAL - 1, i));
+        if (FRAMES[i]) { drawTo(mCtx, mCanvas.width, mCanvas.height, FRAMES[i]); return; }
+        for (var j = i - 1; j >= 0; j--) {
+          if (FRAMES[j]) { drawTo(mCtx, mCanvas.width, mCanvas.height, FRAMES[j]); return; }
+        }
+      }
 
-    function mUpdate() {
-      mRafPending = false;
-      if (!mInitDone) return;
-      var p = mGetProgress();
-      var i = Math.round(p * (TOTAL - 1));
-      if (i !== mCurIndex) { mCurIndex = i; mDrawFrame(i); }
-    }
+      function mGetProgress() {
+        if (mScrollMax <= 0) return 0;
+        return Math.max(0, Math.min(1, -mSection.getBoundingClientRect().top / mScrollMax));
+      }
 
-    var mInView = false;
-    new IntersectionObserver(function (entries) {
-      mInView = entries[0].isIntersecting;
-      if (mInView && !mRafPending) { mRafPending = true; requestAnimationFrame(mUpdate); }
-    }, { threshold: 0 }).observe(mSection);
+      function mUpdate() {
+        mRafPending = false;
+        if (!mInitDone) return;
+        var p = mGetProgress();
+        var i = Math.round(p * (TOTAL - 1));
+        if (i !== mCurIndex) { mCurIndex = i; mDrawFrame(i); }
+      }
 
-    window.addEventListener('scroll', function () {
-      if (!mInView || mRafPending) return;
-      mRafPending = true;
-      requestAnimationFrame(mUpdate);
-    }, { passive: true });
+      var mInView = false;
+      new IntersectionObserver(function (entries) {
+        mInView = entries[0].isIntersecting;
+        if (mInView && !mRafPending) { mRafPending = true; requestAnimationFrame(mUpdate); }
+      }, { threshold: 0 }).observe(mSection);
 
-    var rTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(rTimer);
-      rTimer = setTimeout(function () {
-        if (mInitLayout()) mDrawFrame(mCurIndex);
-      }, 150);
-    }, { passive: true });
+      window.addEventListener('scroll', function () {
+        if (!mInView || mRafPending) return;
+        mRafPending = true;
+        requestAnimationFrame(mUpdate);
+      }, { passive: true });
 
-    for (var i = 0; i < TOTAL; i++) {
-      (function (idx) {
-        var img = new Image();
-        img.onload = function () {
-          FRAMES[idx] = img;
-          loaded++;
-          if (idx === 0) {
-            if (mInitLayout()) {
-              mDrawFrame(0);
-              mInitDone = true;
-            } else {
-              requestAnimationFrame(function () {
-                mInitLayout();
+      var rTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(rTimer);
+        rTimer = setTimeout(function () {
+          if (mInitLayout()) mDrawFrame(mCurIndex);
+        }, 150);
+      }, { passive: true });
+
+      for (var i = 0; i < TOTAL; i++) {
+        (function (idx) {
+          var img = new Image();
+          img.onload = function () {
+            FRAMES[idx] = img;
+            loaded++;
+            if (idx === 0) {
+              if (mInitLayout()) {
                 mDrawFrame(0);
                 mInitDone = true;
-              });
+              } else {
+                requestAnimationFrame(function () {
+                  mInitLayout();
+                  mDrawFrame(0);
+                  mInitDone = true;
+                });
+              }
             }
-          }
-          if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
-        };
-        img.onerror = function () { loaded++; };
-        img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
-      })(i);
-    }
-
-  // ── DESKTOP: scroll-driven animation (unchanged) ─────────────────────────
-  } else {
-
-    var panels = document.querySelectorAll('.cam-panel');
-    var N = panels.length;
-
-    function updatePanels(p) {
-      if (!N) return;
-      var panelFloat = p * (N - 1);
-      for (var pi = 0; pi < N; pi++) {
-        var offset = (pi - panelFloat) * 100;
-        var absOff = Math.abs(offset);
-        var opacity = Math.max(0, 1 - Math.max(0, absOff - 30) / 70);
-        panels[pi].style.transform = 'translateY(' + offset + '%)';
-        panels[pi].style.opacity = opacity;
+            if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
+          };
+          img.onerror = function () { loaded++; };
+          img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
+        })(i);
       }
-    }
 
-    var section = document.getElementById('cam-section');
-    var sticky  = document.getElementById('cam-sticky');
-    var canvas  = document.getElementById('cam-canvas');
-    if (!section || !sticky || !canvas) return;
-    var ctx = canvas.getContext('2d');
+    // ── DESKTOP: scroll-driven animation ─────────────────────────────────────
+    } else {
 
-    var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
-    var curIndex = 0, rafPending = false, initDone = false;
+      var panels = document.querySelectorAll('.cam-panel');
+      var N = panels.length;
 
-    function initLayout() {
-      DPR           = Math.min(window.devicePixelRatio || 1, 2);
-      CW            = canvas.offsetWidth;
-      CH            = canvas.offsetHeight;
-      sectionOffset = window.scrollY + section.getBoundingClientRect().top;
-      scrollMax     = section.offsetHeight - sticky.offsetHeight;
-      if (!CW || !CH) return false;
-      canvas.width  = Math.round(CW * DPR);
-      canvas.height = Math.round(CH * DPR);
-      return true;
-    }
-
-    function drawFrame(i) {
-      i = Math.max(0, Math.min(TOTAL - 1, i));
-      if (FRAMES[i]) { drawTo(ctx, canvas.width, canvas.height, FRAMES[i]); return; }
-      for (var j = i - 1; j >= 0; j--) {
-        if (FRAMES[j]) { drawTo(ctx, canvas.width, canvas.height, FRAMES[j]); return; }
+      function updatePanels(p) {
+        if (!N) return;
+        var panelFloat = p * (N - 1);
+        for (var pi = 0; pi < N; pi++) {
+          var offset = (pi - panelFloat) * 100;
+          var absOff = Math.abs(offset);
+          var opacity = Math.max(0, 1 - Math.max(0, absOff - 30) / 70);
+          panels[pi].style.transform = 'translateY(' + offset + '%)';
+          panels[pi].style.opacity = opacity;
+        }
       }
-    }
 
-    function getProgress() {
-      if (scrollMax <= 0) return 0;
-      return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
-    }
+      var section = document.getElementById('cam-section');
+      var sticky  = document.getElementById('cam-sticky');
+      var canvas  = document.getElementById('cam-canvas');
+      if (!section || !sticky || !canvas) return;
+      var ctx = canvas.getContext('2d');
 
-    function update() {
-      rafPending = false;
-      if (!initDone) return;
-      var p = getProgress();
-      var i = Math.round(p * (TOTAL - 1));
-      if (i !== curIndex) { curIndex = i; drawFrame(i); }
-      // Reveal "Cada detalle importa" when animation is nearly complete
-      if (p >= 0.95) {
-        var revealEl = document.getElementById('cada-detalle');
-        if (revealEl) revealEl.classList.add('revealed');
+      var CW = 0, CH = 0, DPR = 1, scrollMax = 0, sectionOffset = 0;
+      var curIndex = 0, rafPending = false, initDone = false;
+
+      function initLayout() {
+        DPR           = Math.min(window.devicePixelRatio || 1, 2);
+        CW            = canvas.offsetWidth;
+        CH            = canvas.offsetHeight;
+        sectionOffset = window.scrollY + section.getBoundingClientRect().top;
+        scrollMax     = section.offsetHeight - sticky.offsetHeight;
+        if (!CW || !CH) return false;
+        canvas.width  = Math.round(CW * DPR);
+        canvas.height = Math.round(CH * DPR);
+        return true;
       }
-      updatePanels(p);
-    }
 
-    var inView = false;
-    new IntersectionObserver(function (entries) {
-      inView = entries[0].isIntersecting;
-      if (inView && !rafPending) { rafPending = true; requestAnimationFrame(update); }
-    }, { threshold: 0 }).observe(section);
+      function drawFrame(i) {
+        i = Math.max(0, Math.min(TOTAL - 1, i));
+        if (FRAMES[i]) { drawTo(ctx, canvas.width, canvas.height, FRAMES[i]); return; }
+        for (var j = i - 1; j >= 0; j--) {
+          if (FRAMES[j]) { drawTo(ctx, canvas.width, canvas.height, FRAMES[j]); return; }
+        }
+      }
 
-    window.addEventListener('scroll', function () {
-      if (!inView || rafPending) return;
-      rafPending = true;
-      requestAnimationFrame(update);
-    }, { passive: true });
+      function getProgress() {
+        if (scrollMax <= 0) return 0;
+        return Math.max(0, Math.min(1, (window.scrollY - sectionOffset) / scrollMax));
+      }
 
-    var rTimer;
-    window.addEventListener('resize', function () {
-      clearTimeout(rTimer);
-      rTimer = setTimeout(function () { initLayout(); drawFrame(curIndex); updatePanels(getProgress()); }, 150);
-    }, { passive: true });
+      function update() {
+        rafPending = false;
+        if (!initDone) return;
+        var p = getProgress();
+        var i = Math.round(p * (TOTAL - 1));
+        if (i !== curIndex) { curIndex = i; drawFrame(i); }
+        if (p >= 0.95) {
+          var revealEl = document.getElementById('cada-detalle');
+          if (revealEl) revealEl.classList.add('revealed');
+        }
+        updatePanels(p);
+      }
 
-    for (var i = 0; i < TOTAL; i++) {
-      (function (idx) {
-        var img = new Image();
-        img.onload = function () {
-          FRAMES[idx] = img;
-          loaded++;
-          if (idx === 0) {
-            if (!initLayout()) {
-              requestAnimationFrame(function () { initLayout(); drawFrame(0); updatePanels(getProgress()); });
-            } else {
-              drawFrame(0);
+      var inView = false;
+      new IntersectionObserver(function (entries) {
+        inView = entries[0].isIntersecting;
+        if (inView && !rafPending) { rafPending = true; requestAnimationFrame(update); }
+      }, { threshold: 0 }).observe(section);
+
+      window.addEventListener('scroll', function () {
+        if (!inView || rafPending) return;
+        rafPending = true;
+        requestAnimationFrame(update);
+      }, { passive: true });
+
+      var rTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(rTimer);
+        rTimer = setTimeout(function () { initLayout(); drawFrame(curIndex); updatePanels(getProgress()); }, 150);
+      }, { passive: true });
+
+      for (var i = 0; i < TOTAL; i++) {
+        (function (idx) {
+          var img = new Image();
+          img.onload = function () {
+            FRAMES[idx] = img;
+            loaded++;
+            if (idx === 0) {
+              if (!initLayout()) {
+                requestAnimationFrame(function () { initLayout(); drawFrame(0); updatePanels(getProgress()); });
+              } else {
+                drawFrame(0);
+              }
+              initDone = true;
+              updatePanels(getProgress());
             }
-            initDone = true;
-            updatePanels(getProgress());
-          }
-          if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
-        };
-        img.onerror = function () { loaded++; };
-        img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
-      })(i);
+            if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
+          };
+          img.onerror = function () { loaded++; };
+          img.src = 'assets/frames/frame_' + String(idx).padStart(4, '0') + '.webp';
+        })(i);
+      }
     }
-  }
 
-})();
-</script>
+  })();
+  </script>
 </body>
 </html>
