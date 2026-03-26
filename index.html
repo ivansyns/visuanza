@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <title>Visuanza – Visibilidad Local para Restaurantes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1707,7 +1708,7 @@
     .how-it-works {
       padding: 200px 0 110px;
       padding-bottom: 80px;
-      background: transparent;
+      background: var(--black);
     }
 
     .section-header {
@@ -1792,7 +1793,7 @@
     /* ─── SERVICES ─── */
     .services {
       padding: 110px 0;
-      background: transparent;
+      background: var(--black);
     }
 
     .services-grid {
@@ -1852,7 +1853,7 @@
 
     /* ─── STATS SECTION ─── */
     .stats-section {
-      background: rgba(79,126,255,0.05);
+      background: #080c1a;
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.06);
       padding: 110px 0;
@@ -1890,7 +1891,7 @@
     /* ─── TESTIMONIALS ─── */
     .testimonials {
       padding: 110px 0;
-      background: transparent;
+      background: var(--black);
     }
 
     .testimonials-grid {
@@ -1991,6 +1992,26 @@
       background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%);
       border-radius: 50%;
       pointer-events: none;
+    }
+
+    /* ─── STACKED CARDS SCROLL ─── */
+    .stack-container { position: relative; }
+    .stack-container > section {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      transform: translateY(40px);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .stack-container > section.in-view { transform: translateY(0); }
+    .platforms     { z-index: 1; }
+    .how-it-works  { z-index: 2; }
+    .services      { z-index: 3; }
+    .stats-section { z-index: 4; }
+    .testimonials  { z-index: 5; }
+    .cta-section   { z-index: 6; }
+    @media (max-width: 768px) {
+      .stack-container > section { min-height: 100svh; }
     }
 
     .cta-section h2 {
@@ -2843,6 +2864,8 @@
     </div><!-- /social-proof -->
   </section><!-- /hero + proof -->
 
+  <div class="stack-container">
+
   <!-- ─── PLATFORMS SHOWCASE ─── -->
   <section class="platforms" id="estrategia">
 
@@ -3241,6 +3264,8 @@
     </div>
   </section>
 
+  </div><!-- /.stack-container -->
+
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
@@ -3321,6 +3346,18 @@
     setTimeout(() => {
       document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
     }, 300);
+
+    // ─── STACKED CARDS: slide-up on entry ───
+    const stackObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.stack-container > section').forEach(s => {
+      stackObserver.observe(s);
+    });
 
     // ─── MOBILE HAMBURGER MENU ───
     const hamburger = document.getElementById('hamburger');
