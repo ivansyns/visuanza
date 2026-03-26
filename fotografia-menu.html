@@ -397,185 +397,240 @@
   .btn-blue-sm { background: #4F7EFF; color: #fff; border: none; }
   .btn-blue-sm:hover { background: #3a6be8; }
 
-  /* ─── PRICING SECTION ─── */
-  .pricing-section {
-    padding: clamp(72px,8vw,120px) 0;
-    background: #f8f9ff;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-  .pricing-header { text-align: center; margin-bottom: 48px; }
-  .pricing-header .section-label { justify-content: center; }
-  .pricing-header h2 { font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight: 900; letter-spacing: -0.03em; line-height: 1.1; color: #111111; margin-top: 8px; }
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 clamp(16px,4vw,48px);
-  }
-  @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 440px; } }
-  .plan-card {
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.09);
-    border-radius: 20px;
-    padding: 36px 28px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    transition: box-shadow 0.2s, transform 0.2s;
-  }
-  .plan-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.10); transform: translateY(-3px); }
-  .plan-card.plan-pro { border-color: #4F7EFF; box-shadow: 0 4px 24px rgba(79,126,255,0.15); }
-  .plan-badge {
-    position: absolute;
-    top: -14px; left: 50%;
-    transform: translateX(-50%);
-    background: #4F7EFF;
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 4px 14px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .plan-name { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #4F7EFF; margin-bottom: 10px; }
-  .plan-price { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.04em; color: #111111; line-height: 1; margin-bottom: 6px; font-family: 'Geist','Inter',sans-serif; }
-  .plan-price span { font-size: 0.95rem; font-weight: 500; color: #666666; letter-spacing: 0; }
-  .plan-desc { font-size: 0.83rem; color: #666666; line-height: 1.55; margin-bottom: 24px; }
-  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 32px; flex: 1; }
-  .plan-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.85rem; color: #333333; line-height: 1.4; }
-  .plan-features li::before { content: '✓'; flex-shrink: 0; color: #4F7EFF; font-weight: 800; font-size: 0.8rem; margin-top: 1px; }
-  .btn-plan { display: block; text-align: center; background: #111111; color: #ffffff; border: none; padding: 13px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: background 0.2s, transform 0.1s; }
-  .btn-plan:hover { background: #333333; transform: translateY(-1px); }
-  .plan-card.plan-pro .btn-plan { background: #4F7EFF; }
-  .plan-card.plan-pro .btn-plan:hover { background: #3a6be8; }
+  /* ─── POST-CAMERA CONTENT STYLES ─── */
 
-  /* ─── PROCESS SECTION ─── */
-  .process-section {
-    padding: clamp(72px,8vw,120px) 0;
-    background: #ffffff;
-    border-top: 1px solid rgba(0,0,0,0.06);
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
   }
-  .process-section h2 {
-    font-size: clamp(1.8rem,3.5vw,2.8rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    color: #111111;
-    margin-top: 8px;
-    margin-bottom: 56px;
+  .reveal.in-view { opacity: 1; transform: none; }
+  .reveal-d1 { transition-delay: 0.08s; }
+  .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; }
+  .reveal-d4 { transition-delay: 0.32s; }
+
+  /* ─── OPENING STATEMENT (dark) ─── */
+  .stmt-section {
+    background: #0a0a0e;
+    padding: clamp(80px,10vw,140px) clamp(28px,7vw,110px);
+    position: relative; overflow: hidden;
   }
-  .process-section h2 .accent { color: var(--blue); }
-  .process-grid {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 32px;
+  .stmt-section::before {
+    content: ''; position: absolute;
+    top: -80px; left: -5%; width: 65%; height: 600px;
+    background: radial-gradient(ellipse at top left, rgba(79,126,255,0.11) 0%, transparent 60%);
+    pointer-events: none;
   }
-  @media (max-width: 900px) { .process-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 540px) { .process-grid { grid-template-columns: 1fr; } }
-  .process-step {
-    position: relative;
-    padding: 28px 24px;
-    background: #f9f9fb;
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 16px;
+  .stmt-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(79,126,255,0.8);
+    margin-bottom: 36px;
   }
-  .step-num {
+  .stmt-eyebrow::before {
+    content: ''; width: 24px; height: 2px;
+    background: #4F7EFF; border-radius: 2px; flex-shrink: 0;
+  }
+  .stmt-heading {
     font-family: 'Geist','Inter',sans-serif;
-    font-size: 2.8rem;
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    color: rgba(79,126,255,0.15);
-    line-height: 1;
-    margin-bottom: 14px;
+    font-size: clamp(2.8rem,5.5vw,5.2rem);
+    font-weight: 900; letter-spacing: -0.04em;
+    line-height: 1.0; color: #ffffff;
+    max-width: 960px; margin-bottom: 48px;
   }
-  .process-step h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #111111;
-    margin-bottom: 8px;
+  .stmt-heading em { font-style: normal; color: #4F7EFF; }
+  .stmt-rule { width: 100%; height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 48px; }
+  .stmt-body { display: flex; align-items: flex-start; gap: clamp(40px,6vw,100px); flex-wrap: wrap; }
+  .stmt-text {
+    flex: 1; min-width: 260px;
+    font-size: clamp(0.95rem,1.4vw,1.12rem);
+    color: rgba(255,255,255,0.58); line-height: 1.82;
+    max-width: 520px;
   }
-  .process-step p {
-    font-size: 0.875rem;
-    color: #555555;
-    line-height: 1.65;
+  .stmt-callout {
+    flex-shrink: 0; padding: 28px 44px;
+    background: rgba(79,126,255,0.09);
+    border: 1px solid rgba(79,126,255,0.22);
+    border-radius: 20px; text-align: center;
+  }
+  .stmt-big-num {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: clamp(3rem,4.5vw,4.2rem);
+    font-weight: 900; letter-spacing: -0.04em;
+    color: #4F7EFF; line-height: 1;
+  }
+  .stmt-callout-label {
+    font-size: 0.76rem; color: rgba(255,255,255,0.42);
+    line-height: 1.6; margin-top: 8px;
+  }
+  @media (max-width: 640px) {
+    .stmt-body { flex-direction: column; }
+    .stmt-callout { width: 100%; }
   }
 
-  /* ─── TESTIMONIALS SECTION ─── */
-  .testimonials-section {
-    padding: clamp(72px,8vw,120px) 0;
-    background: #f8f9ff;
-    border-top: 1px solid rgba(0,0,0,0.06);
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
-  .testimonials-section h2 {
-    font-size: clamp(1.8rem,3.5vw,2.8rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    color: #111111;
-    margin-top: 8px;
-    margin-bottom: 48px;
-  }
-  .testimonials-section h2 .accent { color: var(--blue); }
-  .testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 24px;
-  }
-  @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; } }
-  .testimonial-card {
+  /* ─── MOBILE HERO (inside #cam-content) ─── */
+  .mob-hero {
+    padding: clamp(36px,6vw,72px) clamp(20px,5vw,40px) 48px;
     background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 20px;
-    padding: 32px 28px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
   }
-  .stars { color: #f59e0b; font-size: 1rem; letter-spacing: 2px; }
-  .testimonial-card > p {
-    font-size: 0.92rem;
-    color: #333333;
-    line-height: 1.7;
-    flex: 1;
+  .mob-hero h1 {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: clamp(2rem,7vw,3rem);
+    font-weight: 900; letter-spacing: -0.04em;
+    line-height: 1.05; color: #111111; margin-bottom: 16px;
   }
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  .mob-hero h1 em { font-style: normal; color: #4F7EFF; }
+  .mob-hero p {
+    font-size: 0.95rem; color: #666666;
+    line-height: 1.75; margin-bottom: 28px; max-width: 480px;
+  }
+  .mob-cta-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ─── WHAT'S INCLUDED (light) ─── */
+  .included-section {
+    background: #ffffff;
+    padding: clamp(72px,8vw,120px) clamp(28px,7vw,110px);
     border-top: 1px solid rgba(0,0,0,0.06);
-    padding-top: 16px;
   }
-  .author-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(79,126,255,0.12);
-    color: #4F7EFF;
-    font-weight: 800;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  .section-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #4F7EFF; margin-bottom: 16px;
   }
-  .testimonial-author strong {
-    display: block;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: #111111;
+  .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: #4F7EFF; border-radius: 2px; }
+  .included-heading {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: clamp(2rem,4vw,3.2rem);
+    font-weight: 900; letter-spacing: -0.04em;
+    line-height: 1.05; color: #111111; margin-bottom: 56px;
   }
-  .testimonial-author span {
-    display: block;
-    font-size: 0.78rem;
-    color: #777777;
-    margin-top: 2px;
+  .included-heading .accent { color: #4F7EFF; }
+  .included-list { display: flex; flex-direction: column; }
+  .inc-row {
+    display: grid; grid-template-columns: 76px 1fr;
+    gap: 32px; padding: 28px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    align-items: start;
   }
+  .inc-row:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+  .inc-idx {
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: rgba(79,126,255,0.45); padding-top: 4px;
+    font-family: 'Geist','Inter',sans-serif;
+  }
+  .inc-body h3 {
+    font-size: clamp(1.05rem,1.8vw,1.4rem); font-weight: 800;
+    letter-spacing: -0.02em; color: #111111;
+    margin-bottom: 7px; line-height: 1.2;
+  }
+  .inc-body p { font-size: 0.88rem; color: #666666; line-height: 1.72; max-width: 580px; }
+  @media (max-width: 560px) { .inc-row { grid-template-columns: 44px 1fr; gap: 14px; } }
+
+  /* ─── PRICING (dark) ─── */
+  .pn-section {
+    background: #09090b;
+    padding: clamp(72px,8vw,120px) clamp(28px,6vw,80px);
+    position: relative; overflow: hidden;
+  }
+  .pn-section::before {
+    content: ''; position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 500px;
+    background: radial-gradient(ellipse at top, rgba(79,126,255,0.09) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .pn-head { text-align: center; margin-bottom: 60px; position: relative; z-index: 1; }
+  .pn-head h2 {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: clamp(2rem,4vw,3.2rem);
+    font-weight: 900; letter-spacing: -0.04em;
+    line-height: 1.05; color: #ffffff; margin-bottom: 14px;
+  }
+  .pn-head h2 .accent { color: #4F7EFF; }
+  .pn-head p { font-size: 0.95rem; color: rgba(255,255,255,0.42); max-width: 440px; margin: 0 auto; line-height: 1.65; }
+  .pn-grid {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 18px; max-width: 960px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 860px) { .pn-grid { grid-template-columns: 1fr; max-width: 400px; } }
+  .pn-card {
+    padding: 36px 28px; border-radius: 20px;
+    display: flex; flex-direction: column;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative; transition: border-color 0.2s;
+  }
+  .pn-card:hover { border-color: rgba(255,255,255,0.14); }
+  .pn-card.pn-featured {
+    background: #ffffff; border-color: transparent;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+  }
+  .pn-pop {
+    position: absolute; top: -11px; left: 50%;
+    transform: translateX(-50%);
+    background: #4F7EFF; color: #fff;
+    font-size: 0.68rem; font-weight: 700;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 4px 14px; border-radius: 999px; white-space: nowrap;
+  }
+  .pn-tier { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #4F7EFF; margin-bottom: 10px; }
+  .pn-price {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: 2.6rem; font-weight: 900;
+    letter-spacing: -0.04em; color: #ffffff; line-height: 1; margin-bottom: 8px;
+  }
+  .pn-card.pn-featured .pn-price { color: #111111; }
+  .pn-price span { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.32); letter-spacing: 0; }
+  .pn-card.pn-featured .pn-price span { color: #999999; }
+  .pn-subtitle { font-size: 0.82rem; color: rgba(255,255,255,0.36); line-height: 1.55; margin-bottom: 24px; }
+  .pn-card.pn-featured .pn-subtitle { color: #666666; }
+  .pn-list { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .pn-list li { font-size: 0.84rem; color: rgba(255,255,255,0.52); display: flex; align-items: flex-start; gap: 9px; line-height: 1.45; }
+  .pn-card.pn-featured .pn-list li { color: #444444; }
+  .pn-list li::before { content: ''; flex-shrink: 0; margin-top: 6px; width: 4px; height: 4px; border-radius: 50%; background: #4F7EFF; }
+  .pn-action { display: block; text-align: center; padding: 13px 24px; border-radius: 10px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .pn-outline { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.12); }
+  .pn-outline:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.26); }
+  .pn-solid { background: #4F7EFF; color: #fff; border: none; box-shadow: 0 4px 20px rgba(79,126,255,0.4); }
+  .pn-solid:hover { background: #3a6be8; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(79,126,255,0.5); }
+
+  /* ─── FINAL CTA (light) ─── */
+  .final-cta {
+    background: #ffffff;
+    padding: clamp(80px,8vw,120px) clamp(28px,6vw,80px);
+    text-align: center; position: relative; overflow: hidden;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .final-cta::before {
+    content: ''; position: absolute;
+    top: -60px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse, rgba(79,126,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .final-cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
+  .final-cta h2 {
+    font-family: 'Geist','Inter',sans-serif;
+    font-size: clamp(2rem,4vw,3.4rem);
+    font-weight: 900; letter-spacing: -0.04em;
+    line-height: 1.05; color: #111111; margin-bottom: 18px;
+  }
+  .final-cta h2 .accent { color: #4F7EFF; }
+  .final-cta p { font-size: 0.98rem; color: #777777; line-height: 1.7; margin-bottom: 40px; }
+  .btn-reserve {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #111111; color: #ffffff; border: none;
+    padding: 16px 32px; border-radius: 12px;
+    font-size: 1rem; font-weight: 700; text-decoration: none;
+    letter-spacing: -0.01em;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .btn-reserve:hover { background: #222222; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.2); }
   </style>
 </head>
 <body>
@@ -710,191 +765,137 @@
     </div>
   </section>
 
+  <!-- Mobile-only: camera scroll zone + hero -->
   <div id="cam-content">
-  <section class="sp-hero">
-    <div class="sp-hero-inner">
-      <h1 class="hero-el">Platos que se ven tan bien que <span class="accent">se piden solos.</span></h1>
-      <p class="hero-el">Fotografiar bien tu menú no es un lujo — es el paso más rápido que puedes dar para vender más online.</p>
-      <div class="sp-hero-cta hero-el">
-        <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
-        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+    <div id="cam-scroll-zone">
+      <div id="cam-mobile">
+        <canvas id="cam-canvas-mobile"></canvas>
       </div>
     </div>
-  </section>
-
-  <section class="sp-section">
-    <div class="container">
-      <p class="section-label">Lo que incluye cada sesión</p>
-      <h2>Fotografía que <span class="accent">vende</span></h2>
-      <p>Una foto mediocre de un plato excelente hace que el cliente lo pase por alto. Una foto profesional puede multiplicar sus pedidos por tres.</p>
-      <div class="feature-grid fade-in">
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div><h3>Sesión en tu local</h3><p>Llegamos con todo el equipo. Fotografiamos en tu entorno real para máxima autenticidad.</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h3>Entrega en 48 horas</h3><p>Fotos editadas y listas para usar en menos de 48 horas. Sin esperas.</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Formatos para todo</h3><p>Alta resolución para imprenta, web optimizado y recortes para redes sociales.</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Optimizadas para delivery</h3><p>Tamaños perfectos para Glovo, Just Eat, Uber Eats y cualquier plataforma.</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><h3>Retoque profesional</h3><p>Color, brillo, contraste y eliminación de imperfecciones en cada foto.</p></div>
-        <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Derechos ilimitados</h3><p>Todas las fotos son tuyas para siempre. Web, redes, carta, menú digital — sin límites.</p></div>
+    <div class="mob-hero">
+      <h1>Platos que se ven tan bien que <em>se piden solos.</em></h1>
+      <p>Fotografiar bien tu menú no es un lujo — es el paso más rápido que puedes dar para vender más online.</p>
+      <div class="mob-cta-row">
+        <a href="index.html#contacto" class="btn-blue">Reservar sesión</a>
+        <a href="servicios.html" class="btn-ghost">Ver servicios</a>
       </div>
     </div>
-  </section>
-
-  <section class="sp-section">
-    <div class="container">
-      <div class="includes-split">
-        <div>
-          <p class="section-label">Todo incluido</p>
-          <h2>Lo que recibes en tu <span class="accent">sesión</span></h2>
-          <p style="margin-bottom: 32px;">Una sesión completa pensada para maximizar el impacto visual de cada plato de tu carta.</p>
-          <ul class="includes-list">
-            <li>Sesión fotográfica completa en tu local</li>
-            <li>Fotografía de todos los platos de la carta</li>
-            <li>Fotografías del local, ambiente e interior</li>
-            <li>Edición y retoque profesional de todas las fotos</li>
-            <li>Versiones para web, redes y plataformas de delivery</li>
-            <li>Fotos en formato vertical (stories/reels) y horizontal (web)</li>
-            <li>Entrega de archivos en alta resolución en 48 horas</li>
-            <li>Derechos de uso ilimitados y permanentes</li>
-          </ul>
-        </div>
-        <div class="includes-aside fade-in">
-          <h3>¿Por qué importan las fotos?</h3>
-          <p>El 93% de los clientes decide qué pedir basándose en las fotos del menú. En plataformas de delivery, los platos con foto de calidad se piden un 30% más que los que no la tienen.</p>
-          <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">Trabajamos con restaurantes de todos los estilos: mediterráneo, asiático, fast food, alta cocina y cocina de fusión.</p>
-          <br/>
-          <a href="index.html#contacto" class="btn-blue">Reservar sesión</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   </div><!-- /#cam-content -->
 
-  <!-- ─── PROCESS SECTION ─── -->
-  <section class="process-section fade-in">
-    <div class="container" style="text-align:center;">
-      <p class="section-label" style="justify-content:center;">Así funciona</p>
-      <h2>Cuatro pasos.<br/><span class="accent">Una sesión perfecta.</span></h2>
-    </div>
-    <div class="process-grid container">
-      <div class="process-step">
-        <div class="step-num">01</div>
-        <h3>Reserva tu cita</h3>
-        <p>Cuéntanos cuántos platos tienes y en qué horario podemos ir. Sin formularios largos ni reuniones previas.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">02</div>
-        <h3>Preparamos la toma</h3>
-        <p>Te enviamos una guía breve: qué tener listo, cómo presentar los platos, y qué esperar del día.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">03</div>
-        <h3>Día de sesión</h3>
-        <p>Llegamos a tu local con todo el equipo. Tú sirves, nosotros fotografiamos. Terminamos en pocas horas.</p>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <h3>Tú a lo tuyo</h3>
-        <p>En 48 horas tienes las fotos editadas y listas en tu carpeta. Sin idas y venidas, sin esperas infinitas.</p>
+  <!-- ─── OPENING STATEMENT ─── -->
+  <section class="stmt-section">
+    <div class="stmt-eyebrow reveal">Fotografía de menú · Visuanza</div>
+    <h2 class="stmt-heading reveal">Platos que se ven tan bien que <em>se piden solos.</em></h2>
+    <div class="stmt-rule reveal"></div>
+    <div class="stmt-body reveal">
+      <p class="stmt-text">Los clientes deciden con los ojos antes de leer una sola palabra. Una foto mediocre de un plato excelente es ventas perdidas — el cliente lo pasa por alto. Una foto profesional del mismo plato es el argumento más rápido y más barato que existe para vender más.</p>
+      <div class="stmt-callout">
+        <div class="stmt-big-num">×3</div>
+        <div class="stmt-callout-label">más pedidos con foto<br/>profesional vs. sin foto</div>
       </div>
     </div>
   </section>
 
-  <!-- ─── TESTIMONIALS ─── -->
-  <section class="testimonials-section fade-in">
-    <div class="container" style="text-align:center;">
-      <p class="section-label" style="justify-content:center;">Lo que dicen nuestros clientes</p>
-      <h2>Restaurantes que <span class="accent">ya destacan</span></h2>
-    </div>
-    <div class="testimonials-grid container">
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p>"Desde que cambiamos las fotos del menú en Glovo, los pedidos de nuestros platos estrella subieron un 40% en el primer mes. No esperábamos resultados tan rápidos."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">J</div>
-          <div><strong>Jorge M.</strong><span>Mariscos El Puerto, Madrid</span></div>
+  <!-- ─── WHAT'S INCLUDED ─── -->
+  <section class="included-section">
+    <div class="section-eyebrow reveal">Todo lo que incluye tu sesión</div>
+    <h2 class="included-heading reveal">Una sesión completa.<br/><span class="accent">Sin complicaciones.</span></h2>
+    <div class="included-list">
+      <div class="inc-row reveal">
+        <span class="inc-idx">01</span>
+        <div class="inc-body">
+          <h3>Sesión en tu local</h3>
+          <p>Llegamos con todo el equipo. Fotografiamos tus platos en su entorno real, con la luz y el contexto que los hace irresistibles — no en un estudio genérico.</p>
         </div>
       </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p>"El proceso fue facilísimo. Vinieron, fotografiaron, y en dos días tenía todas las fotos listas. Mi menú digital nunca había tenido tan buen aspecto."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">A</div>
-          <div><strong>Ana R.</strong><span>La Trattoria, Barcelona</span></div>
+      <div class="inc-row reveal reveal-d1">
+        <span class="inc-idx">02</span>
+        <div class="inc-body">
+          <h3>Entrega en 48 horas</h3>
+          <p>Fotos editadas, retocadas y listas para usar en menos de dos días desde la sesión. Sin esperas, sin rondas infinitas de revisión.</p>
         </div>
       </div>
-      <div class="testimonial-card">
-        <div class="stars">★★★★★</div>
-        <p>"Teníamos buena comida pero las fotos del menú eran pésimas. Eso cambió. Ahora los clientes piden lo que fotografiamos — no solo los platos que ya conocían."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar">M</div>
-          <div><strong>Miguel S.</strong><span>Burger Clandestina, Valencia</span></div>
+      <div class="inc-row reveal reveal-d2">
+        <span class="inc-idx">03</span>
+        <div class="inc-body">
+          <h3>Todos los formatos</h3>
+          <p>Alta resolución para imprenta, versión web optimizada, recortes para redes sociales y tamaños exactos para Glovo, Just Eat y Uber Eats.</p>
+        </div>
+      </div>
+      <div class="inc-row reveal reveal-d3">
+        <span class="inc-idx">04</span>
+        <div class="inc-body">
+          <h3>Retoque profesional</h3>
+          <p>Corrección de color, brillo, contraste y eliminación de imperfecciones. Cada foto sale perfecta — no solo buena.</p>
+        </div>
+      </div>
+      <div class="inc-row reveal reveal-d4">
+        <span class="inc-idx">05</span>
+        <div class="inc-body">
+          <h3>Derechos de uso ilimitados</h3>
+          <p>Todas las fotos son tuyas para siempre. Web, redes, carta impresa, menú digital, delivery — sin restricciones ni facturas adicionales.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── PRICING PLANS ─── -->
-  <section class="pricing-section fade-in">
-    <div class="pricing-header container">
-      <p class="section-label" style="justify-content:center;">EMPIEZA HOY</p>
-      <h2>El plan que se adapta a ti</h2>
+  <!-- ─── PRICING ─── -->
+  <section class="pn-section">
+    <div class="pn-head reveal">
+      <div class="section-eyebrow" style="color:rgba(79,126,255,0.82);justify-content:center;margin-bottom:16px;">Planes y precios</div>
+      <h2>El plan que <span class="accent">se adapta a ti</span></h2>
+      <p>Tres niveles, un objetivo: más pedidos, más visibilidad, más ventas.</p>
     </div>
-    <div class="pricing-grid">
-      <div class="plan-card">
-        <div class="plan-name">Basic</div>
-        <div class="plan-price">€700<span>/mes</span></div>
-        <p class="plan-desc">Para restaurantes que quieren empezar a destacar</p>
-        <ul class="plan-features">
-          <li>1 sesión/mes</li>
+    <div class="pn-grid">
+      <div class="pn-card reveal">
+        <div class="pn-tier">Basic</div>
+        <div class="pn-price">€700<span>/mes</span></div>
+        <p class="pn-subtitle">Para restaurantes que quieren empezar a destacar en digital</p>
+        <ul class="pn-list">
+          <li>1 sesión fotográfica/mes</li>
           <li>6 fotos editadas</li>
           <li>Optimización Google</li>
           <li>Gestión de perfil Google</li>
           <li>Formatos web y redes</li>
         </ul>
-        <a href="index.html#contacto" class="btn-plan">Empezar</a>
+        <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
       </div>
-      <div class="plan-card plan-pro">
-        <span class="plan-badge">Más popular</span>
-        <div class="plan-name">Pro</div>
-        <div class="plan-price">€1.100<span>/mes</span></div>
-        <p class="plan-desc">Para restaurantes que quieren aumentar ventas con clientes fieles</p>
-        <ul class="plan-features">
-          <li>1 sesión/mes</li>
-          <li>4 vídeos/mes</li>
+      <div class="pn-card pn-featured reveal reveal-d1">
+        <span class="pn-pop">Más popular</span>
+        <div class="pn-tier">Pro</div>
+        <div class="pn-price">€1.100<span>/mes</span></div>
+        <p class="pn-subtitle">Para restaurantes que quieren aumentar ventas con clientes fieles</p>
+        <ul class="pn-list">
+          <li>1 sesión + 4 vídeos/mes</li>
           <li>4 fotos editadas</li>
-          <li>Estrategia redes sociales</li>
           <li>Gestión redes sociales</li>
+          <li>Estrategia de contenido</li>
           <li>Marketing digital</li>
         </ul>
-        <a href="index.html#contacto" class="btn-plan">Empezar</a>
+        <a href="index.html#contacto" class="pn-action pn-solid">Empezar</a>
       </div>
-      <div class="plan-card">
-        <div class="plan-name">Turbo</div>
-        <div class="plan-price">€2.200<span>/mes</span></div>
-        <p class="plan-desc">Para restaurantes que quieren crecer rápido con nuevos clientes</p>
-        <ul class="plan-features">
-          <li>1 sesión/mes</li>
+      <div class="pn-card reveal reveal-d2">
+        <div class="pn-tier">Turbo</div>
+        <div class="pn-price">€2.200<span>/mes</span></div>
+        <p class="pn-subtitle">Para restaurantes que quieren crecer rápido con nuevos clientes</p>
+        <ul class="pn-list">
           <li>12 vídeos/mes</li>
           <li>8 fotos editadas</li>
           <li>Estrategia avanzada</li>
           <li>Gestión redes sociales</li>
           <li>Marketing + IA targeting</li>
         </ul>
-        <a href="index.html#contacto" class="btn-plan">Empezar</a>
+        <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
       </div>
     </div>
   </section>
 
-  <!-- ─── CTA ─── -->
-  <section class="sp-cta">
-    <div class="sp-cta-inner">
-      <p class="section-label" style="justify-content: center;">Empieza hoy</p>
-      <h2>¿Listo para vender más con <span class="accent">cada foto?</span></h2>
-      <p>Reserva tu sesión fotográfica. Sin compromiso, sin letra pequeña.</p>
-      <div class="sp-cta-btns">
-        <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
-        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
-      </div>
+  <!-- ─── FINAL CTA ─── -->
+  <section class="final-cta">
+    <div class="final-cta-inner reveal">
+      <h2>¿Listo para que tus platos <span class="accent">se pidan solos?</span></h2>
+      <p>Sin compromiso. Sin letra pequeña. Solo fotos que venden.</p>
+      <a href="index.html#contacto" class="btn-reserve">Reservar sesión fotográfica</a>
     </div>
   </section>
 
@@ -984,6 +985,11 @@
     function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
     hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+    // Scroll reveal for post-camera sections
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); revealObs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
   </script>
 
 
