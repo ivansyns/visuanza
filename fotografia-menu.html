@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <title>Fotografía de Menú para Restaurantes – Visuanza</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -185,7 +186,7 @@
 
   /* ─── CAMERA SCROLL ANIMATION ─── */
   #cam-section {
-    height: 200vh;
+    height: 500vh;
     position: relative;
     background: transparent;
   }
@@ -197,11 +198,9 @@
     background: #ffffff;
     overflow: hidden;
     z-index: 10;
+    display: flex; flex-direction: row;
   }
-  #cam-wrap {
-    width: 100%;
-    height: 100%;
-  }
+  #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; }
   #cam-canvas {
     display: block;
     width: 100%;
@@ -209,6 +208,39 @@
     will-change: contents;
     transform: translateZ(0);
   }
+  #cam-right {
+    flex: 0 0 55%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border-left: 1px solid rgba(0,0,0,0.08);
+  }
+  #cam-panels {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .cam-panel {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow-y: auto;
+    padding: clamp(32px,4vw,64px) clamp(24px,4vw,56px);
+    will-change: transform, opacity;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .cam-panel::-webkit-scrollbar { width: 4px; }
+  .cam-panel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+  .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); }
+  .cam-panel .includes-split { grid-template-columns: 1fr; gap: 20px; }
+  .cam-panel .stats-row { margin-top: 28px; }
+  .cam-panel h1 { font-size: clamp(1.8rem,3vw,2.8rem); }
+  .cam-panel h2 { font-size: clamp(1.4rem,2.2vw,2rem); }
+  .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 20px; }
+  @media (min-width: 769px) { #cam-content { display: none; } }
   @media (max-width: 768px) {
     #cam-section { display: none; }
 
@@ -304,6 +336,73 @@
       <div id="cam-wrap">
         <canvas id="cam-canvas"></canvas>
       </div>
+      <div id="cam-right">
+        <div id="cam-panels">
+
+          <!-- Panel 0: Hero -->
+          <div class="cam-panel">
+            <div class="sp-badge">✦ Servicio 03 · Fotografía de Menú</div>
+            <h1>Cada detalle importa.</h1>
+            <p style="margin:16px 0;color:var(--text-muted);line-height:1.7;">Fotografiamos todo tu menú con luz natural, composición profesional y edición que hace que cada plato parezca irresistible. Más clics, más pedidos.</p>
+            <div class="sp-hero-cta">
+              <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+              <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+            </div>
+            <div class="stats-row">
+              <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
+              <div class="stat-item"><div class="stat-num"><span>48</span>h</div><div class="stat-lbl">Entrega en 48 horas</div></div>
+              <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-lbl">Derechos ilimitados</div></div>
+            </div>
+          </div>
+
+          <!-- Panel 1: Lo que capturamos -->
+          <div class="cam-panel">
+            <p class="section-label">Lo que capturamos</p>
+            <h2>Fotografía que <span class="accent">vende</span></h2>
+            <p style="margin:12px 0 20px;color:var(--text-muted);line-height:1.65;font-size:0.95rem;">Una foto mediocre de un plato excelente hace que el cliente lo pase por alto. Una foto profesional del mismo plato puede multiplicar sus pedidos por tres.</p>
+            <div class="feature-grid">
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></div><h3>Sesión en tu local</h3><p>Venimos a tu restaurante con todo el equipo. Fotografiamos los platos en su entorno real.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><h3>Entrega en 48 horas</h3><p>Fotos editadas y listas para usar en menos de 48 horas desde la sesión.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><h3>Formatos para todo</h3><p>Alta resolución para imprenta, formato web optimizado y recortes para redes sociales.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Optimizadas para delivery</h3><p>Tamaños perfectos para Glovo, Just Eat, Uber Eats y cualquier plataforma.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div><h3>Retoque profesional</h3><p>Edición de color, brillo, contraste y eliminación de imperfecciones.</p></div>
+              <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Derechos ilimitados</h3><p>Todas las fotos son tuyas para siempre. Úsalas donde quieras, sin límites.</p></div>
+            </div>
+          </div>
+
+          <!-- Panel 2: Todo incluido -->
+          <div class="cam-panel">
+            <p class="section-label">Todo incluido</p>
+            <h2>Lo que recibes en tu <span class="accent">sesión</span></h2>
+            <p style="margin:12px 0 20px;font-size:0.9rem;color:var(--text-muted);">Una sesión completa pensada para maximizar el impacto visual de cada plato de tu carta.</p>
+            <ul class="includes-list">
+              <li>Sesión fotográfica completa en tu local</li>
+              <li>Fotografía de todos los platos de la carta</li>
+              <li>Fotografías del local, ambiente e interior</li>
+              <li>Edición y retoque profesional de todas las fotos</li>
+              <li>Versiones para web, redes y plataformas de delivery</li>
+              <li>Fotos en formato vertical y horizontal</li>
+              <li>Entrega de archivos en alta resolución en 48 horas</li>
+              <li>Derechos de uso ilimitados y permanentes</li>
+            </ul>
+            <div style="margin-top:24px;">
+              <a href="index.html#contacto" class="btn-blue">Reservar sesión</a>
+            </div>
+          </div>
+
+          <!-- Panel 3: CTA -->
+          <div class="cam-panel" style="align-items:center;text-align:center;">
+            <p class="section-label" style="justify-content:center;">Empieza hoy</p>
+            <h2>Platos que se ven tan bien que<br/><span class="accent">se piden solos.</span></h2>
+            <p style="margin:16px 0 32px;color:var(--text-muted);max-width:380px;">Reserva tu sesión fotográfica. Sin compromiso, sin letra pequeña.</p>
+            <div class="sp-cta-btns" style="justify-content:center;">
+              <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+              <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+            </div>
+          </div>
+
+        </div><!-- /#cam-panels -->
+      </div><!-- /#cam-right -->
     </div>
   </section>
 
@@ -316,9 +415,6 @@
       <div class="sp-hero-cta hero-el">
         <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
-      </div>
-      <div id="cam-scroll-zone">
-        <div id="cam-mobile"><canvas id="cam-canvas-mobile"></canvas></div>
       </div>
       <div class="stats-row hero-el">
         <div class="stat-item"><div class="stat-num">+<span>30</span>%</div><div class="stat-lbl">Más pedidos online</div></div>
@@ -586,6 +682,21 @@
   // ── DESKTOP: scroll-driven animation (unchanged) ─────────────────────────
   } else {
 
+    var panels = document.querySelectorAll('.cam-panel');
+    var N = panels.length;
+
+    function updatePanels(p) {
+      if (!N) return;
+      var panelFloat = p * (N - 1);
+      for (var pi = 0; pi < N; pi++) {
+        var offset = (pi - panelFloat) * 100;
+        var absOff = Math.abs(offset);
+        var opacity = Math.max(0, 1 - Math.max(0, absOff - 30) / 70);
+        panels[pi].style.transform = 'translateY(' + offset + '%)';
+        panels[pi].style.opacity = opacity;
+      }
+    }
+
     var section = document.getElementById('cam-section');
     var sticky  = document.getElementById('cam-sticky');
     var canvas  = document.getElementById('cam-canvas');
@@ -626,6 +737,7 @@
       var p = getProgress();
       var i = Math.round(p * (TOTAL - 1));
       if (i !== curIndex) { curIndex = i; drawFrame(i); }
+      updatePanels(p);
     }
 
     var inView = false;
@@ -643,7 +755,7 @@
     var rTimer;
     window.addEventListener('resize', function () {
       clearTimeout(rTimer);
-      rTimer = setTimeout(function () { initLayout(); drawFrame(curIndex); }, 150);
+      rTimer = setTimeout(function () { initLayout(); drawFrame(curIndex); updatePanels(getProgress()); }, 150);
     }, { passive: true });
 
     for (var i = 0; i < TOTAL; i++) {
@@ -654,11 +766,12 @@
           loaded++;
           if (idx === 0) {
             if (!initLayout()) {
-              requestAnimationFrame(function () { initLayout(); drawFrame(0); });
+              requestAnimationFrame(function () { initLayout(); drawFrame(0); updatePanels(getProgress()); });
             } else {
               drawFrame(0);
             }
             initDone = true;
+            updatePanels(getProgress());
           }
           if (loaded === TOTAL) console.log('[cam] all ' + TOTAL + ' frames ready');
         };
