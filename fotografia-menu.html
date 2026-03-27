@@ -279,7 +279,7 @@
 
     /* ─── CAMERA SCROLL ANIMATION ─── */
     #cam-section {
-      height: 380vh;
+      height: 460vh;
       position: relative;
       background: transparent;
     }
@@ -326,6 +326,15 @@
     .cam-panel .section-label { margin-bottom: 10px; }
     .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 16px; }
     .cam-panel > p[style] { margin-top: 0 !important; margin-bottom: 14px !important; }
+    /* Compact includes inside camera panels */
+    .cam-panel .includes-split { grid-template-columns: 1.3fr 1fr; gap: 14px; margin-top: 10px; }
+    .cam-panel .includes-list { gap: 7px; }
+    .cam-panel .includes-list li { font-size: 0.79rem; gap: 8px; }
+    .cam-panel .includes-list li::before { width: 14px; height: 14px; flex-shrink: 0; margin-top: 3px; background-size: 9px 7px; }
+    .cam-panel .includes-aside { padding: 16px; border-radius: 14px; }
+    .cam-panel .includes-aside h3 { font-size: 0.9rem; margin-bottom: 6px; }
+    .cam-panel .includes-aside p { font-size: 0.76rem; margin-bottom: 8px; line-height: 1.55; }
+    .cam-panel .includes-aside .btn-blue { padding: 10px 16px; font-size: 0.82rem; margin-top: 10px; }
     @media (min-width: 769px) { #cam-content { display: none; } }
     @media (max-width: 768px) {
       #cam-section { display: none; }
@@ -369,18 +378,20 @@
       #cada-detalle {
         display: block;
         flex-shrink: 0;
-        padding: 22px 28px 24px;
+        padding: 10px 16px 12px;
         font-family: 'Geist','Inter',sans-serif;
-        font-size: clamp(1.2rem, 2vw, 1.7rem);
-        font-weight: 900;
-        letter-spacing: -0.03em;
-        color: #111111;
-        line-height: 1.1;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(0,0,0,0.32);
+        text-align: center;
+        line-height: 1;
         opacity: 0;
-        transform: translateY(10px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        transform: translateY(6px);
+        transition: opacity 0.9s ease-out, transform 0.9s ease-out;
         background: #ffffff;
-        border-top: 1px solid rgba(0,0,0,0.07);
+        border-top: 1px solid rgba(0,0,0,0.05);
       }
       #cada-detalle.revealed { opacity: 1; transform: translateY(0); }
     }
@@ -566,7 +577,33 @@
             </div>
           </div>
 
-          <!-- Panel 2: Planes y precios -->
+          <!-- Panel 2: Todo incluido -->
+          <div class="cam-panel">
+            <p class="section-label">Todo incluido</p>
+            <h2>Lo que recibes en tu <span class="accent">sesión</span></h2>
+            <div class="includes-split">
+              <div>
+                <ul class="includes-list">
+                  <li>Sesión fotográfica completa en tu local</li>
+                  <li>Fotografía de todos los platos de la carta</li>
+                  <li>Fotografías del local, ambiente e interior</li>
+                  <li>Edición y retoque profesional de todas las fotos</li>
+                  <li>Versiones para web, redes y delivery</li>
+                  <li>Fotos en formato vertical y horizontal</li>
+                  <li>Entrega en alta resolución en 48 horas</li>
+                  <li>Derechos de uso ilimitados y permanentes</li>
+                </ul>
+              </div>
+              <div class="includes-aside">
+                <h3>¿Por qué Visuanza?</h3>
+                <p>Trabajamos exclusivamente con restaurantes. Sabemos cómo iluminar y editar cada plato para que el cliente sienta que ya lo ha probado.</p>
+                <p>Restaurantes que actualizan su fotografía consiguen de media un 30% más de pedidos en sus primeras semanas.</p>
+                <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Panel 3: Planes y precios -->
           <div class="cam-panel">
             <p class="section-label">Planes y precios</p>
             <h2>El plan que <span class="accent">se adapta a ti</span></h2>
@@ -667,36 +704,6 @@
           <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
           <h3>Derechos ilimitados</h3>
           <p>Todas las fotos son tuyas para siempre. Web, redes, carta, menú digital — sin restricciones ni facturas adicionales.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── TODO INCLUIDO ─── -->
-  <section class="sp-section">
-    <div class="container">
-      <div class="includes-split">
-        <div>
-          <p class="section-label">Todo incluido</p>
-          <h2>Lo que recibes en tu <span class="accent">sesión</span></h2>
-          <p style="margin-bottom: 32px;">Una sesión completa, pensada para que cada foto maximice el impacto visual de tu carta.</p>
-          <ul class="includes-list">
-            <li>Sesión fotográfica completa en tu local</li>
-            <li>Fotografía de todos los platos de la carta</li>
-            <li>Fotografías del local, ambiente e interior</li>
-            <li>Edición y retoque profesional de todas las fotos</li>
-            <li>Versiones para web, redes y plataformas de delivery</li>
-            <li>Fotos en formato vertical y horizontal</li>
-            <li>Entrega de archivos en alta resolución en 48 horas</li>
-            <li>Derechos de uso ilimitados y permanentes</li>
-          </ul>
-        </div>
-        <div class="includes-aside fade-in">
-          <h3>¿Por qué Visuanza?</h3>
-          <p>Trabajamos exclusivamente con restaurantes. Sabemos cómo iluminar, encuadrar y editar cada plato para que el cliente sienta que ya lo ha probado antes de pedirlo.</p>
-          <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">Restaurantes que actualizan su fotografía de menú consiguen de media un 30% más de pedidos en sus primeras semanas.</p>
-          <br/>
-          <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
         </div>
       </div>
     </div>
