@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <title>Google My Business para Restaurantes – Visuanza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #4F7EFF;
+      --blue-dark: #3a6be8;
+      --black:     #09090b;
+      --dark:      #111118;
+      --text:      #F8FAFC;
+      --text-muted:#94A3B8;
+      --border:    rgba(255,255,255,0.08);
+      --surface:   rgba(255,255,255,0.04);
+    }
+
+    html { scroll-behavior: smooth; overflow-x: clip; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--black);
+      overflow-x: clip;
+      line-height: 1.6;
+      background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Geist', 'Inter', sans-serif; }
+
+    .bg-glow {
+      position: fixed; top: -300px; left: 50%;
+      transform: translateX(-50%);
+      width: 1000px; height: 1000px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(180deg, rgba(9,9,11,0.88), rgba(9,9,11,0.72)); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.36), inset 0 1px 0 rgba(255,255,255,0.06); pointer-events: auto; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,0.92); letter-spacing: -0.02em; font-family: 'Geist','Inter',sans-serif; }
+    .nav-links { display: flex; align-items: center; list-style: none; }
+    .nav-links li { margin-right: 4px; }
+    .nav-links li:last-child { margin-right: 0; }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
+    .nav-links a:hover { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.06); }
+    .nav-links a.active { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.08); }
+    .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
+    .nav-has-dropdown { position: relative; }
+    .nav-has-dropdown > a .chevron { transition: transform 0.2s ease, opacity 0.2s; }
+    .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
+    .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(9,9,11,0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 8px 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
+    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: rgba(14,14,22,0.98); border-left: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1); }
+    .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.75); transition: background 0.15s ease; }
+    .nav-dropdown-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.95); }
+    .nav-dropdown-item:hover .ndi-icon { background: var(--blue); }
+    .nav-dropdown-item:hover .ndi-icon svg { color: white; }
+    .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
+    .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
+    .ndi-text { flex: 1; }
+    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 2px; letter-spacing: -0.01em; }
+    .ndi-desc { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.42); line-height: 1.4; }
+    @media (max-width: 900px) { .nav-dropdown { display: none; } }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .lang-toggle { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.85); cursor: pointer; background: none; border: none; }
+    .lang-flag { font-size: 1.1rem; }
+    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s, box-shadow 0.2s; }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,126,255,0.5); }
+    /* ─── HAMBURGER ─── */
+    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 8px; transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
+    .hamburger:hover { background: rgba(255,255,255,0.08); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.85); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu { position: fixed; inset: 0; z-index: 150; background: rgba(9,9,11,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px 48px; opacity: 0; pointer-events: none; transform: translateX(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .mobile-menu-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 320px; }
+    .mobile-menu-links li { width: 100%; }
+    .mobile-menu-links a { display: block; text-align: center; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 1.35rem; font-weight: 600; font-family: 'Geist','Inter',sans-serif; letter-spacing: -0.02em; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; }
+    .mobile-menu-links a:hover { color: #fff; }
+    .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
+    .mobile-lang { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.45); background: none; border: none; cursor: pointer; font-family: 'Inter',sans-serif; }
+    .mobile-cta { width: 100%; text-align: center; background: var(--blue); color: #fff; border: none; padding: 15px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; display: block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s; cursor: pointer; }
+    .mobile-cta:hover { background: var(--blue-dark); }
+    @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } .nav-links, .nav-right { display: none !important; } }
+    @media (min-width: 769px) { .mobile-menu { display: none !important; } }
+
+    /* ─── SHARED BUTTONS ─── */
+    .btn-blue { background: var(--blue); color: #fff; padding: 13px 28px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-block; box-shadow: 0 4px 24px rgba(79,126,255,0.4); transition: background 0.2s, transform 0.15s; }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); padding: 13px 28px; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-block; border: 1px solid var(--border); transition: background 0.2s, border-color 0.2s; }
+    .btn-ghost:hover { background: var(--surface); border-color: rgba(255,255,255,0.18); }
+
+    /* ─── HERO ─── */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 140px clamp(20px,4vw,80px) 100px; position: relative; }
+    .hero-inner { max-width: 780px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(79,126,255,0.1); border: 1px solid rgba(79,126,255,0.25); color: var(--blue); font-size: 0.78rem; font-weight: 600; padding: 6px 14px; border-radius: 999px; margin-bottom: 28px; letter-spacing: 0.03em; }
+    .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em; margin-bottom: 20px; color: var(--text); }
+    .hero h1 .accent { color: var(--blue); }
+    .hero-sub { font-size: clamp(1rem, 1.8vw, 1.15rem); color: var(--text-muted); line-height: 1.7; max-width: 560px; margin: 0 auto 36px; }
+
+    /* Stat pills */
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 40px; }
+    .pill { display: inline-flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text); font-size: 0.82rem; font-weight: 500; padding: 7px 16px; border-radius: 999px; transition: border-color 0.2s, background 0.2s; }
+    .pill:hover { border-color: rgba(79,126,255,0.3); background: rgba(79,126,255,0.06); }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: clamp(72px,9vw,120px) clamp(20px,4vw,80px); position: relative; z-index: 1; }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
+    .section-label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue); margin-bottom: 16px; }
+    .section-label::before { content: ''; display: block; width: 14px; height: 1px; background: var(--blue); }
+    .section-heading { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px; line-height: 1.15; }
+    .section-heading .accent { color: var(--blue); }
+    .section-sub { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 520px; }
+
+    /* ─── FEATURES ─── */
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 48px; }
+    @media (max-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 580px) { .features-grid { grid-template-columns: 1fr; } }
+    .feature-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; transition: border-color 0.2s, background 0.2s; }
+    .feature-card:hover { border-color: rgba(79,126,255,0.25); background: rgba(79,126,255,0.04); }
+    .feature-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(79,126,255,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .feature-icon svg { width: 20px; height: 20px; color: var(--blue); }
+    .feature-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* ─── PRICING ─── */
+    .pricing-wrap { display: flex; justify-content: center; margin-top: 56px; }
+    .pricing-card {
+      background: rgba(79,126,255,0.04);
+      border: 1px solid rgba(79,126,255,0.35);
+      border-radius: 20px; padding: 44px 48px;
+      max-width: 480px; width: 100%;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(79,126,255,0.08);
+      position: relative; overflow: hidden;
+    }
+    @media (max-width: 560px) { .pricing-card { padding: 32px 24px; } }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+    .pricing-badge { display: inline-block; background: rgba(79,126,255,0.15); color: var(--blue); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 999px; margin-bottom: 20px; border: 1px solid rgba(79,126,255,0.2); }
+    .pricing-price { font-family: 'Geist','Inter',sans-serif; font-size: 3.4rem; font-weight: 900; color: var(--text); letter-spacing: -0.04em; line-height: 1; margin-bottom: 6px; }
+    .pricing-price sup { font-size: 1.4rem; vertical-align: super; color: var(--text-muted); }
+    .pricing-price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 500; }
+    .pricing-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; }
+    .pricing-list { list-style: none; text-align: left; margin-bottom: 32px; display: flex; flex-direction: column; gap: 12px; }
+    .pricing-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.88rem; color: var(--text); }
+    .pricing-list li::before { content: ''; flex-shrink: 0; width: 17px; height: 17px; border-radius: 50%; background: rgba(79,126,255,0.15); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F7EFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E"); background-size: 11px 11px; background-position: center; background-repeat: no-repeat; margin-top: 1px; }
+    .pricing-cta { width: 100%; padding: 14px 0; background: var(--blue); color: #fff; border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; text-decoration: none; display: block; text-align: center; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.15s; }
+    .pricing-cta:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    /* ─── FINAL CTA ─── */
+    .cta-section { padding: clamp(80px,10vw,140px) clamp(20px,4vw,80px); text-align: center; position: relative; z-index: 1; }
+    .cta-inner { max-width: 640px; margin: 0 auto; background: rgba(79,126,255,0.05); border: 1px solid rgba(79,126,255,0.2); border-radius: 24px; padding: clamp(40px,5vw,72px) clamp(24px,4vw,60px); position: relative; overflow: hidden; }
+    .cta-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
+    .cta-glow { position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 400px; height: 300px; background: radial-gradient(ellipse, rgba(79,126,255,0.15) 0%, transparent 70%); pointer-events: none; }
+    .cta-inner h2 { font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 800; letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px; position: relative; z-index: 1; }
+    .cta-inner h2 .accent { color: var(--blue); }
+    .cta-inner p { font-size: 1rem; color: var(--text-muted); margin-bottom: 32px; position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    /* ─── FOOTER ─── */
+    footer { border-top: 1px solid var(--border); padding: 40px clamp(20px,4vw,80px) 32px; position: relative; z-index: 1; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand { max-width: 280px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 12px; }
+    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+    .footer-logo span { font-size: 1rem; font-weight: 800; color: rgba(255,255,255,0.85); font-family: 'Geist','Inter',sans-serif; }
+    .footer-tagline { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+    .footer-links-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.84rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+    .footer-copy a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--text-muted); }
+
+    /* ─── FADE-IN ─── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <span>Visuanza</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-has-dropdown">
+          <a href="servicios.html" class="active">Servicios <span class="chevron">▾</span></a>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-grid">
+              <a href="redes-sociales.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span>
+              </a>
+              <a href="diseno-web.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span></span>
+              </a>
+              <a href="fotografia-menu.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Imágenes de platos que abren el apetito</span></span>
+              </a>
+              <a href="google-my-business.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Google My Business</span><span class="ndi-desc">Optimización de tu ficha de Google para más clientes</span></span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html#resultados">Resultados</a></li>
+        <li><a href="index.html#contacto">Contactar</a></li>
+      </ul>
+      <div class="nav-right">
+        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
+        <a href="index.html#contacto" class="btn-primary">Pedir propuesta</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── MOBILE MENU ─── -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="mobile-menu-links">
+      <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
+      <li><a href="index.html" class="mobile-menu-link">Inicio</a></li>
+      <li><a href="index.html#resultados" class="mobile-menu-link">Resultados</a></li>
+      <li><a href="index.html#contacto" class="mobile-menu-link">Contactar</a></li>
+    </ul>
+    <div class="mobile-menu-bottom">
+      <button class="mobile-lang">🇪🇸 ES ▾</button>
+      <a href="index.html#contacto" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
+    </div>
+  </div>
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✦ Servicio 04 · Google My Business</div>
+      <h1>Tu restaurante en el <span class="accent">top de Google Maps</span></h1>
+      <p class="hero-sub">El 80% de los clientes buscan dónde comer en Google. Si no apareces bien posicionado, pierdes mesas cada día.</p>
+      <div class="hero-pills">
+        <span class="pill"><span class="pill-dot"></span>+70% más visitas</span>
+        <span class="pill"><span class="pill-dot"></span>Más reservas directas</span>
+        <span class="pill"><span class="pill-dot"></span>Reseñas gestionadas</span>
+        <span class="pill"><span class="pill-dot"></span>Fotos optimizadas</span>
+      </div>
+      <div>
+        <a href="index.html#contacto" class="btn-blue">Optimizar mi perfil</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES ─── -->
+  <section class="section" style="background: rgba(255,255,255,0.015);">
+    <div class="section-inner">
+      <div class="fade-in">
+        <span class="section-label">Lo que incluye</span>
+        <h2 class="section-heading">Todo lo que necesita tu<br/><span class="accent">ficha de Google</span></h2>
+        <p class="section-sub">Optimizamos cada detalle de tu perfil para que aparezcas primero cuando alguien busca un restaurante cerca.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Perfil optimizado</h3>
+          <p>Configuramos y optimizamos tu ficha de Google al 100%: categorías, horarios, fotos, descripción y atributos para destacar en búsquedas locales.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Gestión de reseñas</h3>
+          <p>Respondemos reseñas positivas y negativas de forma profesional para cuidar tu reputación online y generar confianza en nuevos clientes.</p>
+        </div>
+        <div class="feature-card fade-in delay-3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+          <h3>Fotos profesionales</h3>
+          <p>Subimos fotos optimizadas del local y los platos para aumentar el número de clics y visitas. Las fichas con fotos reciben 42% más solicitudes de ruta.</p>
+        </div>
+        <div class="feature-card fade-in delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h3>SEO local</h3>
+          <p>Optimizamos tu perfil y presencia para que aparezcas cuando alguien busca restaurantes cerca. Más visibilidad, más clientes que nunca te conocían.</p>
+        </div>
+        <div class="feature-card fade-in delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          </div>
+          <h3>Informes de rendimiento</h3>
+          <p>Seguimiento mensual de visitas, llamadas y clics generados desde tu ficha. Sabrás exactamente cuántos clientes nuevos llegan gracias a Google.</p>
+        </div>
+        <div class="feature-card fade-in delay-3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+          </div>
+          <h3>Actualizaciones continuas</h3>
+          <p>Mantenemos tu perfil activo con novedades, ofertas y publicaciones periódicas. Un perfil activo tiene mayor visibilidad en los resultados de Google.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PRICING ─── -->
+  <section class="section">
+    <div class="section-inner">
+      <div style="text-align:center;" class="fade-in">
+        <span class="section-label" style="justify-content:center;">Precio</span>
+        <h2 class="section-heading">Un precio claro, <span class="accent">sin sorpresas</span></h2>
+        <p class="section-sub" style="margin:0 auto;">Todo lo que necesita tu ficha de Google en un único plan mensual.</p>
+      </div>
+      <div class="pricing-wrap">
+        <div class="pricing-card fade-in">
+          <div class="pricing-badge">Google My Business</div>
+          <div class="pricing-price"><sup>€</sup>199<span>/mes</span></div>
+          <p class="pricing-desc">Gestión completa de tu presencia en Google Maps.</p>
+          <ul class="pricing-list">
+            <li>Optimización completa del perfil Google</li>
+            <li>Gestión y respuesta de reseñas</li>
+            <li>Publicaciones semanales en Google</li>
+            <li>SEO local continuo</li>
+            <li>Informe mensual de resultados</li>
+            <li>Sin permanencia</li>
+          </ul>
+          <a href="index.html#contacto" class="pricing-cta">Empezar ahora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FINAL CTA ─── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="cta-glow"></div>
+      <h2>¿Listo para aparecer<br/>primero en <span class="accent">Google?</span></h2>
+      <p>Más del 80% de los clientes elige restaurante mirando Google Maps. Asegúrate de que te encuentren a ti.</p>
+      <div class="cta-btns">
+        <a href="index.html#contacto" class="btn-blue">Contactar</a>
+        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/SynsLogo.png" alt="Visuanza" />
+            <span>Visuanza</span>
+          </a>
+          <p class="footer-tagline">Visibilidad digital para restaurantes. Una empresa de SynsNu (Suecia).</p>
+        </div>
+        <div>
+          <div class="footer-links-title">Servicios</div>
+          <ul class="footer-links">
+            <li><a href="redes-sociales.html">Gestión de Redes</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
+            <li><a href="google-my-business.html">Google My Business</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-links-title">Empresa</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#resultados">Resultados</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Visuanza · Una marca de <a href="#">SynsNu AB</a></p>
+        <div class="footer-legal">
+          <a href="#">Privacidad</a>
+          <a href="#">Cookies</a>
+          <a href="#">Aviso Legal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    var fadeEls = document.querySelectorAll('.fade-in');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(function(el) { observer.observe(el); });
+    // ─── MOBILE HAMBURGER MENU ───
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+  </script>
+</body>
+</html>
