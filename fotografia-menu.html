@@ -293,8 +293,8 @@
       z-index: 10;
       display: flex; flex-direction: row;
     }
-    #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; display: flex; flex-direction: column; }
-    #cam-canvas { display: block; width: 100%; flex: 1 1 0; min-height: 0; }
+    #cam-wrap { flex: 0 0 45%; width: 45%; height: 100%; position: relative; }
+    #cam-canvas { display: block; width: 100%; height: 100%; }
     #cam-right {
       flex: 0 0 55%;
       height: 100%;
@@ -309,32 +309,34 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       overflow: hidden;
-      padding: clamp(20px,3vw,44px) clamp(20px,3.5vw,48px);
+      padding: clamp(14px,2vw,28px) clamp(20px,3.5vw,48px);
       will-change: transform, opacity;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      gap: 0;
     }
-    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
-    .cam-panel .feature-card { padding: 16px; }
-    .cam-panel .feature-card h3 { font-size: 0.88rem; margin-bottom: 4px; }
-    .cam-panel .feature-card p { font-size: 0.78rem; line-height: 1.5; }
-    .cam-panel .feature-icon { width: 34px; height: 34px; margin-bottom: 10px; }
-    .cam-panel .feature-icon svg { width: 16px; height: 16px; }
-    .cam-panel h1 { font-size: clamp(1.6rem,2.8vw,2.4rem); }
-    .cam-panel h2 { font-size: clamp(1.3rem,2vw,1.8rem); margin-bottom: 10px; }
-    .cam-panel .section-label { margin-bottom: 10px; }
-    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 16px; }
-    .cam-panel > p[style] { margin-top: 0 !important; margin-bottom: 14px !important; }
+    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
+    .cam-panel .feature-card { padding: 14px; }
+    .cam-panel .feature-card h3 { font-size: 0.86rem; margin-bottom: 3px; }
+    .cam-panel .feature-card p { font-size: 0.77rem; line-height: 1.45; }
+    .cam-panel .feature-icon { width: 30px; height: 30px; margin-bottom: 8px; }
+    .cam-panel .feature-icon svg { width: 15px; height: 15px; }
+    .cam-panel h1 { font-size: clamp(1.6rem,2.8vw,2.4rem); margin-bottom: 6px; }
+    .cam-panel h2 { font-size: clamp(1.3rem,2vw,1.8rem); margin-bottom: 6px; }
+    .cam-panel .section-label { margin-bottom: 6px; }
+    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 12px; gap: 8px; }
+    .cam-panel .btn-blue, .cam-panel .btn-ghost { padding: 11px 20px; font-size: 0.88rem; }
+    .cam-panel > p[style] { margin-top: 0 !important; margin-bottom: 10px !important; }
     /* Compact includes inside camera panels */
-    .cam-panel .includes-split { grid-template-columns: 1.3fr 1fr; gap: 14px; margin-top: 10px; }
-    .cam-panel .includes-list { gap: 7px; }
-    .cam-panel .includes-list li { font-size: 0.79rem; gap: 8px; }
+    .cam-panel .includes-split { grid-template-columns: 1.3fr 1fr; gap: 12px; margin-top: 8px; }
+    .cam-panel .includes-list { gap: 6px; }
+    .cam-panel .includes-list li { font-size: 0.78rem; gap: 8px; }
     .cam-panel .includes-list li::before { width: 14px; height: 14px; flex-shrink: 0; margin-top: 3px; background-size: 9px 7px; }
-    .cam-panel .includes-aside { padding: 16px; border-radius: 14px; }
-    .cam-panel .includes-aside h3 { font-size: 0.9rem; margin-bottom: 6px; }
-    .cam-panel .includes-aside p { font-size: 0.76rem; margin-bottom: 8px; line-height: 1.55; }
-    .cam-panel .includes-aside .btn-blue { padding: 10px 16px; font-size: 0.82rem; margin-top: 10px; }
+    .cam-panel .includes-aside { padding: 14px; border-radius: 12px; }
+    .cam-panel .includes-aside h3 { font-size: 0.88rem; margin-bottom: 5px; }
+    .cam-panel .includes-aside p { font-size: 0.74rem; margin-bottom: 6px; line-height: 1.5; }
+    .cam-panel .includes-aside .btn-blue { padding: 9px 14px; font-size: 0.8rem; margin-top: 8px; width: 100%; text-align: center; }
     @media (min-width: 769px) { #cam-content { display: none; } }
     @media (max-width: 768px) {
       #cam-section { display: none; }
@@ -372,26 +374,27 @@
     }
     .hero-el.in-view { animation-play-state: running; }
 
-    /* ─── CADA DETALLE IMPORTA — desktop only, inside left camera column ─── */
+    /* ─── CADA DETALLE IMPORTA — absolute overlay under camera legs ─── */
     #cada-detalle { display: none; }
     @media (min-width: 769px) {
       #cada-detalle {
         display: block;
-        flex-shrink: 0;
-        padding: 10px 16px 12px;
-        font-family: 'Geist','Inter',sans-serif;
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: rgba(0,0,0,0.32);
+        position: absolute;
+        bottom: 24%;
+        left: 0; right: 0;
         text-align: center;
+        padding: 6px 20px;
+        font-family: 'Geist','Inter',sans-serif;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(0,0,0,0.28);
         line-height: 1;
         opacity: 0;
-        transform: translateY(6px);
-        transition: opacity 0.9s ease-out, transform 0.9s ease-out;
-        background: #ffffff;
-        border-top: 1px solid rgba(0,0,0,0.05);
+        transform: translateY(8px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+        pointer-events: none;
       }
       #cada-detalle.revealed { opacity: 1; transform: translateY(0); }
     }
