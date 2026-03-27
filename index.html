@@ -2468,6 +2468,113 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ─── CONTACT FORM ─── */
+    .contact-section {
+      padding: 100px 24px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.75rem;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-form {
+      background: var(--gray-dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form { padding: 1.5rem; }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+    .form-group input,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s, opacity 0.2s;
+      resize: vertical;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--text-muted);
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+    }
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+    @media (max-width: 480px) {
+      .checkbox-grid { grid-template-columns: 1fr; }
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .checkbox-item:hover { color: var(--text); }
+    .checkbox-item input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--blue);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .submit-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.9rem 2.5rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
   </style>
 </head>
 <body>
@@ -3123,44 +3230,52 @@
     </div>
   </section>
 
-  <!-- ─── SERVICES ─── -->
-  <section class="services">
+  <!-- ─── CONTACT ─── -->
+  <section class="contact-section" id="contacto">
     <div class="section-header fade-in">
-      <p class="section-label">Nuestros servicios</p>
-      <h2>Todo lo que necesitas para<br /><span class="accent">dominar el mercado local</span></h2>
+      <p class="section-label">Contacto</p>
+      <h2>¿Listo para crecer?<br /><span class="accent">Hablemos</span></h2>
+      <p class="section-sub">Cuéntanos sobre tu restaurante y te preparamos una propuesta personalizada.</p>
     </div>
-    <div class="services-grid">
-      <div class="service-card fade-in">
-        <div class="service-icon icon-bg-blue">📍</div>
-        <h3>SEO Local</h3>
-        <p>Posicionamos tu negocio en los primeros resultados de búsqueda local de Google y otros buscadores para atraer clientes cercanos.</p>
+    <form class="contact-form fade-in" id="contactForm" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        </div>
+        <div class="form-group">
+          <label for="restaurante">Nombre del restaurante</label>
+          <input type="text" id="restaurante" name="restaurante" placeholder="Nombre del restaurante" required />
+        </div>
       </div>
-      <div class="service-card fade-in">
-        <div class="service-icon icon-bg-green">🌐</div>
-        <h3>Visuanza Web</h3>
-        <p>Diseñamos y optimizamos tu página web para convertir visitas en clientes, con foco en velocidad, diseño y conversión.</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" />
+        </div>
       </div>
-      <div class="service-card fade-in">
-        <div class="service-icon icon-bg-orange">💳</div>
-        <h3>Visuanza Wallet</h3>
-        <p>Sistema de fidelización digital que recompensa a tus clientes habituales y aumenta la frecuencia de visitas a tu negocio.</p>
+      <div class="form-group">
+        <label>¿Qué te interesa?</label>
+        <div class="checkbox-grid">
+          <label class="checkbox-item"><input type="checkbox" name="servicios" value="Página web" /><span>Página web</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="servicios" value="Redes sociales" /><span>Redes sociales</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="servicios" value="Fotografía de menú" /><span>Fotografía de menú</span></label>
+          <label class="checkbox-item"><input type="checkbox" name="servicios" value="Google My Business" /><span>Google My Business</span></label>
+        </div>
       </div>
-      <div class="service-card fade-in">
-        <div class="service-icon icon-bg-purple">📊</div>
-        <h3>Google Ads</h3>
-        <p>Campañas publicitarias en Google optimizadas para negocios locales, maximizando el retorno de tu inversión publicitaria.</p>
+      <div class="form-group">
+        <label for="mensaje">Mensaje <span style="color:var(--text-muted);font-weight:400;">(opcional)</span></label>
+        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos más sobre tu negocio..." rows="4"></textarea>
       </div>
-      <div class="service-card fade-in">
-        <div class="service-icon icon-bg-red">📱</div>
-        <h3>Meta Ads</h3>
-        <p>Anuncios estratégicos en Facebook e Instagram para llegar a tu público objetivo y generar tráfico cualificado hacia tu negocio.</p>
-      </div>
-      <div class="service-card fade-in">
-        <div class="service-icon icon-bg-teal">⭐</div>
-        <h3>Gestión de Reseñas</h3>
-        <p>Monitorizamos y gestionamos tu reputación online, respondiendo reseñas y construyendo una imagen positiva de tu marca.</p>
-      </div>
-    </div>
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <span id="submitText">Enviar</span>
+      </button>
+      <p id="formFeedback" style="display:none;margin-top:1rem;text-align:center;font-size:0.9rem;"></p>
+    </form>
   </section>
 
   <!-- ─── STATS ─── -->
@@ -3506,6 +3621,47 @@
 
       setInterval(cycle, 3000);
     })();
+
+    async function submitForm(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const txt = document.getElementById('submitText');
+      const feedback = document.getElementById('formFeedback');
+      const form = document.getElementById('contactForm');
+
+      const nombre = form.nombre.value;
+      const restaurante = form.restaurante.value;
+      const email = form.email.value;
+      const telefono = form.telefono.value;
+      const mensaje = form.mensaje.value;
+      const servicios = [...form.querySelectorAll('input[name="servicios"]:checked')].map(c => c.value).join(', ') || 'Ninguno seleccionado';
+
+      btn.disabled = true;
+      txt.textContent = 'Enviando…';
+
+      try {
+        await fetch(`https://formsubmit.co/ajax/ivan@synsnumedia.com`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `Nuevo contacto de ${nombre} — ${restaurante}`,
+            _template: 'table',
+            nombre, restaurante, email, telefono, servicios, mensaje
+          })
+        });
+        txt.textContent = 'Enviado';
+        feedback.style.display = 'block';
+        feedback.style.color = '#4ade80';
+        feedback.textContent = '¡Mensaje enviado! Te contactaremos pronto.';
+        form.reset();
+      } catch {
+        txt.textContent = 'Enviar';
+        btn.disabled = false;
+        feedback.style.display = 'block';
+        feedback.style.color = '#f87171';
+        feedback.textContent = 'Error al enviar. Por favor escríbenos directamente a ivan@synsnumedia.com';
+      }
+    }
   </script>
 </body>
 </html>
