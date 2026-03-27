@@ -22,13 +22,13 @@
       --surface:   rgba(255,255,255,0.04);
     }
 
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
 
     body {
       font-family: 'Inter', sans-serif;
       color: var(--text);
       background: var(--black);
-      overflow-x: hidden;
+      overflow-x: clip;
       line-height: 1.6;
       background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
       background-size: 28px 28px;
@@ -66,11 +66,7 @@
     .nav-links { display: flex; align-items: center; list-style: none; }
     .nav-links li { margin-right: 4px; }
     .nav-links li:last-child { margin-right: 0; }
-    .nav-links a {
-      text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-weight: 500;
-      transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px;
-      padding: 6px 12px; border-radius: 999px;
-    }
+    .nav-links a { text-decoration: none; color: rgba(255,255,255,0.55); font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
     .nav-links a:hover { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.06); }
     .nav-links a.active { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.08); }
     .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
@@ -85,11 +81,7 @@
       opacity: 0; pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200;
     }
-    .nav-dropdown::before {
-      content: ''; position: absolute; top: -6px; left: 50%;
-      transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px;
-      background: rgba(14,14,22,0.98); border-left: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1);
-    }
+    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: rgba(14,14,22,0.98); border-left: 1px solid rgba(255,255,255,0.1); border-top: 1px solid rgba(255,255,255,0.1); }
     .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
     .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
     .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: rgba(255,255,255,0.75); transition: background 0.15s ease; }
@@ -103,416 +95,681 @@
     .ndi-desc { display: block; font-size: 0.75rem; color: rgba(255,255,255,0.42); line-height: 1.4; }
     @media (max-width: 900px) { .nav-dropdown { display: none; } .nav-links, .nav-right { display: none !important; } }
     .nav-right { display: flex; align-items: center; gap: 1rem; }
-    .lang-toggle { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,0.85); cursor: pointer; background: none; border: none; }
-    .lang-flag { font-size: 1.1rem; }
-    .btn-primary {
-      background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block;
-      box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s;
-    }
+    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s; }
     .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
-    /* ─── HAMBURGER ─── */
-    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 8px; transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
-    .hamburger:hover { background: rgba(255,255,255,0.08); }
-    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(255,255,255,0.85); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ─── MOBILE MENU ─── */
-    .mobile-menu { position: fixed; inset: 0; z-index: 150; background: rgba(9,9,11,0.92); backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px 48px; opacity: 0; pointer-events: none; transform: translateX(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
-    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
-    .mobile-menu-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 320px; }
-    .mobile-menu-links li { width: 100%; }
-    .mobile-menu-links a { display: block; text-align: center; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 1.35rem; font-weight: 600; font-family: 'Geist','Inter',sans-serif; letter-spacing: -0.02em; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; }
-    .mobile-menu-links a:hover { color: #fff; }
-    .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
-    .mobile-lang { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.45); background: none; border: none; cursor: pointer; }
-    .mobile-cta { width: 100%; text-align: center; background: #4F7EFF; color: #fff; border: none; padding: 15px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; display: block; transition: background 0.2s; }
-    .mobile-cta:hover { background: #3a6be8; }
-    @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } }
-    @media (min-width: 769px) { .mobile-menu { display: none !important; } }
-
-    /* ─── CONTAINER ─── */
-    .container { width: 100%; max-width: 1100px; margin: 0 auto; padding-left: clamp(16px,3vw,48px); padding-right: clamp(16px,3vw,48px); }
+    /* ─── SHARED BUTTONS ─── */
+    .btn-blue {
+      background: var(--blue); color: #fff;
+      padding: 13px 28px; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; display: inline-block;
+      box-shadow: 0 4px 24px rgba(79,126,255,0.4);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      padding: 13px 28px; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600;
+      text-decoration: none; display: inline-block;
+      border: 1px solid var(--border);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { background: var(--surface); border-color: rgba(255,255,255,0.18); }
 
     /* ─── HERO ─── */
-    .sp-hero {
-      padding: 150px 0 100px;
-      position: relative; text-align: center;
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 140px clamp(20px,4vw,80px) 100px;
+      position: relative;
     }
-    .sp-hero::before {
-      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 600px;
-      background: radial-gradient(ellipse, rgba(79,126,255,0.14) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .sp-hero-inner { position: relative; z-index: 1; max-width: 780px; margin: 0 auto; }
-    .sp-badge {
+    .hero-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(79,126,255,0.12); color: var(--blue);
-      font-size: 0.78rem; font-weight: 600; padding: 6px 16px; border-radius: 100px;
-      margin-bottom: 28px; border: 1px solid rgba(79,126,255,0.25);
+      background: rgba(79,126,255,0.1); border: 1px solid rgba(79,126,255,0.25);
+      color: var(--blue); font-size: 0.78rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 999px; margin-bottom: 28px;
+      letter-spacing: 0.03em;
     }
-    .sp-hero h1 {
-      font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 900;
-      line-height: 1.06; letter-spacing: -0.04em; margin-bottom: 24px;
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 800; line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px; color: var(--text);
     }
-    .sp-hero h1 .accent { color: var(--blue); }
-    .sp-hero p {
-      font-size: clamp(1rem, 1.8vw, 1.15rem); color: var(--text-muted);
-      max-width: 580px; margin: 0 auto 40px; line-height: 1.75;
+    .hero h1 .accent { color: var(--blue); }
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-muted); line-height: 1.7;
+      max-width: 580px; margin: 0 auto 36px;
     }
-    .sp-hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-    .btn-blue {
-      background: var(--blue); color: #fff; border: none; padding: 14px 28px;
-      border-radius: 10px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
-      text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(79,126,255,0.4);
-    }
-    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 32px rgba(79,126,255,0.5); }
-    .btn-ghost {
-      background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.75);
-      border: 1px solid rgba(255,255,255,0.12); padding: 14px 28px;
-      border-radius: 10px; font-size: 0.95rem; font-weight: 600;
-      cursor: pointer; text-decoration: none; display: inline-block;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-    /* ─── STATS ROW ─── */
-    .stats-row {
-      display: flex; gap: 0; justify-content: center;
-      border: 1px solid var(--border); border-radius: 16px;
-      background: var(--surface); backdrop-filter: blur(8px);
-      margin-top: 64px; overflow: hidden;
+    /* Value pills */
+    .hero-pills {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      justify-content: center; margin-bottom: 40px;
     }
-    .stat-item {
-      flex: 1; padding: 32px 24px; text-align: center;
-      border-right: 1px solid var(--border);
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text); font-size: 0.82rem; font-weight: 500;
+      padding: 7px 16px; border-radius: 999px;
+      transition: border-color 0.2s, background 0.2s;
     }
-    .stat-item:last-child { border-right: none; }
-    .stat-num { font-size: 2.4rem; font-weight: 900; letter-spacing: -0.04em; color: var(--text); font-family: 'Geist','Inter',sans-serif; }
-    .stat-num span { color: var(--blue); }
-    .stat-lbl { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+    .pill:hover { border-color: rgba(79,126,255,0.3); background: rgba(79,126,255,0.06); }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
 
-    /* ─── SECTION ─── */
-    .sp-section { padding: clamp(72px,8vw,120px) 0; position: relative; z-index: 1; }
-    .sp-section + .sp-section { border-top: 1px solid var(--border); }
+    /* ─── MARQUEE ─── */
+    .marquee-wrap {
+      overflow: hidden; padding: 18px 0;
+      background: rgba(79,126,255,0.06);
+      border-top: 1px solid rgba(79,126,255,0.12);
+      border-bottom: 1px solid rgba(79,126,255,0.12);
+      position: relative; z-index: 1;
+    }
+    .marquee-track { display: flex; width: max-content; animation: marquee-scroll 32s linear infinite; }
+    .marquee-item {
+      white-space: nowrap; padding: 0 32px;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--text-muted); letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 32px;
+    }
+    .marquee-item::after { content: '·'; color: var(--blue); font-size: 1.2rem; }
+    @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: clamp(72px,9vw,120px) clamp(20px,4vw,80px);
+      position: relative; z-index: 1;
+    }
+    .section-inner { max-width: 1120px; margin: 0 auto; }
     .section-label {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 20px;
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--blue); margin-bottom: 16px;
     }
-    .section-label::before { content: ''; width: 20px; height: 2px; background: var(--blue); border-radius: 2px; }
-    .sp-section h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 18px; line-height: 1.1; }
-    .sp-section h2 .accent { color: var(--blue); }
-    .sp-section > .container > p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.75; max-width: 620px; margin-bottom: 48px; }
+    .section-label::before { content: ''; display: block; width: 14px; height: 1px; background: var(--blue); }
+    .section-heading {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--text); margin-bottom: 16px; line-height: 1.15;
+    }
+    .section-heading .accent { color: var(--blue); }
+    .section-sub { font-size: 1rem; color: var(--text-muted); line-height: 1.7; max-width: 520px; }
 
-    /* ─── FEATURE GRID ─── */
-    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 580px) { .feature-grid { grid-template-columns: 1fr; } }
-    .feature-card {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
-      padding: 28px; transition: border-color 0.2s, background 0.2s;
+    /* ─── DIFFERENTIATOR ─── */
+    .diff-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 72px; align-items: start; margin-top: 56px;
     }
-    .feature-card:hover { border-color: rgba(79,126,255,0.3); background: rgba(79,126,255,0.04); }
-    .feature-icon {
-      width: 44px; height: 44px; border-radius: 10px; background: rgba(79,126,255,0.14);
-      display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
-    }
-    .feature-icon svg { width: 20px; height: 20px; color: var(--blue); }
-    .feature-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
-    .feature-card p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+    @media (max-width: 860px) { .diff-layout { grid-template-columns: 1fr; gap: 40px; } }
 
-    /* ─── INCLUDES LIST ─── */
-    .includes-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-    @media (max-width: 768px) { .includes-split { grid-template-columns: 1fr; gap: 32px; } }
-    .includes-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-    .includes-list li {
-      display: flex; align-items: flex-start; gap: 14px;
-      font-size: 0.95rem; font-weight: 500; color: var(--text);
+    .diff-body {
+      font-size: 1rem; color: var(--text-muted); line-height: 1.8;
+      margin-bottom: 28px;
     }
-    .includes-list li::before {
-      content: ''; flex-shrink: 0; margin-top: 4px; width: 18px; height: 18px;
-      border-radius: 50%; background: rgba(79,126,255,0.15);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%234F7EFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: center; background-size: 10px 8px;
-    }
-    .includes-aside {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
-      padding: 36px;
-    }
-    .includes-aside h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
-    .includes-aside p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 24px; }
-    .includes-aside .btn-blue { width: 100%; text-align: center; }
 
-    /* ─── CTA SECTION ─── */
-    .sp-cta {
-      background: var(--dark); border-top: 1px solid rgba(255,255,255,0.07);
-      padding: clamp(72px,8vw,120px) 0; text-align: center; position: relative; overflow: hidden;
+    /* Comparison table */
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table thead tr th {
+      padding: 12px 16px; font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
     }
-    .sp-cta::before {
-      content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 500px;
-      background: radial-gradient(ellipse, rgba(37,99,235,0.22) 0%, rgba(79,126,255,0.08) 45%, transparent 70%);
+    .compare-table thead tr th:first-child { text-align: left; color: var(--text-muted); }
+    .compare-table thead tr th:nth-child(2) {
+      text-align: center; color: var(--blue);
+      background: rgba(79,126,255,0.06);
+      border-radius: 8px 8px 0 0;
+    }
+    .compare-table thead tr th:last-child { text-align: center; color: var(--text-muted); }
+    .compare-table tbody tr td {
+      padding: 13px 16px; font-size: 0.86rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .compare-table tbody tr:last-child td { border-bottom: none; }
+    .compare-table tbody tr td:first-child { color: var(--text); }
+    .compare-table tbody tr td:nth-child(2) {
+      text-align: center;
+      background: rgba(79,126,255,0.04);
+      color: var(--blue);
+    }
+    .compare-table tbody tr td:last-child { text-align: center; color: var(--text-muted); }
+    .check-yes { color: #34D399; font-size: 1rem; }
+    .check-no  { color: rgba(255,255,255,0.2); font-size: 0.9rem; }
+    .compare-col-label {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .compare-col-label span:first-child { font-weight: 800; font-size: 0.85rem; }
+    .compare-col-label span:last-child { font-size: 0.72rem; font-weight: 400; opacity: 0.6; }
+
+    /* ─── PRICING ─── */
+    .pricing-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-top: 56px; align-items: start;
+    }
+    @media (max-width: 960px) { .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; } }
+
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex; flex-direction: column;
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured {
+      border-color: rgba(79,126,255,0.45);
+      background: rgba(79,126,255,0.05);
+      box-shadow: 0 0 60px rgba(79,126,255,0.1);
+    }
+    .pricing-card.featured::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+    .plan-badge {
+      display: inline-block;
+      background: var(--blue); color: #fff;
+      font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+      margin-bottom: 20px; align-self: flex-start;
+    }
+    .plan-name {
+      font-family: 'Geist','Inter',sans-serif;
+      font-size: 1.3rem; font-weight: 800;
+      color: var(--text); letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .plan-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 24px; }
+    .plan-price {
+      font-family: 'Geist','Inter',sans-serif;
+      font-size: 2.6rem; font-weight: 900;
+      color: var(--text); letter-spacing: -0.04em;
+      line-height: 1; margin-bottom: 4px;
+    }
+    .plan-price sup { font-size: 1.1rem; vertical-align: super; color: var(--text-muted); }
+    .plan-price span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+    .plan-divider { height: 1px; background: var(--border); margin: 24px 0; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .plan-features li {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 0.84rem; color: var(--text);
+    }
+    .plan-features li .fi {
+      flex-shrink: 0; width: 16px; height: 16px;
+      border-radius: 50%; background: rgba(52,211,153,0.12);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .plan-features li .fi::after {
+      content: '';
+      width: 8px; height: 8px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: contain; background-repeat: no-repeat; background-position: center;
+      display: block;
+    }
+    .plan-cta {
+      margin-top: 28px; padding: 12px 0;
+      border-radius: 8px; font-size: 0.88rem; font-weight: 700;
+      text-align: center; text-decoration: none; display: block;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .plan-cta-primary {
+      background: var(--blue); color: #fff;
+      box-shadow: 0 4px 20px rgba(79,126,255,0.35);
+    }
+    .plan-cta-primary:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .plan-cta-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .plan-cta-ghost:hover { background: var(--surface); border-color: rgba(255,255,255,0.16); }
+
+    /* ─── CASE STUDY ─── */
+    .casestudy-wrap {
+      position: relative; overflow: hidden;
+      border-radius: 24px;
+      padding: clamp(48px,6vw,80px) clamp(32px,5vw,72px);
+      background: rgba(79,126,255,0.04);
+      border: 1px solid rgba(79,126,255,0.18);
+      text-align: center;
+    }
+    .casestudy-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(79,126,255,0.1) 0%, transparent 70%);
       pointer-events: none;
     }
-    .sp-cta-inner { position: relative; z-index: 1; max-width: 620px; margin: 0 auto; }
-    .sp-cta h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 900; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
-    .sp-cta h2 .accent { color: var(--blue); }
-    .sp-cta p { font-size: 1rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 40px; }
-    .sp-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .casestudy-quote-mark {
+      font-family: 'Geist','Inter',sans-serif;
+      font-size: 6rem; line-height: 0.5;
+      color: rgba(79,126,255,0.2); font-weight: 900;
+      display: block; margin-bottom: 20px;
+      user-select: none;
+    }
+    .casestudy-quote {
+      font-family: 'Geist','Inter',sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 800; letter-spacing: -0.03em;
+      color: var(--text); line-height: 1.2;
+      margin-bottom: 24px; position: relative; z-index: 1;
+    }
+    .casestudy-quote .accent { color: var(--blue); }
+    .casestudy-attr {
+      font-size: 0.85rem; color: var(--text-muted);
+      position: relative; z-index: 1;
+      max-width: 480px; margin: 0 auto;
+      line-height: 1.65;
+    }
+    .casestudy-attr strong { color: var(--text); display: block; margin-bottom: 8px; font-size: 0.9rem; }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 16px; margin-top: 48px;
+    }
+    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
+    .testimonial-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+    .testimonial-card:hover { border-color: rgba(79,126,255,0.2); }
+    .testimonial-stars { color: #F59E0B; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .testimonial-text { font-size: 0.9rem; color: var(--text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(79,126,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.85rem; color: var(--blue); flex-shrink: 0;
+    }
+    .testimonial-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .testimonial-role { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ─── FINAL CTA ─── */
+    .cta-section {
+      padding: clamp(80px,10vw,140px) clamp(20px,4vw,80px);
+      text-align: center; position: relative; z-index: 1;
+    }
+    .cta-inner {
+      max-width: 640px; margin: 0 auto;
+      background: rgba(79,126,255,0.05);
+      border: 1px solid rgba(79,126,255,0.2);
+      border-radius: 24px;
+      padding: clamp(40px,5vw,72px) clamp(24px,4vw,60px);
+      position: relative; overflow: hidden;
+    }
+    .cta-inner::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+    }
+    .cta-glow {
+      position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+      width: 400px; height: 300px;
+      background: radial-gradient(ellipse, rgba(79,126,255,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-inner h2 {
+      font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 800;
+      letter-spacing: -0.03em; color: var(--text); margin-bottom: 16px;
+      position: relative; z-index: 1;
+    }
+    .cta-inner h2 .accent { color: var(--blue); }
+    .cta-inner p { font-size: 1rem; color: var(--text-muted); margin-bottom: 32px; position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 
     /* ─── FOOTER ─── */
-    footer { background: #09090b; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
-    .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; gap: 40px; margin-bottom: 48px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
-    .footer-logo img { height: 32px; filter: brightness(0) invert(1); }
-    .footer-logo span { font-size: 1.1rem; font-weight: 800; color: white; }
-    .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; color: rgba(255,255,255,0.5); }
-    .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.5); font-size: 0.82rem; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
-    .footer-newsletter h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 8px; }
-    .footer-newsletter p { font-size: 0.78rem; margin-bottom: 16px; line-height: 1.6; color: rgba(255,255,255,0.5); }
-    .footer-form { display: flex; flex-direction: column; gap: 10px; }
-    .footer-input { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 10px 14px; color: white; font-size: 0.8rem; outline: none; transition: border-color 0.2s; font-family: inherit; }
-    .footer-input::placeholder { color: rgba(255,255,255,0.3); }
-    .footer-input:focus { border-color: rgba(79,126,255,0.5); }
-    .btn-submit { background: #4F7EFF; color: white; border: none; padding: 10px; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; }
-    .btn-submit:hover { background: #3a6be8; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px clamp(20px,4vw,80px) 32px;
+      position: relative; z-index: 1;
+    }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+    .footer-brand { max-width: 280px; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 12px; }
+    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
+    .footer-logo span { font-size: 1rem; font-weight: 800; color: rgba(255,255,255,0.85); font-family: 'Geist','Inter',sans-serif; }
+    .footer-tagline { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+    .footer-links-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 0.84rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
+    .footer-copy a { color: rgba(255,255,255,0.4); text-decoration: none; }
     .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
-    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+    .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: var(--text-muted); }
 
-    /* ─── SCROLL FADE ─── */
+    /* ─── FADE-IN ─── */
     .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in.delay-1 { transition-delay: 0.1s; }
+    .fade-in.delay-2 { transition-delay: 0.2s; }
+    .fade-in.delay-3 { transition-delay: 0.3s; }
 
-    @media (max-width: 600px) {
-      .stats-row { flex-direction: column; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .stat-item:last-child { border-bottom: none; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+    @media (max-width: 768px) {
+      .cta-inner { padding: 40px 24px; }
     }
-
-  /* ─── LIGHT THEME ─── */
-  :root {
-    --text: #111111;
-    --text-muted: #555555;
-    --border: rgba(0,0,0,0.1);
-    --surface: #f5f5f5;
-  }
-  body {
-    background: #ffffff;
-    background-image: radial-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
-    background-size: 28px 28px;
-  }
-  .bg-glow { opacity: 0.25; }
-  /* Restore dark variables for footer only */
-  footer {
-    --text: #F8FAFC;
-    --text-muted: #94A3B8;
-    --border: rgba(255,255,255,0.08);
-    --surface: rgba(255,255,255,0.04);
-  }
-  footer { background: #09090b; }
-  /* White CTA section */
-  .sp-cta { background: #ffffff; border-top: 1px solid rgba(0,0,0,0.08); }
-  .sp-cta::before { opacity: 0.06; }
-  /* btn-ghost light override */
-  .btn-ghost { background: #f0f0f0; color: #444444; border: 1px solid #d1d5db; }
-  .btn-ghost:hover { background: #e5e7eb; color: #111111; }
-  /* Light navbar */
-  nav { border-bottom: 1px solid rgba(0,0,0,0.08); }
-  .nav-inner { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
-  .nav-logo img { filter: brightness(0); }
-  .nav-logo span { color: #111111; }
-  .nav-links a { color: rgba(0,0,0,0.55); }
-  .nav-links a:hover { color: #111111; background: rgba(0,0,0,0.05); }
-  .nav-links a.active { color: #111111; background: rgba(0,0,0,0.07); }
-  .lang-toggle { color: rgba(0,0,0,0.7); }
-  .hamburger span { background: rgba(0,0,0,0.75); }
-  .hamburger:hover { background: rgba(0,0,0,0.06); }
   </style>
 </head>
 <body>
-  <div class="bg-glow" aria-hidden="true"></div>
+  <div class="bg-glow"></div>
 
   <!-- ─── NAV ─── -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <img src="SynsLogo.png" alt="Visuanza" />
         <span>Visuanza</span>
       </a>
       <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
         <li class="nav-has-dropdown">
-          <a href="servicios.html" class="active">Servicios <span class="chevron">▾</span></a>
+          <a href="servicios.html" class="active">Servicios <span class="chevron">▼</span></a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-grid">
               <a href="redes-sociales.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span>
+                <div class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                </div>
+                <div class="ndi-text">
+                  <span class="ndi-title">Gestión de Redes</span>
+                  <span class="ndi-desc">Contenido y estrategia para Instagram, Google y más.</span>
+                </div>
               </a>
               <a href="diseno-web.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span></span>
+                <div class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+                </div>
+                <div class="ndi-text">
+                  <span class="ndi-title">Diseño Web</span>
+                  <span class="ndi-desc">Webs atractivas y funcionales para tu restaurante.</span>
+                </div>
               </a>
               <a href="fotografia-menu.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Imágenes de platos que abren el apetito</span></span>
+                <div class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                </div>
+                <div class="ndi-text">
+                  <span class="ndi-title">Fotografía de Menú</span>
+                  <span class="ndi-desc">Fotos profesionales que hacen que los platos se pidan solos.</span>
+                </div>
               </a>
-              <a href="marketing-digital.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Marketing Digital</span><span class="ndi-desc">Del folleto al feed, estrategia completa</span></span>
+              <a href="gestion-google.html" class="nav-dropdown-item">
+                <div class="ndi-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+                </div>
+                <div class="ndi-text">
+                  <span class="ndi-title">Google My Business</span>
+                  <span class="ndi-desc">Optimización de tu ficha de Google para atraer más clientes.</span>
+                </div>
               </a>
             </div>
           </div>
         </li>
-        <li><a href="index.html#producto">Producto</a></li>
-        <li><a href="index.html#estrategia">Estrategia</a></li>
-        <li><a href="index.html#quienes">Quiénes somos</a></li>
-        <li><a href="index.html#contacto">Contactar</a></li>
+        <li><a href="index.html#resultados">Resultados</a></li>
+        <li><a href="index.html#contacto">Contacto</a></li>
       </ul>
       <div class="nav-right">
-        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
-        <a href="index.html#contacto" class="btn-primary">Pedir propuesta</a>
+        <a href="index.html#contacto" class="btn-primary">Hablar con un experto</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </nav>
 
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <ul class="mobile-menu-links">
-      <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
-      <li><a href="index.html#producto" class="mobile-menu-link">Producto</a></li>
-      <li><a href="index.html#estrategia" class="mobile-menu-link">Estrategia</a></li>
-      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
-      <li><a href="index.html#contacto" class="mobile-menu-link">Contactar</a></li>
-    </ul>
-    <div class="mobile-menu-bottom">
-      <button class="mobile-lang">🇪🇸 ES ▾</button>
-      <a href="index.html#contacto" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">✦ Servicio 01 · Gestión de Redes Sociales</div>
+      <h1>Redes sociales que llenan mesas,<br/>no solo <span class="accent">pantallas</span></h1>
+      <p class="hero-sub">Nos enfocamos en los resultados reales — más clientes, más ventas. No solo visitas en redes.</p>
+      <div class="hero-pills">
+        <span class="pill"><span class="pill-dot"></span>Más clientes leales</span>
+        <span class="pill"><span class="pill-dot"></span>Más ventas</span>
+        <span class="pill"><span class="pill-dot"></span>Mayor visibilidad</span>
+        <span class="pill"><span class="pill-dot"></span>Ventaja competitiva</span>
+      </div>
+      <div>
+        <a href="index.html#contacto" class="btn-blue">Contactar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ─── -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">Instagram</div>
+      <div class="marquee-item">TikTok</div>
+      <div class="marquee-item">Google Maps</div>
+      <div class="marquee-item">Reels</div>
+      <div class="marquee-item">Stories</div>
+      <div class="marquee-item">Contenido viral</div>
+      <div class="marquee-item">Más reservas</div>
+      <div class="marquee-item">Más ventas</div>
+      <div class="marquee-item">Sin permanencia</div>
+      <div class="marquee-item">Instagram</div>
+      <div class="marquee-item">TikTok</div>
+      <div class="marquee-item">Google Maps</div>
+      <div class="marquee-item">Reels</div>
+      <div class="marquee-item">Stories</div>
+      <div class="marquee-item">Contenido viral</div>
+      <div class="marquee-item">Más reservas</div>
+      <div class="marquee-item">Más ventas</div>
+      <div class="marquee-item">Sin permanencia</div>
     </div>
   </div>
 
-  <!-- ─── HERO ─── -->
-  <section class="sp-hero">
-    <div class="sp-hero-inner">
-      <div class="sp-badge">✦ Servicio 01 · Redes Sociales</div>
-      <h1>Presencia en redes que<br/><span class="accent">llena mesas.</span></h1>
-      <p>Gestionamos tu Instagram, Facebook y TikTok con contenido de calidad, diseño profesional y estrategia real. Tus clientes te encuentran, te siguen y reservan.</p>
-      <div class="sp-hero-cta">
-        <a href="index.html#contacto" class="btn-blue">Pedir propuesta gratis</a>
-        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
-      </div>
-      <div class="stats-row fade-in">
-        <div class="stat-item">
-          <div class="stat-num">3<span>x</span></div>
-          <div class="stat-lbl">Más alcance orgánico</div>
+  <!-- ─── DIFFERENTIATOR ─── -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="diff-layout">
+        <!-- Left col: copy -->
+        <div class="fade-in">
+          <span class="section-label">¿Por qué Visuanza?</span>
+          <h2 class="section-heading">No somos<br/>como los <span class="accent">demás</span></h2>
+          <p class="diff-body">Entendemos el sector de la restauración a fondo. Nuestro foco está en aumentar tu facturación — no en acumular visualizaciones. Precios claros, sin permanencia, adaptados a cada restaurante.</p>
+          <a href="index.html#contacto" class="btn-blue" style="display:inline-block;">Empezar ahora</a>
         </div>
-        <div class="stat-item">
-          <div class="stat-num">48<span>h</span></div>
-          <div class="stat-lbl">Para la primera publicación</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">100<span>%</span></div>
-          <div class="stat-lbl">Contenido personalizado</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── QUÉ INCLUYE ─── -->
-  <section class="sp-section">
-    <div class="container">
-      <p class="section-label">Lo que hacemos</p>
-      <h2>Gestión completa de <span class="accent">redes sociales</span></h2>
-      <p>No solo publicamos fotos. Construimos una presencia digital coherente, estratégica y atractiva que convierte seguidores en clientes y clientes en fans.</p>
-      <div class="feature-grid fade-in">
-        <div class="feature-card">
-          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div>
-          <h3>Estrategia de contenido</h3>
-          <p>Planificamos cada publicación con propósito: promociones, platos del día, eventos y storytelling de marca.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01M15 9h.01"/></svg></div>
-          <h3>Diseño gráfico incluido</h3>
-          <p>Cada post diseñado con tu paleta de colores, tipografía y estética para que tu marca sea reconocible al instante.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Gestión de comunidad</h3>
-          <p>Respondemos comentarios, mensajes directos y reseñas. Tu restaurante siempre presente y cercano.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <h3>Métricas reales</h3>
-          <p>Informe mensual con alcance, interacciones, nuevos seguidores y conversiones. Sin humo, solo datos.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></div>
-          <h3>Instagram, Facebook y TikTok</h3>
-          <p>Presencia activa en las plataformas donde están tus clientes. Cada red con su formato y frecuencia óptima.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3>Sin contratos largos</h3>
-          <p>Planes mensuales que puedes ajustar cuando quieras. Confiamos en los resultados, no en cláusulas de permanencia.</p>
+        <!-- Right col: comparison table -->
+        <div class="fade-in delay-1">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>
+                  <div class="compare-col-label">
+                    <span>Visuanza</span>
+                    <span>tu agencia</span>
+                  </div>
+                </th>
+                <th>
+                  <div class="compare-col-label">
+                    <span>Otros</span>
+                    <span>agencias genéricas</span>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Conocimiento del sector hostelero</td>
+                <td><span class="check-yes">✓</span></td>
+                <td><span class="check-no">✗</span></td>
+              </tr>
+              <tr>
+                <td>Estrategia que impacta en caja</td>
+                <td><span class="check-yes">✓</span></td>
+                <td><span class="check-no">✗</span></td>
+              </tr>
+              <tr>
+                <td>Precios claros sin letra pequeña</td>
+                <td><span class="check-yes">✓</span></td>
+                <td><span class="check-no">✗</span></td>
+              </tr>
+              <tr>
+                <td>Sin permanencia forzada</td>
+                <td><span class="check-yes">✓</span></td>
+                <td><span class="check-no">✗</span></td>
+              </tr>
+              <tr>
+                <td>Grabación en tu local</td>
+                <td><span class="check-yes">✓</span></td>
+                <td><span class="check-no">✗</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── QUÉ INCLUYE DETALLE ─── -->
-  <section class="sp-section">
-    <div class="container">
-      <div class="includes-split">
-        <div>
-          <p class="section-label">Todo incluido</p>
-          <h2>Lo que recibes cada <span class="accent">mes</span></h2>
-          <p style="margin-bottom: 32px;">Un servicio completo, listo para publicar. Sin que tengas que preocuparte de nada.</p>
-          <ul class="includes-list">
-            <li>Estrategia mensual personalizada para tu restaurante</li>
-            <li>16–20 publicaciones mensuales (feed + stories)</li>
-            <li>Diseño gráfico profesional para cada publicación</li>
-            <li>Reels y vídeos cortos para TikTok e Instagram</li>
-            <li>Gestión de comentarios y DMs en horario de apertura</li>
-            <li>Respuesta a reseñas en Google y redes sociales</li>
-            <li>Informe mensual de resultados con métricas clave</li>
-            <li>Reunión mensual de revisión y ajuste de estrategia</li>
+  <!-- ─── PRICING ─── -->
+  <section class="section" style="background: rgba(255,255,255,0.015);">
+    <div class="section-inner">
+      <div style="text-align:center;" class="fade-in">
+        <span class="section-label" style="justify-content:center;">Planes</span>
+        <h2 class="section-heading">Aquí empieza el <span class="accent">camino</span></h2>
+        <p class="section-sub" style="margin:0 auto;">Sin permanencia. Adaptado a tu restaurante.</p>
+      </div>
+      <div class="pricing-grid">
+
+        <!-- Basic -->
+        <div class="pricing-card fade-in delay-1">
+          <div class="plan-name">Basic</div>
+          <p class="plan-desc">Para restaurantes que quieren empezar a destacar</p>
+          <div class="plan-price"><sup>€</sup>700<span>/mes</span></div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="fi"></span>1 grabación/mes</li>
+            <li><span class="fi"></span>2 vídeos/mes</li>
+            <li><span class="fi"></span>6 fotos/mes</li>
+            <li><span class="fi"></span>Gestión redes sociales</li>
+            <li><span class="fi"></span>Optimización Google</li>
+            <li><span class="fi"></span>Gestión perfil Google</li>
           </ul>
+          <a href="index.html#contacto" class="plan-cta plan-cta-ghost">Empezar con Basic</a>
         </div>
-        <div class="includes-aside fade-in">
-          <h3>¿Por qué Visuanza?</h3>
-          <p>Trabajamos exclusivamente con restaurantes. Conocemos las temporadas, las promociones que funcionan y cómo fotografiar un plato para que se vea irresistible en el feed.</p>
-          <p style="margin-top: 16px; font-size: 0.875rem; color: var(--text-muted);">Clientes activos con nosotros consiguen de media un 40% más de interacciones en sus primeros 90 días.</p>
-          <br/>
-          <a href="index.html#contacto" class="btn-blue">Pedir análisis gratuito</a>
+
+        <!-- Pro (featured) -->
+        <div class="pricing-card featured fade-in delay-2">
+          <span class="plan-badge">Más popular</span>
+          <div class="plan-name">Pro</div>
+          <p class="plan-desc">Para restaurantes que quieren más clientes fieles y más ventas</p>
+          <div class="plan-price"><sup>€</sup>1.100<span>/mes</span></div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="fi"></span>1 grabación/mes</li>
+            <li><span class="fi"></span>4 vídeos/mes</li>
+            <li><span class="fi"></span>4 fotos/mes</li>
+            <li><span class="fi"></span>Gestión redes sociales</li>
+            <li><span class="fi"></span>Estrategia redes sociales</li>
+            <li><span class="fi"></span>Marketing digital</li>
+            <li><span class="fi"></span>IA de targeting avanzado</li>
+          </ul>
+          <a href="index.html#contacto" class="plan-cta plan-cta-primary">Empezar con Pro</a>
+        </div>
+
+        <!-- Turbo -->
+        <div class="pricing-card fade-in delay-3">
+          <div class="plan-name">Turbo</div>
+          <p class="plan-desc">Para restaurantes que quieren crecer rápido con nuevos clientes</p>
+          <div class="plan-price"><sup>€</sup>2.200<span>/mes</span></div>
+          <div class="plan-divider"></div>
+          <ul class="plan-features">
+            <li><span class="fi"></span>1 grabación/mes</li>
+            <li><span class="fi"></span>12 vídeos/mes</li>
+            <li><span class="fi"></span>8 fotos/mes</li>
+            <li><span class="fi"></span>Gestión redes sociales</li>
+            <li><span class="fi"></span>Estrategia redes sociales</li>
+            <li><span class="fi"></span>Marketing digital</li>
+            <li><span class="fi"></span>IA de targeting avanzado</li>
+          </ul>
+          <a href="index.html#contacto" class="plan-cta plan-cta-ghost">Empezar con Turbo</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CASE STUDY ─── -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="casestudy-wrap fade-in">
+        <span class="casestudy-quote-mark">"</span>
+        <p class="casestudy-quote">Aumentamos la caja diaria cerca<br/>de un <span class="accent">50%</span></p>
+        <p class="casestudy-attr">
+          <strong>— Stuvstagrillen</strong>
+          Desde enero de 2024, ayudamos a Stuvstagrillen a superar sus retos y conseguir la visibilidad que necesitaban. En cuestión de meses, notaron un incremento real y sostenido en su facturación diaria.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── TESTIMONIALS ─── -->
+  <section class="section" style="background: rgba(255,255,255,0.015);">
+    <div class="section-inner">
+      <div class="fade-in">
+        <span class="section-label">Testimonios</span>
+        <h2 class="section-heading">Lo que dicen nuestros <span class="accent">clientes</span></h2>
+        <p class="section-sub">Restaurantes reales, resultados reales.</p>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-in delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Vídeos e imágenes increíbles. Lo recomiendo a cualquier restaurante que quiera gestionar sus redes de forma profesional y que realmente genere resultados."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">G</div>
+            <div>
+              <div class="testimonial-name">George R.</div>
+              <div class="testimonial-role">Dripp'n Burgers · Málaga</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Equipo fantástico. Creatividad, calidad y trato excelente. Les daría 6 estrellas si pudiera. El impacto en nuestras redes fue visible desde el primer mes."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">G</div>
+            <div>
+              <div class="testimonial-name">Garo A.</div>
+              <div class="testimonial-role">Stuvsta Grillen · Estocolmo</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card fade-in delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Profesionales y comprometidos. El resultado final, tanto en vídeo como en fotos, es simplemente sobresaliente. Han transformado cómo nos ven nuestros clientes."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Mansour K.</div>
+              <div class="testimonial-role">BBK · Barcelona</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── CTA ─── -->
-  <section class="sp-cta">
-    <div class="sp-cta-inner">
-      <p class="section-label" style="justify-content: center;">Empieza hoy</p>
-      <h2>¿Listo para ser el restaurante <span class="accent">más visible</span> de tu zona?</h2>
-      <p>Solicita un análisis gratuito de tus redes sociales. Sin compromiso, sin letra pequeña.</p>
-      <div class="sp-cta-btns">
-        <a href="index.html#contacto" class="btn-blue">Solicitar análisis gratis</a>
+  <!-- ─── FINAL CTA ─── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <div class="cta-glow"></div>
+      <h2>¿Listo para llenar tu <span class="accent">restaurante?</span></h2>
+      <p>Más de 30 restaurantes ya confían en Visuanza para su crecimiento en redes. Empieza hoy, sin permanencia.</p>
+      <div class="cta-btns">
+        <a href="index.html#contacto" class="btn-blue">Empezar ahora</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
       </div>
     </div>
@@ -521,81 +778,54 @@
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Visuanza" />
-          <span>Visuanza</span>
-        </a>
-        <p class="footer-desc">Con Visuanza, tu empresa local puede mejorar su clasificación en los principales motores de búsqueda, lo que te ayuda a atraer a más clientes locales.</p>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="SynsLogo.png" alt="Visuanza" />
+            <span>Visuanza</span>
+          </a>
+          <p class="footer-tagline">Visibilidad digital para restaurantes. Una empresa de SynsNu (Suecia).</p>
+        </div>
+        <div>
+          <div class="footer-links-title">Servicios</div>
+          <ul class="footer-links">
+            <li><a href="redes-sociales.html">Gestión de Redes</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
+            <li><a href="gestion-google.html">Google My Business</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-links-title">Empresa</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#resultados">Resultados</a></li>
+            <li><a href="index.html#contacto">Contacto</a></li>
+          </ul>
+        </div>
       </div>
-
-      <div class="footer-col">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="redes-sociales.html">Redes Sociales</a></li>
-          <li><a href="diseno-web.html">Diseño Web</a></li>
-          <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="marketing-digital.html">Marketing Digital</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Navegar</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="servicios.html">Servicios</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Sociales</h4>
-        <ul>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">LinkedIn</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-newsletter">
-        <h4>Descubra sus oportunidades locales</h4>
-        <p>Comparta su nombre y te contactaremos con un plan personalizado para mejorar tu alcance local.</p>
-        <div class="footer-form">
-          <input type="text" class="footer-input" placeholder="Nombre" />
-          <input type="email" class="footer-input" placeholder="Email address" />
-          <button class="btn-submit">Enviar</button>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Visuanza · Una marca de <a href="#">SynsNu AB</a></p>
+        <div class="footer-legal">
+          <a href="#">Privacidad</a>
+          <a href="#">Cookies</a>
+          <a href="#">Aviso Legal</a>
         </div>
       </div>
     </div>
-
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
-      <div class="footer-legal">
-        <a href="#">Condiciones de servicio</a>
-        <a href="#">Política de privacidad</a>
-      </div>
-    </div>
-    </div><!-- /footer-inner -->
   </footer>
 
   <script>
-    // Scroll fade-in
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    var fadeEls = document.querySelectorAll('.fade-in');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
       });
     }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-    setTimeout(() => document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible')), 300);
-
-    // Hamburger
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-    function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-    function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
-    document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+    fadeEls.forEach(function(el) { observer.observe(el); });
   </script>
 </body>
 </html>
