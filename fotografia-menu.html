@@ -309,34 +309,33 @@
       top: 0; left: 0;
       width: 100%; height: 100%;
       overflow: hidden;
-      padding: clamp(14px,2vw,28px) clamp(20px,3.5vw,48px);
+      padding: clamp(36px,5vw,64px) clamp(28px,4vw,56px) clamp(24px,3vw,40px);
       will-change: transform, opacity;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 0;
+      justify-content: flex-start;
     }
-    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); gap: 8px; }
-    .cam-panel .feature-card { padding: 14px; }
-    .cam-panel .feature-card h3 { font-size: 0.86rem; margin-bottom: 3px; }
-    .cam-panel .feature-card p { font-size: 0.77rem; line-height: 1.45; }
-    .cam-panel .feature-icon { width: 30px; height: 30px; margin-bottom: 8px; }
-    .cam-panel .feature-icon svg { width: 15px; height: 15px; }
-    .cam-panel h1 { font-size: clamp(1.6rem,2.8vw,2.4rem); margin-bottom: 6px; }
-    .cam-panel h2 { font-size: clamp(1.3rem,2vw,1.8rem); margin-bottom: 6px; }
-    .cam-panel .section-label { margin-bottom: 6px; }
-    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 12px; gap: 8px; }
-    .cam-panel .btn-blue, .cam-panel .btn-ghost { padding: 11px 20px; font-size: 0.88rem; }
-    .cam-panel > p[style] { margin-top: 0 !important; margin-bottom: 10px !important; }
+    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 4px; }
+    .cam-panel .feature-card { padding: 18px; }
+    .cam-panel .feature-card h3 { font-size: 0.9rem; margin-bottom: 5px; }
+    .cam-panel .feature-card p { font-size: 0.8rem; line-height: 1.5; }
+    .cam-panel .feature-icon { width: 34px; height: 34px; margin-bottom: 10px; }
+    .cam-panel .feature-icon svg { width: 16px; height: 16px; }
+    .cam-panel h1 { font-size: clamp(1.7rem,2.8vw,2.5rem); margin-bottom: 10px; }
+    .cam-panel h2 { font-size: clamp(1.35rem,2.2vw,1.9rem); margin-bottom: 8px; }
+    .cam-panel .section-label { margin-bottom: 8px; }
+    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 16px; gap: 10px; }
+    .cam-panel .btn-blue, .cam-panel .btn-ghost { padding: 12px 22px; font-size: 0.9rem; }
+    .cam-panel > p[style] { margin-top: 0 !important; margin-bottom: 12px !important; }
     /* Compact includes inside camera panels */
-    .cam-panel .includes-split { grid-template-columns: 1.3fr 1fr; gap: 12px; margin-top: 8px; }
-    .cam-panel .includes-list { gap: 6px; }
-    .cam-panel .includes-list li { font-size: 0.78rem; gap: 8px; }
-    .cam-panel .includes-list li::before { width: 14px; height: 14px; flex-shrink: 0; margin-top: 3px; background-size: 9px 7px; }
-    .cam-panel .includes-aside { padding: 14px; border-radius: 12px; }
-    .cam-panel .includes-aside h3 { font-size: 0.88rem; margin-bottom: 5px; }
-    .cam-panel .includes-aside p { font-size: 0.74rem; margin-bottom: 6px; line-height: 1.5; }
-    .cam-panel .includes-aside .btn-blue { padding: 9px 14px; font-size: 0.8rem; margin-top: 8px; width: 100%; text-align: center; }
+    .cam-panel .includes-split { grid-template-columns: 1.3fr 1fr; gap: 16px; margin-top: 12px; }
+    .cam-panel .includes-list { gap: 10px; }
+    .cam-panel .includes-list li { font-size: 0.82rem; gap: 10px; }
+    .cam-panel .includes-list li::before { width: 15px; height: 15px; flex-shrink: 0; margin-top: 3px; background-size: 9px 7px; }
+    .cam-panel .includes-aside { padding: 18px; border-radius: 14px; }
+    .cam-panel .includes-aside h3 { font-size: 0.95rem; margin-bottom: 8px; }
+    .cam-panel .includes-aside p { font-size: 0.78rem; margin-bottom: 8px; line-height: 1.55; }
+    .cam-panel .includes-aside .btn-blue { padding: 11px 16px; font-size: 0.84rem; margin-top: 12px; width: 100%; text-align: center; }
     @media (min-width: 769px) { #cam-content { display: none; } }
     @media (max-width: 768px) {
       #cam-section { display: none; }
