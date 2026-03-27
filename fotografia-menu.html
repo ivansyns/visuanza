@@ -127,7 +127,7 @@
 
     /* ─── HERO ─── */
     .sp-hero {
-      padding: 150px 0 100px;
+      padding: 150px 0 60px;
       position: relative; text-align: center;
     }
     .sp-hero::before {
@@ -279,7 +279,7 @@
 
     /* ─── CAMERA SCROLL ANIMATION ─── */
     #cam-section {
-      height: 500vh;
+      height: 380vh;
       position: relative;
       background: transparent;
     }
@@ -308,19 +308,24 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      overflow-y: auto;
-      padding: clamp(32px,4vw,64px) clamp(24px,4vw,56px);
+      overflow: hidden;
+      padding: clamp(20px,3vw,44px) clamp(20px,3.5vw,48px);
       will-change: transform, opacity;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    .cam-panel::-webkit-scrollbar { width: 4px; }
-    .cam-panel::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
-    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); }
-    .cam-panel h1 { font-size: clamp(1.8rem,3vw,2.8rem); }
-    .cam-panel h2 { font-size: clamp(1.4rem,2.2vw,2rem); }
-    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 20px; }
+    .cam-panel .feature-grid { grid-template-columns: repeat(2,1fr); gap: 10px; }
+    .cam-panel .feature-card { padding: 16px; }
+    .cam-panel .feature-card h3 { font-size: 0.88rem; margin-bottom: 4px; }
+    .cam-panel .feature-card p { font-size: 0.78rem; line-height: 1.5; }
+    .cam-panel .feature-icon { width: 34px; height: 34px; margin-bottom: 10px; }
+    .cam-panel .feature-icon svg { width: 16px; height: 16px; }
+    .cam-panel h1 { font-size: clamp(1.6rem,2.8vw,2.4rem); }
+    .cam-panel h2 { font-size: clamp(1.3rem,2vw,1.8rem); margin-bottom: 10px; }
+    .cam-panel .section-label { margin-bottom: 10px; }
+    .cam-panel .sp-hero-cta { justify-content: flex-start; margin-top: 16px; }
+    .cam-panel > p[style] { margin-top: 0 !important; margin-bottom: 14px !important; }
     @media (min-width: 769px) { #cam-content { display: none; } }
     @media (max-width: 768px) {
       #cam-section { display: none; }
