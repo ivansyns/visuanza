@@ -351,16 +351,17 @@
     @media (max-width: 860px) { .session-grid { grid-template-columns: 1fr; max-width: 400px; } }
     .session-card { padding: 36px 28px; border-radius: 20px; display: flex; flex-direction: column; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); position: relative; transition: border-color 0.2s; }
     .session-card:hover { border-color: rgba(255,255,255,0.14); }
-    .session-card.session-featured { background: #ffffff; border-color: transparent; box-shadow: 0 24px 64px rgba(0,0,0,0.45); }
+    .session-card.session-featured {
+      background: var(--gray-dark);
+      border: 1px solid rgba(79,126,255,0.5);
+      box-shadow: 0 0 40px rgba(79,126,255,0.1), inset 0 1px 0 rgba(255,255,255,0.07);
+      color: var(--text);
+    }
     .session-badge { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #4F7EFF; margin-bottom: 6px; }
     .session-name { font-family: 'Urbanist',sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .session-card.session-featured .session-name { color: #111; }
     .session-price { font-family: 'Urbanist',sans-serif; font-size: 2.4rem; font-weight: 900; letter-spacing: -0.04em; color: #ffffff; line-height: 1; margin-bottom: 8px; }
-    .session-card.session-featured .session-price { color: #111111; }
     .session-price span { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.32); letter-spacing: 0; }
-    .session-card.session-featured .session-price span { color: #999; }
     .session-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
-    .session-card.session-featured .session-desc { color: #666; }
   </style>
 </head>
 <body>
@@ -431,22 +432,8 @@
       <h1 class="hero-el">Platos que se ven tan bien que<br/><span class="accent">se piden solos.</span></h1>
       <p class="hero-el">Fotografiar bien tu menú no es un lujo — es el paso más rápido que puedes dar para vender más online. Cada plato, irresistible.</p>
       <div class="sp-hero-cta hero-el">
-        <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+        <a href="contacto.html" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
-      </div>
-      <div class="stats-row fade-in">
-        <div class="stat-item">
-          <div class="stat-num">+<span>30</span>%</div>
-          <div class="stat-lbl">Más pedidos online</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num"><span>48</span>h</div>
-          <div class="stat-lbl">Entrega de fotos editadas</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num"><span>∞</span></div>
-          <div class="stat-lbl">Derechos ilimitados</div>
-        </div>
       </div>
     </div>
   </section>
@@ -521,7 +508,7 @@
           </span>
           <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
         </div>
-        <a href="index.html#contacto" class="pn-action pn-outline">Reservar sesión</a>
+        <a href="contacto.html" class="pn-action pn-outline">Reservar sesión</a>
       </div>
 
       <!-- Estándar (featured) -->
@@ -545,7 +532,7 @@
           </span>
           <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
         </div>
-        <a href="index.html#contacto" class="pn-action pn-solid">Reservar sesión</a>
+        <a href="contacto.html" class="pn-action pn-solid">Reservar sesión</a>
       </div>
 
       <!-- Campaña -->
@@ -568,7 +555,7 @@
           </span>
           <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
         </div>
-        <a href="index.html#contacto" class="pn-action pn-outline">Reservar sesión</a>
+        <a href="contacto.html" class="pn-action pn-outline">Reservar sesión</a>
       </div>
 
     </div>
@@ -581,7 +568,7 @@
       <h2>¿Listo para que tus platos <span class="accent">se pidan solos?</span></h2>
       <p>Reserva tu sesión fotográfica. Sin compromiso, sin letra pequeña.</p>
       <div class="sp-cta-btns">
-        <a href="index.html#contacto" class="btn-blue">Reservar sesión fotográfica</a>
+        <a href="contacto.html" class="btn-blue">Reservar sesión fotográfica</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
       </div>
     </div>
@@ -605,7 +592,7 @@
             <li><a href="redes-sociales.html">Redes Sociales</a></li>
             <li><a href="diseno-web.html">Diseño Web</a></li>
             <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-            <li><a href="marketing-digital.html">Marketing Digital</a></li>
+            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
           </ul>
         </div>
 
