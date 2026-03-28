@@ -7,20 +7,23 @@
   <title>Servicios – Visuanza</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
       --blue:       #4F7EFF;
       --blue-dark:  #3a6be8;
-      --black:      #0a0a0a;
-      --dark:       #111111;
-      --gray-mid:   #555;
-      --gray-light: #f5f5f5;
+      --black:      #09090b;
+      --dark:       #111118;
+      --gray-dark:  #1c1c2e;
+      --gray-mid:   rgba(255,255,255,0.45);
+      --gray-light: rgba(255,255,255,0.05);
       --white:      #ffffff;
-      --text:       #1a1a1a;
-      --text-muted: #666;
+      --text:       #F8FAFC;
+      --text-muted: #94A3B8;
+      --border:     rgba(255,255,255,0.08);
+      --surface:    rgba(255,255,255,0.04);
       --radius:     12px;
       --radius-lg:  20px;
     }
@@ -28,11 +31,27 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'DM Sans', sans-serif;
       color: var(--text);
-      background: var(--white);
+      background: var(--black);
       overflow-x: hidden;
       line-height: 1.6;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.022) 0px,
+        rgba(255,255,255,0.022) 1px,
+        transparent 1px,
+        transparent 18px
+      );
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9999;
     }
 
     /* ─── CONTAINER ─── */
@@ -44,7 +63,7 @@
       padding-right: clamp(8px, 1.5vw, 24px);
     }
 
-    h1, h2, h3, h4 { font-family: 'Geist', 'Inter', sans-serif; }
+    h1, h2, h3, h4 { font-family: 'Urbanist', sans-serif; }
 
     /* ─── NAV ─── */
     nav {
@@ -90,7 +109,7 @@
       font-weight: 800;
       color: rgba(255,255,255,0.92);
       letter-spacing: -0.02em;
-      font-family: 'Geist', 'Inter', sans-serif;
+      font-family: 'Urbanist', sans-serif;
     }
 
     .nav-links {
@@ -264,8 +283,8 @@
 
     .btn-outline {
       background: transparent;
-      color: #1a1a1a;
-      border: 1.5px solid rgba(0,0,0,0.14);
+      color: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(255,255,255,0.18);
       padding: 12px 24px;
       border-radius: 8px;
       font-size: 0.9rem;
@@ -277,6 +296,19 @@
       font-family: inherit;
     }
     .btn-outline:hover { border-color: #4F7EFF; color: #4F7EFF; transform: translateY(-1px); }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      padding-left: 10px;
+      border-left: 2px solid var(--blue);
+      margin-bottom: 1rem;
+    }
 
     /* ─── HAMBURGER ─── */
     .hamburger {
@@ -331,7 +363,7 @@
     .mobile-menu-links a {
       display: block; text-align: center; text-decoration: none;
       color: rgba(255,255,255,0.75); font-size: 1.35rem; font-weight: 600;
-      font-family: 'Geist', 'Inter', sans-serif; letter-spacing: -0.02em;
+      font-family: 'Urbanist', sans-serif; letter-spacing: -0.02em;
       padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
       transition: color 0.2s;
     }
@@ -354,11 +386,11 @@
 
     /* ─── HERO ─── */
     .hero {
-      padding: 140px 0 80px;
-      background: var(--white);
+      background: linear-gradient(160deg, #1A1A2E 0%, #0D0D1A 100%);
+      padding: 160px 24px 80px;
+      text-align: center;
       position: relative;
       overflow: hidden;
-      text-align: center;
     }
 
     .hero::before {
@@ -387,7 +419,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: #f0f4ff;
+      background: rgba(79,126,255,0.12);
       color: var(--blue);
       font-size: 0.78rem;
       font-weight: 600;
@@ -402,7 +434,7 @@
       font-weight: 900;
       line-height: 1.08;
       letter-spacing: -0.03em;
-      color: var(--black);
+      color: var(--text);
       margin-bottom: 20px;
     }
 
@@ -428,7 +460,6 @@
     /* ─── SERVICES GRID ─── */
     .services-section {
       padding: clamp(40px, 6vw, 80px) 0 clamp(80px, 10vw, 140px);
-      background: var(--white);
     }
 
     .services-grid {
@@ -442,19 +473,20 @@
     }
 
     .service-card {
-      background: var(--white);
-      border: 1px solid #EBEBEB;
+      background: var(--gray-dark);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: clamp(32px, 3.5vw, 52px);
-      position: relative;
-      overflow: hidden;
-      transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
+      transition: border-color 0.25s, transform 0.25s;
     }
 
     .service-card:hover {
-      box-shadow: 0 16px 56px rgba(79,126,255,0.10);
-      transform: translateY(-4px);
-      border-color: rgba(79,126,255,0.25);
+      border-color: rgba(79,126,255,0.35);
+      transform: translateY(-3px);
     }
 
     /* Subtle gradient accent top-left on hover */
@@ -475,7 +507,7 @@
       width: 56px;
       height: 56px;
       border-radius: 14px;
-      background: #f0f4ff;
+      background: rgba(79,126,255,0.1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -495,7 +527,7 @@
       top: 28px; right: 32px;
       font-size: 4.5rem;
       font-weight: 900;
-      color: rgba(0,0,0,0.04);
+      color: rgba(255,255,255,0.04);
       line-height: 1;
       letter-spacing: -0.04em;
       pointer-events: none;
@@ -506,7 +538,7 @@
       font-size: clamp(1.25rem, 2vw, 1.55rem);
       font-weight: 800;
       letter-spacing: -0.025em;
-      color: var(--black);
+      color: var(--text);
       margin-bottom: 10px;
     }
 
@@ -549,7 +581,7 @@
       margin-top: 5px;
       width: 16px; height: 16px;
       border-radius: 50%;
-      background: #eef2ff;
+      background: rgba(79,126,255,0.15);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%234F7EFF' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: center;
@@ -565,13 +597,14 @@
     .service-divider {
       width: 100%;
       height: 1px;
-      background: #F0F0F0;
+      background: var(--border);
       margin-bottom: 36px;
     }
 
     /* ─── CTA BANNER ─── */
     .cta-banner {
-      background: var(--black);
+      background: var(--gray-dark);
+      border-top: 1px solid var(--border);
       padding: clamp(56px, 7vw, 96px) clamp(8px, 1.5vw, 24px);
       text-align: center;
       position: relative;
@@ -671,23 +704,6 @@
       .footer-bottom { flex-direction: column; text-align: center; }
     }
 
-  /* ─── LIGHT NAV ─── */
-  nav { border-bottom: 1px solid rgba(0,0,0,0.08); }
-  .nav-inner { background: rgba(255,255,255,0.85) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border: 1px solid rgba(0,0,0,0.08) !important; box-shadow: 0 2px 16px rgba(0,0,0,0.08) !important; }
-  .nav-logo img { filter: brightness(0) !important; }
-  .nav-logo span { color: #111111 !important; }
-  .nav-links a { color: rgba(0,0,0,0.55) !important; }
-  .nav-links a:hover { color: #111111 !important; background: rgba(0,0,0,0.05) !important; }
-  .nav-links a.active { color: #111111 !important; background: rgba(0,0,0,0.07) !important; }
-  .lang-toggle { color: rgba(0,0,0,0.7) !important; }
-  .hamburger span { background: rgba(0,0,0,0.75) !important; }
-  .hamburger:hover { background: rgba(0,0,0,0.06) !important; }
-
-  /* ─── WHITE CTA ─── */
-  .cta-banner { background: #ffffff !important; border-top: 1px solid rgba(0,0,0,0.08) !important; }
-  .cta-banner::before { opacity: 0.06; }
-  .cta-banner h2 { color: #111111 !important; }
-  .cta-banner p { color: #555555 !important; }
   </style>
 </head>
 <body>
@@ -864,27 +880,27 @@
         </div>
       </div>
 
-      <!-- 4. Marketing Digital -->
-      <div class="service-card fade-in" id="marketing-digital" style="transition-delay: 0.2s;">
+      <!-- 4. Publicidad Digital -->
+      <div class="service-card fade-in" id="publicidad-digital" style="transition-delay: 0.2s;">
         <span class="service-number">04</span>
         <div class="service-icon-wrap">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/>
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
           </svg>
         </div>
-        <h2>Marketing Digital</h2>
-        <p class="service-tagline">Del folleto al feed, todo integrado</p>
+        <h2>Publicidad Digital</h2>
+        <p class="service-tagline">Meta Ads y TikTok Ads que llenan mesas</p>
         <div class="service-divider"></div>
-        <p class="service-desc">Desde folletos impresos hasta contenido digital para redes sociales y newsletters. Una estrategia de marketing completa para que tu restaurante no pare de crecer.</p>
+        <p class="service-desc">Gestionamos tus campañas publicitarias en Meta y TikTok con creatividades reales y segmentación local precisa. Tú pones el presupuesto, nosotros lo hacemos rendir.</p>
         <ul class="service-benefits">
-          <li>Campañas de email marketing segmentadas</li>
-          <li>Diseño de folletos y materiales impresos</li>
-          <li>Publicidad en Google y redes sociales</li>
-          <li>Gestión de Google My Business y reseñas</li>
-          <li>Newsletter mensual para clientes fidelizados</li>
+          <li>Campañas de Meta Ads (Facebook e Instagram) gestionadas</li>
+          <li>Campañas de TikTok Ads para clientes locales</li>
+          <li>Creatividades visuales basadas en tu contenido real</li>
+          <li>Segmentación por zona geográfica y perfil de cliente</li>
+          <li>Informe mensual de resultados: alcance, clics y conversiones</li>
         </ul>
         <div class="service-cta">
-          <a href="google-my-business.html" class="btn-blue">Saber más</a>
+          <a href="publicidad-digital.html" class="btn-blue">Saber más</a>
           <a href="index.html#contacto" class="btn-outline">Ver ejemplos</a>
         </div>
       </div>
@@ -898,8 +914,8 @@
       <h2>¿Listo para ser el restaurante<br/><span class="accent">más visible</span> de tu zona?</h2>
       <p>Solicita un análisis gratuito de tu presencia digital. Sin compromiso, sin letra pequeña.</p>
       <div class="cta-banner-btns">
-        <a href="index.html#contacto" class="btn-blue" style="padding: 14px 32px; font-size: 0.95rem;">Solicitar análisis gratis</a>
-        <a href="index.html" class="btn-outline" style="padding: 14px 32px; font-size: 0.95rem; border-color: rgba(0,0,0,0.18); color: rgba(0,0,0,0.65);">Volver al inicio</a>
+        <a href="contacto.html" class="btn-blue" style="padding: 14px 32px; font-size: 0.95rem;">Solicitar análisis gratis</a>
+        <a href="index.html" class="btn-outline" style="padding: 14px 32px; font-size: 0.95rem;">Volver al inicio</a>
       </div>
     </div>
   </section>
@@ -922,7 +938,7 @@
           <li><a href="redes-sociales.html">Redes Sociales</a></li>
           <li><a href="diseno-web.html">Diseño Web</a></li>
           <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="google-my-business.html">Marketing Digital</a></li>
+          <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
         </ul>
       </div>
 
