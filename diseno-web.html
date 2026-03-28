@@ -544,6 +544,10 @@
       color: var(--blue);
       margin-top: 1px;
     }
+    .pricing-toggle-wrap { max-width: 480px; margin: 0 auto; }
+    .pricing-toggle { display: flex; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 4px; margin-bottom: 28px; gap: 4px; }
+    .ptoggle-btn { flex: 1; padding: 9px 16px; border: none; background: transparent; color: var(--text-muted); font-family: 'DM Sans',sans-serif; font-size: 0.88rem; font-weight: 600; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
+    .ptoggle-btn.active { background: var(--blue); color: #fff; }
   </style>
 </head>
 <body>
@@ -831,24 +835,53 @@
         <p class="section-sub" style="margin:0 auto;">Un precio fijo, todo incluido. Sin costes ocultos, sin contratos largos.</p>
       </div>
       <div class="pricing-wrap">
-        <div class="pricing-card fade-in">
-          <div class="pricing-badge">Plan Completo</div>
-          <div class="pricing-price"><sup>€</sup>49<span>/mes</span></div>
-          <p class="pricing-desc">Todo lo que necesita tu restaurante en un solo plan.</p>
-          <ul class="pricing-list">
-            <li>Diseño web personalizado para tu restaurante</li>
-            <li>Hosting y dominio incluidos</li>
-            <li>Actualizaciones y cambios ilimitados</li>
-            <li>Optimización SEO desde el primer día</li>
-            <li>Soporte prioritario por WhatsApp</li>
-          </ul>
-          <div class="addon-banner">
-            <span class="addon-icon">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </span>
-            <span><strong>Incluye Google My Business</strong> — optimización de tu ficha de Google al contratar el servicio web.</span>
+        <div class="pricing-toggle-wrap fade-in">
+          <div class="pricing-toggle">
+            <button class="ptoggle-btn active" onclick="switchPlan('unico')">Pago único</button>
+            <button class="ptoggle-btn" onclick="switchPlan('mensual')">Mensual</button>
           </div>
-          <a href="index.html#contacto" class="btn-blue pricing-cta">Empezar ahora</a>
+
+          <!-- Plan único -->
+          <div id="plan-unico" class="pricing-card">
+            <div class="pricing-badge">Web Completa</div>
+            <div class="pricing-price"><sup>€</sup>800<span> pago único</span></div>
+            <p class="pricing-desc">Tu web lista de una vez. Sin cuotas mensuales.</p>
+            <ul class="pricing-list">
+              <li>Diseño web personalizado para tu restaurante</li>
+              <li>Dominio .com durante 1 año incluido</li>
+              <li>Optimización SEO desde el primer día</li>
+              <li>Formulario de reservas o contacto</li>
+              <li>Carta digital integrada</li>
+            </ul>
+            <div class="addon-banner">
+              <span class="addon-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              <span><strong>Incluye Google My Business</strong> — optimización de tu ficha de Google al contratar el servicio web.</span>
+            </div>
+            <a href="index.html#contacto" class="btn-blue pricing-cta">Empezar ahora</a>
+          </div>
+
+          <!-- Plan mensual -->
+          <div id="plan-mensual" class="pricing-card" style="display:none;">
+            <div class="pricing-badge">Web + Soporte</div>
+            <div class="pricing-price"><sup>€</sup>99<span>/mes</span></div>
+            <p class="pricing-desc">Tu web siempre actualizada, con soporte continuo incluido.</p>
+            <ul class="pricing-list">
+              <li>Todo lo del plan pago único</li>
+              <li>Hosting y dominio incluidos</li>
+              <li>Actualizaciones y cambios ilimitados</li>
+              <li>Soporte prioritario por WhatsApp</li>
+              <li>Optimización SEO continua</li>
+            </ul>
+            <div class="addon-banner">
+              <span class="addon-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              </span>
+              <span><strong>Incluye Google My Business</strong> — optimización de tu ficha de Google al contratar el servicio web.</span>
+            </div>
+            <a href="index.html#contacto" class="btn-blue pricing-cta">Empezar ahora</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1000,6 +1033,12 @@
     function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
     hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+    function switchPlan(type) {
+      document.getElementById('plan-unico').style.display = type === 'unico' ? '' : 'none';
+      document.getElementById('plan-mensual').style.display = type === 'mensual' ? '' : 'none';
+      document.querySelectorAll('.ptoggle-btn').forEach(function(btn) { btn.classList.remove('active'); });
+      document.querySelector('.ptoggle-btn[onclick="switchPlan(\'' + type + '\')"]').classList.add('active');
+    }
   </script>
 </body>
 </html>

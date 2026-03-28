@@ -347,6 +347,20 @@
       color: var(--blue);
       margin-top: 1px;
     }
+    .session-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+    @media (max-width: 860px) { .session-grid { grid-template-columns: 1fr; max-width: 400px; } }
+    .session-card { padding: 36px 28px; border-radius: 20px; display: flex; flex-direction: column; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); position: relative; transition: border-color 0.2s; }
+    .session-card:hover { border-color: rgba(255,255,255,0.14); }
+    .session-card.session-featured { background: #ffffff; border-color: transparent; box-shadow: 0 24px 64px rgba(0,0,0,0.45); }
+    .session-badge { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #4F7EFF; margin-bottom: 6px; }
+    .session-name { font-family: 'Urbanist',sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .session-card.session-featured .session-name { color: #111; }
+    .session-price { font-family: 'Urbanist',sans-serif; font-size: 2.4rem; font-weight: 900; letter-spacing: -0.04em; color: #ffffff; line-height: 1; margin-bottom: 8px; }
+    .session-card.session-featured .session-price { color: #111111; }
+    .session-price span { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.32); letter-spacing: 0; }
+    .session-card.session-featured .session-price span { color: #999; }
+    .session-desc { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+    .session-card.session-featured .session-desc { color: #666; }
   </style>
 </head>
 <body>
@@ -486,17 +500,20 @@
       <h2>El plan que <span class="accent">se adapta a ti</span></h2>
       <p>Tres niveles, un objetivo: más pedidos, más visibilidad, más ventas para tu restaurante.</p>
     </div>
-    <div class="pn-grid">
-      <div class="pn-card fade-in">
-        <div class="pn-tier">Basic</div>
-        <div class="pn-price">€700<span>/mes</span></div>
-        <p class="pn-subtitle">Para restaurantes que quieren empezar a destacar en digital</p>
+    <div class="session-grid">
+
+      <!-- Básica -->
+      <div class="session-card fade-in">
+        <div class="session-badge">Básica</div>
+        <div class="session-name">Sesión de Menú</div>
+        <div class="session-price">€300<span> / sesión</span></div>
+        <p class="session-desc">Para restaurantes que quieren empezar con fotos profesionales de su carta.</p>
         <ul class="pn-list">
-          <li>1 sesión fotográfica/mes</li>
-          <li>6 fotos editadas</li>
-          <li>Optimización Google</li>
-          <li>Gestión de perfil Google</li>
-          <li>Formatos web y redes</li>
+          <li>Hasta 10 platos fotografiados</li>
+          <li>Fotos editadas en alta resolución</li>
+          <li>Formatos web y redes sociales</li>
+          <li>Entrega en 48 horas</li>
+          <li>Derechos de uso ilimitados</li>
         </ul>
         <div class="addon-banner">
           <span class="addon-icon">
@@ -504,19 +521,23 @@
           </span>
           <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
         </div>
-        <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
+        <a href="index.html#contacto" class="pn-action pn-outline">Reservar sesión</a>
       </div>
-      <div class="pn-card pn-featured fade-in">
+
+      <!-- Estándar (featured) -->
+      <div class="session-card session-featured fade-in">
         <span class="pn-pop">Más popular</span>
-        <div class="pn-tier">Pro</div>
-        <div class="pn-price">€1.100<span>/mes</span></div>
-        <p class="pn-subtitle">Para restaurantes que quieren aumentar ventas con clientes fieles</p>
+        <div class="session-badge">Estándar</div>
+        <div class="session-name">Sesión Completa</div>
+        <div class="session-price">€500<span> / sesión</span></div>
+        <p class="session-desc">Para restaurantes que quieren fotografiar toda la carta con calidad premium.</p>
         <ul class="pn-list">
-          <li>1 sesión + 4 vídeos/mes</li>
-          <li>4 fotos editadas</li>
-          <li>Gestión redes sociales</li>
-          <li>Estrategia de contenido</li>
-          <li>Marketing digital</li>
+          <li>Carta completa fotografiada</li>
+          <li>Hasta 25 platos editados</li>
+          <li>Fotografías del local y ambiente</li>
+          <li>Formatos delivery (Glovo, Just Eat…)</li>
+          <li>Entrega en 48 horas</li>
+          <li>Derechos de uso ilimitados</li>
         </ul>
         <div class="addon-banner">
           <span class="addon-icon">
@@ -524,18 +545,22 @@
           </span>
           <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
         </div>
-        <a href="index.html#contacto" class="pn-action pn-solid">Empezar</a>
+        <a href="index.html#contacto" class="pn-action pn-solid">Reservar sesión</a>
       </div>
-      <div class="pn-card fade-in">
-        <div class="pn-tier">Turbo</div>
-        <div class="pn-price">€2.200<span>/mes</span></div>
-        <p class="pn-subtitle">Para restaurantes que quieren crecer rápido con nuevos clientes</p>
+
+      <!-- Campaña -->
+      <div class="session-card fade-in">
+        <div class="session-badge">Campaña</div>
+        <div class="session-name">Pack Campaña</div>
+        <div class="session-price">€800<span> / sesión</span></div>
+        <p class="session-desc">Para restaurantes que quieren contenido completo para lanzamientos y campañas.</p>
         <ul class="pn-list">
-          <li>12 vídeos/mes</li>
-          <li>8 fotos editadas</li>
-          <li>Estrategia avanzada</li>
-          <li>Gestión redes sociales</li>
-          <li>Marketing + IA targeting</li>
+          <li>Todo lo del plan Estándar</li>
+          <li>Hasta 40 platos fotografiados</li>
+          <li>Vídeos cortos para redes (Reels/TikTok)</li>
+          <li>Estrategia de publicación incluida</li>
+          <li>Assets para publicidad digital</li>
+          <li>Entrega en 48 horas</li>
         </ul>
         <div class="addon-banner">
           <span class="addon-icon">
@@ -543,8 +568,9 @@
           </span>
           <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
         </div>
-        <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
+        <a href="index.html#contacto" class="pn-action pn-outline">Reservar sesión</a>
       </div>
+
     </div>
   </section>
 
