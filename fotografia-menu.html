@@ -79,6 +79,15 @@
     .nav-links a.active { color: rgba(255,255,255,0.95); background: rgba(255,255,255,0.08); }
     .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
     .nav-has-dropdown { position: relative; }
+    .nav-has-dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: -10px;
+      right: -10px;
+      height: 10px;
+      background: transparent;
+    }
     .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
     .nav-dropdown {
       position: absolute; top: calc(100% + 6px); left: 50%;
@@ -319,6 +328,25 @@
     .pn-outline:hover { background: rgba(255,255,255,0.07); color: #fff; border-color: rgba(255,255,255,0.26); }
     .pn-solid { background: #4F7EFF; color: #fff; border: none; box-shadow: 0 4px 20px rgba(79,126,255,0.4); }
     .pn-solid:hover { background: #3a6be8; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(79,126,255,0.5); }
+    .addon-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: rgba(79,126,255,0.07);
+      border: 1px solid rgba(79,126,255,0.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 1rem;
+    }
+    .addon-banner strong { color: var(--text); }
+    .addon-icon {
+      flex-shrink: 0;
+      color: var(--blue);
+      margin-top: 1px;
+    }
   </style>
 </head>
 <body>
@@ -342,15 +370,15 @@
               </a>
               <a href="diseno-web.html" class="nav-dropdown-item">
                 <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida que convierten visitas en reservas</span></span>
+                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida + Google My Business incluido</span></span>
               </a>
               <a href="fotografia-menu.html" class="nav-dropdown-item">
                 <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Imágenes de platos que abren el apetito</span></span>
+                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Fotos profesionales + assets digitales y print</span></span>
               </a>
-              <a href="google-my-business.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Google My Business</span><span class="ndi-desc">Optimización de tu ficha de Google para más clientes</span></span>
+              <a href="publicidad-digital.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Publicidad Digital</span><span class="ndi-desc">Meta Ads y TikTok Ads que llenan mesas</span></span>
               </a>
             </div>
           </div>
@@ -470,6 +498,12 @@
           <li>Gestión de perfil Google</li>
           <li>Formatos web y redes</li>
         </ul>
+        <div class="addon-banner">
+          <span class="addon-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </span>
+          <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
+        </div>
         <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
       </div>
       <div class="pn-card pn-featured fade-in">
@@ -484,6 +518,12 @@
           <li>Estrategia de contenido</li>
           <li>Marketing digital</li>
         </ul>
+        <div class="addon-banner">
+          <span class="addon-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </span>
+          <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
+        </div>
         <a href="index.html#contacto" class="pn-action pn-solid">Empezar</a>
       </div>
       <div class="pn-card fade-in">
@@ -497,6 +537,12 @@
           <li>Gestión redes sociales</li>
           <li>Marketing + IA targeting</li>
         </ul>
+        <div class="addon-banner">
+          <span class="addon-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </span>
+          <span><strong>Add-on disponible: Material Digital y Print</strong> — con tus fotos creamos flyers, cartas digitales y assets para redes listos para publicar.</span>
+        </div>
         <a href="index.html#contacto" class="pn-action pn-outline">Empezar</a>
       </div>
     </div>
