@@ -230,7 +230,7 @@
     /* ─── FOOTER ─── */
     footer { background: #09090b; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
     .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; gap: 40px; margin-bottom: 48px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
     .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
     .footer-logo img { height: 32px; filter: brightness(0) invert(1); }
     .footer-logo span { font-size: 1.1rem; font-weight: 800; color: white; }
@@ -249,6 +249,8 @@
     .btn-submit:hover { background: #3a6be8; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-copy a:hover { color: rgba(255,255,255,0.8); }
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
@@ -403,7 +405,6 @@
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div class="nav-right">
-        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
         <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -420,7 +421,6 @@
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
-      <button class="mobile-lang">🇪🇸 ES ▾</button>
       <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
@@ -453,8 +453,8 @@
         </div>
         <div class="feature-card">
           <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-          <h3>Entrega en 48 horas</h3>
-          <p>Fotos editadas y listas para usar en menos de 48 horas desde la sesión. Sin esperas, sin rondas infinitas de revisión.</p>
+          <h3>Entrega rápida</h3>
+          <p>Fotos editadas y listas para usar en cuanto antes desde la sesión. Sin esperas innecesarias ni rondas infinitas de revisión.</p>
         </div>
         <div class="feature-card">
           <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
@@ -499,7 +499,7 @@
           <li>Hasta 10 platos fotografiados</li>
           <li>Fotos editadas en alta resolución</li>
           <li>Formatos web y redes sociales</li>
-          <li>Entrega en 48 horas</li>
+          <li>Entrega rápida</li>
           <li>Derechos de uso ilimitados</li>
         </ul>
         <div class="addon-banner">
@@ -523,7 +523,7 @@
           <li>Hasta 25 platos editados</li>
           <li>Fotografías del local y ambiente</li>
           <li>Formatos delivery (Glovo, Just Eat…)</li>
-          <li>Entrega en 48 horas</li>
+          <li>Entrega rápida</li>
           <li>Derechos de uso ilimitados</li>
         </ul>
         <div class="addon-banner">
@@ -547,7 +547,7 @@
           <li>Vídeos cortos para redes (Reels/TikTok)</li>
           <li>Estrategia de publicación incluida</li>
           <li>Assets para publicidad digital</li>
-          <li>Entrega en 48 horas</li>
+          <li>Entrega rápida</li>
         </ul>
         <div class="addon-banner">
           <span class="addon-icon">
@@ -606,7 +606,7 @@
         </div>
 
         <div class="footer-col">
-          <h4>Sociales</h4>
+          <h4>Redes</h4>
           <ul>
             <li><a href="#">Facebook</a></li>
             <li><a href="#">Instagram</a></li>
@@ -617,10 +617,10 @@
       </div>
 
       <div class="footer-bottom">
-        <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
+        <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
         <div class="footer-legal">
           <a href="#">Condiciones de servicio</a>
-          <a href="#">Política de privacidad</a>
+          <a href="politica-privacidad.html">Política de privacidad</a>
         </div>
       </div>
     </div><!-- /footer-inner -->

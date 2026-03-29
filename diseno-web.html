@@ -484,7 +484,7 @@
       padding: 40px clamp(20px,4vw,80px) 32px;
       position: relative; z-index: 1;
     }
-    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-inner { max-width: 1120px; margin: 0 auto; padding-left: clamp(20px, 4vw, 80px); padding-right: clamp(20px, 4vw, 80px); }
     .footer-top {
       display: flex; justify-content: space-between; align-items: flex-start;
       gap: 40px; flex-wrap: wrap; margin-bottom: 40px;
@@ -589,7 +589,6 @@
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div class="nav-right">
-        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
         <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -607,7 +606,6 @@
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
-      <button class="mobile-lang">🇪🇸 ES ▾</button>
       <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
@@ -988,27 +986,34 @@
         <div class="footer-links-group">
           <div class="footer-links-title">Servicios</div>
           <ul class="footer-links">
-            <li><a href="gestion-redes.html">Gestión de Redes</a></li>
+            <li><a href="redes-sociales.html">Redes Sociales</a></li>
             <li><a href="diseno-web.html">Diseño Web</a></li>
             <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-            <li><a href="gestion-google.html">Google My Business</a></li>
+            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
           </ul>
         </div>
         <div class="footer-links-group">
-          <div class="footer-links-title">Empresa</div>
+          <div class="footer-links-title">Navegar</div>
           <ul class="footer-links">
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="index.html#resultados">Resultados</a></li>
+            <li><a href="servicios.html">Servicios</a></li>
             <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-links-group">
+          <div class="footer-links-title">Redes</div>
+          <ul class="footer-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copy">© 2025 Visuanza · Una marca de <a href="#">SynsNu AB</a></p>
+        <p class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></p>
         <div class="footer-legal">
-          <a href="#">Privacidad</a>
-          <a href="#">Cookies</a>
-          <a href="#">Aviso Legal</a>
+          <a href="#">Condiciones de servicio</a>
+          <a href="politica-privacidad.html">Política de privacidad</a>
         </div>
       </div>
     </div>

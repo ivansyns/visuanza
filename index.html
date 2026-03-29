@@ -1082,32 +1082,53 @@
       background: white;
     }
 
+    /* iPhone mockup overlay — used on phones 1 & 4 */
+    .sp-iphone-frame {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
     /* Phone 1 – Facebook · far left, most tilted */
     .sp-fb {
       width: 215px;
       left: 50%; margin-left: -360px;
       transform: rotate(-18deg);
       z-index: 1;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
     }
-    .sp-fb .sp-screen { height: 415px; background: #f0f2f5; overflow: hidden; }
+    .sp-fb .sp-screen { height: auto; border-radius: 0; overflow: hidden; background: transparent; }
 
-    /* Phone 2 – Apple Maps · centre-left */
+    /* Phone 2 – Canva mockup · centre-left — strip CSS frame */
     .sp-gmb {
       width: 228px;
       left: 50%; margin-left: -212px;
       transform: rotate(-6deg);
       z-index: 2;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
     }
-    .sp-gmb .sp-screen { height: 442px; background: #1c1c1e; display: flex; flex-direction: column; overflow: hidden; }
+    .sp-gmb .sp-screen { height: auto; border-radius: 0; overflow: hidden; background: transparent; }
 
-    /* Phone 3 – Google Maps listing · centre-right */
+    /* Phone 3 – Canva mockup · centre-right — strip CSS frame */
     .sp-chat {
       width: 228px;
       left: 50%; margin-left: -50px;
       transform: rotate(6deg);
       z-index: 3;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
     }
-    .sp-chat .sp-screen { height: 442px; background: white; overflow: hidden; }
+    .sp-chat .sp-screen { height: auto; border-radius: 0; overflow: hidden; background: transparent; }
 
     /* Phone 4 – ChatGPT · far right */
     .sp-stats {
@@ -1115,8 +1136,12 @@
       left: 50%; margin-left: 110px;
       transform: rotate(18deg);
       z-index: 4;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
     }
-    .sp-stats .sp-screen { height: 415px; background: #343541; display: flex; flex-direction: column; overflow: hidden; }
+    .sp-stats .sp-screen { height: auto; border-radius: 0; overflow: hidden; background: transparent; }
 
     /* Part 2: Conversion panel — overlaps phones above, bleeds into white below */
     .platforms-panel {
@@ -1255,9 +1280,9 @@
 
     .panel-phone {
       width: 220px;
-      background: #111;
-      border-radius: 36px;
-      padding: 10px;
+      background: transparent;
+      border-radius: 0;
+      padding: 0;
       box-shadow: none;
       transform: rotate(-4deg);
     }
@@ -1969,6 +1994,8 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
       transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
       backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
     }
 
     .testimonial-card:hover {
@@ -1989,6 +2016,7 @@
       line-height: 1.6;
       margin-bottom: 20px;
       font-style: italic;
+      flex: 1;
     }
 
     .testimonial-author {
@@ -2780,7 +2808,6 @@
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div class="nav-right">
-        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
         <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -2801,7 +2828,6 @@
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
-      <button class="mobile-lang">🇪🇸 ES ▾</button>
       <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
@@ -3026,7 +3052,7 @@
           </div>
         </div>
         <!-- Real iPhone frame overlay (transparent screen hole, opaque chrome) -->
-        <img class="phone-frame" src="phoneMock.png" alt="" />
+        <img class="phone-frame" src="assets/herophone.webp" alt="" />
       </div>
 
       <!-- Floating Google Business Profile card — bottom right, tilted -6deg -->
@@ -3123,119 +3149,28 @@
       <!-- Facebook Phone -->
       <div class="showcase-phone sp-fb">
         <div class="sp-screen">
-          <div class="fb-header">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-            facebook
-          </div>
-          <div class="fb-body">
-            <div class="fb-profile-row">
-              <div class="fb-avatar">TV</div>
-              <div>
-                <div class="fb-name">Tu Restaurante</div>
-                <div class="fb-meta">Restaurante · 1.2k seguidores</div>
-              </div>
-            </div>
-            <div class="fb-post-text">¡Nuevo menú de temporada disponible! Reserva tu mesa y disfruta de nuestros platos especiales.</div>
-            <div class="fb-img">🍽️</div>
-            <div style="font-size:0.48rem;color:#1877f2;margin-bottom:4px;">👍 Me gusta · 💬 Comentar · ↗ Compartir</div>
-            <div class="fb-actions">
-              <div class="fb-act-btn">👍 Me gusta</div>
-              <div class="fb-act-btn">💬 Comentar</div>
-              <div class="fb-act-btn">↗ Compartir</div>
-            </div>
-          </div>
+          <img src="assets/facebook.webp" alt="" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
 
       <!-- Apple Maps Phone -->
       <div class="showcase-phone sp-gmb">
         <div class="sp-screen">
-          <!-- Apple Maps dark header -->
-          <div style="background:#1c1c1e;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#FF3B30"/><circle cx="12" cy="9" r="2.5" fill="white"/></svg>
-            <span style="font-size:0.58rem;font-weight:700;color:white;letter-spacing:-0.01em;">Mapas</span>
-            <div style="flex:1;background:#2c2c2e;border-radius:10px;padding:4px 8px;font-size:0.46rem;color:rgba(255,255,255,0.55);">Tu Restaurante</div>
-          </div>
-          <!-- Map area — Apple Maps warm beige -->
-          <div style="flex:1;background:linear-gradient(160deg,#f2ece0 0%,#ece5d5 50%,#e5dece 100%);position:relative;overflow:hidden;min-height:200px;">
-            <!-- Roads -->
-            <div style="position:absolute;top:0;bottom:0;left:42%;width:5px;background:rgba(255,255,255,0.95);"></div>
-            <div style="position:absolute;top:0;bottom:0;left:62%;width:3px;background:rgba(255,255,255,0.8);"></div>
-            <div style="position:absolute;left:0;right:0;top:44%;height:5px;background:rgba(255,255,255,0.95);"></div>
-            <div style="position:absolute;left:0;right:0;top:66%;height:3px;background:rgba(255,255,255,0.8);"></div>
-            <!-- Park -->
-            <div style="position:absolute;top:8%;left:5%;width:28%;height:28%;background:#c2d9a0;border-radius:8px;opacity:0.75;"></div>
-            <!-- Buildings -->
-            <div style="position:absolute;top:48%;left:22%;width:11%;height:22%;background:#ddd6c8;border-radius:3px;"></div>
-            <div style="position:absolute;top:52%;left:63%;width:9%;height:18%;background:#ddd6c8;border-radius:3px;"></div>
-            <!-- Apple Maps red pin -->
-            <div style="position:absolute;top:30%;left:39%;width:22px;height:22px;background:#FF3B30;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 10px rgba(255,59,48,0.45);">
-              <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);width:7px;height:7px;background:white;border-radius:50%;"></div>
-            </div>
-          </div>
-          <!-- Bottom listing card — Apple Maps dark -->
-          <div style="background:#1c1c1e;padding:11px 13px;border-top:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
-            <div style="font-size:0.68rem;font-weight:700;color:white;margin-bottom:3px;">Tu Restaurante</div>
-            <div style="display:flex;align-items:center;gap:4px;margin-bottom:8px;">
-              <span style="color:#FF9500;font-size:0.5rem;">★★★★★</span>
-              <span style="font-size:0.44rem;color:rgba(255,255,255,0.55);">4.8 (489) · Restaurante</span>
-            </div>
-            <div style="display:flex;gap:6px;">
-              <button style="flex:1;background:#2c2c2e;border:none;border-radius:10px;padding:6px;font-size:0.44rem;color:#0A84FF;font-weight:600;">Ruta</button>
-              <button style="flex:1;background:#2c2c2e;border:none;border-radius:10px;padding:6px;font-size:0.44rem;color:#0A84FF;font-weight:600;">Llamar</button>
-              <button style="flex:1;background:#2c2c2e;border:none;border-radius:10px;padding:6px;font-size:0.44rem;color:#0A84FF;font-weight:600;">Web</button>
-            </div>
-          </div>
+          <img src="assets/GoogleMaps.webp" alt="" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
 
       <!-- Google Maps Listing Phone -->
       <div class="showcase-phone sp-chat">
         <div class="sp-screen">
-          <div class="gmb-header">
-            <span class="gmb-g-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></span>
-            <div class="gmb-search">restaurante cerca de mí</div>
-          </div>
-          <div class="gmb-map">
-            <div class="gmb-map-grid"></div>
-            <div class="gmb-pin"></div>
-          </div>
-          <div class="gmb-body">
-            <div class="gmb-biz-name">Tu Restaurante</div>
-            <div class="gmb-category">Restaurante · Italiano</div>
-            <div class="gmb-rating-row">
-              <span class="gmb-stars">★★★★★</span>
-              <span class="gmb-rating-num">4.8</span>
-              <span class="gmb-reviews">(489 reseñas)</span>
-            </div>
-            <div class="gmb-actions">
-              <button class="gmb-act-btn gmb-act-blue">Cómo llegar</button>
-              <button class="gmb-act-btn gmb-act-outline">Reservar</button>
-            </div>
-            <div class="gmb-hours-row">✓ Abierto ahora · Cierra 22:30</div>
-            <div class="gmb-info-row">📍 Calle Mayor 15, Madrid</div>
-            <div class="gmb-info-row">📞 +34 91 234 5678</div>
-          </div>
+          <img src="assets/Maps.webp" alt="" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
 
       <!-- ChatGPT Phone -->
       <div class="showcase-phone sp-stats">
         <div class="sp-screen">
-          <div class="chat-header">
-            <div class="chat-title">ChatGPT</div>
-            <div class="chat-openai">AI</div>
-          </div>
-          <div class="chat-messages">
-            <div class="chat-msg-user">Buenos restaurantes cerca de mí en Madrid</div>
-            <div class="chat-msg-ai">
-              <strong>Aquí tienes los restaurantes mejor valorados:</strong>
-              <div class="chat-restaurant-item"><div class="chat-rest-num">1</div><span class="chat-rest-name">Tu Restaurante — ★★★★★ · 4.8</span></div>
-              <div class="chat-restaurant-item"><div class="chat-rest-num">2</div><span class="chat-rest-name">La Tasca Madrileña — ★★★★ · 4.5</span></div>
-              <div class="chat-restaurant-item"><div class="chat-rest-num">3</div><span class="chat-rest-name">El Rincón Español — ★★★★ · 4.3</span></div>
-              <div style="margin-top:4px;font-size:0.42rem;color:rgba(255,255,255,0.5);">6 recomendaciones disponibles</div>
-            </div>
-          </div>
+          <img src="assets/gpt.webp" alt="" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
     </div>
@@ -3287,47 +3222,7 @@
             </div>
 
             <div class="panel-phone">
-              <div class="panel-phone-screen">
-                <!-- Google Maps header -->
-                <div style="background:#1a73e8;padding:8px 10px;display:flex;align-items:center;gap:6px;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5" fill="rgba(255,255,255,0.7)"/></svg>
-                  <span style="font-size:0.55rem;font-weight:700;color:white;">Google Maps</span>
-                </div>
-                <!-- Map area -->
-                <div style="flex:1;background:linear-gradient(160deg,#e8f4fd 0%,#d0eaf6 40%,#c8e6e0 100%);position:relative;overflow:hidden;min-height:160px;">
-                  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.35) 1px,transparent 1px);background-size:18px 18px;"></div>
-                  <!-- Roads -->
-                  <div style="position:absolute;top:0;bottom:0;left:45%;width:4px;background:rgba(255,255,255,0.7);"></div>
-                  <div style="position:absolute;left:0;right:0;top:52%;height:4px;background:rgba(255,255,255,0.7);"></div>
-                  <div style="position:absolute;top:0;bottom:0;left:70%;width:2px;background:rgba(255,255,255,0.5);"></div>
-                  <div style="position:absolute;left:0;right:0;top:28%;height:2px;background:rgba(255,255,255,0.5);"></div>
-                  <!-- Google Maps pin -->
-                  <div style="position:absolute;top:30%;left:43%;width:24px;height:24px;background:#ea4335;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 3px 10px rgba(234,67,53,0.5);">
-                    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);width:8px;height:8px;background:white;border-radius:50%;"></div>
-                  </div>
-                  <!-- Nearby pins (competitors, smaller) -->
-                  <div style="position:absolute;top:55%;left:62%;width:14px;height:14px;background:#bbb;border-radius:50% 50% 50% 0;transform:rotate(-45deg);"></div>
-                  <div style="position:absolute;top:22%;left:55%;width:14px;height:14px;background:#bbb;border-radius:50% 50% 50% 0;transform:rotate(-45deg);"></div>
-                </div>
-                <!-- Business info -->
-                <div style="padding:8px 10px;background:white;">
-                  <div style="font-size:0.65rem;font-weight:800;color:#1a1a1a;margin-bottom:2px;">Tu Restaurante</div>
-                  <div style="display:flex;align-items:center;gap:4px;margin-bottom:4px;">
-                    <span style="color:#fbbc04;font-size:0.5rem;">★★★★★</span>
-                    <span style="font-size:0.48rem;font-weight:700;color:#1a1a1a;">4.8</span>
-                    <span style="font-size:0.44rem;color:#70757a;">(1,243 reseñas)</span>
-                  </div>
-                  <!-- Mini revenue chart -->
-                  <div style="width:100%;height:50px;background:#f8fdf9;border-radius:6px;overflow:hidden;position:relative;margin-top:4px;">
-                    <svg width="100%" height="100%" viewBox="0 0 100 50" preserveAspectRatio="none">
-                      <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#34a853" stop-opacity="0.3"/><stop offset="100%" stop-color="#34a853" stop-opacity="0"/></linearGradient></defs>
-                      <path d="M0,42 L12,38 L25,32 L38,26 L52,18 L68,12 L82,6 L100,3 L100,50 L0,50Z" fill="url(#pg)"/>
-                      <polyline points="0,42 12,38 25,32 38,26 52,18 68,12 82,6 100,3" fill="none" stroke="#34a853" stroke-width="2"/>
-                    </svg>
-                    <div style="position:absolute;top:4px;right:6px;font-size:0.48rem;font-weight:800;color:#1e8e3e;">↑ 50.8%</div>
-                  </div>
-                </div>
-              </div>
+              <img src="assets/GoogleMaps.webp" alt="" style="width:100%;display:block;" />
             </div>
             <!-- Floating revenue badge -->
             <div class="panel-revenue-badge">

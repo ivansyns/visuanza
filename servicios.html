@@ -658,7 +658,7 @@
     /* ─── FOOTER ─── */
     footer { background: #09090b; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
     .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 2fr; gap: 40px; margin-bottom: 48px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
     .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
     .footer-logo img { height: 32px; filter: brightness(0) invert(1); }
     .footer-logo span { font-size: 1.1rem; font-weight: 800; color: white; }
@@ -677,6 +677,8 @@
     .btn-submit:hover { background: #3a6be8; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-copy a:hover { color: rgba(255,255,255,0.8); }
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
@@ -765,7 +767,6 @@
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
       <div class="nav-right">
-        <button class="lang-toggle"><span class="lang-flag">🇪🇸</span> ES ▾</button>
         <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -786,7 +787,6 @@
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
-      <button class="mobile-lang">🇪🇸 ES ▾</button>
       <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
@@ -952,7 +952,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Sociales</h4>
+        <h4>Redes</h4>
         <ul>
           <li><a href="#">Facebook</a></li>
           <li><a href="#">Instagram</a></li>
@@ -963,10 +963,10 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
+      <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
       <div class="footer-legal">
         <a href="#">Condiciones de servicio</a>
-        <a href="#">Política de privacidad</a>
+        <a href="politica-privacidad.html">Política de privacidad</a>
       </div>
     </div>
     </div><!-- /footer-inner -->
