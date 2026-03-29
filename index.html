@@ -2113,7 +2113,7 @@
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr 2fr;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
       gap: 40px;
       margin-bottom: 48px;
     }
@@ -2236,6 +2236,8 @@
       font-size: 0.75rem;
       color: rgba(255,255,255,0.3);
     }
+    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-copy a:hover { color: rgba(255,255,255,0.8); }
 
     .footer-legal {
       display: flex;
@@ -2257,69 +2259,29 @@
     }
 
     @media (max-width: 768px) {
-      /* Hide the JS-driven arc canvas */
-      .sp-container { display: none; }
+      /* Arc animation runs on mobile — hide the static fallback */
+      .sp-mobile { display: none; }
 
-      /* Show the static mobile layout */
-      .sp-mobile {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 0 24px 48px;
-        text-align: center;
-      }
+      /* Scale down the arc container */
+      .sp-container { height: 340px; }
 
-      .sp-mobile .sp-visuanza-m {
-        width: 96px; height: 96px;
-        border-radius: 50%;
-        background: #2e27b8;
-        box-shadow: 0 12px 40px rgba(46,39,184,0.5), 0 0 0 6px rgba(46,39,184,0.16), 0 0 0 12px rgba(46,39,184,0.06);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 24px;
+      /* Scale down the Visuanza center circle */
+      .sp-visuanza {
+        width: 90px;
+        height: 90px;
+        top: 20px;
+        box-shadow: 0 10px 36px rgba(46,39,184,0.5), 0 0 0 5px rgba(46,39,184,0.16), 0 0 0 10px rgba(46,39,184,0.06);
       }
-      .sp-mobile .sp-visuanza-m img {
-        width: 62px; height: auto;
-        filter: brightness(0) invert(1);
-      }
+      .sp-visuanza img { width: 58px; }
 
-      .sp-mobile .sp-text-m h2 {
-        font-size: 1.75rem;
-        font-weight: 900;
-        letter-spacing: -0.03em;
-        line-height: 1.15;
-        color: #F8FAFC;
-        margin-bottom: 24px;
-      }
-      .sp-mobile .sp-text-m h2 .accent { color: var(--blue); }
+      /* Reposition text block under the Visuanza circle */
+      .sp-text { top: 145px; width: 90vw; }
+      .sp-text h2 { font-size: 1.75rem; }
 
-      .sp-logos-row {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 28px;
-      }
+      /* Smaller logo tiles */
+      .sp-logo { width: 72px; height: 72px; border-radius: 18px; font-size: 1.8rem; }
 
-      .sp-logos-row .sp-logo-m {
-        width: 72px; height: 72px;
-        border-radius: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(255,255,255,0.08) !important;
-        border: 1px solid rgba(255,255,255,0.12);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        overflow: hidden;
-      }
-      .sp-logos-row .sp-logo-m img {
-        width: 68%; height: 68%;
-        object-fit: contain;
-        display: block;
-      }
-
-      /* Fix panel negative margin (phones hidden, so no overlap needed) */
+      /* Fix panel negative margin */
       .platforms-panel {
         margin-top: 0 !important;
         margin-bottom: 0 !important;
@@ -3556,7 +3518,7 @@
           <li><a href="redes-sociales.html">Redes Sociales</a></li>
           <li><a href="diseno-web.html">Diseño Web</a></li>
           <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="google-my-business.html">Google My Business</a></li>
+          <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
         </ul>
       </div>
 
@@ -3570,7 +3532,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Sociales</h4>
+        <h4>Redes</h4>
         <ul>
           <li><a href="#">Facebook</a></li>
           <li><a href="#">Instagram</a></li>
@@ -3581,10 +3543,10 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza. Todos los derechos reservados.</div>
+      <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
       <div class="footer-legal">
         <a href="#">Condiciones de servicio</a>
-        <a href="#">Política de privacidad</a>
+        <a href="politica-privacidad.html">Política de privacidad</a>
       </div>
     </div>
     </div><!-- /footer-inner -->
@@ -3697,22 +3659,38 @@
 
       // Parabola: y(t) = B*(t-0.5)^2 + TOP_Y  where t ∈ [0,1]
       // t=0 → bottom-left,  t=0.5 → top-center (under Visuanza),  t=1 → bottom-right
-      // Visuanza center is at y=100px (top:45px + height/2=55px)
-      const TOP_Y = 100;  // logo centers at t=0.5, aligns with Visuanza center
-      const B     = 1600; // tighter arc — logos cluster closer to the top peak
-      // At t=0 or t=1: y = 1600*0.25 + 100 = 500px (at section bottom → faded/clipped)
 
-      const HALF = 60;    // 120px / 2
+      function getParams() {
+        const W = container.offsetWidth || window.innerWidth;
+        const isMobile = W < 600;
+        return {
+          HALF:     isMobile ? 36 : 60,
+          TOP_Y:    isMobile ? 65 : 100,
+          B:        isMobile ? 1100 : 1600,
+          logoSize: isMobile ? 72 : 120,
+        };
+      }
 
-      let phase   = 0;
-      let running = false;
+      let phase       = 0;
+      let running     = false;
       let raf;
+      let lastLogoSize = -1;
 
       function tick() {
         phase = (phase + 0.0007) % 1;  // slow, smooth — full loop ≈ 24 seconds
 
+        const { HALF, TOP_Y, B, logoSize } = getParams();
         const W = container.offsetWidth  || 1440;
         const H = container.offsetHeight || 500;
+
+        // Only write size styles when logoSize has changed (avoids per-frame style writes)
+        if (logoSize !== lastLogoSize) {
+          logos.forEach(el => {
+            el.style.width  = logoSize + 'px';
+            el.style.height = logoSize + 'px';
+          });
+          lastLogoSize = logoSize;
+        }
 
         logos.forEach((el, i) => {
           const t = (phase + i / N) % 1;
