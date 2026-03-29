@@ -320,44 +320,55 @@
 
     /* ─── PRICING ─── */
     .pricing-wrap {
-      display: flex; justify-content: center;
-      margin-top: 56px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 24px; max-width: 820px;
+      margin: 56px auto 0;
     }
+    @media (max-width: 700px) { .pricing-wrap { grid-template-columns: 1fr; } }
     .pricing-card {
-      background: rgba(79,126,255,0.04);
-      border: 1px solid rgba(79,126,255,0.35);
-      border-radius: 20px;
-      padding: 44px 48px;
-      max-width: 480px; width: 100%;
-      text-align: center;
-      box-shadow: 0 0 60px rgba(79,126,255,0.08), 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px 32px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
       position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
     }
-    .pricing-card::before {
+    .pricing-card:hover { transform: translateY(-3px); }
+    .pricing-card.pricing-featured {
+      border-color: rgba(79,126,255,0.35);
+      box-shadow: 0 0 32px rgba(79,126,255,0.12), 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
+    }
+    .pricing-card.pricing-featured::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
     }
+    .pricing-pop {
+      position: absolute; top: -1px; right: 20px;
+      background: var(--blue); color: #fff;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 12px;
+      border-radius: 0 0 8px 8px;
+    }
     .pricing-badge {
       display: inline-block;
-      background: rgba(79,126,255,0.15); color: var(--blue);
-      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      background: rgba(79,126,255,0.1); color: var(--blue);
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
       text-transform: uppercase; padding: 4px 12px; border-radius: 999px;
-      margin-bottom: 20px; border: 1px solid rgba(79,126,255,0.2);
+      margin-bottom: 20px; border: 1px solid rgba(79,126,255,0.18);
     }
     .pricing-price {
       font-family: 'Urbanist',sans-serif;
-      font-size: 3.4rem; font-weight: 900;
+      font-size: 3rem; font-weight: 900;
       color: var(--text); letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 6px;
+      line-height: 1; margin-bottom: 6px;
     }
-    .pricing-price sup { font-size: 1.4rem; vertical-align: super; color: var(--text-muted); }
-    .pricing-price span { font-size: 1.1rem; color: var(--text-muted); font-weight: 500; }
-    .pricing-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; }
+    .pricing-price sup { font-size: 1.3rem; vertical-align: super; color: var(--text-muted); }
+    .pricing-price span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+    .pricing-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
     .pricing-list {
-      list-style: none;
-      text-align: left;
+      list-style: none; flex: 1;
       margin-bottom: 32px;
       display: flex; flex-direction: column; gap: 12px;
     }
@@ -376,7 +387,19 @@
       background-repeat: no-repeat;
       margin-top: 1px;
     }
-    .pricing-cta { width: 100%; }
+    .pricing-cta { width: 100%; text-align: center; }
+    .pricing-addon {
+      max-width: 820px; margin: 20px auto 0;
+      background: rgba(79,126,255,0.06);
+      border: 1px solid rgba(79,126,255,0.18);
+      border-radius: 12px; padding: 20px 24px;
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    @media (max-width: 600px) { .pricing-addon { flex-direction: column; } }
+    .pricing-addon-icon { flex-shrink: 0; color: var(--blue); margin-top: 2px; }
+    .pricing-addon-icon svg { width: 20px; height: 20px; }
+    .pricing-addon-text h4 { font-family: 'Urbanist',sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .pricing-addon-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
 
     /* ─── STEPS ─── */
     .steps-grid {
@@ -522,7 +545,8 @@
 
     @media (max-width: 768px) {
       .hero-stats { gap: 24px; }
-      .pricing-card { padding: 32px 24px; }
+      .pricing-wrap { gap: 16px; }
+      .pricing-card { padding: 28px 24px; }
       .cta-inner { padding: 40px 24px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-brand, .footer-col { text-align: center; }
@@ -551,10 +575,6 @@
       color: var(--blue);
       margin-top: 1px;
     }
-    .pricing-toggle-wrap { max-width: 480px; margin: 0 auto; }
-    .pricing-toggle { display: flex; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 999px; padding: 4px; margin-bottom: 28px; gap: 4px; }
-    .ptoggle-btn { flex: 1; padding: 9px 16px; border: none; background: transparent; color: var(--text-muted); font-family: 'DM Sans',sans-serif; font-size: 0.88rem; font-weight: 600; border-radius: 999px; cursor: pointer; transition: background 0.2s, color 0.2s; }
-    .ptoggle-btn.active { background: var(--blue); color: #fff; }
 
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
     .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
@@ -844,54 +864,49 @@
         <h2 class="section-heading">Sin sorpresas al final del mes</h2>
         <p class="section-sub" style="margin:0 auto;">Un precio fijo, todo incluido. Sin costes ocultos, sin contratos largos.</p>
       </div>
-      <div class="pricing-wrap">
-        <div class="pricing-toggle-wrap fade-in">
-          <div class="pricing-toggle">
-            <button class="ptoggle-btn active" onclick="switchPlan('unico')">Pago único</button>
-            <button class="ptoggle-btn" onclick="switchPlan('mensual')">Mensual</button>
-          </div>
+      <div class="pricing-wrap fade-in">
 
-          <!-- Plan único -->
-          <div id="plan-unico" class="pricing-card">
-            <div class="pricing-badge">Web Completa</div>
-            <div class="pricing-price"><sup>€</sup>800<span> pago único</span></div>
-            <p class="pricing-desc">Tu web lista de una vez. Sin cuotas mensuales.</p>
-            <ul class="pricing-list">
-              <li>Diseño web personalizado para tu restaurante</li>
-              <li>Dominio .com durante 1 año incluido</li>
-              <li>Optimización SEO desde el primer día</li>
-              <li>Formulario de reservas o contacto</li>
-              <li>Carta digital integrada</li>
-            </ul>
-            <div class="addon-banner">
-              <span class="addon-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              </span>
-              <span><strong>Incluye Google My Business</strong> — optimización de tu ficha de Google al contratar el servicio web.</span>
-            </div>
-            <a href="index.html#contacto" class="btn-blue pricing-cta">Empezar ahora</a>
-          </div>
+        <!-- Estándar -->
+        <div class="pricing-card">
+          <div class="pricing-badge">Estándar</div>
+          <div class="pricing-price"><sup>€</sup>800<span> pago único</span></div>
+          <p class="pricing-desc">Web profesional lista en días. Perfecta para empezar con buen pie.</p>
+          <ul class="pricing-list">
+            <li>Diseño web personalizado para tu restaurante</li>
+            <li>Dominio .com durante 1 año incluido</li>
+            <li>Optimización SEO desde el primer día</li>
+            <li>Formulario de reservas o contacto</li>
+            <li>Carta digital integrada</li>
+            <li>Google My Business optimizado</li>
+          </ul>
+          <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
+        </div>
 
-          <!-- Plan mensual -->
-          <div id="plan-mensual" class="pricing-card" style="display:none;">
-            <div class="pricing-badge">Web + Soporte</div>
-            <div class="pricing-price"><sup>€</sup>99<span>/mes</span></div>
-            <p class="pricing-desc">Tu web siempre actualizada, con soporte continuo incluido.</p>
-            <ul class="pricing-list">
-              <li>Todo lo del plan pago único</li>
-              <li>Hosting y dominio incluidos</li>
-              <li>Actualizaciones y cambios ilimitados</li>
-              <li>Soporte prioritario por WhatsApp</li>
-              <li>Optimización SEO continua</li>
-            </ul>
-            <div class="addon-banner">
-              <span class="addon-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              </span>
-              <span><strong>Incluye Google My Business</strong> — optimización de tu ficha de Google al contratar el servicio web.</span>
-            </div>
-            <a href="index.html#contacto" class="btn-blue pricing-cta">Empezar ahora</a>
-          </div>
+        <!-- Premium -->
+        <div class="pricing-card pricing-featured">
+          <span class="pricing-pop">Recomendado</span>
+          <div class="pricing-badge">Premium</div>
+          <div class="pricing-price"><sup>€</sup>1.700<span> pago único</span></div>
+          <p class="pricing-desc">Web de alto impacto con animaciones avanzadas y más integraciones.</p>
+          <ul class="pricing-list">
+            <li>Todo lo del plan Estándar</li>
+            <li>Animaciones 3D y efectos visuales avanzados</li>
+            <li>Más páginas y secciones personalizadas</li>
+            <li>Integración con plataformas de reservas</li>
+            <li>Sistema de carta digital con fotos</li>
+            <li>Soporte prioritario 30 días post-entrega</li>
+          </ul>
+          <a href="contacto.html" class="btn-blue pricing-cta">Hablar con nosotros</a>
+        </div>
+
+      </div>
+      <div class="pricing-addon fade-in">
+        <span class="pricing-addon-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>
+        </span>
+        <div class="pricing-addon-text">
+          <h4>Mantenimiento mensual — €33/mes</h4>
+          <p>Incluye hosting, renovación del dominio y actualizaciones técnicas. Opcional para ambos planes.</p>
         </div>
       </div>
     </div>
@@ -1054,12 +1069,6 @@
     function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
     hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
-    function switchPlan(type) {
-      document.getElementById('plan-unico').style.display = type === 'unico' ? '' : 'none';
-      document.getElementById('plan-mensual').style.display = type === 'mensual' ? '' : 'none';
-      document.querySelectorAll('.ptoggle-btn').forEach(function(btn) { btn.classList.remove('active'); });
-      document.querySelector('.ptoggle-btn[onclick="switchPlan(\'' + type + '\')"]').classList.add('active');
-    }
   </script>
 </body>
 </html>
