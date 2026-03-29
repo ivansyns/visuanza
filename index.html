@@ -2259,27 +2259,68 @@
     }
 
     @media (max-width: 768px) {
-      /* Arc animation runs on mobile — hide the static fallback */
-      .sp-mobile { display: none; }
+      /* Hide the JS-driven arc canvas */
+      .sp-container { display: none; }
 
-      /* Scale down the arc container */
-      .sp-container { height: 340px; }
-
-      /* Scale down the Visuanza center circle */
-      .sp-visuanza {
-        width: 90px;
-        height: 90px;
-        top: 20px;
-        box-shadow: 0 10px 36px rgba(46,39,184,0.5), 0 0 0 5px rgba(46,39,184,0.16), 0 0 0 10px rgba(46,39,184,0.06);
+      /* Show the static mobile layout */
+      .sp-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 24px 48px;
+        text-align: center;
       }
-      .sp-visuanza img { width: 58px; }
 
-      /* Reposition text block under the Visuanza circle */
-      .sp-text { top: 145px; width: 90vw; }
-      .sp-text h2 { font-size: 1.75rem; }
+      .sp-mobile .sp-visuanza-m {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: #2e27b8;
+        box-shadow: 0 4px 24px rgba(46,39,184,0.45), 0 0 0 3px rgba(255,255,255,0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+        flex-shrink: 0;
+      }
 
-      /* Smaller logo tiles */
-      .sp-logo { width: 72px; height: 72px; border-radius: 18px; font-size: 1.8rem; }
+      .sp-mobile .sp-visuanza-m img {
+        width: 62px;
+        height: auto;
+        filter: brightness(0) invert(1);
+      }
+
+      .sp-mobile .sp-text-m {
+        margin-bottom: 28px;
+      }
+
+      .sp-mobile .sp-text-m h2 {
+        font-size: 1.75rem;
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      .sp-logos-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 32px;
+      }
+
+      .sp-logos-row .sp-logo-m {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.06);
+        box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
       /* Fix panel negative margin */
       .platforms-panel {
@@ -2320,6 +2361,8 @@
       .hero { padding-top: 90px; padding-bottom: 0; }
 
       .hero p, .hero-stats { justify-content: center; }
+      .stat-divider { display: none; }
+      .stat-logo { display: none; }
 
       .hero-visual { display: none; }
 
@@ -2673,57 +2716,6 @@
       .bento-grid { grid-template-columns: 1fr; }
       .bento-wide { grid-column: span 1; }
     }
-    /* ─── TESTIMONIALS TICKER ─── */
-    .testimonials-ticker-section {
-      padding: 100px 0;
-      overflow: hidden;
-    }
-    .testimonials-ticker-section .section-header {
-      padding: 0 24px;
-      margin-bottom: 3rem;
-    }
-    .ticker-outer {
-      position: relative;
-      overflow: hidden;
-    }
-    .ticker-fade-left, .ticker-fade-right {
-      position: absolute;
-      top: 0; bottom: 0;
-      width: 120px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .ticker-fade-left  { left: 0;  background: linear-gradient(to right, var(--black), transparent); }
-    .ticker-fade-right { right: 0; background: linear-gradient(to left, var(--black), transparent); }
-    .ticker-track {
-      display: flex;
-      gap: 16px;
-      width: max-content;
-      animation: testimonialScroll 40s linear infinite;
-      padding: 8px 16px;
-    }
-    .ticker-track:hover { animation-play-state: paused; }
-    @keyframes testimonialScroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-    .t-card {
-      width: 340px;
-      flex-shrink: 0;
-      background: var(--gray-dark);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .t-stars { color: #FFD700; font-size: 0.85rem; letter-spacing: 2px; }
-    .t-card p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.65; font-style: italic; flex: 1; }
-    .t-author { display: flex; align-items: center; gap: 0.75rem; margin-top: 0.5rem; }
-    .t-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: white; flex-shrink: 0; }
-    .t-name { font-size: 0.82rem; font-weight: 600; color: var(--text); }
-    .t-biz  { font-size: 0.75rem; color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -3422,25 +3414,50 @@
   </section>
 
   <!-- ─── TESTIMONIALS ─── -->
-  <section class="testimonials-ticker-section" id="quienes">
+  <section class="testimonials" id="quienes">
     <div class="section-header fade-in">
       <p class="section-label">Testimonios</p>
       <h2>Lo que dicen<br /><span class="accent">nuestros clientes</span></h2>
+      <p class="section-sub" style="font-size:0.8rem;color:var(--text-muted);margin-top:0.5rem;">Reseñas verificadas de <a href="https://synsnumedia.se" target="_blank" style="color:var(--accent);text-decoration:none;">SynsNuMedia</a> · Suecia</p>
     </div>
-    <div class="ticker-outer">
-      <div class="ticker-fade-left"></div>
-      <div class="ticker-fade-right"></div>
-      <div class="ticker-track">
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"Desde que empezamos con Visuanza, nuestras reservas en línea aumentaron un 60%. Aparecemos en los primeros resultados de Google."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">MR</div><div><div class="t-name">María Rodríguez</div><div class="t-biz">Restaurante La Terraza, Madrid</div></div></div></div>
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"Pasamos de ser invisibles en Google Maps a tener colas los fines de semana. El equipo de Visuanza transformó nuestra presencia digital."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">CG</div><div><div class="t-name">Carlos García</div><div class="t-biz">Pizzería Bella Napoli, Barcelona</div></div></div></div>
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"En solo 3 meses nuestras visitas al perfil de Google se triplicaron y el número de llamadas directas se disparó."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">AL</div><div><div class="t-name">Ana López</div><div class="t-biz">Café Moderno, Valencia</div></div></div></div>
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"Resultados reales desde el primer mes. Nuestra visibilidad en Google Maps mejoró drásticamente y los clientes nos encuentran solos."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">JM</div><div><div class="t-name">Jorge Martínez</div><div class="t-biz">Tapas Bar El Centro, Sevilla</div></div></div></div>
-        <!-- duplicate for seamless loop -->
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"Desde que empezamos con Visuanza, nuestras reservas en línea aumentaron un 60%. Aparecemos en los primeros resultados de Google."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">MR</div><div><div class="t-name">María Rodríguez</div><div class="t-biz">Restaurante La Terraza, Madrid</div></div></div></div>
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"Pasamos de ser invisibles en Google Maps a tener colas los fines de semana. El equipo de Visuanza transformó nuestra presencia digital."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">CG</div><div><div class="t-name">Carlos García</div><div class="t-biz">Pizzería Bella Napoli, Barcelona</div></div></div></div>
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"En solo 3 meses nuestras visitas al perfil de Google se triplicaron y el número de llamadas directas se disparó."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">AL</div><div><div class="t-name">Ana López</div><div class="t-biz">Café Moderno, Valencia</div></div></div></div>
-        <div class="t-card"><div class="t-stars">★★★★★</div><p>"Resultados reales desde el primer mes. Nuestra visibilidad en Google Maps mejoró drásticamente y los clientes nos encuentran solos."</p><div class="t-author"><div class="t-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">JM</div><div><div class="t-name">Jorge Martínez</div><div class="t-biz">Tapas Bar El Centro, Sevilla</div></div></div></div>
+    <div class="testimonials-grid fade-in">
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Increíbles videos e imágenes. Los recomiendo mucho si necesitáis una página web o alguien que se encargue de vuestras redes sociales."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">GD</div>
+          <div>
+            <div class="author-name">George</div>
+            <div class="author-biz">Dripp´n Burgers</div>
+          </div>
+        </div>
       </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"¡Equipo fantástico! Desde el principio se ha notado una buena energía hasta el resultado final. Ideas creativas, alta calidad y trato excelente con el cliente. ¡Pondría 6 estrellas si fuera posible!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">GS</div>
+          <div>
+            <div class="author-name">Garo</div>
+            <div class="author-biz">Stuvsta Grillen</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Además de ser increíblemente amables, son altamente profesionales y comprometidos. Presentan sus ideas con claridad y luego participan activamente en nuestra opinión. El resultado — tanto en video como en imágenes — es sencillamente excepcional."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">MB</div>
+          <div>
+            <div class="author-name">Mansour</div>
+            <div class="author-biz">Berra Burras Kebab</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -3660,37 +3677,19 @@
       // Parabola: y(t) = B*(t-0.5)^2 + TOP_Y  where t ∈ [0,1]
       // t=0 → bottom-left,  t=0.5 → top-center (under Visuanza),  t=1 → bottom-right
 
-      function getParams() {
-        const W = container.offsetWidth || window.innerWidth;
-        const isMobile = W < 600;
-        return {
-          HALF:     isMobile ? 36 : 60,
-          TOP_Y:    isMobile ? 65 : 100,
-          B:        isMobile ? 1100 : 1600,
-          logoSize: isMobile ? 72 : 120,
-        };
-      }
+      const HALF  = 60;
+      const TOP_Y = 100;
+      const B     = 1600;
 
-      let phase       = 0;
-      let running     = false;
+      let phase   = 0;
+      let running = false;
       let raf;
-      let lastLogoSize = -1;
 
       function tick() {
         phase = (phase + 0.0007) % 1;  // slow, smooth — full loop ≈ 24 seconds
 
-        const { HALF, TOP_Y, B, logoSize } = getParams();
         const W = container.offsetWidth  || 1440;
         const H = container.offsetHeight || 500;
-
-        // Only write size styles when logoSize has changed (avoids per-frame style writes)
-        if (logoSize !== lastLogoSize) {
-          logos.forEach(el => {
-            el.style.width  = logoSize + 'px';
-            el.style.height = logoSize + 'px';
-          });
-          lastLogoSize = logoSize;
-        }
 
         logos.forEach((el, i) => {
           const t = (phase + i / N) % 1;
@@ -3706,8 +3705,8 @@
           const xRatio = x / W;
           // leftFraction: 1.0 at far-left, 0.0 at center and beyond
           const leftFraction = Math.max(0, 1 - xRatio * 2);
-          const blur  = leftFraction * 14;          // 14px max at far left, 0 at center+
-          let opacity = 1 - leftFraction * 0.72;   // 0.28 at far left, 1.0 at center+
+          const blur  = leftFraction * 14;
+          let opacity = 1 - leftFraction * 0.72;
 
           // Fade out as logos sink toward the bottom (entering from left, exiting to right)
           // y > 72% of H → start fading; clipped by overflow:hidden below H
