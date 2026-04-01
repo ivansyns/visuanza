@@ -332,9 +332,9 @@
       display: flex; flex-direction: column;
       box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
       position: relative; overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s;
     }
-    .pricing-card:hover { transform: translateY(-3px); }
+    .pricing-card:hover { }
     .pricing-card.pricing-featured {
       border-color: rgba(79,126,255,0.35);
       box-shadow: 0 0 32px rgba(79,126,255,0.12), 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07);
@@ -404,86 +404,40 @@
     /* ─── PRICING SPOTLIGHT ─── */
     @media (hover: hover) and (pointer: fine) {
       .pricing-card[data-glow] {
-        --border-size: 2px;
-        --spotlight-size: calc(var(--size, 200) * 1px);
         --hue: calc(var(--base, 210) + (var(--xp, 0) * var(--spread, 40)));
         background-image: radial-gradient(
-          var(--spotlight-size) var(--spotlight-size) at
-          calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
-          hsl(var(--hue) 100% 70% / 0.07),
-          transparent
+          160px 160px at var(--card-x, 50%) var(--card-y, 50%),
+          hsl(var(--hue) 100% 65% / 0.12),
+          transparent 100%
         );
-        background-color: var(--surface);
-        background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
-        background-position: 50% 50%;
-        background-attachment: fixed;
-        border: var(--border-size) solid var(--border);
         position: relative;
       }
 
-      .pricing-card[data-glow]::before,
-      .pricing-card[data-glow]::after {
-        pointer-events: none;
+      /* Glowing border ring — exclude trick clips glow to border area only */
+      .pricing-card[data-glow]::before {
         content: "";
         position: absolute;
-        inset: calc(var(--border-size) * -1);
-        border: var(--border-size) solid transparent;
-        border-radius: 14px;
-        background-attachment: fixed;
-        background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
-        background-repeat: no-repeat;
-        background-position: 50% 50%;
-        mask:
-          linear-gradient(transparent, transparent),
-          linear-gradient(white, white);
-        mask-clip: padding-box, border-box;
-        mask-composite: intersect;
-      }
-
-      .pricing-card[data-glow]::before {
-        background-image: radial-gradient(
-          calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
-          calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
-          hsl(var(--hue) 100% 50% / 1),
-          transparent 100%
-        );
-        filter: brightness(2);
-      }
-
-      .pricing-card[data-glow]::after {
-        background-image: radial-gradient(
-          calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
-          calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
-          hsl(0 100% 100% / 0.8),
-          transparent 100%
-        );
-      }
-
-      .pricing-card[data-glow] > span[data-glow] {
-        position: absolute;
-        inset: 0;
-        border-radius: 14px;
-        border: 40px solid transparent;
-        filter: blur(20px);
-        background: none;
+        inset: -1px;
+        border-radius: 15px;
         pointer-events: none;
-        will-change: filter;
-        opacity: var(--outer, 1);
-        background-attachment: fixed;
-        background-image: radial-gradient(
-          calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
-          calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
-          hsl(var(--hue) 100% 50% / 1),
+        background: radial-gradient(
+          160px 160px at var(--card-x, -300px) var(--card-y, -300px),
+          hsl(var(--hue) 100% 65% / 0.9),
           transparent 100%
         );
-        background-size: calc(100% + 80px) calc(100% + 80px);
-        background-position: 50% 50%;
+        -webkit-mask:
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
         mask:
-          linear-gradient(transparent, transparent),
-          linear-gradient(white, white);
-        mask-clip: padding-box, border-box;
-        mask-composite: intersect;
+          linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        padding: 1px;
       }
+
+      .pricing-card[data-glow]::after { display: none; }
+      .pricing-card[data-glow] > span[data-glow] { display: none; }
     }
 
     /* ─── STEPS ─── */
@@ -592,75 +546,23 @@
       padding: 40px clamp(20px,4vw,80px) 32px;
       position: relative; z-index: 1;
     }
-    .footer-inner { max-width: 1120px; margin: 0 auto; padding-left: clamp(20px, 4vw, 80px); padding-right: clamp(20px, 4vw, 80px); }
-    .footer-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      gap: 40px; flex-wrap: wrap; margin-bottom: 40px;
-    }
+    .footer-inner { max-width: 1120px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
     .footer-brand { max-width: 280px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 12px; }
-    .footer-logo img { height: 28px; filter: brightness(0) invert(1); }
-    .footer-logo span { font-size: 1rem; font-weight: 800; color: rgba(255,255,255,0.85); font-family: 'Urbanist',sans-serif; }
-    .footer-tagline { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
-    .footer-links-group { }
-    .footer-links-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 14px; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a { font-size: 0.84rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px; }
+    .footer-logo img { height: 32px; filter: brightness(0) invert(1); }
+    .footer-logo span { font-size: 1.1rem; font-weight: 800; color: white; font-family: 'Urbanist',sans-serif; }
+    .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; color: rgba(255,255,255,0.5); }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.5); font-size: 0.82rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
     .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.25); }
     .footer-copy a { color: rgba(255,255,255,0.4); text-decoration: none; }
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; }
-    .footer-legal a:hover { color: var(--text-muted); }
-
-    /* ─── FADE-IN ─── */
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.028;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    @media (max-width: 768px) {
-      .hero-stats { gap: 24px; }
-      .pricing-wrap { gap: 16px; }
-      .pricing-card { padding: 28px 24px; }
-      .cta-inner { padding: 40px 24px; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-brand, .footer-col { text-align: center; }
-      .footer-logo { justify-content: center; }
-      .footer-desc { max-width: 100%; }
-      .footer-col ul { align-items: center; }
-      .footer-social-icons { justify-content: center; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    .addon-banner {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: rgba(79,126,255,0.07);
-      border: 1px solid rgba(79,126,255,0.2);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-top: 1rem;
-    }
-    .addon-banner strong { color: var(--text); }
-    .addon-icon {
-      flex-shrink: 0;
-      color: var(--blue);
-      margin-top: 1px;
-    }
-
+    .footer-legal a:hover { color: rgba(255,255,255,0.5); }
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
     .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
     .footer-social-icon:hover { background: rgba(79,126,255,0.15); border-color: rgba(79,126,255,0.3); color: white; }
@@ -946,8 +848,8 @@
     <div class="section-inner">
       <div style="text-align:center;" class="fade-in">
         <span class="section-label" style="justify-content:center;">Precio</span>
-        <h2 class="section-heading">Sin sorpresas al final del mes</h2>
-        <p class="section-sub" style="margin:0 auto;">Un precio fijo, todo incluido. Sin costes ocultos, sin contratos largos.</p>
+        <h2 class="section-heading">La web que tus clientes esperan</h2>
+        <p class="section-sub" style="margin:0 auto;">Elige el plan que mejor se adapte a tu restaurante. El mantenimiento mensual es opcional.</p>
       </div>
       <div class="pricing-wrap fade-in">
 
@@ -963,6 +865,7 @@
             <li>Optimización SEO desde el primer día</li>
             <li>Formulario de reservas o contacto</li>
             <li>Carta digital integrada</li>
+            <li>Integración con plataformas de reservas</li>
             <li>Google My Business optimizado</li>
           </ul>
           <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
@@ -979,9 +882,8 @@
             <li>Todo lo del plan Estándar</li>
             <li>Animaciones 3D y efectos visuales avanzados</li>
             <li>Más páginas y secciones personalizadas</li>
-            <li>Integración con plataformas de reservas</li>
-            <li>Sistema de carta digital con fotos</li>
-            <li>Soporte prioritario 30 días post-entrega</li>
+            <li>Sistema de carta digital con fotos (propias o con sesión de fotografía)</li>
+            <li>Cambios y correcciones incluidos 30 días tras la entrega</li>
           </ul>
           <a href="contacto.html" class="btn-blue pricing-cta">Hablar con nosotros</a>
         </div>
@@ -1080,7 +982,7 @@
       <h2>¿Listo para destacar <span class="accent">en Google?</span></h2>
       <p>Más de 30 restaurantes ya confían en Visuanza para su presencia digital. Únete tú también.</p>
       <div class="cta-btns">
-        <a href="index.html#contacto" class="btn-blue">Quiero mi web</a>
+        <a href="contacto.html" class="btn-blue">Quiero mi web</a>
         <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
       </div>
     </div>
@@ -1112,7 +1014,7 @@
         <h4>Navegar</h4>
         <ul>
           <li><a href="index.html">Inicio</a></li>
-          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="index.html#quienes">Acerca de</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </div>
@@ -1125,16 +1027,17 @@
             <a href="#" class="footer-social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
             <a href="#" class="footer-social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
           </div>
-        </div>
       </div>
-      <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></p>
-        <div class="footer-legal">
-          <a href="#">Condiciones de servicio</a>
-          <a href="politica-privacidad.html">Política de privacidad</a>
-        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
+      <div class="footer-legal">
+        <a href="politica-privacidad.html">Política de privacidad</a>
       </div>
     </div>
+    </div><!-- /footer-inner -->
   </footer>
 
   <script>
@@ -1159,11 +1062,17 @@
 
     (function() {
       if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-      document.body.addEventListener('pointermove', function(e) {
-        document.documentElement.style.setProperty('--x', e.clientX.toFixed(2));
-        document.documentElement.style.setProperty('--y', e.clientY.toFixed(2));
-        document.documentElement.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
-        document.documentElement.style.setProperty('--yp', (e.clientY / window.innerHeight).toFixed(2));
+      document.querySelectorAll('.pricing-card[data-glow]').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--card-x', (e.clientX - rect.left).toFixed(1) + 'px');
+          card.style.setProperty('--card-y', (e.clientY - rect.top).toFixed(1) + 'px');
+          document.documentElement.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.setProperty('--card-x', '-300px');
+          card.style.setProperty('--card-y', '-300px');
+        });
       });
     })();
   </script>

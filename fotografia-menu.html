@@ -202,8 +202,8 @@
     .pricing-head p { font-size: 0.95rem; color: var(--text-muted); max-width: 440px; margin: 0 auto; line-height: 1.65; }
     .session-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
     @media (max-width: 860px) { .session-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
-    .session-card { padding: 36px 28px; border-radius: 20px; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); position: relative; transition: border-color 0.2s, transform 0.2s; box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07); }
-    .session-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.14); }
+    .session-card { padding: 36px 28px; border-radius: 20px; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--border); position: relative; transition: border-color 0.2s; box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.07); }
+    .session-card:hover { border-color: rgba(255,255,255,0.14); }
     .session-card.session-featured { background: var(--gray-dark); border: 1px solid rgba(79,126,255,0.5); box-shadow: 0 0 40px rgba(79,126,255,0.1), inset 0 1px 0 rgba(255,255,255,0.07); }
     .session-card.session-featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--blue), transparent); }
     .session-pop { position: absolute; top: -11px; left: 50%; transform: translateX(-50%); background: var(--blue); color: #fff; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 4px 14px; border-radius: 999px; white-space: nowrap; }
@@ -281,6 +281,38 @@
       .footer-social-icons { justify-content: center; }
       .footer-bottom { flex-direction: column; text-align: center; }
       .cta-inner { padding: 40px 24px; }
+    }
+
+    /* ─── PRICING SPOTLIGHT ─── */
+    @media (hover: hover) and (pointer: fine) {
+      .session-card[data-glow] {
+        --hue: calc(var(--base, 210) + (var(--xp, 0) * var(--spread, 40)));
+        background-image: radial-gradient(
+          160px 160px at var(--card-x, 50%) var(--card-y, 50%),
+          hsl(var(--hue) 100% 65% / 0.12),
+          transparent 100%
+        );
+        position: relative;
+      }
+      .session-card[data-glow]::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: 20px;
+        pointer-events: none;
+        background: radial-gradient(
+          160px 160px at var(--card-x, -300px) var(--card-y, -300px),
+          hsl(var(--hue) 100% 65% / 0.9),
+          transparent 100%
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask-composite: exclude;
+        padding: 1px;
+      }
+      .session-card[data-glow]::after { display: none; }
+      .session-card[data-glow] > span[data-glow] { display: none; }
     }
   </style>
 </head>
@@ -480,7 +512,8 @@
       <div class="session-grid">
 
         <!-- Básica -->
-        <div class="session-card fade-in delay-1">
+        <div class="session-card fade-in delay-1" data-glow style="--base:220;--spread:40;">
+          <span data-glow></span>
           <div class="session-badge">Básica</div>
           <div class="session-name">Sesión de Menú</div>
           <div class="session-price">€300<span> / sesión</span></div>
@@ -500,7 +533,8 @@
         </div>
 
         <!-- Estándar (featured) -->
-        <div class="session-card session-featured fade-in">
+        <div class="session-card session-featured fade-in" data-glow style="--base:215;--spread:50;">
+          <span data-glow></span>
           <span class="session-pop">Más popular</span>
           <div class="session-badge">Estándar</div>
           <div class="session-name">Sesión Completa</div>
@@ -522,7 +556,8 @@
         </div>
 
         <!-- Campaña -->
-        <div class="session-card fade-in delay-2">
+        <div class="session-card fade-in delay-2" data-glow style="--base:210;--spread:40;">
+          <span data-glow></span>
           <div class="session-badge">Campaña</div>
           <div class="session-name">Pack Campaña</div>
           <div class="session-price">€800<span> / sesión</span></div>
@@ -606,7 +641,6 @@
       <div class="footer-bottom">
         <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
         <div class="footer-legal">
-          <a href="#">Condiciones de servicio</a>
           <a href="politica-privacidad.html">Política de privacidad</a>
         </div>
       </div>
@@ -630,6 +664,22 @@
     function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
     hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
     document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    (function() {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      document.querySelectorAll('.pricing-card[data-glow], .session-card[data-glow]').forEach(function(card) {
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          card.style.setProperty('--card-x', (e.clientX - rect.left).toFixed(1) + 'px');
+          card.style.setProperty('--card-y', (e.clientY - rect.top).toFixed(1) + 'px');
+          document.documentElement.style.setProperty('--xp', (e.clientX / window.innerWidth).toFixed(2));
+        });
+        card.addEventListener('mouseleave', function() {
+          card.style.setProperty('--card-x', '-300px');
+          card.style.setProperty('--card-y', '-300px');
+        });
+      });
+    })();
   </script>
 
 </body>
