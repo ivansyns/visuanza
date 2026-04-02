@@ -2297,11 +2297,18 @@
         margin: 0;
       }
 
+      /* Outer clips logos horizontally but lets badge shadow bleed vertically */
+      .sp-strip-outer {
+        width: 100%;
+        overflow-x: clip;
+        overflow-y: visible;
+      }
+
       .sp-strip-wrap {
         position: relative;
         width: 100%;
         height: 110px;
-        overflow: hidden;
+        overflow: visible;
       }
 
       .sp-mobile .sp-visuanza-m {
@@ -2313,7 +2320,7 @@
         height: 80px;
         border-radius: 50%;
         background: #2e27b8;
-        box-shadow: 0 4px 24px rgba(46,39,184,0.55), 0 0 0 4px rgba(255,255,255,0.9), 0 0 0 6px rgba(46,39,184,0.15);
+        box-shadow: 0 16px 56px rgba(46,39,184,0.55), 0 0 0 7px rgba(46,39,184,0.18), 0 0 0 14px rgba(46,39,184,0.07);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -2444,7 +2451,8 @@
       .phones-fan-wrap { display: none; }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
-      .panel-right { display: none; }
+      .panel-right { display: flex; justify-content: center; margin-top: 48px; }
+      .panel-phone-wrap { transform: scale(0.75); transform-origin: top center; overflow: visible; }
 
       .platforms { padding: 60px 0 0; }
     }
@@ -3146,13 +3154,15 @@
         <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
       </div>
 
-      <!-- Single logo strip with Visuanza centered over it -->
-      <div class="sp-strip-wrap" id="sp-strip-wrap">
-        <!-- Visuanza focal point — centered absolutely -->
-        <div class="sp-visuanza-m">
-          <img src="assets/SynsLogo.png" alt="Visuanza" />
+      <!-- Outer clips logos horizontally, inner allows badge shadow to bleed -->
+      <div class="sp-strip-outer">
+        <div class="sp-strip-wrap" id="sp-strip-wrap">
+          <!-- Visuanza focal point — centered over the strip -->
+          <div class="sp-visuanza-m">
+            <img src="assets/SynsLogo.png" alt="Visuanza" />
+          </div>
+          <!-- Logo tiles injected by JS -->
         </div>
-        <!-- Logo tiles injected by JS -->
       </div>
 
       <a href="#contacto" class="btn-primary sp-cta" style="margin-top:28px;">Solicite un presupuesto gratuito</a>
@@ -3708,7 +3718,7 @@
       let raf;
 
       function tick() {
-        offset = (offset + 0.6) % TOTAL;
+        offset = (offset - 1.0 + TOTAL) % TOTAL;
 
         const W = wrap.offsetWidth || 390;
         const CENTER = W / 2;
