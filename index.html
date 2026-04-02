@@ -2275,19 +2275,18 @@
       /* Hide the JS-driven arc canvas */
       .sp-container { display: none; }
 
-      /* Show the carousel mobile layout */
+      /* Show the blur-focus mobile strip */
       .sp-mobile {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 0 0 48px;
         text-align: center;
-        overflow: hidden;
       }
 
       .sp-mobile .sp-text-m {
         padding: 0 24px;
-        margin-bottom: 28px;
+        margin-bottom: 32px;
       }
 
       .sp-mobile .sp-text-m h2 {
@@ -2298,75 +2297,58 @@
         margin: 0;
       }
 
+      .sp-strip-wrap {
+        position: relative;
+        width: 100%;
+        height: 110px;
+        overflow: hidden;
+      }
+
       .sp-mobile .sp-visuanza-m {
-        width: 88px;
-        height: 88px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         background: #2e27b8;
-        box-shadow: 0 4px 24px rgba(46,39,184,0.45);
+        box-shadow: 0 4px 24px rgba(46,39,184,0.55), 0 0 0 4px rgba(255,255,255,0.9), 0 0 0 6px rgba(46,39,184,0.15);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 20px 0;
+        z-index: 20;
         flex-shrink: 0;
-        z-index: 2;
       }
 
       .sp-mobile .sp-visuanza-m img {
-        width: 56px;
+        width: 52px;
         height: auto;
         filter: brightness(0) invert(1);
       }
 
-      .sp-carousel-wrap {
-        width: 100%;
-        overflow: hidden;
-        -webkit-mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
-        mask-image: linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%);
-        margin: 6px 0;
-      }
-
-      .sp-carousel-track {
-        display: flex;
-        gap: 10px;
-        width: max-content;
-      }
-
-      .sp-carousel-fwd .sp-carousel-track {
-        animation: scrollFwd 18s linear infinite;
-      }
-
-      .sp-carousel-rev .sp-carousel-track {
-        animation: scrollRev 18s linear infinite;
-      }
-
-      @keyframes scrollFwd {
-        0%   { transform: translateX(0); }
-        100% { transform: translateX(-50%); }
-      }
-
-      @keyframes scrollRev {
-        0%   { transform: translateX(-50%); }
-        100% { transform: translateX(0); }
-      }
-
       .sp-logo-m {
-        width: 72px;
-        height: 72px;
-        border-radius: 18px;
+        position: absolute;
+        top: 0; left: 0;
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
         background: transparent;
         border: none;
         box-shadow: none;
-        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
+        will-change: transform, filter, opacity;
+        z-index: 5;
       }
 
       .sp-logo-m img {
-        width: 100%;
-        height: 100%;
+        width: 70%;
+        height: 70%;
         object-fit: contain;
+        display: block;
+        pointer-events: none;
       }
 
       /* Fix panel negative margin */
@@ -3158,64 +3140,22 @@
       </div>
     </div>
 
-    <!-- Mobile-only static logo grid (arc canvas hidden on mobile) -->
+    <!-- Mobile-only logo strip (arc canvas hidden on mobile) -->
     <div class="sp-mobile">
       <div class="sp-text-m">
         <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
       </div>
 
-      <!-- Carousel row 1 (left to right) -->
-      <div class="sp-carousel-wrap">
-        <div class="sp-carousel sp-carousel-fwd">
-          <div class="sp-carousel-track">
-            <div class="sp-logo-m"><img src="assets/logos/mlg.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/bramslogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/mamthailogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/mazraa.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/KimliLogoNoTxt.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/berralogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/nplogo.webp" alt="" /></div>
-            <!-- duplicate for loop -->
-            <div class="sp-logo-m"><img src="assets/logos/mlg.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/bramslogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/mamthailogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/mazraa.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/KimliLogoNoTxt.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/berralogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/nplogo.webp" alt="" /></div>
-          </div>
+      <!-- Single logo strip with Visuanza centered over it -->
+      <div class="sp-strip-wrap" id="sp-strip-wrap">
+        <!-- Visuanza focal point — centered absolutely -->
+        <div class="sp-visuanza-m">
+          <img src="assets/SynsLogo.png" alt="Visuanza" />
         </div>
+        <!-- Logo tiles injected by JS -->
       </div>
 
-      <!-- Visuanza center logo -->
-      <div class="sp-visuanza-m">
-        <img src="assets/SynsLogo.png" alt="Visuanza" />
-      </div>
-
-      <!-- Carousel row 2 (right to left) -->
-      <div class="sp-carousel-wrap">
-        <div class="sp-carousel sp-carousel-rev">
-          <div class="sp-carousel-track">
-            <div class="sp-logo-m"><img src="assets/logos/oloflogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/partillelogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/pzlogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/Sams-Cafe-Logo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/shuilogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/dunderlogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/libalogo.webp" alt="" /></div>
-            <!-- duplicate -->
-            <div class="sp-logo-m"><img src="assets/logos/oloflogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/partillelogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/pzlogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/Sams-Cafe-Logo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/shuilogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/dunderlogo.webp" alt="" /></div>
-            <div class="sp-logo-m"><img src="assets/logos/libalogo.webp" alt="" /></div>
-          </div>
-        </div>
-      </div>
-
-      <a href="#contacto" class="btn-primary sp-cta">Solicite un presupuesto gratuito</a>
+      <a href="#contacto" class="btn-primary sp-cta" style="margin-top:28px;">Solicite un presupuesto gratuito</a>
     </div>
     </div><!-- /social-proof -->
   </section><!-- /hero + proof -->
@@ -3704,6 +3644,87 @@
           opacity *= Math.max(0, 1 - fadeY);
 
           el.style.filter  = blur > 0 ? `blur(${blur}px)` : 'none';
+          el.style.opacity = opacity.toFixed(3);
+        });
+
+        if (running) raf = requestAnimationFrame(tick);
+      }
+
+      function start() { if (!running) { running = true; requestAnimationFrame(tick); } }
+      function stop()  { running = false; cancelAnimationFrame(raf); }
+
+      start();
+
+      const section = document.querySelector('.social-proof');
+      if (section && window.IntersectionObserver) {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => { e.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.05 }).observe(section);
+      }
+    })();
+
+    // ── Mobile Logo Strip ─────────────────────────────────────────────────────
+    (function initMobileStrip() {
+      if (window.innerWidth > 768) return;
+      const wrap = document.getElementById('sp-strip-wrap');
+      if (!wrap) return;
+
+      const logoFiles = [
+        'assets/logos/mlg.webp',
+        'assets/logos/bramslogo.webp',
+        'assets/logos/mamthailogo.webp',
+        'assets/logos/mazraa.webp',
+        'assets/logos/KimliLogoNoTxt.webp',
+        'assets/logos/berralogo.webp',
+        'assets/logos/nplogo.webp',
+        'assets/logos/oloflogo.webp',
+        'assets/logos/partillelogo.webp',
+        'assets/logos/pzlogo.webp',
+        'assets/logos/Sams-Cafe-Logo.webp',
+        'assets/logos/shuilogo.webp',
+        'assets/logos/dunderlogo.webp',
+        'assets/logos/libalogo.webp',
+      ];
+
+      const TILE = 80;
+      const GAP  = 20;
+      const STEP = TILE + GAP;
+      const N    = logoFiles.length;
+      const TOTAL = N * STEP;
+
+      const tiles = logoFiles.map(src => {
+        const el = document.createElement('div');
+        el.className = 'sp-logo-m';
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        el.appendChild(img);
+        wrap.appendChild(el);
+        return el;
+      });
+
+      let offset = 0;
+      let running = false;
+      let raf;
+
+      function tick() {
+        offset = (offset + 0.6) % TOTAL;
+
+        const W = wrap.offsetWidth || 390;
+        const CENTER = W / 2;
+        const HALF = TILE / 2;
+
+        tiles.forEach((el, i) => {
+          let x = (i * STEP - offset + TOTAL * 2) % TOTAL;
+          x = x - TOTAL / 2 + W / 2;
+
+          const logoCenter = x + HALF;
+          const leftDist = Math.max(0, (CENTER - logoCenter) / CENTER);
+          const blur = leftDist * 7;
+          const opacity = 1 - leftDist * 0.65;
+
+          el.style.transform = `translate(${x.toFixed(1)}px, ${(wrap.offsetHeight / 2 - HALF).toFixed(1)}px)`;
+          el.style.filter  = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
           el.style.opacity = opacity.toFixed(3);
         });
 
