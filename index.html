@@ -35,7 +35,7 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      font-size: 17px;
+      font-size: 18px;
       color: var(--text);
       background: #ffffff;
       overflow-x: hidden;
@@ -850,7 +850,7 @@
     .section-label {
       display: inline-flex;
       align-items: center;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -862,7 +862,7 @@
 
     .social-proof {
       position: relative;
-      padding-top: 110px;
+      padding-top: 120px;
       background: transparent;
     }
 
@@ -1924,7 +1924,7 @@
       background: #f8fafc;
       border-top: 1px solid rgba(0,0,0,0.06);
       border-bottom: 1px solid rgba(0,0,0,0.06);
-      padding: 120px 0;
+      padding: 130px 0;
     }
 
     .stats-grid {
@@ -2354,6 +2354,29 @@
       /* Contain horizontal overflow on mobile */
       .platforms { overflow-x: hidden; }
       .bg-glow { display: none; }
+
+      /* ─── MOBILE TYPOGRAPHY & SPACING OVERRIDES ─── */
+      body { font-size: 16px; }
+
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 2.8rem); }
+
+      .section-header h2,
+      .platforms-top-left h2,
+      .panel-left h3,
+      .sp-text h2,
+      .cta-section h2 { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+
+      .service-card p,
+      .bento-content p { font-size: 1rem; }
+
+      .stat-block .number { font-size: 2.4rem; }
+      .stat-block .label { font-size: 0.85rem; color: #374151; }
+
+      .services { padding: 80px 0; }
+      .bento-section { padding: 80px 16px; }
+      .stats-section { padding: 80px 0; }
+      .platforms { padding: 80px 0 0; }
+      .social-proof { padding-top: 80px; }
     }
 
     /* ─── RESPONSIVE ─── */
@@ -2711,7 +2734,7 @@
       flex: 1;
     }
     .bento-tag {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       font-weight: 700;
       color: var(--blue);
       letter-spacing: 0.1em;
