@@ -2404,10 +2404,26 @@
       .stat-block .label { font-size: 1rem; color: #374151; }
 
       .services { padding: 80px 0; }
-      .bento-section { padding: 80px 16px; }
+      .bento-section { padding: 80px 20px; }
       .stats-section { padding: 80px 0; }
       .platforms { padding: 80px 0 0; }
       .social-proof { padding-top: 80px; }
+
+      /* ── Consistent 20px horizontal margin on mobile for all content ── */
+      .hero-content,
+      .platforms-top,
+      .platforms-panel-inner,
+      .section-header,
+      .steps-grid,
+      .services-grid,
+      .stats-grid,
+      .testimonials-grid,
+      .contact-section > *,
+      .cta-section > * {
+        padding-left: 20px;
+        padding-right: 20px;
+        box-sizing: border-box;
+      }
     }
 
     /* ─── RESPONSIVE ─── */
