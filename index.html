@@ -21,7 +21,7 @@
       --gray-light: #f1f5f9;
       --white:      #ffffff;
       --text:       #0f172a;
-      --text-muted: #4b5563;
+      --text-muted: #374151;
       --border:     rgba(0,0,0,0.08);
       --surface:    #f8fafc;
       --radius:     12px;
@@ -121,7 +121,7 @@
       align-items: center;
       list-style: none;
     }
-    .nav-links li { margin-right: 4px; }
+    .nav-links li { margin-right: 33px; }
     .nav-links li:last-child { margin-right: 0; }
 
     .nav-links a {
@@ -422,7 +422,7 @@
     .word-carousel-wrap {
       display: inline-block;
       overflow: hidden;
-      height: 1.1em;        /* matches h1 line-height: 1.1 */
+      height: 1.1em;
       vertical-align: bottom;
       line-height: 1.1;
     }
@@ -441,7 +441,38 @@
       line-height: 1.7;
     }
 
-    .hero-cta { margin-bottom: 44px; }
+    .hero-n1-badge {
+      display: none;
+      flex-direction: column;
+      margin-bottom: 36px;
+    }
+    .hero-n1-badge .n1-number {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+    .hero-n1-badge .n1-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-cta { margin-bottom: 44px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1.5px solid var(--blue);
+      color: var(--blue);
+      background: transparent;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s;
+    }
+    .btn-ghost:hover { background: rgba(79,126,255,0.08); }
 
     .hero-stats {
       display: flex;
@@ -866,6 +897,17 @@
       padding-top: 120px;
       background: transparent;
     }
+    .social-proof::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(79,126,255,0.10) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      display: none;
+    }
 
     /* Conveyor belt container */
     .sp-container {
@@ -919,7 +961,7 @@
     /* Text — centered in section, below Visuanza */
     .sp-text {
       position: absolute;
-      top: 215px;
+      top: 260px;
       left: 50%;
       transform: translateX(-50%);
       text-align: center;
@@ -932,7 +974,7 @@
       font-size: clamp(2.1rem, 3.4vw, 3.4rem);
       font-weight: 900;
       letter-spacing: -0.03em;
-      line-height: 1.1;
+      line-height: 1.35;
       margin-bottom: 0;
     }
     .sp-text h2 .accent { color: var(--blue); }
@@ -951,19 +993,19 @@
     /* ─── PLATFORMS SHOWCASE ─── */
     /* ─── OMNIPRESENCIA DIGITAL ─── */
     .platforms {
-      background: #f8fafc;
+      background: #ffffff;
       padding: 130px 0 0;
       position: relative;
       overflow: visible;
     }
 
-    /* Ambient top glow */
+    /* Ambient glow — centered behind phone panel on desktop */
     .platforms::before {
       content: '';
       position: absolute;
-      top: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 400px;
+      top: 50%; right: 0;
+      transform: translateY(-50%);
+      width: 700px; height: 700px;
       background: radial-gradient(ellipse, rgba(79,126,255,0.13) 0%, transparent 65%);
       pointer-events: none;
       z-index: 0;
@@ -1221,7 +1263,7 @@
       line-height: 1.65;
       border-left: 2px solid var(--blue);
       padding-left: 1rem;
-      margin: 1.25rem 0 1.75rem;
+      margin: 2rem 0 1.75rem;
     }
 
     .panel-checklist {
@@ -1922,9 +1964,7 @@
 
     /* ─── STATS SECTION ─── */
     .stats-section {
-      background: #f8fafc;
-      border-top: 1px solid rgba(0,0,0,0.06);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: #ffffff;
       padding: 130px 0;
     }
 
@@ -1983,6 +2023,29 @@
       flex-direction: column;
     }
 
+    .testimonial-stat {
+      display: inline-flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+      max-width: 100%;
+      background: #fff;
+      border: 1.5px solid rgba(0,0,0,0.12);
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 14px;
+      font-size: 0.82rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    .stat-line2 { display: inline; }
+
+    .testimonial-stat strong {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--blue);
+    }
+
     .testimonial-card:hover {
       transform: translateY(-3px);
       box-shadow: 0 12px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(79,126,255,0.15);
@@ -2036,35 +2099,10 @@
 
     /* ─── CTA SECTION ─── */
     .cta-section {
-      background: #f8fafc;
-      border-top: 1px solid rgba(0,0,0,0.06);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
+      background: #ffffff;
       padding: 100px 0;
       text-align: center;
       position: relative;
-      overflow: hidden;
-    }
-
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 400px;
-      background: radial-gradient(ellipse, rgba(37,99,235,0.25) 0%, rgba(79,126,255,0.1) 45%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .cta-section::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(37,99,235,0.12) 0%, transparent 65%);
-      border-radius: 50%;
-      pointer-events: none;
     }
 
     .cta-section h2 {
@@ -2143,12 +2181,12 @@
     }
 
     .footer-logo img {
-      height: 32px;
+      height: 72px;
       filter: brightness(0) invert(1);
     }
 
     .footer-logo span {
-      font-size: 1.1rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: white;
     }
@@ -2297,6 +2335,7 @@
         line-height: 1.2;
         margin: 0;
       }
+      .sp-mobile .sp-text-m h2 .accent { color: var(--blue); }
 
       /* Outer clips logos horizontally but lets badge shadow bleed vertically */
       .sp-strip-outer {
@@ -2359,12 +2398,6 @@
         pointer-events: none;
       }
 
-      /* Fix panel negative margin */
-      .platforms-panel {
-        margin-top: 0 !important;
-        margin-bottom: 0 !important;
-      }
-
       /* Hide floating glassmorphism cards — no room on mobile */
       .panel-glass-card { display: none !important; }
 
@@ -2383,7 +2416,12 @@
 
       body { font-size: 17px; }
 
-      .hero h1 { font-size: clamp(2.4rem, 9vw, 3rem); }
+      .hero h1 { font-size: clamp(2.4rem, 9vw, 3rem); text-align: left; }
+      .hero-content > p { text-align: left; }
+      .hero-cta { flex-direction: column; }
+      .hero-cta .btn-primary, .hero-cta .btn-ghost { width: 100%; justify-content: center; }
+      .hero-inner { padding-left: 24px; padding-right: 24px; }
+      .hero-n1-badge { display: flex; }
 
       .section-header h2,
       .platforms-top-left h2,
@@ -2405,7 +2443,10 @@
       .stat-block .label { font-size: 1rem; color: #374151; }
 
       .services { padding: 80px 0; }
-      .bento-section { padding: 80px 20px; }
+      .bento-section { padding: 52px 20px; }
+      .testimonials { padding: 52px 0; }
+      .contact-section { padding: 52px 24px; }
+      .stat-line2 { display: block; }
       .stats-section { padding: 80px 0; }
       .platforms { padding: 80px 0 0; }
       .social-proof { padding-top: 80px; }
@@ -2443,7 +2484,7 @@
         min-height: unset;
       }
 
-      .hero { padding-top: 90px; padding-bottom: 0; }
+      .hero { padding-top: 150px; padding-bottom: 0; }
 
       .hero p, .hero-stats { justify-content: center; }
       .stat-divider { display: none; }
@@ -2463,12 +2504,30 @@
         grid-template-columns: 1fr 1fr;
       }
 
+      .platforms::before { display: none; }
+      .social-proof::before { display: block; }
+
       .nav-links, .nav-right { display: none !important; }
 
-      .phones-fan-wrap { display: none; }
+      .phones-fan-wrap {
+        display: block;
+        transform: scale(0.5);
+        transform-origin: top center;
+        margin-bottom: -265px;
+        clip-path: inset(0 -100vw 50% -100vw);
+      }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
+
+      /* Fix panel negative margin */
+      .platforms-panel {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        position: relative;
+        top: -130px;
+        margin-bottom: -130px !important;
+      }
 
       .platforms { padding: 60px 0 0; }
     }
@@ -2476,8 +2535,8 @@
     @media (max-width: 600px) {
       .steps-grid,
       .services-grid,
-      .stats-grid,
-      .testimonials-grid { padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px); }
+      .stats-grid { padding-left: clamp(8px, 1.5vw, 24px); padding-right: clamp(8px, 1.5vw, 24px); }
+      .testimonials-grid { padding-left: 20px; padding-right: 20px; }
 
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-grid { grid-template-columns: 1fr; }
@@ -2485,7 +2544,11 @@
       .footer-logo { justify-content: center; }
       .footer-desc { max-width: 100%; }
       .footer-col ul { align-items: center; }
-      .footer-social-icons { justify-content: center; }
+      .footer-social-icons { justify-content: center; gap: 20px; }
+      .footer-social-icon { width: 48px; height: 48px; border-radius: 12px; }
+      .footer-social-icon svg { width: 20px; height: 20px; }
+      .footer-logo img { height: 36px; }
+      .footer-logo span { font-size: 1.3rem; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
 
@@ -2748,7 +2811,7 @@
     }
     .bento-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 14px;
       margin-top: 3rem;
     }
@@ -2767,7 +2830,8 @@
       border-color: rgba(79,126,255,0.4);
       transform: translateY(-4px);
     }
-    .bento-wide { grid-column: span 2; }
+    .bento-wide { grid-column: span 3; }
+    .bento-narrow { grid-column: span 2; }
     .bento-img-frame {
       width: 100%;
       aspect-ratio: 16/9;
@@ -2782,11 +2846,11 @@
       flex: 1;
     }
     .bento-tag {
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: 0;
+      text-transform: none;
     }
     .bento-content p {
       font-size: 1.05rem;
@@ -2795,16 +2859,24 @@
       flex: 1;
     }
     .bento-arrow {
-      font-size: 1rem;
-      color: var(--blue);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       align-self: flex-end;
-      opacity: 0.6;
-      transition: transform 0.2s, opacity 0.2s;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform 0.2s, background 0.2s;
     }
-    .bento-card:hover .bento-arrow { transform: translateX(5px); opacity: 1; }
+    .bento-arrow svg { width: 16px; height: 16px; }
+    .bento-card:hover .bento-arrow { transform: translateX(4px); background: var(--blue-dark); }
     @media (max-width: 768px) {
       .bento-grid { grid-template-columns: 1fr; }
       .bento-wide { grid-column: span 1; }
+      .bento-narrow { grid-column: span 1; }
     }
 
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
@@ -2869,8 +2941,6 @@
             </div>
           </div>
         </li>
-        <li><a href="#producto">Producto</a></li>
-        <li><a href="#estrategia">Estrategia</a></li>
         <li><a href="#quienes">Quiénes somos</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
@@ -2889,8 +2959,6 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul class="mobile-menu-links">
       <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
-      <li><a href="#producto" class="mobile-menu-link">Producto</a></li>
-      <li><a href="#estrategia" class="mobile-menu-link">Estrategia</a></li>
       <li><a href="#quienes" class="mobile-menu-link">Quiénes somos</a></li>
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
@@ -2904,34 +2972,15 @@
     <img src="assets/SynsLogo.png" class="hero-logo-bg" alt="" aria-hidden="true" />
     <div class="hero-inner">
     <div class="hero-content">
-      <div class="hero-badge">
-        📍 Visibilidad local para negocios
+      <div class="hero-n1-badge">
+        <div class="n1-number">N°1</div>
+        <div class="n1-label">agencia para restaurantes en Suecia</div>
       </div>
       <h1>Qué tan visible es<br /><span class="accent">Tu <span class="word-carousel-wrap"><span id="hero-word">tienda</span></span></span><br />en línea</h1>
-      <p>Pon tu negocio en el mapa con Visuanza. Te ayudamos a posicionarte en los buscadores más utilizados y a atraer a más clientes potenciales.</p>
+      <p>Tus clientes te buscan en Google. La pregunta es si te encuentran a ti o a tu competencia.</p>
       <div class="hero-cta">
-        <a href="#contacto" class="btn-primary" style="padding: 14px 28px; font-size: 0.9rem;">Solicite un análisis gratuito</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat-item">
-          <svg class="stat-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-          </svg>
-          <div>
-            <div class="stat-number">+50%</div>
-            <div class="stat-label">aumento de ingresos en clientes</div>
-          </div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-          <div>
-            <div class="stat-number">N°1</div>
-            <div class="stat-label">agencia para restaurantes en Suecia</div>
-          </div>
-        </div>
+        <a href="contacto.html" class="btn-primary" style="padding: 14px 28px; font-size: 0.9rem;">Solicita una propuesta</a>
+        <a href="#" class="btn-ghost">Analiza tu negocio gratis →</a>
       </div>
     </div>
 
@@ -3156,18 +3205,14 @@
       <!-- Logo tiles injected by JS -->
       <!-- Text centered below Visuanza -->
       <div class="sp-text">
-        <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
-      </div>
-      <!-- CTA below text -->
-      <div class="sp-cta-wrap">
-        <a href="#contacto" class="btn-primary sp-cta">Solicite un presupuesto gratuito</a>
+        <h2>Elegido por<br /><span class="accent">más de 800</span> restaurantes</h2>
       </div>
     </div>
 
     <!-- Mobile-only logo strip (arc canvas hidden on mobile) -->
     <div class="sp-mobile">
       <div class="sp-text-m">
-        <h2>Elegido por<br /><span class="accent">más de 1000</span> restaurantes</h2>
+        <h2>Elegido por<br /><span class="accent">más de 800</span> restaurantes</h2>
       </div>
 
       <!-- Outer clips logos horizontally, inner allows badge shadow to bleed -->
@@ -3181,7 +3226,6 @@
         </div>
       </div>
 
-      <a href="#contacto" class="btn-primary sp-cta" style="margin-top:28px;">Solicite un presupuesto gratuito</a>
     </div>
     </div><!-- /social-proof -->
   </section><!-- /hero + proof -->
@@ -3193,10 +3237,10 @@
     <div class="platforms-top fade-in">
       <div class="platforms-top-left">
         <p class="section-label">Omnipresencia digital</p>
-        <h2>Sincronice su información en <span class="accent">todas partes</span> con un solo clic</h2>
+        <h2>Más visibilidad.<br />Más reservas.<br /><span class="accent">Menos preocupaciones.</span></h2>
       </div>
       <div class="platforms-top-right">
-        <p>Desde Google hasta ChatGPT, nos aseguramos de que tus clientes te encuentren donde sea que busquen. Actualizamos tu presencia en todas las plataformas de forma simultánea, sin esfuerzo manual.</p>
+        <p>Gestionamos tu presencia digital en Google, redes sociales y más — para que tus mesas nunca estén vacías.</p>
         <div class="platform-badges">
           <div class="platform-badge">
             <svg width="12" height="12" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
@@ -3252,8 +3296,7 @@
           <p class="section-label">¿Qué nos hace diferentes?</p>
           <h3>No visitas en redes.<br /><span class="accent">Mesas llenas.</span></h3>
           <p class="panel-body-text">En Visuanza tenemos un conocimiento profundo del sector restaurantero y sus problemas reales. Por eso nuestro foco está en aumentar tu facturación — no en conseguirte visitas en redes que no se convierten en clientes.</p>
-          <p class="panel-body-text">Precios claros y paquetes sin permanencia, adaptados a cada restaurante y situación.</p>
-          <p class="panel-punchline">Cualquiera puede grabar un vídeo bonito.<br />No cualquiera sabe llenarte el restaurante.</p>
+<p class="panel-punchline">Cualquiera puede grabar un vídeo bonito.<br />No cualquiera sabe llenarte el restaurante.</p>
           <a href="contacto.html" class="btn-primary" style="display:inline-flex;padding:14px 28px;font-size:0.9rem;text-decoration:none;">Hablemos →</a>
         </div>
 
@@ -3318,23 +3361,23 @@
         <div class="bento-content">
           <span class="bento-tag">Fotografía de Menú</span>
           <p>Imágenes profesionales de tus platos que abren el apetito y disparan los pedidos online.</p>
-          <span class="bento-arrow">→</span>
+          <span class="bento-arrow"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
       </a>
-      <a href="publicidad-digital.html" class="bento-card fade-in">
+      <a href="publicidad-digital.html" class="bento-card bento-narrow fade-in">
         <div class="bento-img-frame" style="background:none;"><img src="assets/publicidad.webp" alt="Publicidad Digital" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
         <div class="bento-content">
           <span class="bento-tag">Publicidad Digital</span>
           <p>Meta Ads y TikTok Ads gestionados para llenar tu restaurante cada semana.</p>
-          <span class="bento-arrow">→</span>
+          <span class="bento-arrow"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
       </a>
-      <a href="diseno-web.html" class="bento-card fade-in">
+      <a href="diseno-web.html" class="bento-card bento-narrow fade-in">
         <div class="bento-img-frame" style="background:none;"><img src="assets/web.webp" alt="Diseño Web" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
         <div class="bento-content">
           <span class="bento-tag">Diseño Web</span>
           <p>Páginas web a medida que convierten visitas en reservas y pedidos.</p>
-          <span class="bento-arrow">→</span>
+          <span class="bento-arrow"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
       </a>
       <a href="redes-sociales.html" class="bento-card bento-wide fade-in">
@@ -3342,7 +3385,7 @@
         <div class="bento-content">
           <span class="bento-tag">Redes Sociales</span>
           <p>Gestión profesional de Instagram, Facebook y TikTok para atraer más clientes a tu restaurante.</p>
-          <span class="bento-arrow">→</span>
+          <span class="bento-arrow"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
       </a>
     </div>
@@ -3350,31 +3393,6 @@
 
   <!-- ─── CONTACT ─── -->
   <!-- ─── STATS ─── -->
-  <section class="stats-section">
-    <div class="section-header fade-in">
-      <p class="section-label">Resultados reales</p>
-      <h2>Números que<br /><span class="accent">hablan por sí solos</span></h2>
-    </div>
-    <div class="stats-grid">
-      <div class="stat-block fade-in">
-        <div class="number"><span class="accent">+</span>50<span class="accent">%</span></div>
-        <div class="label">Aumento de ingresos diarios</div>
-      </div>
-      <div class="stat-block fade-in">
-        <div class="number"><span class="accent">+</span>41<span class="accent">%</span></div>
-        <div class="label">Más clientes en 90 días</div>
-      </div>
-      <div class="stat-block fade-in">
-        <div class="number">4.6<span class="accent">★</span></div>
-        <div class="label">Valoración media en 60 días</div>
-      </div>
-      <div class="stat-block fade-in">
-        <div class="number">1.200</div>
-        <div class="label">Pre-registros en apertura de local</div>
-      </div>
-    </div>
-    <p style="text-align:center;font-size:0.85rem;color:var(--text-muted);margin-top:2rem;letter-spacing:0.06em;text-transform:uppercase;">Resultados reales de clientes de la red SynsNuMedia</p>
-  </section>
 
   <!-- ─── TESTIMONIALS ─── -->
   <section class="testimonials" id="quienes">
@@ -3386,6 +3404,7 @@
     <div class="testimonials-grid fade-in">
 
       <div class="testimonial-card">
+        <div class="testimonial-stat"><strong>280.000</strong> reproducciones <span class="stat-line2"><strong>7.000</strong> interacciones en 1 mes</span></div>
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"Increíbles videos e imágenes. Los recomiendo mucho si necesitáis una página web o alguien que se encargue de vuestras redes sociales."</p>
         <div class="testimonial-author">
@@ -3398,6 +3417,7 @@
       </div>
 
       <div class="testimonial-card">
+        <div class="testimonial-stat"><strong>~50%</strong> de aumento en caja diaria en 3 meses</div>
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"¡Equipo fantástico! Desde el principio se ha notado una buena energía hasta el resultado final. Ideas creativas, alta calidad y trato excelente con el cliente. ¡Pondría 6 estrellas si fuera posible!"</p>
         <div class="testimonial-author">
@@ -3410,6 +3430,7 @@
       </div>
 
       <div class="testimonial-card">
+        <div class="testimonial-stat"><strong>1.200</strong> pre-registros antes de la apertura</div>
         <div class="testimonial-stars">★★★★★</div>
         <p class="testimonial-text">"Además de ser increíblemente amables, son altamente profesionales y comprometidos. Presentan sus ideas con claridad y luego participan activamente en nuestra opinión. El resultado — tanto en video como en imágenes — es sencillamente excepcional."</p>
         <div class="testimonial-author">
@@ -3472,14 +3493,6 @@
   </section>
 
   <!-- ─── CTA ─── -->
-  <section class="cta-section">
-    <div class="container" style="text-align:center;">
-      <h2>¿Listo para ser más visible?</h2>
-      <p>Únete a más de 1000 negocios que ya confían en Visuanza para dominar su mercado local.</p>
-      <a href="contacto.html" class="btn-white">Solicita tu análisis gratuito →</a>
-    </div>
-  </section>
-
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
@@ -3489,7 +3502,6 @@
           <img src="assets/SynsLogo.png" alt="Visuanza" />
           <span>Visuanza</span>
         </a>
-        <p class="footer-desc">Con Visuanza, tu empresa local puede mejorar su clasificación en los principales motores de búsqueda, lo que te ayuda a atraer a más clientes locales.</p>
       </div>
 
       <div class="footer-col">
@@ -3506,7 +3518,7 @@
         <h4>Navegar</h4>
         <ul>
           <li><a href="#">Inicio</a></li>
-          <li><a href="#">Acerca de</a></li>
+          <li><a href="#quienes">Quiénes somos</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </div>
@@ -3579,15 +3591,7 @@
       link.addEventListener('click', closeMenu);
     });
 
-    // Nav shadow on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        nav.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
-      } else {
-        nav.style.boxShadow = 'none';
-      }
-    });
+    // Nav shadow handled by .nav-inner pill CSS — no full-width shadow needed
 
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -3663,13 +3667,22 @@
 
           const xRatio = x / W;
           const leftFraction = Math.max(0, 1 - xRatio * 2);
-          const blur  = leftFraction * 14;
+          let blur  = leftFraction * 14;
           let opacity = 1 - leftFraction * 0.72;
 
           const fadeY = Math.max(0, (y - H * 0.72) / (H * 0.28));
           opacity *= Math.max(0, 1 - fadeY);
 
-          el.style.filter  = blur > 0 ? `blur(${blur}px)` : 'none';
+          // Peek effect: clear when passing behind Visuanza logo (center of arc)
+          const distFromCenter = Math.abs(x - W * 0.5);
+          const peekRadius = 90;
+          if (distFromCenter < peekRadius) {
+            const peekStrength = 1 - distFromCenter / peekRadius;
+            blur    = blur    * (1 - peekStrength);
+            opacity = opacity + (1 - opacity) * peekStrength;
+          }
+
+          el.style.filter  = blur > 0.3 ? `blur(${blur.toFixed(1)}px)` : 'none';
           el.style.opacity = opacity.toFixed(3);
         });
 
@@ -3734,7 +3747,7 @@
       let raf;
 
       function tick() {
-        offset = (offset - 1.0 + TOTAL) % TOTAL;
+        offset = (offset - 0.6 + TOTAL) % TOTAL;
 
         const W = wrap.offsetWidth || 390;
         const CENTER = W / 2;
@@ -3746,8 +3759,17 @@
 
           const logoCenter = x + HALF;
           const leftDist = Math.max(0, (CENTER - logoCenter) / CENTER);
-          const blur = leftDist * 7;
-          const opacity = 1 - leftDist * 0.65;
+          let blur = leftDist * 7;
+          let opacity = 1 - leftDist * 0.65;
+
+          // Peek effect: clear when passing behind Visuanza badge
+          const distFromCenter = Math.abs(logoCenter - CENTER);
+          const peekRadius = 60;
+          if (distFromCenter < peekRadius) {
+            const peekStrength = 1 - distFromCenter / peekRadius;
+            blur    = blur    * (1 - peekStrength);
+            opacity = opacity + (1 - opacity) * peekStrength;
+          }
 
           el.style.transform = `translate(${x.toFixed(1)}px, ${(wrap.offsetHeight / 2 - HALF).toFixed(1)}px)`;
           el.style.filter  = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
@@ -3772,7 +3794,7 @@
 
     // ── Hero word carousel ──────────────────────────────────────────
     (function () {
-      const words = ['restaurante', 'bar', 'cafetería', 'tienda', 'salón', 'hotel', 'negocio'];
+      const words = ['restaurante', 'bar', 'cafetería', 'tienda'];
       let current = words.indexOf('tienda');
       const el = document.getElementById('hero-word');
       if (!el) return;
