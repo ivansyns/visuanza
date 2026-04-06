@@ -52,7 +52,7 @@
 
     /* ─── NAV ─── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; }
-    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); pointer-events: auto; }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.88) padding-box, linear-gradient(120deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.7)) border-box; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid transparent; border-radius: 999px; box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05); pointer-events: auto; }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { height: 30px; width: auto; }
     .nav-logo span { font-size: 1.1rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; font-family: 'Urbanist',sans-serif; }
@@ -172,6 +172,7 @@
 
     .section-header h2 {
       font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
       margin-bottom: 1rem;
     }
 
