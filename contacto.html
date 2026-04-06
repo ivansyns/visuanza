@@ -133,14 +133,14 @@
     .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; color: rgba(255,255,255,0.5); }
     .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.5); font-size: 0.82rem; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-col ul li a { color: rgba(255,255,255,0.6); font-size: 0.82rem; transition: color 0.2s, text-decoration-color 0.2s; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); text-decoration-color: rgba(255,255,255,0.6); }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .footer-copy a { color: rgba(255,255,255,0.6); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); transition: color 0.2s, text-decoration-color 0.2s; }
     .footer-copy a:hover { color: rgba(255,255,255,0.8); }
     .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.45); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.15); transition: color 0.2s, text-decoration-color 0.2s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
     /* ─── FADE-IN ─── */
@@ -185,7 +185,7 @@
     .submit-btn:disabled { opacity:0.5;cursor:not-allowed;transform:none; }
 
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
+    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
     .footer-social-icon:hover { background: rgba(79,126,255,0.15); border-color: rgba(79,126,255,0.3); color: white; }
     .footer-social-icon svg { width: 15px; height: 15px; }
   </style>
@@ -198,7 +198,7 @@
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
         <span>Visuanza</span>
       </a>
       <ul class="nav-links">
@@ -271,6 +271,8 @@
     </div>
   </div>
 
+  <main>
+
   <!-- ─── CONTACT ─── -->
   <section style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:140px 24px 100px;">
     <div class="section-header fade-in" style="text-align:center;margin-bottom:3rem;">
@@ -317,12 +319,14 @@
     </form>
   </section>
 
+  </main>
+
     <footer>
     <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Visuanza" />
+          <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
           <span>Visuanza</span>
         </a>
               <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
