@@ -173,26 +173,7 @@
       transition: border-color 0.2s, background 0.2s;
     }
     .pill:hover { border-color: rgba(79,126,255,0.3); background: rgba(79,126,255,0.06); }
-    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
-
-    /* ─── MARQUEE ─── */
-    .marquee-wrap {
-      overflow: hidden; padding: 18px 0;
-      background: rgba(79,126,255,0.06);
-      border-top: 1px solid rgba(79,126,255,0.12);
-      border-bottom: 1px solid rgba(79,126,255,0.12);
-      position: relative; z-index: 1;
-    }
-    .marquee-track { display: flex; width: max-content; animation: marquee-scroll 32s linear infinite; }
-    .marquee-item {
-      white-space: nowrap; padding: 0 32px;
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--text-muted); letter-spacing: 0.05em;
-      text-transform: uppercase;
-      display: flex; align-items: center; gap: 32px;
-    }
-    .marquee-item::after { content: '·'; color: var(--blue); font-size: 1.2rem; }
-    @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; } 100% { transform: translateX(-50%); } }
 
     /* ─── SECTIONS ─── */
     .section {
@@ -448,6 +429,8 @@
     .cta-inner p { font-size: 1rem; color: var(--text-muted); margin-bottom: 32px; position: relative; z-index: 1; }
     .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 
+    .footer-cta-btn { display: inline-block; margin-top: 18px; background: #4F7EFF; color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: 999px; transition: opacity 0.2s, transform 0.2s; }
+    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     /* ─── FOOTER ─── */
     footer {
       background: #0f172a;
@@ -581,30 +564,6 @@
       </div>
     </div>
   </section>
-
-  <!-- ─── MARQUEE ─── -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <div class="marquee-item">Instagram</div>
-      <div class="marquee-item">TikTok</div>
-      <div class="marquee-item">Google Maps</div>
-      <div class="marquee-item">Reels</div>
-      <div class="marquee-item">Stories</div>
-      <div class="marquee-item">Contenido viral</div>
-      <div class="marquee-item">Más reservas</div>
-      <div class="marquee-item">Más ventas</div>
-      <div class="marquee-item">Sin permanencia</div>
-      <div class="marquee-item">Instagram</div>
-      <div class="marquee-item">TikTok</div>
-      <div class="marquee-item">Google Maps</div>
-      <div class="marquee-item">Reels</div>
-      <div class="marquee-item">Stories</div>
-      <div class="marquee-item">Contenido viral</div>
-      <div class="marquee-item">Más reservas</div>
-      <div class="marquee-item">Más ventas</div>
-      <div class="marquee-item">Sin permanencia</div>
-    </div>
-  </div>
 
   <!-- ─── DIFFERENTIATOR ─── -->
   <section class="section">
@@ -774,7 +733,8 @@
           <img src="assets/SynsLogo.png" alt="Visuanza" />
           <span>Visuanza</span>
         </a>
-      </div>
+              <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
+</div>
 
       <div class="footer-col">
         <h4>Servicios</h4>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <title>Análisis SEO Gratuito – Visuanza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #4F7EFF;
+      --blue-dark: #3a6be8;
+      --black:     #09090b;
+      --dark:      #111118;
+      --gray-dark: #1c1c2e;
+      --text:      #0f172a;
+      --text-muted:#374151;
+      --border:    rgba(0,0,0,0.08);
+      --surface:   #f8fafc;
+      --radius:    12px;
+      --radius-lg: 20px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: clip; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: #ffffff;
+      overflow-x: clip;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Urbanist', sans-serif; }
+    h1 { letter-spacing: -0.04em; }
+    h2 { letter-spacing: -0.03em; }
+    h3 { letter-spacing: -0.02em; }
+    .accent { color: var(--blue); }
+
+    .bg-glow {
+      position: fixed; top: -300px; left: 50%;
+      transform: translateX(-50%);
+      width: 1000px; height: 1000px;
+      background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); pointer-events: auto; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 30px; width: auto; }
+    .nav-logo span { font-size: 1.1rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; font-family: 'Urbanist',sans-serif; }
+    .nav-links { display: flex; align-items: center; list-style: none; }
+    .nav-links li { margin-right: 33px; }
+    .nav-links li:last-child { margin-right: 0; }
+    .nav-links a { text-decoration: none; color: rgba(15,23,42,0.55); font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
+    .nav-links a:hover { color: rgba(15,23,42,0.95); background: rgba(0,0,0,0.05); }
+    .nav-links a.active { color: rgba(15,23,42,0.95); background: rgba(0,0,0,0.07); }
+    .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
+    .nav-has-dropdown { position: relative; }
+    .nav-has-dropdown > a .chevron { transition: transform 0.2s ease, opacity 0.2s; }
+    .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
+    .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(255,255,255,0.98); border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 8px 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
+    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: rgba(255,255,255,0.98); border-left: 1px solid rgba(0,0,0,0.08); border-top: 1px solid rgba(0,0,0,0.08); }
+    .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+    .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: rgba(15,23,42,0.75); transition: background 0.15s ease; }
+    .nav-dropdown-item:hover { background: rgba(0,0,0,0.04); color: rgba(15,23,42,0.95); }
+    .nav-dropdown-item:hover .ndi-icon { background: var(--blue); }
+    .nav-dropdown-item:hover .ndi-icon svg { color: white; }
+    .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
+    .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
+    .ndi-text { flex: 1; }
+    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(15,23,42,0.9); margin-bottom: 2px; letter-spacing: -0.01em; }
+    .ndi-desc { display: block; font-size: 0.75rem; color: rgba(15,23,42,0.42); line-height: 1.4; }
+    @media (max-width: 900px) { .nav-dropdown { display: none; } }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s, box-shadow 0.2s; }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,126,255,0.5); }
+    /* ─── HAMBURGER ─── */
+    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 8px; transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
+    .hamburger:hover { background: rgba(0,0,0,0.06); }
+    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(15,23,42,0.85); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* ─── MOBILE MENU ─── */
+    .mobile-menu { position: fixed; inset: 0; z-index: 150; background: rgba(255,255,255,0.97); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px 48px; opacity: 0; pointer-events: none; transform: translateX(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .mobile-menu-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 320px; }
+    .mobile-menu-links li { width: 100%; }
+    .mobile-menu-links a { display: block; text-align: center; text-decoration: none; color: rgba(15,23,42,0.75); font-size: 1.35rem; font-weight: 600; font-family: 'Urbanist',sans-serif; letter-spacing: -0.02em; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.07); transition: color 0.2s; }
+    .mobile-menu-links a:hover { color: #0f172a; }
+    .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
+    .mobile-cta { width: 100%; text-align: center; background: var(--blue); color: #fff; border: none; padding: 15px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; display: block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s; cursor: pointer; }
+    .mobile-cta:hover { background: var(--blue-dark); }
+    @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } .nav-links, .nav-right { display: none !important; } }
+    @media (min-width: 769px) { .mobile-menu { display: none !important; } }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label { display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); padding-left: 10px; border-left: 2px solid var(--blue); margin-bottom: 1rem; }
+
+    .footer-cta-btn { display: inline-block; margin-top: 18px; background: #4F7EFF; color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: 999px; transition: opacity 0.2s, transform 0.2s; }
+    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    /* ─── FOOTER ─── */
+    footer { background: #0f172a; color: rgba(255,255,255,0.6); padding: 60px 0 30px; }
+    .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+    .footer-brand {}
+    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; text-decoration: none; }
+    .footer-logo img { height: 72px; filter: brightness(0) invert(1); }
+    .footer-logo span { font-size: 2.2rem; font-weight: 800; color: white; }
+    .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; color: rgba(255,255,255,0.5); }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.5); font-size: 0.82rem; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
+    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-copy a:hover { color: rgba(255,255,255,0.8); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+    .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
+    .footer-social-icon:hover { background: rgba(79,126,255,0.15); border-color: rgba(79,126,255,0.3); color: white; }
+    .footer-social-icon svg { width: 15px; height: 15px; }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand, .footer-col { text-align: center; }
+      .footer-logo { justify-content: center; }
+      .footer-col ul { align-items: center; }
+      .footer-social-icons { justify-content: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    /* ─── FADE-IN ─── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.028; pointer-events: none; z-index: 9999;
+    }
+
+    /* ─── MAIN SECTION ─── */
+    .main-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 140px 24px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* Trust badges */
+    .trust-badges {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .trust-badge svg { width: 15px; height: 15px; color: var(--blue); flex-shrink: 0; }
+
+    /* ─── FORM ─── */
+    .analysis-form {
+      background: #f8fafc;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 640px;
+    }
+    @media(max-width:600px) { .analysis-form { padding: 1.5rem; } }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    @media(max-width:600px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--text); letter-spacing: 0.02em; }
+    .form-group label .required { color: var(--blue); margin-left: 2px; }
+    .form-group input { background: #ffffff; border: 1px solid rgba(0,0,0,0.12); border-radius: var(--radius); color: var(--text); font-family: 'DM Sans',sans-serif; font-size: 0.95rem; padding: 0.75rem 1rem; outline: none; transition: border-color 0.2s; }
+    .form-group input::placeholder { color: var(--text-muted); }
+    .form-group input:focus { border-color: var(--blue); }
+
+    .url-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* hCaptcha wrapper */
+    .captcha-wrapper {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .submit-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.9rem 2.5rem;
+      cursor: pointer;
+      align-self: flex-start;
+      transition: opacity 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .submit-btn svg { width: 16px; height: 16px; }
+
+    /* ─── SUCCESS STATE ─── */
+    .success-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.5rem;
+      padding: 3rem 2.5rem;
+      background: #f8fafc;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 640px;
+    }
+    .success-state.visible { display: flex; }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(79,126,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .success-icon svg { width: 28px; height: 28px; color: var(--blue); }
+
+    .success-state h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .success-state p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 380px;
+    }
+
+    .success-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 360px;
+      text-align: left;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .timeline-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(79,126,255,0.1);
+      border: 1px solid rgba(79,126,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-top: 2px;
+    }
+    .timeline-text strong { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .timeline-text span { font-size: 0.78rem; color: var(--text-muted); }
+
+    .success-back {
+      font-size: 0.85rem;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .success-back:hover { opacity: 0.7; }
+
+    /* ─── ERROR MSG ─── */
+    .form-error {
+      display: none;
+      font-size: 0.85rem;
+      color: #dc2626;
+      background: rgba(220,38,38,0.06);
+      border: 1px solid rgba(220,38,38,0.15);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+    }
+    .form-error.visible { display: block; }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- ─── NAV ─── -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <span>Visuanza</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-has-dropdown">
+          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
+          <div class="nav-dropdown">
+            <div class="nav-dropdown-grid">
+              <a href="redes-sociales.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span>
+              </a>
+              <a href="diseno-web.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida + Google My Business incluido</span></span>
+              </a>
+              <a href="fotografia-menu.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Fotos profesionales + assets digitales y print</span></span>
+              </a>
+              <a href="publicidad-digital.html" class="nav-dropdown-item">
+                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+                <span class="ndi-text"><span class="ndi-title">Publicidad Digital</span><span class="ndi-desc">Meta Ads y TikTok Ads que llenan mesas</span></span>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li><a href="index.html#quienes">Quiénes somos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div class="nav-right">
+        <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── MOBILE MENU ─── -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="mobile-menu-links">
+      <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
+      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
+      <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
+    </ul>
+    <div class="mobile-menu-bottom">
+      <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
+    </div>
+  </div>
+
+  <!-- ─── MAIN ─── -->
+  <main class="main-section">
+
+    <!-- Header -->
+    <div class="section-header fade-in">
+      <p class="section-label" style="justify-content:center;">Gratis · Sin compromiso</p>
+      <h2>Análisis SEO<br /><span class="accent">para tu restaurante</span></h2>
+      <p>Introduce la web de tu restaurante y recibirás un informe detallado con todo lo que está frenando tu visibilidad en Google — completamente gratis.</p>
+      <div class="trust-badges">
+        <span class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          100% gratuito
+        </span>
+        <span class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Resultado en menos de 24h
+        </span>
+        <span class="trust-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Enviado a tu email
+        </span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form class="analysis-form fade-in" id="analysisForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="nombre">Tu nombre <span class="required">*</span></label>
+          <input type="text" id="nombre" name="nombre" placeholder="Ana García" required />
+        </div>
+        <div class="form-group">
+          <label for="restaurante">Nombre del restaurante <span class="required">*</span></label>
+          <input type="text" id="restaurante" name="restaurante" placeholder="Restaurante Casa Ana" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="url">Web del restaurante <span class="required">*</span></label>
+        <input type="url" id="url" name="url" placeholder="https://turestaurante.es" required />
+        <span class="url-hint">Incluye https://</span>
+      </div>
+      <div class="form-group">
+        <label for="email">Email donde recibir el análisis <span class="required">*</span></label>
+        <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+      </div>
+
+      <!-- hCaptcha -->
+      <div class="captcha-wrapper">
+        <div class="h-captcha" data-sitekey="02f802f2-a63c-4ee0-8aa0-451ccde22f00"></div>
+      </div>
+
+      <div class="form-error" id="formError"></div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span id="submitText">Solicitar análisis gratuito</span>
+      </button>
+    </form>
+
+    <!-- Success state -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3>¡Solicitud recibida!</h3>
+      <p>Hemos recibido tu solicitud. Analizaremos la web de tu restaurante y te enviaremos el informe completo en menos de <strong>24 horas</strong>.</p>
+      <div class="success-timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">1</div>
+          <div class="timeline-text">
+            <strong>Análisis en curso</strong>
+            <span>Revisamos tu web, velocidad, SEO técnico y presencia en Google.</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">2</div>
+          <div class="timeline-text">
+            <strong>Informe personalizado</strong>
+            <span>Preparamos un informe claro con los puntos a mejorar y cómo hacerlo.</span>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">3</div>
+          <div class="timeline-text">
+            <strong>En tu bandeja en &lt;24h</strong>
+            <span>Recibirás el análisis directamente en el email que nos has dado.</span>
+          </div>
+        </div>
+      </div>
+      <a href="index.html" class="success-back">← Volver al inicio</a>
+    </div>
+
+  </main>
+
+  <!-- ─── FOOTER ─── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/SynsLogo.png" alt="Visuanza" />
+            <span>Visuanza</span>
+          </a>
+                <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
+</div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="redes-sociales.html">Redes Sociales</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
+            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Navegar</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#quienes">Quiénes somos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Redes</h4>
+          <div class="footer-social-icons">
+            <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+            <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg></a>
+            <a href="#" class="footer-social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
+        <div class="footer-legal">
+          <a href="politica-privacidad.html">Política de privacidad</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── FADE IN ───
+    var fadeEls = document.querySelectorAll('.fade-in');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
+      });
+    }, { threshold: 0.1 });
+    fadeEls.forEach(function(el) { observer.observe(el); });
+    setTimeout(function() { document.querySelectorAll('.fade-in:not(.visible)').forEach(function(el) { el.classList.add('visible'); }); }, 300);
+
+    // ─── HAMBURGER ───
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+    function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
+    document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    // ─── FORM SUBMIT ───
+    document.getElementById('analysisForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const form     = e.target;
+      const btn      = document.getElementById('submitBtn');
+      const btnText  = document.getElementById('submitText');
+      const errorEl  = document.getElementById('formError');
+
+      errorEl.classList.remove('visible');
+
+      const nombre     = form.nombre.value.trim();
+      const restaurante = form.restaurante.value.trim();
+      const url        = form.url.value.trim();
+      const email      = form.email.value.trim();
+
+      // Basic validation
+      if (!nombre || !restaurante || !email) {
+        errorEl.textContent = 'Por favor rellena todos los campos obligatorios.';
+        errorEl.classList.add('visible');
+        return;
+      }
+
+      // hCaptcha check
+      const captchaResponse = hcaptcha.getResponse();
+      if (!captchaResponse) {
+        errorEl.textContent = 'Por favor completa el captcha antes de enviar.';
+        errorEl.classList.add('visible');
+        return;
+      }
+
+      btn.disabled = true;
+      btnText.textContent = 'Enviando…';
+
+      try {
+        await fetch('https://formsubmit.co/ajax/ivan@synsnumedia.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: `🔍 Análisis SEO solicitado — ${restaurante}`,
+            _template: 'table',
+            nombre,
+            restaurante,
+            url: url || '(sin web)',
+            email,
+          })
+        });
+
+        // Show success regardless of network response — formsubmit is reliable
+        form.style.display = 'none';
+        document.getElementById('successState').classList.add('visible');
+
+      } catch (err) {
+        btn.disabled = false;
+        btnText.textContent = 'Solicitar análisis gratuito';
+        errorEl.textContent = 'Hubo un error al enviar. Inténtalo de nuevo o escríbenos a ivan@synsnumedia.com';
+        errorEl.classList.add('visible');
+      }
+    });
+  </script>
+</body>
+</html>
