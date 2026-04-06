@@ -2218,13 +2218,16 @@
     }
 
     .footer-col ul li a {
-      text-decoration: none;
-      color: rgba(255,255,255,0.5);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
       font-size: 0.82rem;
-      transition: color 0.2s;
+      transition: color 0.2s, text-decoration-color 0.2s;
     }
 
-    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); text-decoration-color: rgba(255,255,255,0.6); }
 
     .footer-newsletter h4 {
       font-size: 0.78rem;
@@ -2290,10 +2293,10 @@
 
     .footer-copy {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.45);
     }
-    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
-    .footer-copy a:hover { color: rgba(255,255,255,0.8); }
+    .footer-copy a { color: rgba(255,255,255,0.6); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); transition: color 0.2s, text-decoration-color 0.2s; }
+    .footer-copy a:hover { color: rgba(255,255,255,0.8); text-decoration-color: rgba(255,255,255,0.6); }
 
     .footer-legal {
       display: flex;
@@ -2302,12 +2305,15 @@
 
     .footer-legal a {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.3);
-      text-decoration: none;
-      transition: color 0.2s;
+      color: rgba(255,255,255,0.45);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255,255,255,0.2);
+      transition: color 0.2s, text-decoration-color 0.2s;
     }
 
-    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); text-decoration-color: rgba(255,255,255,0.6); }
 
     /* ─── MOBILE ARC REPLACEMENT ─── */
     .sp-mobile {
@@ -2884,9 +2890,12 @@
     }
 
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
+    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
     .footer-social-icon:hover { background: rgba(79,126,255,0.15); border-color: rgba(79,126,255,0.3); color: white; }
     .footer-social-icon svg { width: 15px; height: 15px; }
+
+    .sp-screen img { width: 100%; height: auto; display: block; }
+    .panel-phone img { width: 100%; height: auto; display: block; }
   </style>
 </head>
 <body>
@@ -2898,7 +2907,7 @@
   <nav>
     <div class="nav-inner">
       <a href="#" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
         <span>Visuanza</span>
       </a>
       <ul class="nav-links">
@@ -2970,6 +2979,8 @@
       <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
+
+  <main>
 
   <!-- ─── HERO + SOCIAL PROOF (one continuous section) ─── -->
   <section class="hero" id="producto">
@@ -3172,7 +3183,7 @@
           </div>
         </div>
         <!-- Real iPhone frame overlay (transparent screen hole, opaque chrome) -->
-        <img class="phone-frame" src="assets/herophone.webp" alt="" />
+        <img class="phone-frame" src="assets/agencia-marketing-restaurantes.webp" alt="" aria-hidden="true" />
       </div>
 
       <!-- Floating Google Business Profile card — bottom right, tilted -6deg -->
@@ -3204,7 +3215,7 @@
     <div class="sp-container" id="sp-container">
       <!-- Visuanza: fixed at the top — the belt's peak -->
       <div class="sp-visuanza">
-        <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
       </div>
       <!-- Logo tiles injected by JS -->
       <!-- Text centered below Visuanza -->
@@ -3224,7 +3235,7 @@
         <div class="sp-strip-wrap" id="sp-strip-wrap">
           <!-- Visuanza focal point — centered over the strip -->
           <div class="sp-visuanza-m">
-            <img src="assets/SynsLogo.png" alt="Visuanza" />
+            <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
           </div>
           <!-- Logo tiles injected by JS -->
         </div>
@@ -3265,28 +3276,28 @@
       <!-- Facebook Phone -->
       <div class="showcase-phone sp-fb">
         <div class="sp-screen">
-          <img src="assets/facebook.webp" alt="" style="width:100%;height:auto;display:block;" />
+          <img src="assets/facebook.webp" alt="Vista de perfil de Facebook de un restaurante" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
 
       <!-- Apple Maps Phone -->
       <div class="showcase-phone sp-gmb">
         <div class="sp-screen">
-          <img src="assets/GoogleMaps.webp" alt="" style="width:100%;height:auto;display:block;" />
+          <img src="assets/GoogleMaps.webp" alt="Perfil de Google My Business" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
 
       <!-- Google Maps Listing Phone -->
       <div class="showcase-phone sp-chat">
         <div class="sp-screen">
-          <img src="assets/Maps.webp" alt="" style="width:100%;height:auto;display:block;" />
+          <img src="assets/Maps.webp" alt="Recomendación en ChatGPT" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
 
       <!-- ChatGPT Phone -->
       <div class="showcase-phone sp-stats">
         <div class="sp-screen">
-          <img src="assets/gpt.webp" alt="" style="width:100%;height:auto;display:block;" />
+          <img src="assets/busqueda-restaurantes-cerca-de-mi.webp" alt="Estadísticas de Google Maps" style="width:100%;height:auto;display:block;" />
         </div>
       </div>
     </div>
@@ -3337,7 +3348,7 @@
             </div>
 
             <div class="panel-phone">
-              <img src="assets/GoogleMaps.webp" alt="" style="width:100%;display:block;" />
+              <img src="assets/GoogleMaps.webp" alt="Perfil optimizado en Google Maps" style="width:100%;display:block;" />
             </div>
             <!-- Floating revenue badge -->
             <div class="panel-revenue-badge">
@@ -3361,7 +3372,7 @@
     </div>
     <div class="bento-grid">
       <a href="fotografia-menu.html" class="bento-card bento-wide fade-in">
-        <div class="bento-img-frame" style="background:none;"><img src="assets/foto.webp" alt="Fotografía de menú" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div class="bento-img-frame" style="background:none;"><img src="assets/fotografia-menu-restaurante.webp" alt="Fotografía de menú" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
         <div class="bento-content">
           <span class="bento-tag">Fotografía de Menú</span>
           <p>Imágenes profesionales de tus platos que abren el apetito y disparan los pedidos online.</p>
@@ -3377,7 +3388,7 @@
         </div>
       </a>
       <a href="diseno-web.html" class="bento-card bento-narrow fade-in">
-        <div class="bento-img-frame" style="background:none;"><img src="assets/web.webp" alt="Diseño Web" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div class="bento-img-frame" style="background:none;"><img src="assets/diseno-web-restaurante.webp" alt="Diseño Web" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
         <div class="bento-content">
           <span class="bento-tag">Diseño Web</span>
           <p>Páginas web a medida que convierten visitas en reservas y pedidos.</p>
@@ -3497,13 +3508,16 @@
   </section>
 
   <!-- ─── CTA ─── -->
+
+  </main>
+
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="#" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Visuanza" />
+          <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
           <span>Visuanza</span>
         </a>
         <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
