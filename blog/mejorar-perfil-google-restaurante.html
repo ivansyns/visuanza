@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <title>Blog – Visuanza</title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <title>Cómo mejorar el perfil Google de tu restaurante – Blog Visuanza</title>
+  <meta name="description" content="Descubre cómo optimizar tu perfil Google de restaurante y atrae más clientes. Guía completa de Google My Business para hostelería." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
@@ -90,10 +91,9 @@
     .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; letter-spacing: -0.01em; }
     .ndi-desc { display: block; font-size: 0.75rem; color: #64748b; line-height: 1.4; }
 
-    @media (max-width: 900px) { .nav-dropdown { display: none; } }
+    @media (max-width: 900px) { .nav-dropdown { display: none; } .nav-links, .nav-right { display: none !important; } }
 
     .nav-right { display: flex; align-items: center; gap: 1rem; }
-
     .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); }
     .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,126,255,0.5); }
 
@@ -121,164 +121,113 @@
 
     @media (max-width: 768px) { .mobile-menu { display: flex; } }
 
-    /* ─── HERO ─── */
-    .hero {
-      padding: 150px 0 80px;
-      text-align: center;
-      position: relative;
-    }
-    .hero-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(79,126,255,0.10);
-      color: var(--blue);
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(79,126,255,0.22);
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-    .hero p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    /* ─── BLOG GRID ─── */
-    .blog-section {
-      padding: 0 24px 120px;
-      max-width: 1120px;
-      margin: 0 auto;
-    }
-
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-
-    .blog-card {
-      background: #f8fafc;
-      border: 1px solid rgba(0,0,0,0.07);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      text-decoration: none;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-    }
-
-    .blog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-      border-color: rgba(79,126,255,0.2);
-    }
-
-    .blog-card-img {
+    /* ─── ARTICLE ─── */
+    .article-hero {
+      padding-top: 100px;
       width: 100%;
-      aspect-ratio: 16/10;
-      background: #e2e8f0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: #94a3b8;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
+      max-height: 480px;
       overflow: hidden;
     }
-
-    .blog-card-img img {
+    .article-hero img {
       width: 100%;
-      height: 100%;
+      height: 480px;
       object-fit: cover;
     }
 
-    .blog-card-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      flex: 1;
+    .article-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 120px;
     }
 
-    .blog-card-tag {
+    .article-tag {
+      display: inline-block;
       font-size: 0.72rem;
       font-weight: 700;
       color: var(--blue);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+      margin-bottom: 16px;
     }
 
-    .blog-card-body h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
-      line-height: 1.3;
-      color: var(--text);
+    .article-container h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 16px;
     }
 
-    .blog-card-body p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-      flex: 1;
-    }
-
-    .blog-card-meta {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
+    .article-meta {
+      font-size: 0.85rem;
       color: #94a3b8;
-      margin-top: 4px;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
 
-    .blog-card-arrow {
-      font-size: 0.9rem;
-      color: var(--blue);
-      align-self: flex-end;
-      opacity: 0.5;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-    .blog-card:hover .blog-card-arrow { transform: translateX(5px); opacity: 1; }
-
-    /* ─── EMPTY STATE ─── */
-    .blog-empty {
-      text-align: center;
-      padding: 80px 24px;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-    .blog-empty-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      opacity: 0.4;
-    }
-    .blog-empty h2 {
+    .article-content h2 {
       font-size: 1.4rem;
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-top: 40px;
+      margin-bottom: 16px;
+      line-height: 1.3;
     }
-    .blog-empty p {
+
+    .article-content p {
+      margin-bottom: 20px;
+      line-height: 1.8;
       color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.6;
     }
+
+    .article-content ul, .article-content ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+      color: var(--text-muted);
+    }
+
+    .article-content li {
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+
+    .article-content a {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      transition: color 0.2s;
+    }
+    .article-content a:hover { color: var(--blue-dark); }
+
+    .article-content strong { color: var(--text); font-weight: 600; }
+
+    .article-credit {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      text-align: right;
+      padding: 8px 24px 0;
+    }
+    .article-credit a {
+      color: #94a3b8;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .article-credit a:hover { color: var(--blue); }
+
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      transition: gap 0.2s;
+    }
+    .article-back:hover { gap: 10px; }
 
     /* ─── FOOTER ─── */
     .footer-cta-btn { display: inline-block; margin-top: 18px; background: #4F7EFF; color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: 999px; transition: opacity 0.2s, transform 0.2s; }
@@ -293,18 +242,18 @@
     .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; color: rgba(255,255,255,0.5); }
     .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { text-decoration: none; color: rgba(255,255,255,0.5); font-size: 0.82rem; transition: color 0.2s; }
-    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); }
+    .footer-col ul li a { color: rgba(255,255,255,0.6); font-size: 0.82rem; transition: color 0.2s, text-decoration-color 0.2s; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); }
+    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); text-decoration-color: rgba(255,255,255,0.6); }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-    .footer-copy a { color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .footer-copy a { color: rgba(255,255,255,0.6); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); transition: color 0.2s, text-decoration-color 0.2s; }
     .footer-copy a:hover { color: rgba(255,255,255,0.8); }
     .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a { font-size: 0.75rem; color: rgba(255,255,255,0.45); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.15); transition: color 0.2s, text-decoration-color 0.2s; }
     .footer-legal a:hover { color: rgba(255,255,255,0.7); }
 
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.55); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
+    .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
     .footer-social-icon:hover { background: rgba(79,126,255,0.15); border-color: rgba(79,126,255,0.3); color: white; }
     .footer-social-icon svg { width: 15px; height: 15px; }
 
@@ -313,14 +262,10 @@
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .nav-links, .nav-right { display: none !important; }
-      .blog-grid { grid-template-columns: 1fr; }
-    }
-
     @media (max-width: 600px) {
       body { font-size: 16px; }
-      .hero h1 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+      .article-hero img { height: 280px; }
+      .article-container { padding-top: 32px; }
       .footer-grid { grid-template-columns: 1fr; }
       .footer-brand, .footer-col { text-align: center; }
       .footer-logo { justify-content: center; }
@@ -349,43 +294,43 @@
   <!-- ─── NAV ─── -->
   <nav>
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Visuanza" />
+      <a href="../index.html" class="nav-logo">
+        <img src="../assets/SynsLogo.png" alt="Logo de Visuanza" />
         <span>Visuanza</span>
       </a>
       <ul class="nav-links">
         <li class="nav-has-dropdown">
-          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
+          <a href="../servicios.html">Servicios <span class="chevron">&#9662;</span></a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-grid">
-              <a href="redes-sociales.html" class="nav-dropdown-item">
+              <a href="../redes-sociales.html" class="nav-dropdown-item">
                 <span class="ndi-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
                 </span>
                 <span class="ndi-text">
                   <span class="ndi-title">Redes Sociales</span>
-                  <span class="ndi-desc">Gestión profesional para ganar visibilidad online</span>
+                  <span class="ndi-desc">Gesti&oacute;n profesional para ganar visibilidad online</span>
                 </span>
               </a>
-              <a href="diseno-web.html" class="nav-dropdown-item">
+              <a href="../diseno-web.html" class="nav-dropdown-item">
                 <span class="ndi-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                 </span>
                 <span class="ndi-text">
-                  <span class="ndi-title">Diseño Web</span>
-                  <span class="ndi-desc">Páginas a medida + Google My Business incluido</span>
+                  <span class="ndi-title">Dise&ntilde;o Web</span>
+                  <span class="ndi-desc">P&aacute;ginas a medida + Google My Business incluido</span>
                 </span>
               </a>
-              <a href="fotografia-menu.html" class="nav-dropdown-item">
+              <a href="../fotografia-menu.html" class="nav-dropdown-item">
                 <span class="ndi-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
                 </span>
                 <span class="ndi-text">
-                  <span class="ndi-title">Fotografía de Menú</span>
+                  <span class="ndi-title">Fotograf&iacute;a de Men&uacute;</span>
                   <span class="ndi-desc">Fotos profesionales + assets digitales y print</span>
                 </span>
               </a>
-              <a href="publicidad-digital.html" class="nav-dropdown-item">
+              <a href="../publicidad-digital.html" class="nav-dropdown-item">
                 <span class="ndi-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 </span>
@@ -397,13 +342,13 @@
             </div>
           </div>
         </li>
-        <li><a href="index.html#quienes">Quiénes somos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="../index.html#quienes">Qui&eacute;nes somos</a></li>
+        <li><a href="../contacto.html">Contacto</a></li>
       </ul>
       <div class="nav-right">
-        <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
+        <a href="../contacto.html" class="btn-primary">Pedir propuesta</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <button class="hamburger" id="hamburger" aria-label="Abrir men&uacute;" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
@@ -414,75 +359,159 @@
   <!-- ─── MOBILE MENU ─── -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul class="mobile-menu-links">
-      <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
-      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
-      <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
+      <li><a href="../servicios.html" class="mobile-menu-link">Servicios</a></li>
+      <li><a href="../index.html#quienes" class="mobile-menu-link">Qui&eacute;nes somos</a></li>
+      <li><a href="../contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
-      <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
+      <a href="../contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
     </div>
   </div>
 
-  <!-- ─── HERO ─── -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-badge">✦ Blog</div>
-      <h1>Consejos para hacer <span class="accent">crecer</span> tu restaurante</h1>
-      <p>Guías prácticas, casos de éxito y estrategias de marketing digital para restaurantes que quieren llenar mesas.</p>
-    </div>
-  </section>
+  <main>
 
-  <!-- ─── BLOG GRID ─── -->
-  <section class="blog-section">
-    <div class="blog-grid">
-    <a href="blog/mejorar-perfil-google-restaurante.html" class="blog-card fade-in">
-      <div class="blog-card-img">
-        <img src="https://images.unsplash.com/photo-1772479036537-2f24be392ab0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTgyMDJ8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBjb3p5JTIwdGFibGVzfGVufDF8MHx8fDE3NzU1NzUxODF8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Restaurant dining tables with plants and soft lighting" />
-      </div>
-      <div class="blog-card-body">
-        <span class="blog-card-tag">Marketing Digital</span>
-        <h3>Cómo mejorar el perfil Google de tu restaurante</h3>
-        <p>Tu perfil Google es la puerta de entrada para que nuevos clientes encuentren tu restaurante. Aprende a optimizarlo correctamente.</p>
-        <div class="blog-card-meta">
-          <span>7 de abril de 2026</span>
-        </div>
-        <span class="blog-card-arrow">&rarr;</span>
-      </div>
-    </a>
-    </div><h2>Próximamente</h2>
-      <p>Estamos preparando artículos con consejos prácticos para mejorar la visibilidad online de tu restaurante. ¡Vuelve pronto!</p>
+  <!-- ─── ARTICLE HERO IMAGE ─── -->
+  <div class="article-hero">
+    <img src="https://images.unsplash.com/photo-1772479036537-2f24be392ab0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTgyMDJ8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwaW50ZXJpb3IlMjBjb3p5JTIwdGFibGVzfGVufDF8MHx8fDE3NzU1NzUxODF8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Restaurant dining tables with plants and soft lighting" />
+  </div>
+  <div class="article-credit">Foto: <a href="https://unsplash.com/@kikiz?utm_source=visuanza&utm_medium=referral" target="_blank" rel="noopener">Yimeng Zhao</a> / Unsplash</div>
+
+  <!-- ─── ARTICLE CONTENT ─── -->
+  <article class="article-container fade-in">
+    <span class="article-tag">Marketing Digital</span>
+    <h1>Cómo mejorar el perfil Google de tu restaurante</h1>
+    <div class="article-meta">7 de abril de 2026 &middot; Visuanza</div>
+
+    <div class="article-content">
+      <p>Cuando un cliente potencial busca dónde comer en tu ciudad, lo primero que hace es abrir Google. Si tu restaurante no aparece con un perfil optimizado, estás perdiendo oportunidades de negocio. Un <strong>perfil Google de restaurante</strong> bien configurado no solo mejora tu visibilidad, sino que aumenta las probabilidades de que los usuarios hagan una reserva o te visiten.</p>
+
+<p>En Visuanza sabemos que la mayoría de restaurantes en España no sacan el máximo provecho a esta herramienta gratuita y poderosa. Por eso hemos preparado esta guía completa para ayudarte a optimizar tu presencia en Google My Business y convertir búsquedas en clientes reales.</p>
+
+<h2>¿Por qué es crucial un perfil Google bien optimizado?</h2>
+
+<p>Antes de entrar en detalles técnicos, es importante entender por qué invertir tiempo en tu <strong>Google My Business restaurante</strong> es una prioridad absoluta.</p>
+
+<p>Google ha hecho que el 76% de los usuarios que buscan un restaurante desde el móvil visiten el establecimiento en el mismo día. Si no tienes un perfil Google de restaurante completo y actualizado, simplemente no aparecerás en esas búsquedas locales.</p>
+
+<p>Además, tu perfil actúa como tarjeta de presentación digital. Los usuarios verán tu horario, ubicación, fotos, reseñas y menú antes de pisar tu establecimiento. Esto significa que la primera impresión depende, en gran medida, de cómo hayas optimizado esa información.</p>
+
+<h2>Los elementos esenciales de un perfil Google completo</h2>
+
+<p>No basta con crear una cuenta en Google My Business. Necesitas rellenar cada campo de manera estratégica y coherente.</p>
+
+<ul>
+<li><strong>Nombre y categoría del negocio:</strong> Usa el nombre exacto de tu restaurante. En la categoría, sé específico: no solo pongas "Restaurante", sino "Restaurante italiano" o "Cervecería de tapas".</li>
+<li><strong>Descripción:</strong> Escribe una descripción de 750 caracteres que destaque qué te diferencia. ¿Tienes una terraza? ¿Cocina tradicional? ¿Opciones veganas? Incluye estos detalles.</li>
+<li><strong>Dirección y teléfono:</strong> Verifica que sean exactos. Los errores aquí son desastrosos para el SEO local.</li>
+<li><strong>Horarios de apertura:</strong> Actualiza esto regularmente, especialmente en festivos o si tienes cambios estacionales.</li>
+<li><strong>Sitio web:</strong> Enlaza a tu web de restaurante. Si aún no tienes una profesional, es algo que deberías considerar seriamente.</li>
+<li><strong>Categorías adicionales:</strong> Aprovecha todas las que apliquen (cafetería, pizzería, etc.).</li>
+</ul>
+
+<h2>Las fotos: tu mejor herramienta visual</h2>
+
+<p>El contenido visual es fundamental en un perfil Google de restaurante. Las imágenes son lo que más influye en la decisión de un cliente potencial.</p>
+
+<p>Sube fotografías profesionales de:</p>
+
+<ul>
+<li>La fachada y entrada del restaurante</li>
+<li>El interior y las mesas</li>
+<li>Los platos principales y destacados</li>
+<li>El ambiente del local en diferentes momentos del día</li>
+<li>El equipo y la cocina (si es pertinente)</li>
+</ul>
+
+<p>Las fotos borrosas, mal iluminadas o con poca calidad generan desconfianza. Si no tienes fotografías profesionales de tu restaurante, te recomendamos que consideres invertir en ello. En Visuanza ofrecemos <a href="https://visuanza.es/fotografia-menu.html">servicios de fotografía especializada para restaurantes</a> que pueden transformar la presentación de tu perfil Google.</p>
+
+<p>Ánima también a tus clientes a dejar fotos. Las imágenes subidas por usuarios generan mucha más confianza que las oficiales.</p>
+
+<h2>Gestiona tus reseñas como un profesional</h2>
+
+<p>Las reseñas son el corazón de tu Google My Business restaurante. No solo afectan tu reputación, sino que Google prioriza perfiles con muchas valoraciones positivas.</p>
+
+<p><strong>Cómo aumentar reseñas:</strong></p>
+
+<ul>
+<li>Pide a clientes satisfechos que dejen una valoración. Hazlo de manera natural, en persona o a través de un QR en la mesa.</li>
+<li>Responde a <strong>todas</strong> las reseñas, positivas y negativas. Una respuesta profesional y empática demuestra que te importa la experiencia del cliente.</li>
+<li>Ante críticas negativas, nunca seas defensivo. Toma nota, disculpate si es necesario, y ofrece soluciones.</li>
+<li>No pidas que eliminen reseñas negativas. Google lo detecta y penaliza tu perfil.</li>
+</ul>
+
+<p>Las reseñas positivas consistentes no solo mejoran tu clasificación en Google, sino que también generan confianza en nuevos clientes.</p>
+
+<h2>Información adicional que no debes olvidar</h2>
+
+<p>Hay detalles que muchos restaurantes pasan por alto pero que marcan la diferencia:</p>
+
+<ul>
+<li><strong>Atributos:</strong> Indica si tienes WiFi, acepta reservas, es accesible, tiene estacionamiento, etc.</li>
+<li><strong>Menú:</strong> Si tienes un menú digital o PDF, cárgalo en Google. Los usuarios lo verán antes de visitarte.</li>
+<li><strong>Horarios especiales:</strong> Comunica si cierras en verano, tienes horarios especiales en Navidad o aperturas nocturnas.</li>
+<li><strong>Promociones:</strong> Usa la sección de posts para anunciar menús especiales, eventos o promociones.</li>
+</ul>
+
+<p>Si tu restaurante tiene una estrategia completa de marketing digital, tu perfil Google debe estar alineado con ella. Por eso es importante que coordines tu presencia en Google con <a href="https://visuanza.es/redes-sociales.html">tus redes sociales</a> y otros canales de comunicación.</p>
+
+<h2>Analiza y mejora continuamente</h2>
+
+<p>Un error común es crear el perfil y olvidarse de él. Google My Business proporciona datos muy valiosos que debes revisar regularmente:</p>
+
+<ul>
+<li>¿Cuántas personas buscaron tu restaurante?</li>
+<li>¿Cuántas llamadas recibiste desde Google?</li>
+<li>¿Cuántas personas visitaron tu web desde el perfil?</li>
+<li>¿Cuántas pidieron indicaciones?</li>
+</ul>
+
+<p>Estos números te dicen qué funciona y qué necesita ajustes. Si ves que muchas personas miran tu perfil pero no hacen reserva, quizá el problema esté en la descripción, las fotos o la información de horarios.</p>
+
+<p>Optimizar tu perfil Google de restaurante es un proceso continuo. No se trata de hacerlo una vez y olvidarse. Requiere atención, actualización y análisis constante.</p>
+
+<h2>Conclusión</h2>
+
+<p>Tu <strong>perfil Google de restaurante</strong> es una herramienta de marketing tan importante como tu carta o tu atención al cliente. Un perfil bien optimizado atrae clientes nuevos, genera confianza y posiciona tu negocio en el mercado local.</p>
+
+<p>Si sientes que tu presencia en Google y en internet en general necesita mejorar, no dudes en contactarnos. En Visuanza tenemos experiencia trabajando con restaurantes de toda España, y sabemos exactamente qué cambios generan resultados reales.</p>
+
+<p><strong>¿Quieres que analicemos tu perfil Google actual?</strong> Te ofrecemos un análisis gratuito sin compromiso. Descubriremos qué oportunidades estás dejando pasar y cómo optimizar tu presencia para atraer más clientes. <a href="https://visuanza.es/analisis.html">Solicita tu análisis gratuito aquí</a>.</p>
     </div>
-  </section>
+
+    <a href="../blog.html" class="article-back">&larr; Volver al blog</a>
+  </article>
+
+  </main>
 
   <!-- ─── FOOTER ─── -->
   <footer>
     <div class="footer-inner">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Visuanza" />
+        <a href="../index.html" class="footer-logo">
+          <img src="../assets/SynsLogo.png" alt="Logo de Visuanza" />
           <span>Visuanza</span>
         </a>
-        <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
+        <a href="../analisis.html" class="footer-cta-btn">Analiza tu negocio gratis &rarr;</a>
       </div>
 
       <div class="footer-col">
         <h4>Servicios</h4>
         <ul>
-          <li><a href="redes-sociales.html">Redes Sociales</a></li>
-          <li><a href="diseno-web.html">Diseño Web</a></li>
-          <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
+          <li><a href="../redes-sociales.html">Redes Sociales</a></li>
+          <li><a href="../diseno-web.html">Dise&ntilde;o Web</a></li>
+          <li><a href="../fotografia-menu.html">Fotograf&iacute;a de Men&uacute;</a></li>
+          <li><a href="../publicidad-digital.html">Publicidad Digital</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
         <h4>Navegar</h4>
         <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="index.html#quienes">Quiénes somos</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../index.html#quienes">Qui&eacute;nes somos</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../contacto.html">Contacto</a></li>
         </ul>
       </div>
 
@@ -498,9 +527,9 @@
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
+      <div class="footer-copy">&copy; 2026 Visuanza &middot; Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
       <div class="footer-legal">
-        <a href="politica-privacidad.html">Política de privacidad</a>
+        <a href="../politica-privacidad.html">Pol&iacute;tica de privacidad</a>
       </div>
     </div>
     </div>
