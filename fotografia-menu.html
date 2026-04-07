@@ -48,34 +48,34 @@
 
     /* ─── NAV ─── */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; }
-    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(0,0,0,0.08); border-radius: 999px; box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8); pointer-events: auto; }
+    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.88) padding-box, linear-gradient(120deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.7)) border-box; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid transparent; border-radius: 999px; box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05); pointer-events: auto; }
     .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
     .nav-logo img { height: 30px; width: auto; }
     .nav-logo span { font-size: 1.1rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em; font-family: 'Urbanist',sans-serif; }
     .nav-links { display: flex; align-items: center; list-style: none; }
     .nav-links li { margin-right: 33px; }
     .nav-links li:last-child { margin-right: 0; }
-    .nav-links a { text-decoration: none; color: rgba(15,23,42,0.55); font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
-    .nav-links a:hover { color: rgba(15,23,42,0.95); background: rgba(0,0,0,0.04); }
+    .nav-links a { text-decoration: none; color: #0f172a; font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
+    .nav-links a:hover { color: var(--blue); background: rgba(79,126,255,0.06); }
     .nav-links a.active { color: rgba(15,23,42,0.95); background: rgba(0,0,0,0.06); }
     .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
     .nav-has-dropdown { position: relative; }
     .nav-has-dropdown::after { content: ''; position: absolute; top: 100%; left: -10px; right: -10px; height: 10px; background: transparent; }
     .nav-has-dropdown > a .chevron { transition: transform 0.2s ease, opacity 0.2s; }
     .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
-    .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(255,255,255,0.98); border: 1px solid rgba(0,0,0,0.1); border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 8px 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
-    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: rgba(255,255,255,0.98); border-left: 1px solid rgba(0,0,0,0.1); border-top: 1px solid rgba(0,0,0,0.1); }
+    .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 8px 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
+    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: #ffffff; border-left: 1px solid rgba(0,0,0,0.08); border-top: 1px solid rgba(0,0,0,0.08); }
     .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
     .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-    .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: rgba(15,23,42,0.75); transition: background 0.15s ease; }
-    .nav-dropdown-item:hover { background: rgba(0,0,0,0.04); color: rgba(15,23,42,0.95); }
+    .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: #0f172a; transition: background 0.15s ease; }
+    .nav-dropdown-item:hover { background: rgba(79,126,255,0.06); color: var(--blue); }
     .nav-dropdown-item:hover .ndi-icon { background: var(--blue); }
     .nav-dropdown-item:hover .ndi-icon svg { color: white; }
     .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
     .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
     .ndi-text { flex: 1; }
-    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: rgba(15,23,42,0.9); margin-bottom: 2px; letter-spacing: -0.01em; }
-    .ndi-desc { display: block; font-size: 0.75rem; color: rgba(15,23,42,0.42); line-height: 1.4; }
+    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; letter-spacing: -0.01em; }
+    .ndi-desc { display: block; font-size: 0.75rem; color: #64748b; line-height: 1.4; }
     @media (max-width: 900px) { .nav-dropdown { display: none; } }
     .nav-right { display: flex; align-items: center; gap: 1rem; }
     .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s, transform 0.1s, box-shadow 0.2s; }
