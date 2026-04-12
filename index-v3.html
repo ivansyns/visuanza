@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visuanza – Marketing Digital para Restaurantes</title>
+  <meta name="description" content="Agencia de marketing digital para restaurantes en España. Diseño web, Google My Business, redes sociales, fotografía de menú y publicidad digital." />
+  <meta property="og:title" content="Visuanza – Marketing Digital para Restaurantes" />
+  <meta property="og:description" content="Hacemos que tu restaurante sea el más visible del barrio. Diseño web, Google, redes sociales y más." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400;0,500;0,600;0,700;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --copper:       #B87333;
+      --copper-light: #D4944A;
+      --copper-dark:  #9A5F2A;
+      --charcoal:     #141414;
+      --dark:         #0C0C0C;
+      --cream:        #FAF8F5;
+      --cream-dark:   #F0ECE4;
+      --warm-mid:     #E8E2D8;
+      --text:         #1C1917;
+      --text-muted:   #57534E;
+      --text-light:   rgba(250,248,245,0.65);
+      --border:       rgba(0,0,0,0.08);
+      --border-light: rgba(255,255,255,0.08);
+      --radius:       3px;
+    }
+
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html, body { max-width: 100%; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 17px;
+      color: var(--text);
+      background: var(--cream);
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Libre Bodoni', serif; font-weight: 700; }
+    h1 { letter-spacing: -0.03em; }
+    h2 { letter-spacing: -0.02em; }
+
+    .accent { color: var(--copper); }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 60px);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 18px clamp(20px, 5vw, 60px);
+      background: transparent;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(12,12,12,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 28px; width: auto; filter: brightness(0) invert(1); }
+    .nav-logo span {
+      font-family: 'Libre Bodoni', serif;
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta {
+      background: var(--copper);
+      color: var(--cream) !important;
+      padding: 10px 24px;
+      border-radius: var(--radius);
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--copper-light) !important; transform: translateY(-1px); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      width: 32px; height: 32px; background: none; border: none;
+      cursor: pointer; justify-content: center; align-items: center; z-index: 300;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--cream); border-radius: 1px;
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    .mobile-menu {
+      position: fixed; inset: 0; z-index: 150;
+      background: rgba(12,12,12,0.96);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transform: translateX(100%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
+    .mobile-menu-links {
+      list-style: none; display: flex; flex-direction: column;
+      align-items: center; gap: 0; width: 100%; max-width: 320px;
+    }
+    .mobile-menu-links li { width: 100%; }
+    .mobile-menu-links a {
+      display: block; text-align: center; text-decoration: none;
+      color: var(--cream); font-family: 'Libre Bodoni', serif;
+      font-size: 1.8rem; font-weight: 700;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: color 0.2s;
+    }
+    .mobile-menu-links a:hover { color: var(--copper); }
+    .mobile-menu-bottom { margin-top: 36px; width: 100%; max-width: 320px; }
+    .mobile-menu-cta {
+      width: 100%; text-align: center;
+      background: var(--copper); color: var(--cream);
+      padding: 16px 24px; border-radius: var(--radius);
+      font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; display: block;
+      transition: background 0.2s;
+    }
+    .mobile-menu-cta:hover { background: var(--copper-light); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+    @media (min-width: 769px) { .mobile-menu { display: none !important; } }
+
+    /* ─── BUTTONS ─── */
+    .btn-copper {
+      background: var(--copper);
+      color: var(--cream);
+      border: none;
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      font-size: 0.78rem; font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-copper:hover { background: var(--copper-light); transform: translateY(-2px); }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid rgba(250,248,245,0.2);
+      padding: 16px 36px;
+      border-radius: var(--radius);
+      font-size: 0.78rem; font-weight: 500;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-outline-light:hover { border-color: var(--copper); color: var(--copper); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 680px;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: clamp(60px, 10vh, 120px);
+      overflow: hidden;
+      background: var(--dark);
+    }
+    .hero-bg { position: absolute; inset: 0; z-index: 0; }
+    .hero-bg img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg,
+        rgba(12,12,12,0.5) 0%,
+        rgba(12,12,12,0.3) 40%,
+        rgba(12,12,12,0.75) 100%);
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 60px);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 32px; height: 1px;
+      background: var(--copper);
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 24px;
+      max-width: 700px;
+    }
+    .hero h1 em { font-style: italic; color: var(--copper-light); }
+    .hero p {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 480px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* ─── SECTION COMMON ─── */
+    .section-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 16px;
+    }
+    .section-heading {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ─── SOCIAL PROOF ─── */
+    .social-proof {
+      padding: 110px 0;
+      background: var(--cream);
+      overflow: hidden;
+    }
+
+    /* Desktop conveyor */
+    .sp-desktop {
+      display: block;
+    }
+    .sp-container {
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .sp-visuanza {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: var(--copper);
+      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      box-shadow:
+        0 0 0 12px rgba(184,115,51,0.12),
+        0 0 0 28px rgba(184,115,51,0.07),
+        0 0 0 50px rgba(184,115,51,0.03);
+    }
+    .sp-visuanza img {
+      filter: brightness(0) invert(1);
+      width: 90px;
+      height: auto;
+      object-fit: contain;
+    }
+    .sp-logo {
+      width: 120px; height: 120px;
+      border-radius: var(--radius);
+      position: absolute;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .sp-text {
+      text-align: center;
+      padding-top: 20px;
+      position: relative;
+      z-index: 5;
+    }
+    .sp-text h2 {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    /* Mobile strip */
+    .sp-mobile {
+      display: none;
+    }
+    .sp-strip-wrap {
+      width: 100%;
+      height: 100px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .sp-logo-m {
+      width: 80px; height: 80px;
+      border-radius: var(--radius);
+      position: absolute;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .sp-logo-m img {
+      width: 70%; height: 70%;
+      object-fit: contain; display: block;
+    }
+    .sp-visuanza-m {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: var(--copper);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      box-shadow:
+        0 0 0 8px rgba(184,115,51,0.12),
+        0 0 0 18px rgba(184,115,51,0.06);
+    }
+    .sp-visuanza-m img {
+      filter: brightness(0) invert(1);
+      width: 50px; height: auto;
+      object-fit: contain;
+    }
+
+    @media (max-width: 768px) {
+      .sp-desktop { display: none; }
+      .sp-mobile { display: block; }
+    }
+
+    /* ─── BENTO SERVICES ─── */
+    .services {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+    .services-header {
+      margin-bottom: 52px;
+    }
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+    .bento-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s cubic-bezier(0.16,1,0.3,1), border-color 0.22s;
+    }
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.08);
+      border-color: rgba(184,115,51,0.2);
+    }
+    .bento-wide { grid-column: span 3; }
+    .bento-narrow { grid-column: span 2; }
+    .bento-img-frame {
+      aspect-ratio: 16/9;
+      background: var(--cream-dark);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .bento-img-frame img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .bento-card:hover .bento-img-frame img { transform: scale(1.04); }
+    .bento-content {
+      padding: 22px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .bento-tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--copper);
+      margin-bottom: 10px;
+    }
+    .bento-content h3 {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .bento-content p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 16px;
+    }
+    .bento-arrow {
+      display: inline-flex; align-items: center;
+      color: var(--copper);
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      gap: 6px;
+      margin-top: auto;
+      transition: gap 0.2s;
+    }
+    .bento-card:hover .bento-arrow { gap: 10px; }
+    .bento-arrow svg {
+      width: 14px; height: 14px;
+      transition: transform 0.2s;
+    }
+    .bento-card:hover .bento-arrow svg { transform: translateX(4px); }
+
+    @media (max-width: 900px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .bento-wide, .bento-narrow { grid-column: span 1; }
+    }
+
+    /* ─── WHY VISUANZA ─── */
+    .why {
+      padding: 120px 0;
+      background: var(--cream-dark);
+    }
+    .why-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .why-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.1);
+    }
+    .why-img img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .why-list {
+      list-style: none;
+      display: flex; flex-direction: column;
+      gap: 28px;
+      margin-top: 32px;
+    }
+    .why-list li {
+      display: flex; gap: 16px;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .why-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: var(--radius);
+      background: var(--copper);
+      color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Libre Bodoni', serif;
+      font-size: 0.82rem; font-weight: 700;
+    }
+    .why-list strong {
+      display: block;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    @media (max-width: 900px) {
+      .why-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .why-img { max-width: 400px; }
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+    .testimonials-header {
+      margin-bottom: 52px;
+    }
+    .testimonials-source {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .testimonial-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .t-stat {
+      display: inline-block;
+      background: rgba(184,115,51,0.08);
+      color: var(--copper-dark);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 6px 12px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(184,115,51,0.15);
+    }
+    .t-stars {
+      display: flex; gap: 3px;
+    }
+    .t-stars svg {
+      width: 14px; height: 14px;
+      fill: var(--copper);
+    }
+    .t-quote {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+      font-style: italic;
+    }
+    .t-author {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+    .t-author span {
+      display: block;
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 900px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      padding: 140px 0;
+      background: var(--charcoal);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 500px;
+      background: radial-gradient(ellipse, rgba(184,115,51,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-section .section-eyebrow { color: var(--copper); }
+    .cta-section .section-heading {
+      color: var(--cream);
+      max-width: 600px;
+      margin-left: auto; margin-right: auto;
+      margin-bottom: 20px;
+    }
+    .cta-section p {
+      color: var(--text-light);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      font-size: 0.95rem;
+      position: relative; z-index: 1;
+      line-height: 1.7;
+    }
+    .cta-btns {
+      display: flex; gap: 16px;
+      justify-content: center; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--border-light);
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px; text-decoration: none;
+    }
+    .footer-logo img { height: 24px; filter: brightness(0) invert(1); }
+    .footer-logo span {
+      font-family: 'Libre Bodoni', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--cream);
+    }
+    .footer-desc {
+      font-size: 0.8rem;
+      color: rgba(250,248,245,0.45);
+      line-height: 1.7;
+      max-width: 280px;
+      margin-bottom: 20px;
+    }
+    .footer-cta-pill {
+      display: inline-flex; align-items: center;
+      background: rgba(184,115,51,0.12);
+      border: 1px solid rgba(184,115,51,0.25);
+      color: var(--copper);
+      padding: 9px 18px;
+      border-radius: 100px;
+      font-size: 0.78rem; font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .footer-cta-pill:hover {
+      background: rgba(184,115,51,0.2);
+      border-color: rgba(184,115,51,0.4);
+    }
+    .footer-col h4 {
+      font-size: 0.7rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--copper);
+      margin-bottom: 16px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(250,248,245,0.15);
+      color: rgba(250,248,245,0.5);
+      font-size: 0.82rem;
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .footer-col a:hover { color: var(--cream); text-decoration-color: var(--copper); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-light);
+      padding-top: 24px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(250,248,245,0.3);
+    }
+    .footer-copy a {
+      color: rgba(250,248,245,0.5);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: rgba(250,248,245,0.15);
+    }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-socials a {
+      width: 36px; height: 36px;
+      border-radius: var(--radius);
+      background: rgba(250,248,245,0.04);
+      border: 1px solid var(--border-light);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(250,248,245,0.5);
+      transition: background 0.2s, color 0.2s;
+      text-decoration: none;
+    }
+    .footer-socials a:hover { background: rgba(184,115,51,0.12); color: var(--copper); }
+    .footer-socials svg { width: 15px; height: 15px; }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-socials { justify-content: center; }
+    }
+
+    /* ─── SCROLL FADE ─── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* Stagger delays */
+    .stagger > *:nth-child(1) { transition-delay: 0ms; }
+    .stagger > *:nth-child(2) { transition-delay: 80ms; }
+    .stagger > *:nth-child(3) { transition-delay: 160ms; }
+    .stagger > *:nth-child(4) { transition-delay: 240ms; }
+    .stagger > *:nth-child(5) { transition-delay: 320ms; }
+    .stagger > *:nth-child(6) { transition-delay: 400ms; }
+
+    /* ─── FOCUS + A11Y ─── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--copper);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-in { opacity: 1; transform: none; }
+    }
+
+    /* ─── MOBILE MISC ─── */
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .hero h1 { font-size: clamp(2.2rem, 9vw, 3rem); }
+      .services { padding: 80px 0; }
+      .why { padding: 80px 0; }
+      .testimonials { padding: 80px 0; }
+      .cta-section { padding: 80px 0; }
+      .social-proof { padding: 72px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAV ─── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
+        <span>Visuanza</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="servicios.html">Servicios</a></li>
+        <li><a href="#quienes">Quiénes somos</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contacto.html" class="nav-cta">Pedir propuesta</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <ul class="mobile-menu-links">
+      <li><a href="servicios.html" class="mm-link">Servicios</a></li>
+      <li><a href="#quienes" class="mm-link">Quiénes somos</a></li>
+      <li><a href="contacto.html" class="mm-link">Contacto</a></li>
+      <li><a href="blog.html" class="mm-link">Blog</a></li>
+    </ul>
+    <div class="mobile-menu-bottom">
+      <a href="contacto.html" class="mobile-menu-cta mm-link">Pedir propuesta</a>
+    </div>
+  </div>
+
+  <main>
+
+  <!-- ─── 1. HERO ─── -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600&h=1000&fit=crop&crop=center&q=80"
+        alt="Interior de restaurante elegante con iluminación cálida"
+        width="1600" height="1000"
+        fetchpriority="high"
+      />
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Agencia de marketing para restaurantes</div>
+      <h1>Hacemos que tu restaurante sea <em>imposible de ignorar</em></h1>
+      <p>Diseño web, Google, redes sociales, fotografía y publicidad digital — todo lo que necesitas para ser el más visible del barrio.</p>
+      <div class="hero-btns">
+        <a href="contacto.html" class="btn-copper">Solicitar propuesta</a>
+        <a href="analisis.html" class="btn-outline-light">Analiza tu negocio gratis &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 2. SOCIAL PROOF ─── -->
+  <section class="social-proof" id="clientes">
+
+    <!-- DESKTOP: conveyor belt -->
+    <div class="sp-desktop">
+      <div id="sp-container" class="sp-container">
+        <div class="sp-visuanza" aria-hidden="true">
+          <img src="assets/SynsLogo.png" alt="" />
+        </div>
+        <!-- logos injected by JS -->
+      </div>
+      <div class="sp-text container">
+        <h2>Elegido por <span class="accent">más de 800</span> restaurantes</h2>
+        <a href="contacto.html" class="btn-copper">Solicite un presupuesto gratuito</a>
+      </div>
+    </div>
+
+    <!-- MOBILE: horizontal strip -->
+    <div class="sp-mobile container">
+      <div class="sp-visuanza-m" aria-hidden="true">
+        <img src="assets/SynsLogo.png" alt="" />
+      </div>
+      <div id="sp-strip-wrap" class="sp-strip-wrap" aria-hidden="true">
+        <!-- logos injected by JS -->
+      </div>
+      <div class="sp-text">
+        <h2>Elegido por <span class="accent">más de 800</span> restaurantes</h2>
+        <a href="contacto.html" class="btn-copper">Solicite un presupuesto gratuito</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── 3. BENTO SERVICES ─── -->
+  <section class="services" id="servicios">
+    <div class="container">
+      <div class="services-header fade-in">
+        <p class="section-eyebrow">Servicios</p>
+        <h2 class="section-heading">Todo lo que necesitas para <span class="accent">crecer</span></h2>
+      </div>
+      <div class="bento-grid stagger">
+
+        <!-- Card 1: Fotografía de Menú — wide -->
+        <a href="fotografia-menu.html" class="bento-card bento-wide fade-in">
+          <div class="bento-img-frame">
+            <img src="assets/fotografia-menu-restaurante.webp" alt="Fotografía profesional de platos de restaurante para menú" loading="lazy" />
+          </div>
+          <div class="bento-content">
+            <span class="bento-tag">Fotografía de Menú</span>
+            <h3>Fotografía de Menú</h3>
+            <p>Imágenes profesionales de tus platos que abren el apetito y disparan los pedidos online.</p>
+            <span class="bento-arrow">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Card 2: Publicidad Digital — narrow -->
+        <a href="publicidad-digital.html" class="bento-card bento-narrow fade-in">
+          <div class="bento-img-frame">
+            <img src="assets/publicidad.webp" alt="Gestión de publicidad digital para restaurantes en Meta y TikTok" loading="lazy" />
+          </div>
+          <div class="bento-content">
+            <span class="bento-tag">Publicidad Digital</span>
+            <h3>Publicidad Digital</h3>
+            <p>Meta Ads y TikTok Ads gestionados para llenar tu restaurante cada semana.</p>
+            <span class="bento-arrow">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Card 3: Diseño Web — narrow -->
+        <a href="diseno-web.html" class="bento-card bento-narrow fade-in">
+          <div class="bento-img-frame">
+            <img src="assets/diseno-web-restaurante.webp" alt="Diseño web a medida para restaurantes que convierte visitas en reservas" loading="lazy" />
+          </div>
+          <div class="bento-content">
+            <span class="bento-tag">Diseño Web</span>
+            <h3>Diseño Web</h3>
+            <p>Páginas web a medida que convierten visitas en reservas y pedidos.</p>
+            <span class="bento-arrow">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Card 4: Redes Sociales — wide -->
+        <a href="redes-sociales.html" class="bento-card bento-wide fade-in">
+          <div class="bento-img-frame">
+            <img src="assets/redes.webp" alt="Gestión de redes sociales para restaurantes en Instagram, Facebook y TikTok" loading="lazy" />
+          </div>
+          <div class="bento-content">
+            <span class="bento-tag">Redes Sociales</span>
+            <h3>Redes Sociales</h3>
+            <p>Gestión profesional de Instagram, Facebook y TikTok para atraer más clientes a tu restaurante.</p>
+            <span class="bento-arrow">Ver más <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 4. WHY VISUANZA ─── -->
+  <section class="why" id="quienes">
+    <div class="container">
+      <div class="why-inner">
+        <div class="why-img fade-in">
+          <img
+            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=750&fit=crop&crop=center&q=80"
+            alt="Chef preparando un plato en la cocina de un restaurante"
+            width="600" height="750"
+            loading="lazy"
+          />
+        </div>
+        <div class="fade-in">
+          <p class="section-eyebrow">¿Qué nos hace diferentes?</p>
+          <h2 class="section-heading">No somos una agencia más. <span class="accent">Solo hacemos restaurantes.</span></h2>
+          <ul class="why-list">
+            <li>
+              <span class="why-num">01</span>
+              <div>
+                <strong>Especialistas en hostelería</strong>
+                No tocamos otros sectores. Cada estrategia está diseñada para llenar mesas, no para quedar bonita en un portfolio.
+              </div>
+            </li>
+            <li>
+              <span class="why-num">02</span>
+              <div>
+                <strong>Respaldados por SynsNu (Suecia)</strong>
+                Más de 50 restaurantes gestionados en Escandinavia. Ahora traemos esa experiencia a España.
+              </div>
+            </li>
+            <li>
+              <span class="why-num">03</span>
+              <div>
+                <strong>Todo incluido, sin sorpresas</strong>
+                Diseño web, Google, redes, fotos y publicidad — todo en un solo servicio, con un solo interlocutor.
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 5. TESTIMONIALS ─── -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonials-header fade-in">
+        <p class="section-eyebrow">Testimonios</p>
+        <h2 class="section-heading">Lo que dicen <span class="accent">nuestros clientes</span></h2>
+        <p class="testimonials-source">Reseñas verificadas de SynsNuMedia · Suecia</p>
+      </div>
+      <div class="testimonials-grid stagger">
+
+        <div class="testimonial-card fade-in">
+          <span class="t-stat">280.000 reproducciones · 7.000 interacciones en 1 mes</span>
+          <div class="t-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="t-quote">"Increíbles videos e imágenes. Los recomiendo mucho si necesitáis una página web o alguien que se encargue de vuestras redes sociales."</p>
+          <div class="t-author">
+            George
+            <span>Dripp'n Burgers</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <span class="t-stat">~50% de aumento en caja diaria en 3 meses</span>
+          <div class="t-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="t-quote">"¡Equipo fantástico! Desde el principio se ha notado una buena energía hasta el resultado final. Ideas creativas, alta calidad y trato excelente con el cliente. ¡Pondría 6 estrellas si fuera posible!"</p>
+          <div class="t-author">
+            Garo
+            <span>Stuvsta Grillen</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <span class="t-stat">1.200 pre-registros antes de la apertura</span>
+          <div class="t-stars" aria-label="5 estrellas">
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <p class="t-quote">"Además de ser increíblemente amables, son altamente profesionales y comprometidos. Presentan sus ideas con claridad y luego participan activamente en nuestra opinión. El resultado — tanto en video como en imágenes — es sencillamente excepcional."</p>
+          <div class="t-author">
+            Mansour
+            <span>Berra Burras Kebab</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 6. CTA ─── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-eyebrow">¿Listo?</p>
+        <h2 class="section-heading">Haz que tu restaurante sea <span class="accent">imposible de ignorar</span></h2>
+        <p>Solicita una propuesta gratuita y sin compromiso. Te mostramos exactamente qué haríamos por tu negocio.</p>
+        <div class="cta-btns">
+          <a href="contacto.html" class="btn-copper">Solicitar propuesta gratuita</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ─── 7. FOOTER ─── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="footer-logo">
+            <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
+            <span>Visuanza</span>
+          </a>
+          <p class="footer-desc">Agencia de marketing digital especializada en restaurantes. Diseño web, redes sociales, fotografía y publicidad para hostelería.</p>
+          <a href="analisis.html" class="footer-cta-pill">Analiza tu negocio gratis &rarr;</a>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="redes-sociales.html">Redes Sociales</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
+            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Navegar</h4>
+          <ul>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#quienes">Quiénes somos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="politica-privacidad.html">Política de privacidad</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Síguenos</h4>
+          <ul>
+            <li>
+              <div class="footer-socials">
+                <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" aria-label="Instagram de Visuanza">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" aria-label="TikTok de Visuanza">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg>
+                </a>
+                <a href="#" aria-label="Facebook de Visuanza">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </a>
+                <a href="#" aria-label="LinkedIn de Visuanza">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          &copy; 2026 Visuanza &middot; Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ─── NAV SCROLL ───
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // ─── HAMBURGER ───
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    function openMenu() {
+      hamburger.classList.add('open');
+      mobileMenu.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    document.querySelectorAll('.mm-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    // ─── SCROLL REVEAL ───
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => revealObs.observe(el));
+
+    const staggerObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.fade-in').forEach(child => child.classList.add('visible'));
+          staggerObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.stagger').forEach(grid => staggerObs.observe(grid));
+
+    setTimeout(() => {
+      document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 2000);
+
+    // ─── DESKTOP CONVEYOR BELT ───
+    (function initConveyorBelt() {
+      const container = document.getElementById('sp-container');
+      if (!container) return;
+      const D = 'transparent';
+      const logoData = [
+        { img: 'assets/logos/berralogo.webp', bg: D },
+        { img: 'assets/logos/bramslogo.webp', bg: D },
+        { img: 'assets/logos/dunderlogo.webp', bg: D },
+        { img: 'assets/logos/KimliLogoNoTxt.webp', bg: D },
+        { img: 'assets/logos/libalogo.webp', bg: D },
+        { img: 'assets/logos/mamthailogo.webp', bg: D },
+        { img: 'assets/logos/mazraa.webp', bg: D },
+        { img: 'assets/logos/mlg.webp', bg: D },
+        { img: 'assets/logos/nplogo.webp', bg: D },
+        { img: 'assets/logos/oloflogo.webp', bg: D },
+        { img: 'assets/logos/partillelogo.webp', bg: D },
+        { img: 'assets/logos/pzlogo.webp', bg: D },
+        { img: 'assets/logos/Sams-Cafe-Logo.webp', bg: D },
+        { img: 'assets/logos/shuilogo.webp', bg: D },
+      ];
+      const N = logoData.length;
+      const logos = logoData.map(l => {
+        const el = document.createElement('div');
+        el.className = 'sp-logo';
+        el.style.background = l.bg;
+        const img = document.createElement('img');
+        img.src = l.img; img.alt = '';
+        img.style.cssText = 'width:70%;height:70%;object-fit:contain;display:block;pointer-events:none;';
+        el.appendChild(img);
+        container.appendChild(el);
+        return el;
+      });
+      const HALF = 60, TOP_Y = 100, B = 1600;
+      let phase = 0, running = false, raf;
+      function tick() {
+        phase = (phase + 0.0007) % 1;
+        const W = container.offsetWidth || 1440;
+        const H = container.offsetHeight || 500;
+        logos.forEach((el, i) => {
+          const t = (phase + i / N) % 1;
+          const x = W * 0.06 + t * W * 0.88;
+          const y = B * (t - 0.5) * (t - 0.5) + TOP_Y;
+          el.style.transform = `translate(${(x - HALF).toFixed(1)}px, ${(y - HALF).toFixed(1)}px)`;
+          const xRatio = x / W;
+          const leftFraction = Math.max(0, 1 - xRatio * 2);
+          let blur = leftFraction * 14;
+          let opacity = 1 - leftFraction * 0.72;
+          const fadeY = Math.max(0, (y - H * 0.72) / (H * 0.28));
+          opacity *= Math.max(0, 1 - fadeY);
+          const distFromCenter = Math.abs(x - W * 0.5);
+          const peekRadius = 90;
+          if (distFromCenter < peekRadius) {
+            const peekStrength = 1 - distFromCenter / peekRadius;
+            blur = blur * (1 - peekStrength);
+            opacity = opacity + (1 - opacity) * peekStrength;
+          }
+          el.style.filter = blur > 0.3 ? `blur(${blur.toFixed(1)}px)` : 'none';
+          el.style.opacity = opacity.toFixed(3);
+        });
+        if (running) raf = requestAnimationFrame(tick);
+      }
+      function start() { if (!running) { running = true; requestAnimationFrame(tick); } }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      start();
+      const section = document.querySelector('.social-proof');
+      if (section && window.IntersectionObserver) {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => { e.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.05 }).observe(section);
+      }
+    })();
+
+    // ─── MOBILE STRIP ───
+    (function initMobileStrip() {
+      if (window.innerWidth > 768) return;
+      const wrap = document.getElementById('sp-strip-wrap');
+      if (!wrap) return;
+      const logoFiles = [
+        'assets/logos/mlg.webp','assets/logos/bramslogo.webp','assets/logos/mamthailogo.webp',
+        'assets/logos/mazraa.webp','assets/logos/KimliLogoNoTxt.webp','assets/logos/berralogo.webp',
+        'assets/logos/nplogo.webp','assets/logos/oloflogo.webp','assets/logos/partillelogo.webp',
+        'assets/logos/pzlogo.webp','assets/logos/Sams-Cafe-Logo.webp','assets/logos/shuilogo.webp',
+        'assets/logos/dunderlogo.webp','assets/logos/libalogo.webp',
+      ];
+      const TILE = 80, GAP = 20, STEP = TILE + GAP, N = logoFiles.length, TOTAL = N * STEP;
+      const tiles = logoFiles.map(src => {
+        const el = document.createElement('div');
+        el.className = 'sp-logo-m';
+        const img = document.createElement('img');
+        img.src = src; img.alt = '';
+        el.appendChild(img);
+        wrap.appendChild(el);
+        return el;
+      });
+      let offset = 0, running = false, raf;
+      function tick() {
+        offset = (offset - 0.6 + TOTAL) % TOTAL;
+        const W = wrap.offsetWidth || 390;
+        const CENTER = W / 2, HALF = TILE / 2;
+        tiles.forEach((el, i) => {
+          let x = (i * STEP - offset + TOTAL * 2) % TOTAL;
+          x = x - TOTAL / 2 + W / 2;
+          const logoCenter = x + HALF;
+          const leftDist = Math.max(0, (CENTER - logoCenter) / CENTER);
+          let blur = leftDist * 7;
+          let opacity = 1 - leftDist * 0.65;
+          const distFromCenter = Math.abs(logoCenter - CENTER);
+          const peekRadius = 60;
+          if (distFromCenter < peekRadius) {
+            const peekStrength = 1 - distFromCenter / peekRadius;
+            blur = blur * (1 - peekStrength);
+            opacity = opacity + (1 - opacity) * peekStrength;
+          }
+          el.style.transform = `translate(${x.toFixed(1)}px, ${(wrap.offsetHeight / 2 - HALF).toFixed(1)}px)`;
+          el.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none';
+          el.style.opacity = opacity.toFixed(3);
+        });
+        if (running) raf = requestAnimationFrame(tick);
+      }
+      function start() { if (!running) { running = true; requestAnimationFrame(tick); } }
+      function stop() { running = false; cancelAnimationFrame(raf); }
+      start();
+      const section = document.querySelector('.social-proof');
+      if (section && window.IntersectionObserver) {
+        new IntersectionObserver(entries => {
+          entries.forEach(e => { e.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.05 }).observe(section);
+      }
+    })();
+  </script>
+
+</body>
+</html>
