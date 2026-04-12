@@ -352,14 +352,18 @@
       position: absolute;
       top: 50%;
       right: -8%;
-      transform: translateY(-50%) rotate(0deg);
+      transform: translateY(-50%);
       width: 580px;
       height: 580px;
-      opacity: 0.038;
+      opacity: 0.06;
       pointer-events: none;
-      filter: grayscale(1) brightness(4);
-      animation: logoBgRotate 100s linear infinite;
+      filter: grayscale(1) brightness(3);
+      animation: logoBgRotate 120s linear infinite;
       z-index: 0;
+      /* Debossed effect via drop-shadow filter */
+      filter: grayscale(1) brightness(0.4) contrast(1.2)
+              drop-shadow(1px 1px 0px rgba(192,139,92,0.15))
+              drop-shadow(-1px -1px 0px rgba(0,0,0,0.4));
     }
     @keyframes logoBgRotate {
       from { transform: translateY(-50%) rotate(0deg); }
@@ -538,9 +542,30 @@
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
     }
-    .orbit-ring-1 { width: 430px; height: 430px; border: 1.5px solid rgba(192,139,92,0.20); }
-    .orbit-ring-2 { width: 580px; height: 580px; border: 1.5px solid rgba(192,139,92,0.20); }
-    .orbit-ring-3 { width: 730px; height: 730px; border: 1.5px solid rgba(192,139,92,0.20); }
+    .orbit-ring-1 {
+      width: 430px; height: 430px;
+      border: none;
+      box-shadow:
+        inset 1px 1px 2px rgba(0,0,0,0.25),
+        inset -1px -1px 2px rgba(192,139,92,0.08),
+        0 0 0 1.5px rgba(192,139,92,0.06);
+    }
+    .orbit-ring-2 {
+      width: 580px; height: 580px;
+      border: none;
+      box-shadow:
+        inset 1px 1px 3px rgba(0,0,0,0.2),
+        inset -1px -1px 2px rgba(192,139,92,0.06),
+        0 0 0 1.5px rgba(192,139,92,0.04);
+    }
+    .orbit-ring-3 {
+      width: 730px; height: 730px;
+      border: none;
+      box-shadow:
+        inset 1px 1px 3px rgba(0,0,0,0.15),
+        inset -1px -1px 2px rgba(192,139,92,0.04),
+        0 0 0 1.5px rgba(192,139,92,0.03);
+    }
 
     /* Soft glow behind phone — subtle on light bg */
     .phone-glow {
