@@ -81,6 +81,14 @@ Clean, professional light theme with cobalt blue accents — modern SaaS agency 
 - Social icons: 36px rounded squares
 - Footer CTA button: blue pill linking to analisis.html
 
+## Accessibility
+- Focus-visible: `outline: 2px solid var(--blue)`, `outline-offset: 3px`
+- `prefers-reduced-motion: reduce` disables all transitions/animations
+- Cards (step, service, testimonial, bento): `cursor: pointer`
+- Footer links: underline with `text-underline-offset: 3px`
+- All images have descriptive Spanish alt text
+- `<main>` landmark on all pages
+
 ## Notes
 - Grain noise overlay on body::after at 0.028 opacity
 - Subtle blue radial glow on hero (`rgba(79,126,255,0.08)`)

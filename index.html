@@ -2896,6 +2896,27 @@
 
     .sp-screen img { width: 100%; height: auto; display: block; }
     .panel-phone img { width: 100%; height: auto; display: block; }
+
+    /* ─── FOCUS STATES ─── */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ─── CURSOR ON INTERACTIVE CARDS ─── */
+    .step-card, .service-card, .testimonial-card, .bento-card { cursor: pointer; }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-in { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
