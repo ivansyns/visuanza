@@ -1,36 +1,34 @@
 # Design System — Visuanza
 
 ## Personality
-Clean, professional light theme with cobalt blue accents — modern SaaS agency feel for restaurant marketing.
+Premium, warm, confident restaurant marketing agency. Dark bookends (hero/footer) with warm cream content sections. Copper accent throughout.
 
 ## Colors
 | Token        | Value                   | Usage                    |
 |--------------|-------------------------|--------------------------|
-| --blue       | #4F7EFF                 | Buttons, links, accents  |
-| --blue-dark  | #3a6be8                 | Hover states, highlights |
-| --bg         | #ffffff                 | Page background          |
-| --surface    | #f8fafc                 | Cards, alt sections      |
-| --text       | #0f172a                 | Body text                |
-| --text-muted | #4b5563                 | Secondary text           |
-| --border     | rgba(0,0,0,0.08)        | Borders, dividers        |
-| --gray-mid   | #64748b                 | Tertiary text            |
-| --gray-light | #f1f5f9                 | Light backgrounds        |
-| footer-bg    | #0f172a                 | Footer background        |
+| --blue       | #C08B5C                 | Primary accent (copper)  |
+| --blue-dark  | #A67744                 | Hover states             |
+| --black      | #1A1A1A                 | Hero/footer background   |
+| --dark       | #141414                 | Deep dark background     |
+| --gray-dark  | #1E1E1E                 | Dark section alt          |
+| --gray-mid   | #6B5E54                 | Muted text (warm)        |
+| --gray-light | #F0EBE3                 | Alt section background   |
+| --white      | #FAF7F2                 | Page background (cream)  |
+| --text       | #1A1A1A                 | Body text                |
+| --text-muted | #6B5E54                 | Secondary text           |
+| --border     | rgba(107,94,84,0.12)    | Borders, dividers        |
+| --surface    | #F0EBE3                 | Cards, alt sections      |
 
 ## Typography
-| Element | Font      | Size                          | Weight | Line-height |
-|---------|-----------|-------------------------------|--------|-------------|
-| h1      | Urbanist  | clamp(2.8rem, 4.5vw, 4rem)   | 900    | 1.1         |
-| h2      | Urbanist  | clamp(2.2rem, 3.5vw, 3.6rem) | 900    | 1.15        |
-| h3      | Urbanist  | 1.05rem                       | 700    | —           |
-| body    | DM Sans   | 18px                          | 400    | 1.6         |
-| small   | DM Sans   | 0.78rem                       | 600    | —           |
-| nav     | DM Sans   | 0.85rem                       | 500    | —           |
-| button  | DM Sans   | 0.85rem                       | 600    | —           |
-
-- Headings: `letter-spacing: -0.04em` (h1), `-0.03em` (h2), `-0.02em` (h3)
-- Section labels: `letter-spacing: 0.18em`, `text-transform: uppercase`
-- Card body text override: `#374151` for service-card p, bento-content p
+| Element | Font           | Size                          | Weight | Line-height |
+|---------|----------------|-------------------------------|--------|-------------|
+| h1      | Libre Bodoni   | clamp(2.8rem, 4.5vw, 4rem)   | 700    | 1.1         |
+| h2      | Libre Bodoni   | clamp(2.2rem, 3.5vw, 3.6rem) | 700    | 1.15        |
+| h3      | Libre Bodoni   | 1.05rem                       | 700    | —           |
+| body    | DM Sans        | 18px                          | 400    | 1.6         |
+| small   | DM Sans        | 0.78rem                       | 600    | —           |
+| nav     | DM Sans        | 0.85rem                       | 500    | —           |
+| button  | DM Sans        | 0.85rem                       | 600    | —           |
 
 ## Spacing Scale
 8px · 12px · 14px · 16px · 20px · 24px · 28px · 32px · 36px · 48px · 64px · 80px · 110px · 130px · 140px
@@ -38,63 +36,58 @@ Clean, professional light theme with cobalt blue accents — modern SaaS agency 
 ## Border Radius
 | Element  | Radius |
 |----------|--------|
-| Buttons  | 8px    |
-| Cards    | 20px (--radius-lg) |
-| Inputs   | 12px (--radius) |
-| Images   | 16–24px |
+| Buttons  | 3px    |
+| Cards    | 4px (--radius-lg) |
+| Inputs   | 3px (--radius) |
+| Images   | 3-4px  |
 | Nav pill | 999px  |
-| Badges   | 100px  |
+| Badges   | 3px    |
 
 ## Shadows
 | Level    | Value                                                        |
 |----------|--------------------------------------------------------------|
 | subtle   | 0 2px 12px rgba(0,0,0,0.05)                                 |
-| card     | 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)    |
-| elevated | 0 12px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(79,126,255,0.15) |
-| button   | 0 4px 20px rgba(79,126,255,0.35)                             |
-| nav      | 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)    |
+| card     | 0 4px 24px rgba(0,0,0,0.08)                                 |
+| elevated | 0 12px 32px rgba(0,0,0,0.08)                                |
+| button   | 0 4px 20px rgba(192,139,92,0.35)                             |
 
 ## Buttons
-| Style     | Background  | Text    | Border                          | Radius | Padding       |
-|-----------|-------------|---------|----------------------------------|--------|---------------|
-| Primary   | #4F7EFF     | #ffffff | none                             | 8px    | 10px 20px     |
-| Blue      | #4F7EFF     | #ffffff | none                             | 8px    | 12px 24px     |
-| White     | #ffffff     | #0f172a | 1px solid rgba(0,0,0,0.10)      | 8px    | 14px 32px     |
-| Submit    | #4F7EFF     | #ffffff | none                             | 999px  | 0.9rem 2.5rem |
+| Style     | Background  | Text      | Border                          | Radius | Padding       |
+|-----------|-------------|-----------|----------------------------------|--------|---------------|
+| Primary   | #C08B5C     | #FAF7F2   | none                             | 3px    | 10px 20px     |
+| Ghost     | transparent | #C08B5C   | 1px solid rgba(192,139,92,0.3)   | 3px    | 14px 28px     |
+| Submit    | #C08B5C     | #ffffff   | none                             | 3px    | 0.9rem 2.5rem |
 
 ## Nav
 - Fixed position, transparent wrapper, inner pill floats centered
-- Nav pill: `max-width: 1120px`, `border-radius: 999px`
-- Background: `rgba(255,255,255,0.88) padding-box` + gradient border trick (`linear-gradient border-box`)
-- `backdrop-filter: blur(18px)`
-- Shadow: `0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05)`
-- Links: `color: #0f172a`, hover: `color: var(--blue)`, `background: rgba(79,126,255,0.06)`
-- Dropdown: white glass `rgba(255,255,255,0.97)`, 16px radius, blue accent on hover
-- Hamburger at ≤768px, white full-screen mobile menu
+- Nav pill: max-width: 1120px, border-radius: 999px
+- Background: rgba(255,255,255,0.88) padding-box + gradient border
+- backdrop-filter: blur(18px)
+- Links: color: #1A1A1A, hover: color: var(--blue) copper
 
 ## Footer
-- Background: `#0f172a` (dark)
+- Background: #1A1A1A (dark charcoal)
 - 4-column grid: brand+CTA / servicios / navegar / redes
-- Column headers: `rgba(255,255,255,0.9)`, uppercase, 0.78rem
-- Links: `rgba(255,255,255,0.6)` with underline, hover to 0.9
-- Footer logo: white invert filter, 72px height
+- Column headers: rgba(255,255,255,0.9), uppercase
+- Links: rgba(255,255,255,0.6), underline
+- Footer CTA: copper pill linking to analisis.html
 - Social icons: 36px rounded squares
-- Footer CTA button: blue pill linking to analisis.html
 
 ## Accessibility
-- Focus-visible: `outline: 2px solid var(--blue)`, `outline-offset: 3px`
-- `prefers-reduced-motion: reduce` disables all transitions/animations
-- Cards (step, service, testimonial, bento): `cursor: pointer`
-- Footer links: underline with `text-underline-offset: 3px`
+- Focus-visible: outline: 2px solid var(--blue), outline-offset: 3px
+- prefers-reduced-motion: reduce disables all transitions/animations
+- Cards: cursor: pointer
+- Footer links: underline with text-underline-offset: 3px
 - All images have descriptive Spanish alt text
-- `<main>` landmark on all pages
+- <main> landmark on all pages
 
 ## Notes
 - Grain noise overlay on body::after at 0.028 opacity
-- Subtle blue radial glow on hero (`rgba(79,126,255,0.08)`)
-- Card hover: translateY(-4px) + blue border glow
-- Alternating section backgrounds: #ffffff / #f8fafc
+- Subtle copper radial glow on hero
+- Card hover: translateY(-4px) + copper border glow
+- Alternating section backgrounds: #FAF7F2 / #F0EBE3
 - Social proof: JS conveyor belt arc on desktop, JS blur-focus strip on mobile
+- Visuanza hub circle: copper #C08B5C (was blue #2e27b8)
 - Mobile font-size drops to 16px at ≤768px
 - All content in Spanish
 - Logo file: assets/SynsLogo.png
