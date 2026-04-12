@@ -891,7 +891,7 @@
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: #6B5244;
       padding-left: 10px;
       border-left: 2px solid var(--blue);
       margin-bottom: 1rem;
@@ -998,7 +998,7 @@
     /* ─── PLATFORMS SHOWCASE ─── */
     /* ─── OMNIPRESENCIA DIGITAL ─── */
     .platforms {
-      background: #ffffff;
+      background: var(--surface);
       padding: 130px 0 0;
       position: relative;
       overflow: visible;
@@ -1031,7 +1031,7 @@
       z-index: 1;
     }
 
-    .platforms-top-left .section-label { color: var(--blue); }
+    .platforms-top-left .section-label { color: #6B5244; }
 
     .platforms-top-left h2 {
       font-size: clamp(2.2rem, 3.5vw, 3.6rem);
@@ -1242,7 +1242,7 @@
     .panel-left,
     .panel-right { position: relative; z-index: 1; }
 
-    .panel-left .section-label { color: var(--blue); margin-bottom: 14px; }
+    .panel-left .section-label { color: #6B5244; margin-bottom: 14px; }
 
     .panel-left h3 {
       font-size: clamp(1.5rem, 2.4vw, 2.4rem);
@@ -1969,7 +1969,7 @@
 
     /* ─── STATS SECTION ─── */
     .stats-section {
-      background: #ffffff;
+      background: var(--white);
       padding: 130px 0;
     }
 
@@ -2077,6 +2077,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      margin-top: auto;
     }
 
     .author-avatar {
@@ -2104,7 +2105,7 @@
 
     /* ─── CTA SECTION ─── */
     .cta-section {
-      background: #ffffff;
+      background: var(--surface);
       padding: 100px 0;
       text-align: center;
       position: relative;
@@ -2433,7 +2434,7 @@
 
       body { font-size: 17px; }
 
-      .hero h1 { font-size: clamp(2.4rem, 9vw, 3rem); text-align: left; }
+      .hero h1 { font-size: clamp(2.5rem, 10vw, 3.2rem); text-align: left; }
       .hero-content > p { text-align: left; }
       .hero-cta { flex-direction: column; }
       .hero-cta .btn-primary, .hero-cta .btn-ghost { width: 100%; justify-content: center; }
@@ -2836,7 +2837,7 @@
       position: relative;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
       text-decoration: none;
       display: flex;
@@ -2852,7 +2853,7 @@
     .bento-img-frame {
       width: 100%;
       aspect-ratio: 16/9;
-      background: #e2e8f0;
+      background: var(--surface);
       border-bottom: 1px solid var(--border);
     }
     .bento-content {
