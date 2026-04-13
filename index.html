@@ -2533,16 +2533,21 @@
 
       .phones-fan-wrap {
         display: block;
-        transform: scale(0.6);
-        transform-origin: top center;
-        margin-bottom: -260px;
-        -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
-        mask-image: linear-gradient(to bottom, black 50%, transparent 85%);
+        height: 280px;
+        overflow: visible;
+        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 95%);
+        mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 95%);
+        margin-bottom: 0;
       }
-      .sp-fb { transform: rotate(-12deg); }
-      .sp-gmb { transform: rotate(-4deg); }
-      .sp-chat { transform: rotate(4deg); }
-      .sp-stats { transform: rotate(12deg); }
+      .phones-fan-wrap .showcase-phone {
+        bottom: auto;
+        top: 0;
+        transform-origin: top center;
+      }
+      .sp-fb { transform: rotate(-14deg) scale(0.52); margin-left: -175px; }
+      .sp-gmb { transform: rotate(-5deg) scale(0.52); margin-left: -65px; }
+      .sp-chat { transform: rotate(5deg) scale(0.52); margin-left: 40px; }
+      .sp-stats { transform: rotate(14deg) scale(0.52); margin-left: 125px; }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
