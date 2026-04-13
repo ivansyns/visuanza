@@ -33,7 +33,7 @@
 
     body {
       font-family: 'DM Sans', sans-serif;
-      font-size: 18px;
+      font-size: 19px;
       color: var(--text);
       background: var(--white);
       overflow-x: hidden;
@@ -551,7 +551,7 @@
       border-radius: var(--radius-lg);
       padding: 32px 28px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
       transition: border-color 0.2s, box-shadow 0.2s;
       display: flex;
@@ -568,7 +568,7 @@
       position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, transparent, #F5D87A, #D4A935, #A67C1A, transparent);
     }
-    /* Shimmer sweep */
+    /* Shimmer sweep — clipped to card shape */
     .pricing-card.featured::after {
       content: '';
       position: absolute;
@@ -589,15 +589,14 @@
       0% { left: -100%; }
       100% { left: 200%; }
     }
-    .pricing-card.featured .plan-badge,
     .pricing-card.featured .plan-price,
     .pricing-card.featured .plan-name,
     .pricing-card.featured .plan-cta-primary {
-
       position: relative; z-index: 1;
     }
 
-    .pricing-card.featured .plan-badge {
+    .pricing-card.featured .plan-badge,
+    .pricing-card-wrap .plan-badge {
       background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A);
     }
     .pricing-card.featured .plan-price {
@@ -626,12 +625,18 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A67C1A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
     }
 
+    .pricing-card-wrap {
+      position: relative;
+    }
     .plan-badge {
       display: inline-block;
       background: var(--blue); color: #fff;
       font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em;
-      text-transform: uppercase; padding: 3px 10px; border-radius: var(--radius);
-      margin-bottom: 20px; align-self: flex-start;
+      text-transform: uppercase; padding: 4px 14px; border-radius: var(--radius);
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
     }
     .plan-name {
       font-family: 'Libre Bodoni', serif;
@@ -1062,7 +1067,7 @@
       <div class="container">
         <div class="hero-inner">
           <p class="hero-eyebrow fade-in">Servicio 01 · Redes Sociales</p>
-          <h1 class="fade-in">Redes sociales que llenan mesas,<br/>no solo <em>pantallas</em></h1>
+          <h1 class="fade-in">Redes sociales que<br/>llenan mesas, no solo <em>pantallas</em></h1>
           <p class="hero-subtitle fade-in">Nos enfocamos en los resultados reales — más clientes, más ventas. No solo visitas en redes.</p>
           <div class="fade-in">
             <a href="contacto.html" class="btn-blue">Contactar</a>
@@ -1147,53 +1152,52 @@
 
           <!-- Basic -->
           <div class="pricing-card fade-in delay-1">
-            <div class="plan-name">Basic</div>
-            <p class="plan-desc">Para restaurantes que quieren empezar a destacar</p>
+            <div class="plan-name">Presencia</div>
+            <p class="plan-desc">Para restaurantes que quieren existir online con una base sólida</p>
             <div class="plan-price"><sup>€</sup>300<span>/mes</span></div>
             <div class="plan-divider"></div>
             <ul class="plan-features">
-              <li><span class="fi"></span>2 vídeos/mes</li>
-              <li><span class="fi"></span>4 fotos/mes</li>
-              <li><span class="fi"></span>Gestión redes sociales</li>
-              <li><span class="fi"></span>Optimización Google</li>
-              <li><span class="fi"></span>Gestión perfil Google</li>
+              <li><span class="fi"></span>Contenido de fotos y vídeos</li>
+              <li><span class="fi"></span>Publicación en redes sociales</li>
+              <li><span class="fi"></span>Optimización perfil Google</li>
+              <li><span class="fi"></span>Informe mensual de resultados</li>
             </ul>
-            <a href="contacto.html" class="plan-cta plan-cta-ghost">Empezar con Basic</a>
+            <a href="contacto.html" class="plan-cta plan-cta-ghost">Empezar con Presencia</a>
           </div>
 
           <!-- Pro (featured) -->
-          <div class="pricing-card featured fade-in delay-2">
+          <div class="pricing-card-wrap">
             <span class="plan-badge">Más popular</span>
-            <div class="plan-name">Pro</div>
-            <p class="plan-desc">Para restaurantes que quieren más clientes fieles y más ventas</p>
+            <div class="pricing-card featured fade-in delay-2">
+            <div class="plan-name">Estrategia</div>
+            <p class="plan-desc">Para restaurantes que quieren atraer clientes de forma constante</p>
             <div class="plan-price"><sup>€</sup>600<span>/mes</span></div>
             <div class="plan-divider"></div>
             <ul class="plan-features">
-              <li><span class="fi"></span>4 vídeos/mes</li>
-              <li><span class="fi"></span>8 fotos/mes</li>
-              <li><span class="fi"></span>Gestión redes sociales</li>
-              <li><span class="fi"></span>Estrategia redes sociales</li>
-              <li><span class="fi"></span>Marketing digital</li>
-              <li><span class="fi"></span>IA de targeting avanzado</li>
+              <li><span class="fi"></span>Mayor volumen de contenido</li>
+              <li><span class="fi"></span>Gestión completa de redes</li>
+              <li><span class="fi"></span>Calendario de contenido mensual</li>
+              <li><span class="fi"></span>Respuesta a reseñas y comentarios</li>
+              <li><span class="fi"></span>Informe mensual de resultados</li>
             </ul>
-            <a href="contacto.html" class="plan-cta plan-cta-primary">Empezar con Pro</a>
+            <a href="contacto.html" class="plan-cta plan-cta-primary">Empezar con Estrategia</a>
+          </div>
           </div>
 
           <!-- Turbo -->
           <div class="pricing-card fade-in delay-3">
-            <div class="plan-name">Turbo</div>
-            <p class="plan-desc">Para restaurantes que quieren crecer rápido con nuevos clientes</p>
-            <div class="plan-price"><sup>€</sup>800<span>/mes</span></div>
+            <div class="plan-name">Crecimiento</div>
+            <p class="plan-desc">Para restaurantes que quieren desbordar su potencial</p>
+            <div class="plan-price"><sup>€</sup>900<span>/mes</span></div>
             <div class="plan-divider"></div>
             <ul class="plan-features">
-              <li><span class="fi"></span>12 vídeos/mes</li>
-              <li><span class="fi"></span>12 fotos/mes</li>
-              <li><span class="fi"></span>Gestión redes sociales</li>
-              <li><span class="fi"></span>Estrategia redes sociales</li>
-              <li><span class="fi"></span>Marketing digital</li>
-              <li><span class="fi"></span>IA de targeting avanzado</li>
+              <li><span class="fi"></span>Producción de contenido premium</li>
+              <li><span class="fi"></span>Campañas en Meta Ads</li>
+              <li><span class="fi"></span>Campañas de temporada</li>
+              <li><span class="fi"></span>Análisis de mercado</li>
+              <li><span class="fi"></span>Informe mensual de resultados</li>
             </ul>
-            <a href="contacto.html" class="plan-cta plan-cta-ghost">Empezar con Turbo</a>
+            <a href="contacto.html" class="plan-cta plan-cta-ghost">Empezar con Crecimiento</a>
           </div>
 
         </div>
