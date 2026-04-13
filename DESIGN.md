@@ -39,21 +39,33 @@ Premium warm restaurant marketing agency. Copper accent on cream backgrounds wit
 |---------|------|------|--------|-------------|----------------|
 | h1 | Libre Bodoni | clamp(2.8rem, 4.5vw, 4rem) | 900 | 1.1 | -0.04em |
 | h2 | Libre Bodoni | clamp(2.2rem, 3.5vw, 3.6rem) | 900 | 1.15 | -0.03em |
-| h3 | Libre Bodoni | 1.05-1.15rem | 700 | — | -0.02em |
+| h3 / card heading | Libre Bodoni | 1.1-1.5rem | 700 | — | -0.02em |
 | body | DM Sans | 18px | 400 | 1.6 | — |
-| hero p | DM Sans | 1.1rem | 400 | 1.7 | — |
+| hero subtitle | DM Sans | 1.1rem | 400 | 1.7 | — |
+| body paragraph | DM Sans | 1.05-1.1rem | 400 | 1.6-1.8 | — |
+| card description | DM Sans | 1rem (minimum) | 400 | 1.6 | — |
+| pricing features | DM Sans | 1rem (minimum) | 400 | 1.55 | — |
+| table cells | DM Sans | 1rem | 400 | — | — |
+| table headers | DM Sans | 0.9rem | 700 | — | 0.06em, uppercase |
+| section-label | DM Sans | 0.85rem | 600 | — | 0.18em, uppercase |
+| section-sub | DM Sans | 1.1rem | 400 | 1.7 | — |
 | nav links | DM Sans | 0.85rem | 500 | — | — |
-| nav logo | Libre Bodoni | 1.1rem | 800 | — | -0.02em |
-| section-label | DM Sans | 0.78rem | 600 | — | 0.18em, uppercase |
-| section-header h2 | Libre Bodoni | clamp(1.8rem, 3vw, 2.6rem) | 900 | 1.2 | -0.03em |
-| section-header p | DM Sans | 0.95rem | 400 | — | — |
-| btn-primary | DM Sans | 0.85rem | 600 | — | — |
+| nav logo | Libre Bodoni | 1.35rem | 800 | — | -0.02em |
+| btn-primary | DM Sans | 0.85-0.9rem | 600 | — | — |
 | btn-ghost | DM Sans | 0.9rem | 600 | — | — |
-| btn-blue | DM Sans | 0.9rem | 600 | — | — |
-| hero-badge | DM Sans | 0.78rem | 600 | — | — |
+| hero-badge/eyebrow | DM Sans | 0.78-0.82rem | 600 | — | 0.18em, uppercase |
 | footer-col h4 | DM Sans | 0.78rem | 700 | — | 0.08em, uppercase |
 | footer links | DM Sans | 0.82rem | 400 | — | — |
 | footer-copy | DM Sans | 0.75rem | 400 | — | — |
+
+### Text Size Rules
+- **Body base**: 18px on all pages
+- **Minimum content text**: 1rem (18px) — no body/paragraph text below this
+- **Card descriptions**: minimum 1rem
+- **Pricing feature lists**: minimum 1rem
+- **Table cells**: 1rem, headers 0.9rem
+- **Intentionally small UI**: section-label (0.85rem), badges (0.78rem), nav (0.85rem), footer (0.75-0.82rem) — these stay small by design
+- **Mobile minimum**: 16px body, nothing below 15px
 | bento-tag | Libre Bodoni | 1.1rem | 800 | — | 0 |
 | testimonial-text | DM Sans | 1rem | 400 | 1.6 | — |
 | service-card h3 | Libre Bodoni | 1.15rem | 700 | — | — |
