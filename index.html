@@ -127,7 +127,7 @@
 
     .nav-links a {
       text-decoration: none;
-      color: #0f172a;
+      color: #1A1A1A;
       font-size: 0.85rem;
       font-weight: 500;
       transition: color 0.2s, background 0.2s;
@@ -2531,21 +2531,38 @@
 
       .nav-links, .nav-right { display: none !important; }
 
+      /* Mobile: show 2 center phones larger, hide outer pair */
       .phones-fan-wrap {
-        display: block;
-        transform: scale(0.5);
-        transform-origin: top center;
-        margin-bottom: -250px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        height: auto;
+        max-width: 100%;
+        padding: 0 20px;
+        margin-bottom: 0;
         -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
         mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
       }
+      .phones-fan-wrap::after { display: none; }
+
+      .showcase-phone {
+        position: relative !important;
+        bottom: auto !important;
+        left: auto !important;
+        margin-left: 0 !important;
+      }
+
+      .sp-fb    { width: 145px !important; transform: rotate(-10deg) !important; margin-right: -30px !important; z-index: 1 !important; }
+      .sp-gmb   { width: 155px !important; transform: rotate(-4deg) !important;  margin-right: -30px !important; z-index: 2 !important; }
+      .sp-chat  { width: 155px !important; transform: rotate(4deg) !important;   margin-right: -30px !important; z-index: 3 !important; }
+      .sp-stats { width: 145px !important; transform: rotate(10deg) !important;  z-index: 4 !important; }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
 
       /* Pull panel up into the faded phones */
       .platforms-panel {
-        margin-top: -50px !important;
+        margin-top: -110px !important;
         margin-bottom: 0 !important;
         position: relative;
         z-index: 10;
