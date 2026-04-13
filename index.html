@@ -2430,7 +2430,7 @@
       }
 
       /* Contain horizontal overflow on mobile */
-      .platforms { overflow-x: hidden; }
+      .platforms { overflow: visible; }
       .bg-glow { display: none; }
 
       /* ─── MOBILE TYPOGRAPHY & SPACING OVERRIDES ─── */
@@ -2536,11 +2536,13 @@
         transform: scale(0.55);
         transform-origin: top center;
         margin-bottom: -380px;
+        -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 90%);
+        mask-image: linear-gradient(to bottom, black 40%, transparent 90%);
       }
-      .sp-fb { transform: rotate(-12deg); width: 200px; margin-left: -370px; }
-      .sp-gmb { transform: rotate(-4deg); width: 210px; margin-left: -190px; }
-      .sp-chat { transform: rotate(4deg); width: 210px; margin-left: -20px; }
-      .sp-stats { transform: rotate(12deg); width: 200px; margin-left: 160px; }
+      .sp-fb { transform: rotate(-12deg); }
+      .sp-gmb { transform: rotate(-4deg); }
+      .sp-chat { transform: rotate(4deg); }
+      .sp-stats { transform: rotate(12deg); }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
