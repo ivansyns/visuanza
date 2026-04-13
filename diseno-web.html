@@ -462,6 +462,16 @@
     .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(192,139,92,0.55); }
     .btn-blue:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
     .btn-blue:active { transform: translateY(0); }
+    .pricing-card.pricing-featured .btn-blue {
+      background: linear-gradient(135deg, #F5D87A, #D4A935 40%, #A67C1A);
+      color: #3D2E0A;
+      box-shadow: 0 4px 20px rgba(166,124,26,0.35);
+    }
+    .pricing-card.pricing-featured .btn-blue:hover {
+      background: linear-gradient(135deg, #F9E28E, #DDB940 40%, #B8891E);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(166,124,26,0.50);
+    }
 
     .btn-ghost {
       background: transparent;
@@ -650,17 +660,36 @@
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .pricing-card.pricing-featured {
-      border-color: rgba(192,139,92,0.35);
-      box-shadow: 0 0 32px rgba(192,139,92,0.12), 0 4px 24px rgba(0,0,0,0.05);
+      border-color: rgba(166,124,26,0.35);
+      background: linear-gradient(175deg, rgba(245,216,122,0.06) 0%, rgba(212,169,53,0.03) 50%, rgba(255,255,255,0) 100%);
+      box-shadow: 0 0 60px rgba(166,124,26,0.10), 0 4px 24px rgba(0,0,0,0.06);
+      overflow: hidden;
     }
     .pricing-card.pricing-featured::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      background: linear-gradient(90deg, transparent, #F5D87A, #D4A935, #A67C1A, transparent);
+    }
+    .pricing-card.pricing-featured::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(105deg, transparent 40%, rgba(245,216,122,0.05) 45%, rgba(245,216,122,0.10) 50%, rgba(245,216,122,0.05) 55%, transparent 60%);
+      animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+    .pricing-card.pricing-featured > * {
+      position: relative;
+      z-index: 1;
     }
     .pricing-pop {
       position: absolute; top: -1px; right: 20px;
-      background: var(--blue); color: #fff;
+      background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A); color: #3D2E0A;
       font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em;
       text-transform: uppercase; padding: 4px 12px;
       border-radius: 0 0 8px 8px;
@@ -681,6 +710,23 @@
     }
     .pricing-price sup { font-size: 1.3rem; vertical-align: super; color: var(--text-muted); }
     .pricing-price span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
+    .pricing-card.pricing-featured .pricing-price {
+      background: linear-gradient(135deg, #F5D87A 0%, #D4A935 45%, #A67C1A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .pricing-card.pricing-featured .pricing-price sup,
+    .pricing-card.pricing-featured .pricing-price span {
+      -webkit-text-fill-color: var(--text-muted);
+    }
+    .pricing-card.pricing-featured .pricing-list li::before {
+      background: rgba(212,169,53,0.14);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A67C1A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-size: 11px 11px;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
     .pricing-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
     .pricing-list {
       list-style: none;

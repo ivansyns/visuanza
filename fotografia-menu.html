@@ -763,24 +763,42 @@
     }
 
     .session-card.session-featured {
-      background: var(--surface);
-      border: 1px solid rgba(192,139,92,0.3);
-      box-shadow: 0 0 40px rgba(192,139,92,0.08), 0 4px 24px rgba(107,94,84,0.06);
+      background: linear-gradient(175deg, rgba(245,216,122,0.06) 0%, rgba(212,169,53,0.03) 50%, rgba(255,255,255,0) 100%);
+      border: 1px solid rgba(166,124,26,0.35);
+      box-shadow: 0 0 60px rgba(166,124,26,0.10), 0 4px 24px rgba(0,0,0,0.06);
+      overflow: hidden;
     }
     .session-card.session-featured::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      background: linear-gradient(90deg, transparent, #F5D87A, #D4A935, #A67C1A, transparent);
+    }
+    .session-card.session-featured::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(105deg, transparent 40%, rgba(245,216,122,0.05) 45%, rgba(245,216,122,0.10) 50%, rgba(245,216,122,0.05) 55%, transparent 60%);
+      animation: shimmer-session 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes shimmer-session {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+    .session-card.session-featured > * {
+      position: relative;
+      z-index: 1;
     }
 
     .session-pop {
       position: absolute;
       top: -11px; left: 50%;
       transform: translateX(-50%);
-      background: var(--blue);
-      color: #fff;
+      background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A);
+      color: #3D2E0A;
       font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -788,6 +806,33 @@
       padding: 4px 14px;
       border-radius: var(--radius);
       white-space: nowrap;
+    }
+
+    .session-card.session-featured .session-price {
+      background: linear-gradient(135deg, #F5D87A 0%, #D4A935 45%, #A67C1A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .session-card.session-featured .session-price span {
+      -webkit-text-fill-color: var(--text-muted);
+    }
+    .session-card.session-featured .session-list li .sli {
+      background: rgba(212,169,53,0.14);
+    }
+    .session-card.session-featured .session-list li .sli svg {
+      color: #A67C1A;
+    }
+    .session-card.session-featured .session-solid {
+      background: linear-gradient(135deg, #F5D87A, #D4A935 40%, #A67C1A);
+      color: #3D2E0A;
+      box-shadow: 0 4px 20px rgba(166,124,26,0.35);
+      border: none;
+    }
+    .session-card.session-featured .session-solid:hover {
+      background: linear-gradient(135deg, #F9E28E, #DDB940 40%, #B8891E);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 28px rgba(166,124,26,0.50);
     }
 
     .session-badge {
