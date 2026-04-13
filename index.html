@@ -2533,31 +2533,19 @@
 
       .phones-fan-wrap {
         display: block;
-        height: 280px;
-        overflow: visible;
-        -webkit-mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 95%);
-        mask-image: linear-gradient(to bottom, black 0%, black 50%, transparent 95%);
-        margin-bottom: 0;
-      }
-      .phones-fan-wrap .showcase-phone {
-        bottom: auto;
-        top: 0;
+        transform: scale(0.5);
         transform-origin: top center;
+        margin-bottom: -265px;
+        clip-path: inset(0 -100vw 50% -100vw);
       }
-      .sp-fb { transform: rotate(-14deg) scale(0.52); margin-left: -175px; }
-      .sp-gmb { transform: rotate(-5deg) scale(0.52); margin-left: -65px; }
-      .sp-chat { transform: rotate(5deg) scale(0.52); margin-left: 40px; }
-      .sp-stats { transform: rotate(14deg) scale(0.52); margin-left: 125px; }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
 
       /* Fix panel negative margin */
       .platforms-panel {
-        margin-top: -40px !important;
+        margin-top: 0 !important;
         margin-bottom: 0 !important;
-        position: relative;
-        z-index: 10;
       }
 
       .platforms { padding: 60px 0 0; }
