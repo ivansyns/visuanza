@@ -2533,21 +2533,23 @@
 
       .phones-fan-wrap {
         display: block;
-        transform: scale(0.5);
+        transform: scale(0.55);
         transform-origin: top center;
-        margin-bottom: -265px;
-        clip-path: inset(0 -100vw 50% -100vw);
+        margin-bottom: -220px;
+        clip-path: none;
+        -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 95%);
+        mask-image: linear-gradient(to bottom, black 55%, transparent 95%);
       }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
 
-      /* Fix panel negative margin */
+      /* Pull panel up into the faded phones */
       .platforms-panel {
-        margin-top: 0 !important;
-        margin-bottom: -130px !important;
+        margin-top: -50px !important;
+        margin-bottom: 0 !important;
         position: relative;
-        top: -130px;
+        z-index: 10;
       }
 
       .platforms { padding: 60px 0 0; }
