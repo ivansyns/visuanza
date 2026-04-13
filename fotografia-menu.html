@@ -792,10 +792,16 @@
       z-index: 1;
     }
 
+    .session-card-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
     .session-pop {
       position: absolute;
-      top: -11px; left: 50%;
-      transform: translateX(-50%);
+      top: 0; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
       background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A);
       color: #ffffff;
       font-size: 0.68rem;
@@ -1455,8 +1461,9 @@
           </div>
 
           <!-- Estándar (featured) -->
+          <div class="session-card-wrap">
+          <span class="session-pop">Más popular</span>
           <div class="session-card session-featured fade-in">
-            <span class="session-pop">Más popular</span>
             <div class="session-badge">Estándar</div>
             <div class="session-name">Sesión Completa</div>
             <div class="session-price">€500<span> / sesión</span></div>
@@ -1477,6 +1484,7 @@
             </div>
             <a href="contacto.html" class="session-action session-solid">Reservar sesión</a>
           </div>
+          </div><!-- /session-card-wrap -->
 
           <!-- Campaña -->
           <div class="session-card fade-in delay-2">

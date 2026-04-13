@@ -686,12 +686,20 @@
       position: relative;
       z-index: 1;
     }
+    .pricing-card-wrap {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
     .pricing-pop {
-      position: absolute; top: -1px; right: 20px;
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 5;
       background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A); color: #ffffff;
       font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em;
-      text-transform: uppercase; padding: 4px 12px;
-      border-radius: 0 0 8px 8px;
+      text-transform: uppercase; padding: 4px 14px;
+      border-radius: var(--radius);
     }
     .pricing-badge {
       display: inline-block;
@@ -1344,8 +1352,9 @@
           </div>
 
           <!-- Estándar -->
+          <div class="pricing-card-wrap">
+          <span class="pricing-pop">Recomendado</span>
           <div class="pricing-card pricing-featured">
-            <span class="pricing-pop">Recomendado</span>
             <div class="pricing-badge">Estándar</div>
             <div class="pricing-price"><sup>€</sup>100<span>/mes</span></div>
             <p class="pricing-desc">Web completa multipágina para restaurantes que quieren destacar y atraer más clientes.</p>
@@ -1358,6 +1367,7 @@
             </ul>
             <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
           </div>
+          </div><!-- /pricing-card-wrap -->
 
           <!-- Premium -->
           <div class="pricing-card">
