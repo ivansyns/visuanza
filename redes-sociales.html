@@ -559,15 +559,15 @@
       flex-direction: column;
     }
     .pricing-card.featured {
-      border-color: rgba(197,163,90,0.45);
-      background: linear-gradient(175deg, rgba(212,175,55,0.04) 0%, rgba(197,163,90,0.02) 50%, rgba(255,255,255,0) 100%);
-      box-shadow: 0 0 60px rgba(197,163,90,0.14), 0 4px 24px rgba(0,0,0,0.06);
+      border-color: rgba(166,124,26,0.35);
+      background: linear-gradient(175deg, rgba(245,216,122,0.06) 0%, rgba(212,169,53,0.03) 50%, rgba(255,255,255,0) 100%);
+      box-shadow: 0 0 60px rgba(166,124,26,0.10), 0 4px 24px rgba(0,0,0,0.06);
       overflow: hidden;
     }
     .pricing-card.featured::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, #C5A35A, transparent);
+      background: linear-gradient(90deg, transparent, #F5D87A, #D4A935, #A67C1A, transparent);
     }
     /* Shimmer sweep */
     .pricing-card.featured::after {
@@ -577,9 +577,9 @@
       background: linear-gradient(
         105deg,
         transparent 40%,
-        rgba(212,175,55,0.06) 45%,
-        rgba(212,175,55,0.10) 50%,
-        rgba(212,175,55,0.06) 55%,
+        rgba(245,216,122,0.05) 45%,
+        rgba(245,216,122,0.10) 50%,
+        rgba(245,216,122,0.05) 55%,
         transparent 60%
       );
       animation: shimmer 4s ease-in-out infinite;
@@ -598,10 +598,10 @@
     }
 
     .pricing-card.featured .plan-badge {
-      background: linear-gradient(135deg, #D4AF37, #B8960C);
+      background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A);
     }
     .pricing-card.featured .plan-price {
-      background: linear-gradient(135deg, #D4AF37, #F2D06B, #C5A35A);
+      background: linear-gradient(135deg, #F5D87A 0%, #D4A935 45%, #A67C1A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -611,17 +611,18 @@
       -webkit-text-fill-color: var(--text-muted);
     }
     .pricing-card.featured .plan-cta-primary {
-      background: linear-gradient(135deg, #D4AF37, #B8960C);
-      box-shadow: 0 4px 20px rgba(197,163,90,0.35);
+      background: linear-gradient(135deg, #F5D87A, #D4A935 40%, #A67C1A);
+      color: #3D2E0A;
+      box-shadow: 0 4px 20px rgba(166,124,26,0.35);
     }
     .pricing-card.featured .plan-cta-primary:hover {
-      background: linear-gradient(135deg, #E0BE4A, #C5A35A);
+      background: linear-gradient(135deg, #F9E28E, #DDB940 40%, #B8891E);
     }
     .pricing-card.featured .plan-features li .fi {
-      background: rgba(212,175,55,0.12);
+      background: rgba(212,169,53,0.14);
     }
     .pricing-card.featured .plan-features li .fi::after {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C5A35A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A67C1A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
     }
 
     .plan-badge {
