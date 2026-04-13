@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <meta name="description" content="Diseño web profesional para restaurantes: webs rápidas, optimizadas para Google y listas en 72 horas. Incluye Google My Business, hosting y cambios ilimitados. Visuanza." />
   <title>Diseño Web para Restaurantes – Visuanza</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Bodoni:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet" />
@@ -12,30 +13,34 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-  --blue:       #C08B5C;
-  --blue-dark:  #A67744;
-  --black:      #1A1A1A;
-  --dark:       #141414;
-  --gray-dark:  #1E1E1E;
-  --gray-mid:   #2A2420;
-  --gray-light: #F0EBE3;
-  --white:      #FAF7F2;
-  --text:       #1A1A1A;
-  --text-muted: #2A2420;
-  --border:     rgba(107,94,84,0.12);
-  --surface:    #F0EBE3;
-  --radius:     3px;
-  --radius-lg:  4px;
-}
+      --blue:       #C08B5C;
+      --blue-dark:  #A67744;
+      --black:      #1A1A1A;
+      --dark:       #141414;
+      --gray-dark:  #1E1E1E;
+      --gray-mid:   #2A2420;
+      --gray-light: #F0EBE3;
+      --white:      #FAF7F2;
+      --text:       #1A1A1A;
+      --text-muted: #2A2420;
+      --border:     rgba(107,94,84,0.12);
+      --surface:    #F0EBE3;
+      --radius:     3px;
+      --radius-lg:  4px;
+    }
 
-    html { scroll-behavior: smooth; overflow-x: clip; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100%;
+    }
 
     body {
       font-family: 'DM Sans', sans-serif;
       font-size: 18px;
       color: var(--text);
       background: var(--white);
-      overflow-x: clip;
+      overflow-x: hidden;
       line-height: 1.6;
     }
 
@@ -44,173 +49,481 @@
     h2 { letter-spacing: -0.03em; }
     h3 { letter-spacing: -0.02em; }
 
-    .bg-glow {
-      position: fixed; top: -300px; left: 50%;
-      transform: translateX(-50%);
-      width: 1000px; height: 1000px;
-      background: radial-gradient(ellipse, rgba(37,99,235,0.18) 0%, rgba(59,130,246,0.08) 40%, transparent 70%);
-      border-radius: 50%; pointer-events: none; z-index: 0;
+    /* ─── GRAIN OVERLAY ─── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── CONTAINER ─── */
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: clamp(16px, 4vw, 40px);
+      padding-right: clamp(16px, 4vw, 40px);
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #6B5244;
+      padding-left: 10px;
+      border-left: 2px solid var(--blue);
+      margin-bottom: 1rem;
+    }
+
+    /* ─── FADE IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
     }
 
     /* ─── NAV ─── */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px clamp(8px,1.5vw,24px); background: transparent; pointer-events: none; }
-    .nav-inner { max-width: 1120px; margin: 0 auto; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.88) padding-box, linear-gradient(120deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.7)) border-box; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid transparent; border-radius: 999px; box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05); pointer-events: auto; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 14px clamp(8px, 1.5vw, 24px);
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .nav-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.88) padding-box,
+                  linear-gradient(120deg, rgba(255,255,255,0.9), rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.7)) border-box;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid transparent;
+      border-radius: 999px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
+      pointer-events: auto;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
     .nav-logo img { height: 30px; width: auto; }
-    .nav-logo span { font-size: 1.35rem; font-weight: 800; color: #1A1A1A; letter-spacing: -0.02em; font-family: 'Libre Bodoni', serif; }
-    .nav-links { display: flex; align-items: center; list-style: none; }
+    .nav-logo span {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #1A1A1A;
+      letter-spacing: -0.02em;
+      font-family: 'Libre Bodoni', serif;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+    }
     .nav-links li { margin-right: 33px; }
     .nav-links li:last-child { margin-right: 0; }
-    .nav-links a { text-decoration: none; color: #1A1A1A; font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1A1A1A;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s, background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 12px;
+      border-radius: 999px;
+    }
     .nav-links a:hover { color: var(--blue); background: rgba(192,139,92,0.06); }
     .nav-links a.active { color: rgba(15,23,42,0.95); background: rgba(0,0,0,0.06); }
-    .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
+    .nav-links a .chevron {
+      font-size: 0.65rem;
+      opacity: 0.5;
+      transition: transform 0.2s ease;
+    }
+
+    /* ─── SERVICES DROPDOWN ─── */
     .nav-has-dropdown { position: relative; }
     .nav-has-dropdown::after {
       content: '';
       position: absolute;
       top: 100%;
-      left: -10px;
-      right: -10px;
+      left: -10px; right: -10px;
       height: 10px;
       background: transparent;
     }
     .nav-has-dropdown > a .chevron { transition: transform 0.2s ease, opacity 0.2s; }
     .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
-    .nav-dropdown { position: absolute; top: calc(100% + 6px); left: 50%; transform: translateX(-50%) translateY(-6px); width: 480px; background: rgba(255,255,255,0.97); border: 1px solid rgba(0,0,0,0.08); border-radius: var(--radius-lg); box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 16px 8px 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 200; }
-    .nav-dropdown::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%) rotate(45deg); width: 12px; height: 12px; background: #ffffff; border-left: 1px solid rgba(0,0,0,0.08); border-top: 1px solid rgba(0,0,0,0.08); }
-    .nav-has-dropdown:hover .nav-dropdown { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-    .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
-    .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: #1A1A1A; transition: background 0.15s ease; }
+
+    .nav-dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      width: 480px;
+      background: rgba(255,255,255,0.97);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 16px 8px 8px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 200;
+    }
+    .nav-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 12px; height: 12px;
+      background: #ffffff;
+      border-left: 1px solid rgba(0,0,0,0.08);
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .nav-has-dropdown:hover .nav-dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-dropdown-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+    .nav-dropdown-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: #1A1A1A;
+      transition: background 0.15s ease;
+    }
     .nav-dropdown-item:hover { background: rgba(192,139,92,0.06); color: var(--blue); }
     .nav-dropdown-item:hover .ndi-icon { background: var(--blue); }
     .nav-dropdown-item:hover .ndi-icon svg { color: white; }
-    .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(192,139,92,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
+
+    .ndi-icon {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: rgba(192,139,92,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease;
+      margin-top: 1px;
+    }
     .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
     .ndi-text { flex: 1; }
     .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; letter-spacing: -0.01em; }
     .ndi-desc { display: block; font-size: 0.75rem; color: #2A2420; line-height: 1.4; }
+
     @media (max-width: 900px) { .nav-dropdown { display: none; } }
+
     .nav-right { display: flex; align-items: center; gap: 1rem; }
-    .lang-toggle { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: rgba(15,23,42,0.85); cursor: pointer; background: none; border: none; }
-    .lang-flag { font-size: 1.1rem; }
-    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: var(--radius); font-size: 0.85rem; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(192,139,92,0.35); transition: background 0.2s, transform 0.1s, box-shadow 0.2s; }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 20px rgba(192,139,92,0.35);
+    }
     .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(192,139,92,0.5); }
+    .btn-primary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .btn-primary:active { transform: translateY(0); }
+
     /* ─── HAMBURGER ─── */
-    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: var(--radius); transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 36px; height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: var(--radius);
+      transition: background 0.2s;
+      z-index: 300;
+      pointer-events: auto;
+      flex-shrink: 0;
+    }
     .hamburger:hover { background: rgba(0,0,0,0.06); }
-    .hamburger span { display: block; width: 22px; height: 2px; background: rgba(15,23,42,0.85); border-radius: 2px; transition: transform 0.3s ease, opacity 0.3s ease; transform-origin: center; }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #1A1A1A;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      transform-origin: center;
+    }
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ─── MOBILE MENU ─── */
-    .mobile-menu { position: fixed; inset: 0; z-index: 150; background: rgba(9,9,11,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 32px 48px; opacity: 0; pointer-events: none; transform: translateX(100%); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(9,9,11,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 32px 48px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(100%);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
     .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
-    .mobile-menu-links { list-style: none; display: flex; flex-direction: column; align-items: center; gap: 0; width: 100%; max-width: 320px; }
+    .mobile-menu-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      width: 100%;
+      max-width: 320px;
+    }
     .mobile-menu-links li { width: 100%; }
-    .mobile-menu-links a { display: block; text-align: center; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 1.35rem; font-weight: 600; font-family: 'Libre Bodoni', serif; letter-spacing: -0.02em; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.07); transition: color 0.2s; }
+    .mobile-menu-links a {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 1.35rem;
+      font-weight: 600;
+      font-family: 'Libre Bodoni', serif;
+      letter-spacing: -0.02em;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.2s;
+    }
     .mobile-menu-links a:hover { color: #fff; }
-    .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
-    .mobile-lang { font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.45); background: none; border: none; cursor: pointer; font-family: 'DM Sans',sans-serif; }
-    .mobile-cta { width: 100%; text-align: center; background: var(--blue); color: #fff; border: none; padding: 15px 24px; border-radius: var(--radius); font-size: 1rem; font-weight: 600; text-decoration: none; display: block; box-shadow: 0 4px 20px rgba(192,139,92,0.35); transition: background 0.2s; cursor: pointer; }
+    .mobile-menu-bottom {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      max-width: 320px;
+    }
+    .mobile-cta {
+      width: 100%;
+      text-align: center;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 15px 24px;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+      box-shadow: 0 4px 20px rgba(192,139,92,0.35);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
     .mobile-cta:hover { background: var(--blue-dark); }
-    @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } .nav-links, .nav-right { display: none !important; } }
-    @media (min-width: 769px) { .mobile-menu { display: none !important; } }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+      .nav-links { display: none !important; }
+      .nav-right { display: none !important; }
+    }
+    @media (min-width: 769px) {
+      .mobile-menu { display: none !important; }
+    }
 
     /* ─── HERO ─── */
     .hero {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      padding: 140px clamp(20px,4vw,80px) 100px;
       position: relative;
-    }
-    .hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 1; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(192,139,92,0.1); border: 1px solid rgba(192,139,92,0.25);
-      color: var(--blue); font-size: 0.78rem; font-weight: 600;
-      padding: 6px 14px; border-radius: var(--radius); margin-bottom: 28px;
-      letter-spacing: 0.03em;
-    }
-    .hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 20px;
-      color: var(--text);
-    }
-    .hero h1 .accent { color: var(--blue); }
-    .hero-sub {
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
-      color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 560px;
-      margin: 0 auto 36px;
-    }
-    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-blue {
-      background: var(--blue); color: #fff;
-      padding: 13px 26px; border-radius: var(--radius);
-      font-size: 0.9rem; font-weight: 600;
-      text-decoration: none; display: inline-block;
-      box-shadow: 0 4px 24px rgba(192,139,92,0.4);
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
-    .btn-ghost {
-      background: transparent; color: var(--text);
-      padding: 13px 26px; border-radius: var(--radius);
-      font-size: 0.9rem; font-weight: 600;
-      text-decoration: none; display: inline-block;
-      border: 1px solid var(--border);
-      transition: background 0.2s, border-color 0.2s;
-    }
-    .btn-ghost:hover { background: var(--surface); border-color: rgba(15,23,42,0.18); }
-
-    .hero-stats {
-      display: flex; gap: 36px; justify-content: center;
-      margin-top: 52px; flex-wrap: wrap;
-    }
-    .hero-stat { text-align: center; }
-    .hero-stat-num { font-family: 'Libre Bodoni', serif; font-size: 2rem; font-weight: 800; color: var(--text); letter-spacing: -0.03em; }
-    .hero-stat-num span { color: var(--blue); }
-    .hero-stat-lbl { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
-      100% { transform: translateX(-50%); }
+      background: var(--surface);
+      overflow: hidden;
+      padding: 160px 0 100px;
+      display: flex;
+      align-items: center;
     }
 
-    /* ─── SECTIONS ─── */
-    .section {
-      padding: clamp(72px,9vw,120px) clamp(20px,4vw,80px);
-      position: relative; z-index: 1;
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
-    .section-inner { max-width: 1120px; margin: 0 auto; }
-    .section-label {
+
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      font-size: 0.72rem;
+      font-size: 0.82rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--blue);
+      color: #6B5244;
       padding-left: 10px;
       border-left: 2px solid var(--blue);
-      margin-bottom: 1rem;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text);
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 52px;
+    }
+
+    .btn-blue {
+      background: var(--blue);
+      color: #fff;
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 24px rgba(192,139,92,0.4);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(192,139,92,0.55); }
+    .btn-blue:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .btn-blue:active { transform: translateY(0); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      padding: 13px 26px;
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      border: 1px solid var(--border);
+      transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover { background: rgba(192,139,92,0.06); border-color: rgba(107,94,84,0.28); transform: translateY(-1px); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Libre Bodoni', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .hero-stat-num em { font-style: normal; color: var(--blue); }
+    .hero-stat-lbl {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* ─── GENERIC SECTION WRAPPER ─── */
+    .section {
+      padding: clamp(72px, 9vw, 120px) 0;
+      position: relative;
     }
     .section-heading {
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      color: var(--text); margin-bottom: 16px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 16px;
       line-height: 1.15;
     }
-    .section-heading .accent { color: var(--blue); }
+    .section-heading em { font-style: italic; color: var(--blue); }
     .section-sub {
-      font-size: 1rem; color: var(--text-muted);
-      line-height: 1.7; max-width: 520px;
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 520px;
     }
 
     /* ─── PORTFOLIO ─── */
+    .portfolio-section { background: var(--white); }
+
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -219,20 +532,26 @@
     }
     @media (max-width: 900px) { .portfolio-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 600px) { .portfolio-grid { grid-template-columns: 1fr; } }
+
     .portfolio-card {
-      background: var(--surface);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .portfolio-card:hover { border-color: rgba(192,139,92,0.3); transform: translateY(-4px); }
+    .portfolio-card:hover {
+      border-color: rgba(192,139,92,0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(192,139,92,0.1), 0 2px 8px rgba(0,0,0,0.05);
+    }
     .portfolio-browser {
       background: rgba(0,0,0,0.03);
       border-bottom: 1px solid var(--border);
       padding: 10px 14px;
-      display: flex; align-items: center; gap: 7px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
     .browser-dot { width: 9px; height: 9px; border-radius: 50%; }
     .browser-dot:nth-child(1) { background: rgba(255,96,88,0.6); }
@@ -240,20 +559,26 @@
     .browser-dot:nth-child(3) { background: rgba(40,201,64,0.6); }
     .browser-bar { flex: 1; height: 20px; background: rgba(0,0,0,0.05); border-radius: 4px; margin-left: 6px; }
     .portfolio-thumb {
-      width: 100%; aspect-ratio: 16/9;
+      width: 100%;
+      aspect-ratio: 16/9;
       background: linear-gradient(135deg, rgba(192,139,92,0.08) 0%, rgba(192,139,92,0.03) 100%);
-      display: flex; align-items: center; justify-content: center;
-      position: relative; overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
     .portfolio-thumb-letter {
       font-family: 'Libre Bodoni', serif;
-      font-size: 3rem; font-weight: 900;
+      font-size: 3rem;
+      font-weight: 900;
       color: rgba(192,139,92,0.18);
       letter-spacing: -0.04em;
       user-select: none;
     }
     .portfolio-thumb-line {
-      position: absolute; bottom: 0; left: 0; right: 0;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
       height: 2px;
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
       opacity: 0.4;
@@ -263,6 +588,8 @@
     .portfolio-type { font-size: 0.78rem; color: var(--text-muted); }
 
     /* ─── FEATURES ─── */
+    .features-section { background: var(--surface); }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -271,19 +598,27 @@
     }
     @media (max-width: 900px) { .features-grid { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 580px) { .features-grid { grid-template-columns: 1fr; } }
+
     .feature-card {
-      background: var(--surface);
+      background: #ffffff;
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 28px 24px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
-      transition: border-color 0.2s, background 0.2s;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.03);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .feature-card:hover { border-color: rgba(192,139,92,0.25); background: rgba(192,139,92,0.04); }
+    .feature-card:hover {
+      border-color: rgba(192,139,92,0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(192,139,92,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    }
     .feature-icon {
-      width: 44px; height: 44px; border-radius: 10px;
+      width: 44px; height: 44px;
+      border-radius: 10px;
       background: rgba(192,139,92,0.1);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 18px;
     }
     .feature-icon svg { width: 20px; height: 20px; color: var(--blue); }
@@ -291,25 +626,32 @@
     .feature-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; }
 
     /* ─── PRICING ─── */
+    .pricing-section { background: var(--white); }
+
     .pricing-wrap {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px; max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1000px;
       margin: 56px auto 0;
     }
     @media (max-width: 860px) { .pricing-wrap { grid-template-columns: 1fr; max-width: 440px; } }
+
     .pricing-card {
-      background: var(--surface);
+      background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 20px; padding: 36px 32px;
-      display: flex; flex-direction: column;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
-      position: relative; overflow: hidden;
-      transition: border-color 0.2s;
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.04), 0 1px 4px rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .pricing-card:hover { }
     .pricing-card.pricing-featured {
       border-color: rgba(192,139,92,0.35);
-      box-shadow: 0 0 32px rgba(192,139,92,0.12), 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
+      box-shadow: 0 0 32px rgba(192,139,92,0.12), 0 4px 24px rgba(0,0,0,0.05);
     }
     .pricing-card.pricing-featured::before {
       content: '';
@@ -327,12 +669,13 @@
       display: inline-block;
       background: rgba(192,139,92,0.1); color: var(--blue);
       font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; padding: 4px 12px; border-radius: var(--radius);
-      margin-bottom: 20px; border: 1px solid rgba(192,139,92,0.18);
+      text-transform: uppercase; padding: 4px 12px;
+      border-radius: var(--radius); margin-bottom: 20px;
+      border: 1px solid rgba(192,139,92,0.18);
     }
     .pricing-price {
       font-family: 'Libre Bodoni', serif;
-      font-size: 3rem; font-weight: 900;
+      font-size: 3rem; font-weight: 700;
       color: var(--text); letter-spacing: -0.04em;
       line-height: 1; margin-bottom: 6px;
     }
@@ -340,40 +683,49 @@
     .pricing-price span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
     .pricing-desc { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
     .pricing-list {
-      list-style: none; flex: 1;
+      list-style: none;
+      flex: 1;
       margin-bottom: 32px;
-      display: flex; flex-direction: column; gap: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
     .pricing-list li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 0.88rem; color: var(--text);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+      color: var(--text);
     }
     .pricing-list li::before {
       content: '';
       flex-shrink: 0;
-      width: 17px; height: 17px; border-radius: 50%;
+      width: 17px; height: 17px;
+      border-radius: 50%;
       background: rgba(192,139,92,0.15);
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234F7EFF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C08B5C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
       background-size: 11px 11px;
       background-position: center;
       background-repeat: no-repeat;
       margin-top: 1px;
     }
-    .pricing-cta { width: 100%; text-align: center; }
-    .pricing-addon {
-      max-width: 820px; margin: 20px auto 0;
-      background: rgba(192,139,92,0.06);
-      border: 1px solid rgba(192,139,92,0.18);
-      border-radius: 12px; padding: 20px 24px;
-      display: flex; align-items: flex-start; gap: 16px;
+    .pricing-cta {
+      width: 100%;
+      text-align: center;
+      display: block;
     }
-    @media (max-width: 600px) { .pricing-addon { flex-direction: column; } }
-    .pricing-addon-icon { flex-shrink: 0; color: var(--blue); margin-top: 2px; }
-    .pricing-addon-icon svg { width: 20px; height: 20px; }
-    .pricing-addon-text h4 { font-family: 'Libre Bodoni', serif; font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .pricing-addon-text p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0; }
+    .pricing-note {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .pricing-note a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .pricing-note a:hover { text-decoration: underline; }
 
     /* ─── STEPS ─── */
+    .steps-section { background: var(--surface); }
+
     .steps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -384,136 +736,270 @@
     .steps-grid::before {
       content: '';
       position: absolute;
-      top: 32px; left: calc(16.66% + 16px); right: calc(16.66% + 16px);
+      top: 32px;
+      left: calc(16.66% + 16px); right: calc(16.66% + 16px);
       height: 1px;
       background: linear-gradient(90deg, var(--blue), rgba(192,139,92,0.3), var(--blue));
       opacity: 0.35;
     }
-    @media (max-width: 700px) { .steps-grid { grid-template-columns: 1fr; } .steps-grid::before { display: none; } }
+    @media (max-width: 700px) {
+      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+    }
     .step-card {
-      padding: 0 24px 0;
+      padding: 0 24px;
       text-align: center;
     }
     .step-num {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: rgba(192,139,92,0.1);
+      width: 64px; height: 64px;
+      border-radius: 50%;
       border: 1px solid rgba(192,139,92,0.3);
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 auto 20px;
       font-family: 'Libre Bodoni', serif;
-      font-size: 1.4rem; font-weight: 900;
-      color: var(--blue); position: relative; z-index: 1;
-      background: var(--white);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--blue);
+      position: relative;
+      z-index: 1;
+      background: var(--surface);
     }
     .step-card h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
     .step-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; max-width: 240px; margin: 0 auto; }
 
-    /* ─── TESTIMONIALS ─── */
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 48px;
-    }
-    @media (max-width: 900px) { .testimonials-grid { grid-template-columns: 1fr; } }
-    .testimonial-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px 24px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 4px rgba(0,0,0,0.04);
-      transition: border-color 0.2s;
-    }
-    .testimonial-card:hover { border-color: rgba(192,139,92,0.2); }
-    .testimonial-stars { color: #F59E0B; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 14px; }
-    .testimonial-text { font-size: 0.9rem; color: var(--text); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
-    .testimonial-avatar {
-      width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(192,139,92,0.15);
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 0.85rem; color: var(--blue);
-      flex-shrink: 0;
-    }
-    .testimonial-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
-    .testimonial-role { font-size: 0.75rem; color: var(--text-muted); }
-
-    /* ─── FINAL CTA ─── */
+    /* ─── CTA SECTION ─── */
     .cta-section {
-      padding: clamp(80px,10vw,140px) clamp(20px,4vw,80px);
-      text-align: center;
-      position: relative; z-index: 1;
+      background: var(--black);
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
     }
-    .cta-inner {
-      max-width: 640px; margin: 0 auto;
-      background: rgba(192,139,92,0.05);
-      border: 1px solid rgba(192,139,92,0.2);
-      border-radius: 24px;
-      padding: clamp(40px,5vw,72px) clamp(24px,4vw,60px);
-      position: relative; overflow: hidden;
-    }
-    .cta-inner::before {
+    .cta-section::before {
       content: '';
-      position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
-    }
-    .cta-glow {
-      position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
-      width: 400px; height: 300px;
-      background: radial-gradient(ellipse, rgba(192,139,92,0.15) 0%, transparent 70%);
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse, rgba(192,139,92,0.12) 0%, rgba(192,139,92,0.04) 40%, transparent 70%);
       pointer-events: none;
     }
-    .cta-inner h2 {
-      font-size: clamp(1.7rem,3.5vw,2.6rem);
-      font-weight: 800; letter-spacing: -0.03em;
-      color: var(--text); margin-bottom: 16px;
-      position: relative; z-index: 1;
+    .cta-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
     }
-    .cta-inner h2 .accent { color: var(--blue); }
-    .cta-inner p { font-size: 1rem; color: var(--text-muted); margin-bottom: 32px; position: relative; z-index: 1; }
-    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+    .cta-section h2 {
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #FAF7F2;
+      line-height: 1.2;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+    .cta-section h2 em { font-style: italic; color: var(--blue); }
+    .cta-subtitle {
+      font-size: 1rem;
+      color: rgba(250,247,242,0.6);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+    }
+    .cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-cta-fill {
+      background: var(--blue);
+      color: #ffffff;
+      border: none;
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 4px 24px rgba(192,139,92,0.4);
+    }
+    .btn-cta-fill:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(192,139,92,0.55); }
+    .btn-cta-fill:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    .btn-cta-fill:active { transform: translateY(0); }
 
-    .footer-cta-btn { display: inline-block; margin-top: 18px; background: #C08B5C; color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: var(--radius); transition: opacity 0.2s, transform 0.2s; }
-    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-cta-outline {
+      background: transparent;
+      color: #FAF7F2;
+      border: 1.5px solid var(--blue);
+      padding: 14px 28px;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-cta-outline:hover { background: rgba(192,139,92,0.08); transform: translateY(-1px); }
+    .btn-cta-outline:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
     /* ─── FOOTER ─── */
     footer {
       background: #1A1A1A;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 40px clamp(20px,4vw,80px) 32px;
-      position: relative; z-index: 1;
+      color: rgba(255,255,255,0.6);
+      padding: 60px 0 30px;
     }
-    .footer-inner { max-width: 1120px; margin: 0 auto; }
-    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
-    .footer-brand { max-width: 280px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 16px; }
+    .footer-inner {
+      max-width: 1530px;
+      margin: 0 auto;
+      padding-left: clamp(8px, 1.5vw, 24px);
+      padding-right: clamp(8px, 1.5vw, 24px);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      text-decoration: none;
+    }
     .footer-logo img { height: 72px; filter: brightness(0) invert(1); }
-    .footer-logo span { font-size: 2.2rem; font-weight: 800; color: white; font-family: 'Libre Bodoni', serif; letter-spacing: -0.02em; }
-    .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; color: rgba(255,255,255,0.5); }
-    .footer-col h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.9); margin-bottom: 16px; }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a { color: rgba(255,255,255,0.6); font-size: 0.82rem; transition: color 0.2s, text-decoration-color 0.2s; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); }
+    .footer-logo span {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: white;
+      font-family: 'Libre Bodoni', serif;
+      letter-spacing: -0.02em;
+    }
+    .footer-cta-btn {
+      display: inline-block;
+      margin-top: 18px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: var(--radius);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .footer-desc { font-size: 0.8rem; line-height: 1.7; max-width: 240px; }
+    .footer-col h4 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 16px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col ul li a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.82rem;
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
     .footer-col ul li a:hover { color: rgba(255,255,255,0.9); text-decoration-color: rgba(255,255,255,0.6); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
-    .footer-copy a { color: rgba(255,255,255,0.6); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.2); transition: color 0.2s, text-decoration-color 0.2s; }
-    .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a { font-size: 0.78rem; color: rgba(255,255,255,0.45); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,0.15); transition: color 0.2s, text-decoration-color 0.2s; }
-    .footer-legal a:hover { color: rgba(255,255,255,0.7); }
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .footer-social-icon { width: 36px; height: 36px; border-radius: var(--radius); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
+    .footer-social-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.65);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      text-decoration: none;
+    }
     .footer-social-icon:hover { background: rgba(192,139,92,0.15); border-color: rgba(192,139,92,0.3); color: white; }
     .footer-social-icon svg { width: 15px; height: 15px; }
-  @media (max-width: 600px) {
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+    .footer-copy a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255,255,255,0.2);
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .footer-copy a:hover { color: rgba(255,255,255,0.8); text-decoration-color: rgba(255,255,255,0.6); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.45);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(255,255,255,0.2);
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.7); text-decoration-color: rgba(255,255,255,0.6); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      body { font-size: 16px; }
+      .hero { padding: 120px 0 80px; }
+      .cta-section { padding: 80px 0; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand, .footer-col { text-align: center; }
+      .footer-logo { justify-content: center; }
+      .footer-social-icons { justify-content: center; gap: 20px; }
+      .footer-social-icon { width: 48px; height: 48px; border-radius: 12px; }
+      .footer-social-icon svg { width: 20px; height: 20px; }
       .footer-logo img { height: 36px; }
       .footer-logo span { font-size: 1.3rem; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .pricing-wrap { grid-template-columns: 1fr; max-width: 100%; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .hero-stats { gap: 28px; }
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .btn-blue, .btn-ghost, .btn-primary, .btn-cta-fill, .btn-cta-outline,
+      .portfolio-card, .feature-card { transition: none !important; }
     }
   </style>
 </head>
 <body>
-  
 
-    <!-- ─── NAV ─── -->
-    <!-- ─── NAV ─── -->
+  <!-- ─── NAV ─── -->
   <nav>
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
@@ -522,7 +1008,7 @@
       </a>
       <ul class="nav-links">
         <li class="nav-has-dropdown">
-          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
+          <a href="servicios.html" class="active">Servicios <span class="chevron">▾</span></a>
           <div class="nav-dropdown">
             <div class="nav-dropdown-grid">
               <a href="redes-sociales.html" class="nav-dropdown-item">
@@ -566,6 +1052,7 @@
         </li>
         <li><a href="index.html#quienes">Quiénes somos</a></li>
         <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="blog.html">Blog</a></li>
       </ul>
       <div class="nav-right">
         <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
@@ -579,11 +1066,12 @@
   </nav>
 
   <!-- ─── MOBILE MENU ─── -->
-    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul class="mobile-menu-links">
       <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
       <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
+      <li><a href="blog.html" class="mobile-menu-link">Blog</a></li>
     </ul>
     <div class="mobile-menu-bottom">
       <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
@@ -592,373 +1080,409 @@
 
   <main>
 
-  <!-- ─── HERO ─── -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-badge">✦ Servicio 02 · Diseño Web</div>
-      <h1>Tu restaurante merece una web que <span class="accent">impresione.</span></h1>
-      <p class="hero-sub">Diseñamos y lanzamos webs profesionales para restaurantes en días, no en meses. Rápidas, bonitas y optimizadas para que tus clientes reserven desde el primer click.</p>
-      <div class="hero-cta">
-        <a href="index.html#contacto" class="btn-blue">Quiero mi web ahora</a>
-        <a href="#portfolio" class="btn-ghost">Ver ejemplos</a>
+    <!-- ─── HERO ─── -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-inner">
+          <p class="hero-eyebrow">Servicio 02 · Diseño Web</p>
+          <h1>Tu restaurante merece una web que <em>impresione.</em></h1>
+          <p class="hero-subtitle">Diseñamos y lanzamos webs profesionales para restaurantes en días, no en meses. Rápidas, bonitas y optimizadas para que tus clientes reserven desde el primer click.</p>
+          <div class="hero-cta">
+            <a href="contacto.html" class="btn-blue">Quiero mi web ahora</a>
+            <a href="#portfolio" class="btn-ghost">Ver ejemplos</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <div class="hero-stat-num">+<em>40</em>%</div>
+              <div class="hero-stat-lbl">Más reservas online</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num"><em>72</em>h</div>
+              <div class="hero-stat-lbl">Lista en 72 horas</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-num"><em>∞</em></div>
+              <div class="hero-stat-lbl">Cambios ilimitados</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">+<span>40</span>%</div>
-          <div class="hero-stat-lbl">Más reservas online</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num"><span>72</span>h</div>
-          <div class="hero-stat-lbl">Lista en 72 horas</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num"><span>∞</span></div>
-          <div class="hero-stat-lbl">Cambios ilimitados</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ─── PORTFOLIO ─── -->
-  <section class="section" id="portfolio">
-    <div class="section-inner">
-      <div class="fade-in">
-        <span class="section-label">Portfolio</span>
-        <h2 class="section-heading">Webs que hemos <span class="accent">construido</span></h2>
-        <p class="section-sub">Cada restaurante es distinto. Cada web también. Aquí tienes algunos de nuestros últimos proyectos.</p>
+    <!-- ─── PORTFOLIO ─── -->
+    <section class="section portfolio-section" id="portfolio">
+      <div class="container">
+        <div class="fade-in">
+          <p class="section-label">Portfolio</p>
+          <h2 class="section-heading">Webs que hemos <em>construido</em></h2>
+          <p class="section-sub">Cada restaurante es distinto. Cada web también. Aquí tienes algunos de nuestros últimos proyectos.</p>
+        </div>
+        <div class="portfolio-grid">
+          <div class="portfolio-card fade-in">
+            <div class="portfolio-browser">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-bar"></div>
+            </div>
+            <div class="portfolio-thumb">
+              <div class="portfolio-thumb-letter">FB</div>
+              <div class="portfolio-thumb-line"></div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-name">Flipp Burgers</div>
+              <div class="portfolio-type">Hamburguesas · Barcelona</div>
+            </div>
+          </div>
+          <div class="portfolio-card fade-in">
+            <div class="portfolio-browser">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-bar"></div>
+            </div>
+            <div class="portfolio-thumb">
+              <div class="portfolio-thumb-letter">CA</div>
+              <div class="portfolio-thumb-line"></div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-name">Caliente</div>
+              <div class="portfolio-type">Tapas · Madrid</div>
+            </div>
+          </div>
+          <div class="portfolio-card fade-in">
+            <div class="portfolio-browser">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-bar"></div>
+            </div>
+            <div class="portfolio-thumb">
+              <div class="portfolio-thumb-letter">SS</div>
+              <div class="portfolio-thumb-line"></div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-name">Saya Sushi</div>
+              <div class="portfolio-type">Japonés · Valencia</div>
+            </div>
+          </div>
+          <div class="portfolio-card fade-in">
+            <div class="portfolio-browser">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-bar"></div>
+            </div>
+            <div class="portfolio-thumb">
+              <div class="portfolio-thumb-letter">KD</div>
+              <div class="portfolio-thumb-line"></div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-name">Kebab Dudes</div>
+              <div class="portfolio-type">Kebab · Sevilla</div>
+            </div>
+          </div>
+          <div class="portfolio-card fade-in">
+            <div class="portfolio-browser">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-bar"></div>
+            </div>
+            <div class="portfolio-thumb">
+              <div class="portfolio-thumb-letter">AL</div>
+              <div class="portfolio-thumb-line"></div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-name">ALOY</div>
+              <div class="portfolio-type">Fusión · Bilbao</div>
+            </div>
+          </div>
+          <div class="portfolio-card fade-in">
+            <div class="portfolio-browser">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-bar"></div>
+            </div>
+            <div class="portfolio-thumb">
+              <div class="portfolio-thumb-letter">DB</div>
+              <div class="portfolio-thumb-line"></div>
+            </div>
+            <div class="portfolio-info">
+              <div class="portfolio-name">Dripp'n Burgers</div>
+              <div class="portfolio-type">Burgers · Málaga</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="portfolio-grid">
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-browser">
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-bar"></div>
-          </div>
-          <div class="portfolio-thumb">
-            <div class="portfolio-thumb-letter">FB</div>
-            <div class="portfolio-thumb-line"></div>
-          </div>
-          <div class="portfolio-info">
-            <div class="portfolio-name">Flipp Burgers</div>
-            <div class="portfolio-type">Hamburguesas · Barcelona</div>
-          </div>
-        </div>
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-browser">
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-bar"></div>
-          </div>
-          <div class="portfolio-thumb">
-            <div class="portfolio-thumb-letter">CA</div>
-            <div class="portfolio-thumb-line"></div>
-          </div>
-          <div class="portfolio-info">
-            <div class="portfolio-name">Caliente</div>
-            <div class="portfolio-type">Tapas · Madrid</div>
-          </div>
-        </div>
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-browser">
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-bar"></div>
-          </div>
-          <div class="portfolio-thumb">
-            <div class="portfolio-thumb-letter">SS</div>
-            <div class="portfolio-thumb-line"></div>
-          </div>
-          <div class="portfolio-info">
-            <div class="portfolio-name">Saya Sushi</div>
-            <div class="portfolio-type">Japonés · Valencia</div>
-          </div>
-        </div>
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-browser">
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-bar"></div>
-          </div>
-          <div class="portfolio-thumb">
-            <div class="portfolio-thumb-letter">KD</div>
-            <div class="portfolio-thumb-line"></div>
-          </div>
-          <div class="portfolio-info">
-            <div class="portfolio-name">Kebab Dudes</div>
-            <div class="portfolio-type">Kebab · Sevilla</div>
-          </div>
-        </div>
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-browser">
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-bar"></div>
-          </div>
-          <div class="portfolio-thumb">
-            <div class="portfolio-thumb-letter">AL</div>
-            <div class="portfolio-thumb-line"></div>
-          </div>
-          <div class="portfolio-info">
-            <div class="portfolio-name">ALOY</div>
-            <div class="portfolio-type">Fusión · Bilbao</div>
-          </div>
-        </div>
-        <div class="portfolio-card fade-in">
-          <div class="portfolio-browser">
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-dot"></div>
-            <div class="browser-bar"></div>
-          </div>
-          <div class="portfolio-thumb">
-            <div class="portfolio-thumb-letter">DB</div>
-            <div class="portfolio-thumb-line"></div>
-          </div>
-          <div class="portfolio-info">
-            <div class="portfolio-name">Dripp'n Burgers</div>
-            <div class="portfolio-type">Burgers · Málaga</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ─── FEATURES ─── -->
-  <section class="section" style="background: rgba(255,255,255,0.015);">
-    <div class="section-inner">
-      <div class="fade-in">
-        <span class="section-label">Lo que incluye</span>
-        <h2 class="section-heading">Todo lo que necesita tu <span class="accent">restaurante</span></h2>
-        <p class="section-sub">Sin complicaciones, sin sorpresas. Una web completa pensada específicamente para el sector de la restauración.</p>
-      </div>
-      <div class="features-grid">
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    <!-- ─── FEATURES ─── -->
+    <section class="section features-section">
+      <div class="container">
+        <div class="fade-in">
+          <p class="section-label">Lo que incluye</p>
+          <h2 class="section-heading">Todo lo que necesita tu <em>restaurante</em></h2>
+          <p class="section-sub">Sin complicaciones, sin sorpresas. Una web completa pensada específicamente para el sector de la restauración.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Diseño intuitivo</h3>
+            <p>Menú digital, galería de fotos y sistema de reservas integrado. Todo lo que tus clientes necesitan encontrar, accesible en segundos.</p>
           </div>
-          <h3>Diseño intuitivo</h3>
-          <p>Menú digital, galería de fotos y sistema de reservas integrado. Todo lo que tus clientes necesitan encontrar, accesible en segundos.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+            </div>
+            <h3>Adaptada a móvil</h3>
+            <p>El 80% de las búsquedas de restaurantes se hacen desde el móvil. Tu web se verá perfecta en cualquier dispositivo.</p>
           </div>
-          <h3>Adaptada a móvil</h3>
-          <p>El 80% de las búsquedas de restaurantes se hacen desde el móvil. Tu web se verá perfecta en cualquier dispositivo.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </div>
+            <h3>Actualizaciones fáciles</h3>
+            <p>Cambia el menú, añade una nueva carta de temporada o actualiza tus horarios. Nosotros nos encargamos de todo, sin costes extra.</p>
           </div>
-          <h3>Actualizaciones fáciles</h3>
-          <p>Cambia el menú, añade una nueva carta de temporada o actualiza tus horarios. Nosotros nos encargamos de todo, sin costes extra.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+            <h3>SEO optimizada</h3>
+            <p>Tu restaurante aparece cuando alguien busca en Google. Estructura técnica, velocidad de carga y metadatos optimizados desde el primer día.</p>
           </div>
-          <h3>SEO optimizada</h3>
-          <p>Tu restaurante aparece cuando alguien busca en Google. Estructura técnica, velocidad de carga y metadatos optimizados desde el primer día.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Soporte rápido</h3>
+            <p>¿Algo no funciona? Respondemos en menos de 24 horas. No dejaremos que tu web esté caída ni un día sin solución.</p>
           </div>
-          <h3>Soporte rápido</h3>
-          <p>¿Algo no funciona? Respondemos en menos de 24 horas. No dejaremos que tu web esté caída ni un día sin solución.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="feature-card fade-in">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Cambios ilimitados</h3>
+            <p>No pagas por cada ajuste. Mientras seas cliente, los cambios están incluidos. Tu web evolucionará con tu negocio.</p>
           </div>
-          <h3>Cambios ilimitados</h3>
-          <p>No pagas por cada ajuste. Mientras seas cliente, los cambios están incluidos. Tu web evolucionará con tu negocio.</p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ─── PRICING ─── -->
-  <section class="section">
-    <div class="section-inner">
-      <div style="text-align:center;" class="fade-in">
-        <span class="section-label" style="justify-content:center;">Precio</span>
-        <h2 class="section-heading">La web que tus clientes esperan</h2>
-        <p class="section-sub" style="margin:0 auto;">Todo incluido — diseño, hosting, dominio y actualizaciones. Sin sorpresas, sin pagos extra.</p>
+    <!-- ─── PRICING ─── -->
+    <section class="section pricing-section">
+      <div class="container">
+        <div style="text-align:center;" class="fade-in">
+          <p class="section-label" style="justify-content:center;">Precio</p>
+          <h2 class="section-heading">La web que tus clientes esperan</h2>
+          <p class="section-sub" style="margin:0 auto;">Todo incluido — diseño, hosting, dominio y actualizaciones. Sin sorpresas, sin pagos extra.</p>
+        </div>
+        <div class="pricing-wrap fade-in">
+
+          <!-- Básico -->
+          <div class="pricing-card">
+            <div class="pricing-badge">Básico</div>
+            <div class="pricing-price"><sup>€</sup>49<span>/mes</span></div>
+            <p class="pricing-desc">Web todo-en-uno optimizada. Todo lo que tu restaurante necesita en una sola página.</p>
+            <ul class="pricing-list">
+              <li>Dominio y hosting incluidos</li>
+              <li>Carta digital integrada</li>
+              <li>Formulario de contacto o reservas</li>
+              <li>Google My Business optimizado</li>
+              <li>SEO básico</li>
+            </ul>
+            <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
+          </div>
+
+          <!-- Estándar -->
+          <div class="pricing-card pricing-featured">
+            <span class="pricing-pop">Recomendado</span>
+            <div class="pricing-badge">Estándar</div>
+            <div class="pricing-price"><sup>€</sup>100<span>/mes</span></div>
+            <p class="pricing-desc">Web completa multipágina para restaurantes que quieren destacar y atraer más clientes.</p>
+            <ul class="pricing-list">
+              <li>Todo lo del plan Básico</li>
+              <li>Diseño multipágina personalizado</li>
+              <li>SEO avanzado</li>
+              <li>Integración con plataformas de reservas</li>
+              <li>Soporte prioritario</li>
+            </ul>
+            <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
+          </div>
+
+          <!-- Premium -->
+          <div class="pricing-card">
+            <div class="pricing-badge">Premium</div>
+            <div class="pricing-price"><sup>€</sup>149<span>/mes</span></div>
+            <p class="pricing-desc">Web de alto impacto con diseño avanzado, 3D y todo lo que tu restaurante necesita para sobresalir.</p>
+            <ul class="pricing-list">
+              <li>Todo lo del plan Estándar</li>
+              <li>Modelado 3D de platos o espacio</li>
+              <li>Animaciones y efectos visuales avanzados</li>
+              <li>Informe mensual de visitas y rendimiento</li>
+            </ul>
+            <a href="contacto.html" class="btn-blue pricing-cta">Hablar con nosotros</a>
+          </div>
+
+        </div>
+        <p class="pricing-note">Todos los planes con permanencia de 2 años. · Las secciones de galería y carta digital se entregan listas para tu contenido — si necesitas fotos profesionales, combínalas con nuestro <a href="fotografia-menu.html">servicio de fotografía</a>.</p>
       </div>
-      <div class="pricing-wrap fade-in">
+    </section>
 
-        <!-- Básico -->
-        <div class="pricing-card">
-          <div class="pricing-badge">Básico</div>
-          <div class="pricing-price"><sup>€</sup>49<span>/mes</span></div>
-          <p class="pricing-desc">Web todo-en-uno optimizada. Todo lo que tu restaurante necesita en una sola página.</p>
-          <ul class="pricing-list">
-            <li>Dominio y hosting incluidos</li>
-            <li>Carta digital integrada</li>
-            <li>Formulario de contacto o reservas</li>
-            <li>Google My Business optimizado</li>
-            <li>SEO básico</li>
-          </ul>
-          <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
+    <!-- ─── STEPS ─── -->
+    <section class="section steps-section">
+      <div class="container">
+        <div style="text-align:center;" class="fade-in">
+          <p class="section-label" style="justify-content:center;">El proceso</p>
+          <h2 class="section-heading">Lanzamos tu web en <em>3 pasos</em></h2>
+          <p class="section-sub" style="margin:0 auto;">Sin reuniones interminables, sin formularios kilométricos. Vamos al grano.</p>
         </div>
-
-        <!-- Estándar -->
-        <div class="pricing-card pricing-featured">
-          <span class="pricing-pop">Recomendado</span>
-          <div class="pricing-badge">Estándar</div>
-          <div class="pricing-price"><sup>€</sup>100<span>/mes</span></div>
-          <p class="pricing-desc">Web completa multipágina para restaurantes que quieren destacar y atraer más clientes.</p>
-          <ul class="pricing-list">
-            <li>Todo lo del plan Básico</li>
-            <li>Diseño multipágina personalizado</li>
-            <li>SEO avanzado</li>
-            <li>Integración con plataformas de reservas</li>
-            <li>Soporte prioritario</li>
-          </ul>
-          <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
-        </div>
-
-        <!-- Premium -->
-        <div class="pricing-card">
-          <div class="pricing-badge">Premium</div>
-          <div class="pricing-price"><sup>€</sup>149<span>/mes</span></div>
-          <p class="pricing-desc">Web de alto impacto con diseño avanzado, 3D y todo lo que tu restaurante necesita para sobresalir.</p>
-          <ul class="pricing-list">
-            <li>Todo lo del plan Estándar</li>
-            <li>Modelado 3D de platos o espacio</li>
-            <li>Animaciones y efectos visuales avanzados</li>
-            <li>Informe mensual de visitas y rendimiento</li>
-          </ul>
-          <a href="contacto.html" class="btn-blue pricing-cta">Hablar con nosotros</a>
-        </div>
-
-      </div>
-      <p style="text-align:center; margin-top:24px; font-size:0.8rem; color:var(--text-muted);">Todos los planes con permanencia de 2 años. · Las secciones de galería y carta digital se entregan listas para tu contenido — si necesitas fotos profesionales, combínalas con nuestro <a href="fotografia-menu.html" style="color:var(--blue); text-decoration:none; font-weight:500;">servicio de fotografía</a>.</p>
-    </div>
-  </section>
-
-  <!-- ─── STEPS ─── -->
-  <section class="section" style="background: rgba(255,255,255,0.015);">
-    <div class="section-inner">
-      <div style="text-align:center;" class="fade-in">
-        <span class="section-label" style="justify-content:center;">El proceso</span>
-        <h2 class="section-heading">Lanzamos tu web en <span class="accent">3 pasos</span></h2>
-        <p class="section-sub" style="margin:0 auto;">Sin reuniones interminables, sin formularios kilométricos. Vamos al grano.</p>
-      </div>
-      <div class="steps-grid">
-        <div class="step-card fade-in">
-          <div class="step-num">1</div>
-          <h3>Contacto</h3>
-          <p>Nos cuentas qué necesita tu restaurante. En 24 horas te enviamos un borrador inicial con tu futura web.</p>
-        </div>
-        <div class="step-card fade-in">
-          <div class="step-num">2</div>
-          <h3>Diseño y desarrollo</h3>
-          <p>Diseñamos tu web con tus colores, fotos y menú. Tú apruebas, nosotros ajustamos. Sin límite de rondas.</p>
-        </div>
-        <div class="step-card fade-in">
-          <div class="step-num">3</div>
-          <h3>Lanzamiento</h3>
-          <p>Tu web está live en menos de 72 horas. Hosting, dominio y SSL configurados. Solo tienes que compartirla.</p>
+        <div class="steps-grid">
+          <div class="step-card fade-in">
+            <div class="step-num">1</div>
+            <h3>Contacto</h3>
+            <p>Nos cuentas qué necesita tu restaurante. En 24 horas te enviamos un borrador inicial con tu futura web.</p>
+          </div>
+          <div class="step-card fade-in">
+            <div class="step-num">2</div>
+            <h3>Diseño y desarrollo</h3>
+            <p>Diseñamos tu web con tus colores, fotos y menú. Tú apruebas, nosotros ajustamos. Sin límite de rondas.</p>
+          </div>
+          <div class="step-card fade-in">
+            <div class="step-num">3</div>
+            <h3>Lanzamiento</h3>
+            <p>Tu web está live en menos de 72 horas. Hosting, dominio y SSL configurados. Solo tienes que compartirla.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ─── FINAL CTA ─── -->
-  <section class="cta-section">
-    <div class="cta-inner">
-      <div class="cta-glow"></div>
-      <h2>¿Listo para destacar <span class="accent">en Google?</span></h2>
-      <p>Más de 30 restaurantes ya confían en Visuanza para su presencia digital. Únete tú también.</p>
-      <div class="cta-btns">
-        <a href="contacto.html" class="btn-blue">Quiero mi web</a>
-        <a href="servicios.html" class="btn-ghost">Ver todos los servicios</a>
+    <!-- ─── CTA ─── -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-inner fade-in">
+          <h2>¿Listo para destacar <em>en Google?</em></h2>
+          <p class="cta-subtitle">Más de 30 restaurantes ya confían en Visuanza para su presencia digital. Únete tú también.</p>
+          <div class="cta-buttons">
+            <a href="contacto.html" class="btn-cta-fill">Quiero mi web</a>
+            <a href="servicios.html" class="btn-cta-outline">Ver todos los servicios</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   </main>
 
-    <!-- ─── FOOTER ─── -->
-    <footer>
+  <!-- ─── FOOTER ─── -->
+  <footer>
     <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-          <span>Visuanza</span>
-        </a>
-              <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
-</div>
+      <div class="footer-grid">
 
-      <div class="footer-col">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="redes-sociales.html">Redes Sociales</a></li>
-          <li><a href="diseno-web.html">Diseño Web</a></li>
-          <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
-        </ul>
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">
+            <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
+            <span>Visuanza</span>
+          </a>
+          <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <ul>
+            <li><a href="redes-sociales.html">Redes Sociales</a></li>
+            <li><a href="diseno-web.html">Diseño Web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
+            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegar</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#quienes">Quiénes somos</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Redes</h4>
+          <div class="footer-social-icons">
+            <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+        </div>
+
       </div>
 
-      <div class="footer-col">
-        <h4>Navegar</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="index.html#quienes">Quiénes somos</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Redes</h4>
-        <div class="footer-social-icons">
-          <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-          <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg></a>
-          <a href="#" class="footer-social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="#" class="footer-social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <div class="footer-bottom">
+        <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
+        <div class="footer-legal">
+          <a href="politica-privacidad.html">Política de privacidad</a>
         </div>
       </div>
-
-    </div>
-
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
-      <div class="footer-legal">
-        <a href="politica-privacidad.html">Política de privacidad</a>
-      </div>
-    </div>
     </div><!-- /footer-inner -->
   </footer>
 
   <script>
-    // Fade-in on scroll
-    var fadeEls = document.querySelectorAll('.fade-in');
-    var observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    // ─── SCROLL FADE IN ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
-    fadeEls.forEach(function(el) { observer.observe(el); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Fallback: ensure nothing stays permanently hidden
+    setTimeout(() => {
+      document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 300);
+
     // ─── MOBILE HAMBURGER MENU ───
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobile-menu');
-    function openMenu() { hamburger.classList.add('open'); mobileMenu.classList.add('open'); hamburger.setAttribute('aria-expanded','true'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-    function closeMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded','false'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    hamburger.addEventListener('click', () => mobileMenu.classList.contains('open') ? closeMenu() : openMenu());
-    document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
 
+    function openMenu() {
+      hamburger.classList.add('open');
+      mobileMenu.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('open')) closeMenu();
+      else openMenu();
+    });
+
+    document.querySelectorAll('.mobile-menu-link').forEach(l => l.addEventListener('click', closeMenu));
   </script>
 </body>
 </html>
