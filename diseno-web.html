@@ -73,7 +73,7 @@
     .section-label {
       display: inline-flex;
       align-items: center;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -150,7 +150,7 @@
     .nav-links a {
       text-decoration: none;
       color: #1A1A1A;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       font-weight: 500;
       transition: color 0.2s, background 0.2s;
       display: flex;
@@ -162,7 +162,7 @@
     .nav-links a:hover { color: var(--blue); background: rgba(192,139,92,0.06); }
     .nav-links a.active { color: rgba(15,23,42,0.95); background: rgba(0,0,0,0.06); }
     .nav-links a .chevron {
-      font-size: 0.95rem;
+      font-size: 0.85rem;
       opacity: 0.5;
       transition: transform 0.2s ease;
     }
@@ -246,8 +246,8 @@
     }
     .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
     .ndi-text { flex: 1; }
-    .ndi-title { display: block; font-size: 0.95rem; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; letter-spacing: -0.01em; }
-    .ndi-desc { display: block; font-size: 0.95rem; color: #2A2420; line-height: 1.4; }
+    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: #1A1A1A; margin-bottom: 2px; letter-spacing: -0.01em; }
+    .ndi-desc { display: block; font-size: 0.75rem; color: #2A2420; line-height: 1.4; }
 
     @media (max-width: 900px) { .nav-dropdown { display: none; } }
 
@@ -405,7 +405,7 @@
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      font-size: 0.95rem;
+      font-size: 0.82rem;
       font-weight: 600;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -504,7 +504,7 @@
     }
     .hero-stat-num em { font-style: normal; color: var(--blue); }
     .hero-stat-lbl {
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       color: var(--text-muted);
       margin-top: 6px;
     }
@@ -639,9 +639,9 @@
 
     .pricing-wrap {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 1000px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 750px;
       margin: 56px auto 0;
     }
     @media (max-width: 860px) { .pricing-wrap { grid-template-columns: 1fr; max-width: 440px; } }
@@ -779,9 +779,29 @@
       box-shadow: none;
       transform: none;
     }
+    .addon-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: auto;
+      margin-bottom: 20px;
+    }
+    .addon-banner strong { color: var(--text); }
+    .addon-icon { flex-shrink: 0; color: var(--blue); margin-top: 1px; }
+
+    .pricing-permanencia {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
     .pricing-note {
       text-align: center;
-      margin-top: 24px;
+      margin-top: 8px;
       font-size: 0.95rem;
       color: var(--text-muted);
     }
@@ -960,7 +980,7 @@
     .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     .footer-desc { font-size: 0.95rem; line-height: 1.7; max-width: 240px; }
     .footer-col h4 {
-      font-size: 0.95rem;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -979,7 +999,7 @@
       text-decoration-thickness: 1px;
       text-decoration-color: rgba(255,255,255,0.2);
       color: rgba(255,255,255,0.6);
-      font-size: 0.95rem;
+      font-size: 0.82rem;
       transition: color 0.2s, text-decoration-color 0.2s;
     }
     .footer-col ul li a:hover { color: rgba(255,255,255,0.9); text-decoration-color: rgba(255,255,255,0.6); }
@@ -1007,7 +1027,7 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .footer-copy { font-size: 0.95rem; color: rgba(255,255,255,0.45); }
+    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
     .footer-copy a {
       color: rgba(255,255,255,0.6);
       text-decoration: underline;
@@ -1019,7 +1039,7 @@
     .footer-copy a:hover { color: rgba(255,255,255,0.8); text-decoration-color: rgba(255,255,255,0.6); }
     .footer-legal { display: flex; gap: 20px; }
     .footer-legal a {
-      font-size: 0.95rem;
+      font-size: 0.75rem;
       color: rgba(255,255,255,0.45);
       text-decoration: underline;
       text-underline-offset: 3px;
@@ -1330,89 +1350,60 @@
         <div style="text-align:center;" class="fade-in">
           <p class="section-label" style="justify-content:center;">Precio</p>
           <h2 class="section-heading">La web que tus clientes esperan</h2>
-          <p class="section-sub" style="margin:0 auto;">Todo incluido — diseño, hosting, dominio y actualizaciones. Sin sorpresas, sin pagos extra.</p>
+          <p class="section-sub" style="margin:0 auto;">Todo incluido — diseño, hosting, dominio, SEO y actualizaciones.</p>
         </div>
         <div class="pricing-wrap fade-in">
 
-          <!-- Básico -->
+          <!-- Esencial -->
           <div class="pricing-card">
-            <div class="pricing-badge">Básico</div>
+            <div class="pricing-badge">Esencial</div>
             <div class="pricing-price"><sup>€</sup>49<span>/mes</span></div>
-            <p class="pricing-desc">Web todo-en-uno optimizada. Todo lo que tu restaurante necesita en una sola página.</p>
+            <p class="pricing-desc">Tu restaurante online con todo lo necesario para que te encuentren</p>
             <ul class="pricing-list">
-              <li>Dominio y hosting incluidos</li>
-              <li>Carta digital integrada</li>
-              <li>Formulario de contacto o reservas</li>
-              <li>Google My Business optimizado</li>
-              <li>SEO básico</li>
+              <li>Página web profesional</li>
+              <li>Adaptada a móvil</li>
+              <li>Menú digital</li>
+              <li>Formulario de contacto</li>
             </ul>
-            <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
+            <div class="addon-banner">
+              <span class="addon-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </span>
+              <span><strong>Add-on: Modelado 3D</strong> — platos, espacio o fachada en 3D interactivo integrado en tu web.</span>
+            </div>
+            <a href="contacto.html" class="btn-blue pricing-cta">Empezar con Esencial</a>
           </div>
 
-          <!-- Estándar -->
+          <!-- Profesional -->
           <div class="pricing-card-wrap">
           <span class="pricing-pop">Recomendado</span>
           <div class="pricing-card pricing-featured">
-            <div class="pricing-badge">Estándar</div>
+            <div class="pricing-badge">Profesional</div>
             <div class="pricing-price"><sup>€</sup>100<span>/mes</span></div>
-            <p class="pricing-desc">Web completa multipágina para restaurantes que quieren destacar y atraer más clientes.</p>
+            <p class="pricing-desc">Tu web trabajando para ti — atrayendo clientes y generando reservas</p>
             <ul class="pricing-list">
-              <li>Todo lo del plan Básico</li>
               <li>Diseño multipágina personalizado</li>
-              <li>SEO avanzado</li>
-              <li>Integración con plataformas de reservas</li>
-              <li>Soporte prioritario</li>
+              <li>Menú digital interactivo</li>
+              <li>Sistema de reservas integrado</li>
+              <li>Galería de fotos profesional</li>
+              <li>Análisis mensual de rendimiento</li>
             </ul>
-            <a href="contacto.html" class="btn-blue pricing-cta">Empezar ahora</a>
+            <div class="addon-banner">
+              <span class="addon-icon">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+              </span>
+              <span><strong>Add-on: Modelado 3D</strong> — platos, espacio o fachada en 3D interactivo integrado en tu web.</span>
+            </div>
+            <a href="contacto.html" class="btn-blue pricing-cta">Empezar con Profesional</a>
           </div>
           </div><!-- /pricing-card-wrap -->
 
-          <!-- Premium -->
-          <div class="pricing-card">
-            <div class="pricing-badge">Premium</div>
-            <div class="pricing-price"><sup>€</sup>149<span>/mes</span></div>
-            <p class="pricing-desc">Web de alto impacto con diseño avanzado, 3D y todo lo que tu restaurante necesita para sobresalir.</p>
-            <ul class="pricing-list">
-              <li>Todo lo del plan Estándar</li>
-              <li>Modelado 3D de platos o espacio</li>
-              <li>Animaciones y efectos visuales avanzados</li>
-              <li>Informe mensual de visitas y rendimiento</li>
-            </ul>
-            <a href="contacto.html" class="btn-blue pricing-cta">Hablar con nosotros</a>
-          </div>
-
         </div>
-        <p class="pricing-note">Todos los planes con permanencia de 2 años. · Las secciones de galería y carta digital se entregan listas para tu contenido — si necesitas fotos profesionales, combínalas con nuestro <a href="fotografia-menu.html">servicio de fotografía</a>.</p>
+        <p class="pricing-permanencia">Todos los planes incluyen permanencia de 2 años.</p>
+        <p class="pricing-note">Las secciones de galería y carta digital se entregan listas para tu contenido — si necesitas fotos profesionales, combínalas con nuestro <a href="fotografia-menu.html">servicio de fotografía</a>.</p>
       </div>
     </section>
 
-    <!-- ─── STEPS ─── -->
-    <section class="section steps-section">
-      <div class="container">
-        <div style="text-align:center;" class="fade-in">
-          <p class="section-label" style="justify-content:center;">El proceso</p>
-          <h2 class="section-heading">Lanzamos tu web en <em>3 pasos</em></h2>
-          <p class="section-sub" style="margin:0 auto;">Sin reuniones interminables, sin formularios kilométricos. Vamos al grano.</p>
-        </div>
-        <div class="steps-grid">
-          <div class="step-card fade-in">
-            <div class="step-num">1</div>
-            <h3>Contacto</h3>
-            <p>Nos cuentas qué necesita tu restaurante. En 24 horas te enviamos un borrador inicial con tu futura web.</p>
-          </div>
-          <div class="step-card fade-in">
-            <div class="step-num">2</div>
-            <h3>Diseño y desarrollo</h3>
-            <p>Diseñamos tu web con tus colores, fotos y menú. Tú apruebas, nosotros ajustamos. Sin límite de rondas.</p>
-          </div>
-          <div class="step-card fade-in">
-            <div class="step-num">3</div>
-            <h3>Lanzamiento</h3>
-            <p>Tu web está live en menos de 72 horas. Hosting, dominio y SSL configurados. Solo tienes que compartirla.</p>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ─── CTA ─── -->
     <section class="cta-section">
