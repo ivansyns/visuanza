@@ -447,9 +447,11 @@
     }
 
     .hero-n1-badge {
-      display: none;
-      flex-direction: column;
-      margin-bottom: 36px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
     }
     .hero-n1-badge .n1-number {
       font-size: 1rem;
@@ -2441,7 +2443,7 @@
       .hero-cta { flex-direction: column; }
       .hero-cta .btn-primary, .hero-cta .btn-ghost { width: 100%; justify-content: center; }
       .hero-inner { padding-left: 24px; padding-right: 24px; }
-      .hero-n1-badge { display: flex; }
+      .hero-n1-badge { flex-direction: column; gap: 4px; }
 
       .section-header h2,
       .platforms-top-left h2,
@@ -2535,10 +2537,10 @@
         transform-origin: top center;
         margin-bottom: -360px;
       }
-      .sp-fb { transform: rotate(-12deg); }
-      .sp-gmb { transform: rotate(-4deg); }
-      .sp-chat { transform: rotate(4deg); }
-      .sp-stats { transform: rotate(12deg); }
+      .sp-fb { transform: rotate(-12deg); width: 200px; margin-left: -420px; }
+      .sp-gmb { transform: rotate(-4deg); width: 210px; margin-left: -215px; }
+      .sp-chat { transform: rotate(4deg); width: 210px; margin-left: 5px; }
+      .sp-stats { transform: rotate(12deg); width: 200px; margin-left: 220px; }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
       .panel-right { display: none; }
