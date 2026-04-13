@@ -2436,7 +2436,7 @@
 
       body { font-size: 17px; }
 
-      .hero h1 { font-size: clamp(2.5rem, 10vw, 3.2rem); text-align: left; }
+      .hero h1 { font-size: clamp(2.3rem, 9.5vw, 3.2rem); text-align: left; }
       .hero-content > p { text-align: left; }
       .hero-cta { flex-direction: column; }
       .hero-cta .btn-primary, .hero-cta .btn-ghost { width: 100%; justify-content: center; }
@@ -2533,8 +2533,7 @@
         display: block;
         transform: scale(0.55);
         transform-origin: top center;
-        margin-bottom: -240px;
-        clip-path: inset(0 -100vw 45% -100vw);
+        margin-bottom: -310px;
       }
       .platforms-top { grid-template-columns: 1fr; gap: 24px; }
       .platforms-panel-inner { grid-template-columns: 1fr; }
@@ -2542,8 +2541,10 @@
 
       /* Fix panel negative margin */
       .platforms-panel {
-        margin-top: -20px !important;
+        margin-top: -40px !important;
         margin-bottom: 0 !important;
+        position: relative;
+        z-index: 10;
       }
 
       .platforms { padding: 60px 0 0; }
