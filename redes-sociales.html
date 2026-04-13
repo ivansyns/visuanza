@@ -559,14 +559,56 @@
       flex-direction: column;
     }
     .pricing-card.featured {
-      border-color: rgba(192,139,92,0.45);
-      background: rgba(192,139,92,0.04);
-      box-shadow: 0 0 60px rgba(192,139,92,0.12), 0 4px 24px rgba(0,0,0,0.06);
+      border-color: rgba(197,163,90,0.45);
+      background: linear-gradient(175deg, rgba(212,175,55,0.04) 0%, rgba(197,163,90,0.02) 50%, rgba(255,255,255,0) 100%);
+      box-shadow: 0 0 60px rgba(197,163,90,0.14), 0 4px 24px rgba(0,0,0,0.06);
+      overflow: hidden;
     }
     .pricing-card.featured::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
+      background: linear-gradient(90deg, transparent, #C5A35A, transparent);
+    }
+    /* Shimmer sweep */
+    .pricing-card.featured::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(212,175,55,0.06) 45%,
+        rgba(212,175,55,0.10) 50%,
+        rgba(212,175,55,0.06) 55%,
+        transparent 60%
+      );
+      animation: shimmer 4s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 200%; }
+    }
+    .pricing-card.featured .plan-badge,
+    .pricing-card.featured .plan-price,
+    .pricing-card.featured .plan-name,
+    .pricing-card.featured .plan-cta-primary {
+      position: relative; z-index: 1;
+    }
+
+    .pricing-card.featured .plan-badge {
+      background: #C5A35A;
+    }
+    .pricing-card.featured .plan-price {
+      color: #B8963E;
+    }
+    .pricing-card.featured .plan-cta-primary {
+      background: #C5A35A;
+      box-shadow: 0 4px 20px rgba(197,163,90,0.35);
+    }
+    .pricing-card.featured .plan-cta-primary:hover {
+      background: #B8963E;
     }
 
     .plan-badge {
