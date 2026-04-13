@@ -767,6 +767,18 @@
       text-align: center;
       display: block;
     }
+    .pricing-card:not(.pricing-featured) .pricing-cta {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+    .pricing-card:not(.pricing-featured) .pricing-cta:hover {
+      background: var(--surface);
+      border-color: rgba(107,94,84,0.2);
+      box-shadow: none;
+      transform: none;
+    }
     .pricing-note {
       text-align: center;
       margin-top: 24px;
