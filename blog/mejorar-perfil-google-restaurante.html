@@ -26,6 +26,12 @@
   <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
   <title>Cómo mejorar el perfil Google de tu restaurante – Blog Visuanza</title>
   <meta name="description" content="Descubre cómo optimizar tu perfil Google de restaurante y atrae más clientes. Guía completa de Google My Business para hostelería." />
+  <meta property="og:title" content="Cómo mejorar el perfil Google de tu restaurante – Blog Visuanza">
+  <meta property="og:description" content="Descubre cómo optimizar tu perfil Google de restaurante y atrae más clientes. Guía completa de Google My Business para hostelería.">
+  <meta property="og:image" content="https://visuanza.es/assets/GoogleMaps.webp">
+  <meta property="og:url" content="https://visuanza.es/blog/mejorar-perfil-google-restaurante.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
@@ -33,8 +39,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue:       #4F7EFF;
-      --blue-dark:  #3a6be8;
+      --blue:       #C08B5C;
+      --blue-dark:  #A67744;
       --black:      #09090b;
       --dark:       #111118;
       --gray-dark:  #f8fafc;
@@ -88,7 +94,7 @@
     .nav-links li { margin-right: 33px; }
     .nav-links li:last-child { margin-right: 0; }
     .nav-links a { text-decoration: none; color: #0f172a; font-size: 0.85rem; font-weight: 500; transition: color 0.2s, background 0.2s; display: flex; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 999px; }
-    .nav-links a:hover { color: var(--blue); background: rgba(79,126,255,0.06); }
+    .nav-links a:hover { color: var(--blue); background: rgba(192,139,92,0.06); }
     .nav-links a .chevron { font-size: 0.65rem; opacity: 0.5; transition: transform 0.2s ease; }
 
     .nav-has-dropdown { position: relative; }
@@ -102,10 +108,10 @@
 
     .nav-dropdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
     .nav-dropdown-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 10px; text-decoration: none; color: #0f172a; transition: background 0.15s ease; }
-    .nav-dropdown-item:hover { background: rgba(79,126,255,0.06); color: var(--blue); }
+    .nav-dropdown-item:hover { background: rgba(192,139,92,0.06); color: var(--blue); }
     .nav-dropdown-item:hover .ndi-icon { background: var(--blue); }
     .nav-dropdown-item:hover .ndi-icon svg { color: white; }
-    .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(79,126,255,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
+    .ndi-icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 9px; background: rgba(192,139,92,0.14); display: flex; align-items: center; justify-content: center; transition: background 0.15s ease; margin-top: 1px; }
     .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
     .ndi-text { flex: 1; }
     .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; letter-spacing: -0.01em; }
@@ -114,8 +120,8 @@
     @media (max-width: 900px) { .nav-dropdown { display: none; } .nav-links, .nav-right { display: none !important; } }
 
     .nav-right { display: flex; align-items: center; gap: 1rem; }
-    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); }
-    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(79,126,255,0.5); }
+    .btn-primary { background: var(--blue); color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s, transform 0.1s, box-shadow 0.2s; text-decoration: none; display: inline-block; box-shadow: 0 4px 20px rgba(192,139,92,0.35); }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(192,139,92,0.5); }
 
     /* ─── HAMBURGER ─── */
     .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 36px; height: 36px; background: none; border: none; cursor: pointer; padding: 4px; border-radius: 8px; transition: background 0.2s; z-index: 300; pointer-events: auto; flex-shrink: 0; }
@@ -136,7 +142,7 @@
     .mobile-menu-links a { display: block; text-align: center; text-decoration: none; color: #0f172a; font-size: 1.35rem; font-weight: 600; font-family: 'Urbanist',sans-serif; letter-spacing: -0.02em; padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.07); transition: color 0.2s; }
     .mobile-menu-links a:hover { color: var(--blue); }
     .mobile-menu-bottom { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; max-width: 320px; }
-    .mobile-cta { width: 100%; text-align: center; background: var(--blue); color: #fff; border: none; padding: 15px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; display: block; box-shadow: 0 4px 20px rgba(79,126,255,0.35); transition: background 0.2s; cursor: pointer; }
+    .mobile-cta { width: 100%; text-align: center; background: var(--blue); color: #fff; border: none; padding: 15px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; text-decoration: none; display: block; box-shadow: 0 4px 20px rgba(192,139,92,0.35); transition: background 0.2s; cursor: pointer; }
     .mobile-cta:hover { background: var(--blue-dark); }
 
     @media (max-width: 768px) { .mobile-menu { display: flex; } }
@@ -274,7 +280,7 @@
 
     .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
     .footer-social-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.65); transition: background 0.2s, color 0.2s, border-color 0.2s; text-decoration: none; }
-    .footer-social-icon:hover { background: rgba(79,126,255,0.15); border-color: rgba(79,126,255,0.3); color: white; }
+    .footer-social-icon:hover { background: rgba(192,139,92,0.15); border-color: rgba(192,139,92,0.3); color: white; }
     .footer-social-icon svg { width: 15px; height: 15px; }
 
     /* ─── SCROLL FADE ─── */

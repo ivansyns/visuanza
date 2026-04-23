@@ -22,9 +22,9 @@
 
 ## Typography
 
-- **Primary font**: Inter (Google Fonts)
-- **Headings**: Inter, weight 700-800, tight letter spacing
-- **Body**: Inter, weight 400-500, relaxed line height 1.6
+- **Primary font**: Plus Jakarta Sans (Google Fonts)
+- **Headings**: Plus Jakarta Sans, weight 700-800, tight letter spacing
+- **Body**: Plus Jakarta Sans, weight 400-500, relaxed line height 1.6
 - **Accent text** (highlighted words): Cobalt blue `#2563EB`
 - **Font sizes**:
   - H1: clamp(2rem, 5vw, 3.5rem)
