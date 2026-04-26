@@ -2029,7 +2029,220 @@
     .stats-section .section-header h2 { color: var(--text); }
     .stats-section .section-header p { color: var(--text-muted); }
 
-    /* ─── TESTIMONIALS ─── */
+    /* ─── CLIENT CASES ─── */
+    .cases {
+      padding: 110px 0;
+      background: transparent;
+    }
+    .cases-sub {
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      max-width: 60ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cases-sub a { color: var(--blue); text-decoration: none; }
+    .cases-sub a:hover { text-decoration: underline; }
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+    @media (max-width: 960px) {
+      .cases-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .cases-grid { grid-template-columns: 1fr; }
+    }
+    .case-card {
+      display: flex;
+      flex-direction: column;
+      background: #FFFFFF;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(20, 20, 20, 0.04);
+      transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
+    }
+    .case-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(20, 20, 20, 0.10);
+      border-color: rgba(192, 139, 92, 0.35);
+    }
+    .case-img {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #E8E0D2 0%, #D9CFBE 100%);
+      width: 100%;
+      overflow: hidden;
+    }
+    /* Absolute positioning pulls the media out of flow so its intrinsic dimensions
+       don't push the .case-img height (especially with portrait video sources). */
+    .case-img .case-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .case-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: 24px 22px 22px;
+      gap: 10px;
+    }
+    .case-tag {
+      align-self: flex-start;
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: rgba(192, 139, 92, 0.12);
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+    .case-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 4px 0 2px;
+    }
+    .case-desc {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+      flex: 1;
+      margin-bottom: 8px;
+    }
+    .case-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-top: 16px;
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+    }
+    .case-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .case-stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--blue);
+      line-height: 1.05;
+    }
+    .case-stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+      letter-spacing: 0.01em;
+    }
+    /* Featured (hero) case — Falafelbaren: full-width row, image-left / text-right on desktop.
+       Both halves stretch to equal height; relative sizing scales with viewport. */
+    .case-card--featured {
+      grid-column: 1 / -1;
+      flex-direction: row;
+      align-items: stretch;
+      min-height: 0;
+    }
+    .case-card--featured .case-img {
+      flex: 0 0 50%;
+      align-self: stretch;
+      aspect-ratio: auto;
+      height: auto;
+      min-height: clamp(280px, 28vw, 460px);
+    }
+    .case-card--featured .case-body {
+      flex: 1;
+      padding: 40px 44px;
+      gap: 16px;
+      justify-content: center;
+    }
+    .case-card--featured .case-tag {
+      font-size: 0.74rem;
+      padding: 6px 14px;
+    }
+    .case-card--featured .case-title {
+      font-size: 2.4rem;
+      letter-spacing: -0.025em;
+      margin: 6px 0 4px;
+    }
+    .case-card--featured .case-desc {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 56ch;
+      margin-bottom: 14px;
+    }
+    .case-card--featured .case-stats {
+      gap: 28px;
+      padding-top: 22px;
+    }
+    .case-card--featured .case-stat-num {
+      font-size: 2.4rem;
+    }
+    .case-card--featured .case-stat-label {
+      font-size: 0.85rem;
+    }
+    /* Tablet + mobile: featured card stacks vertically like the others, kept slightly larger */
+    @media (max-width: 960px) {
+      .case-card--featured { flex-direction: column; }
+      .case-card--featured .case-img {
+        flex: none;
+        width: 100%;
+        aspect-ratio: auto;
+        height: clamp(180px, 38vw, 260px);
+        min-height: 0;
+      }
+      .case-card--featured .case-body { padding: 28px 24px 24px; }
+      .case-card--featured .case-title { font-size: 1.7rem; }
+      .case-card--featured .case-desc { font-size: 1rem; }
+      .case-card--featured .case-stat-num { font-size: 1.85rem; }
+      .case-card--featured .case-stat-label { font-size: 0.78rem; }
+    }
+    .cases-cta {
+      display: flex;
+      justify-content: center;
+      margin-top: 56px;
+    }
+    .cases-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 32px;
+      background: var(--blue);
+      color: #FFFFFF;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+      border-radius: 999px;
+      box-shadow: 0 8px 22px rgba(192, 139, 92, 0.32);
+      transition: background 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+    }
+    .cases-cta-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(192, 139, 92, 0.4);
+    }
+    .cases-cta-btn .cases-arrow {
+      transition: transform 220ms ease;
+    }
+    .cases-cta-btn:hover .cases-arrow { transform: translateX(4px); }
+
+    /* ─── TESTIMONIALS (legacy classes — old testimonials section removed) ─── */
     .testimonials {
       padding: 110px 0;
       background: transparent;
@@ -3517,53 +3730,114 @@
   <!-- ─── STATS ─── -->
 
   <!-- ─── TESTIMONIALS ─── -->
-  <section class="testimonials" id="quienes">
-    <div class="section-header fade-in">
-      <p class="section-label">Testimonios</p>
-      <h2>Lo que dicen<br /><span class="accent">nuestros clientes</span></h2>
-      <p class="section-sub" style="font-size:1rem;color:var(--text-muted);margin-top:0.5rem;">Reseñas verificadas de <a href="https://synsnumedia.se" target="_blank" style="color:var(--accent);text-decoration:none;">SynsNuMedia</a> · Suecia</p>
-    </div>
-    <div class="testimonials-grid fade-in">
-
-      <div class="testimonial-card">
-        <div class="testimonial-stat"><strong>280.000</strong> reproducciones <span class="stat-line2"><strong>7.000</strong> interacciones en 1 mes</span></div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Increíbles videos e imágenes. Los recomiendo mucho si necesitáis una página web o alguien que se encargue de vuestras redes sociales."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background:linear-gradient(135deg,#667eea,#764ba2);">GD</div>
-          <div>
-            <div class="author-name">George</div>
-            <div class="author-biz">Dripp´n Burgers</div>
-          </div>
-        </div>
+  <section class="cases" id="quienes">
+    <div class="container">
+      <div class="section-header fade-in">
+        <p class="section-label">Casos de éxito</p>
+        <h2>Resultados reales de <span class="accent">restaurantes reales.</span></h2>
+        <p class="cases-sub">Casos de nuestro grupo <a href="https://synsnumedia.se" target="_blank" rel="noopener">SynsNuMedia</a> — más de una década ayudando a restaurantes a crecer.</p>
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stat"><strong>~50%</strong> de aumento en caja diaria en 3 meses</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"¡Equipo fantástico! Desde el principio se ha notado una buena energía hasta el resultado final. Ideas creativas, alta calidad y trato excelente con el cliente. ¡Pondría 6 estrellas si fuera posible!"</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">GS</div>
-          <div>
-            <div class="author-name">Garo</div>
-            <div class="author-biz">Stuvsta Grillen</div>
+      <div class="cases-grid fade-in">
+
+        <article class="case-card case-card--featured">
+          <div class="case-img"><video class="case-media" src="https://assets.cdn.filesafe.space/1FYpgqYgXr6SzFnCzKew/media/685f252da8f9d370ede1ff6f.mp4" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+          <div class="case-body">
+            <span class="case-tag">Redes sociales</span>
+            <h3 class="case-title">Falafelbaren</h3>
+            <p class="case-desc">Nidal Kerch dirige Falafelbaren en Hornsgatan. De cero en TikTok a más de 1 millón de visualizaciones en 3,5 meses — cifras reales de Metricool, no estimaciones.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">10,17K</span><span class="case-stat-label">Seguidores totales (+41%)</span></div>
+              <div class="case-stat"><span class="case-stat-num">1M</span><span class="case-stat-label">Visualizaciones (+856%)</span></div>
+              <div class="case-stat"><span class="case-stat-num">39,6K</span><span class="case-stat-label">Interacciones (+3.760%)</span></div>
+              <div class="case-stat"><span class="case-stat-num">+3.481%</span><span class="case-stat-label">Crecimiento en TikTok</span></div>
+            </div>
           </div>
-        </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-img"><img class="case-media" src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=600&q=80" alt="" loading="lazy" /></div>
+          <div class="case-body">
+            <span class="case-tag">Diseño web + SEO</span>
+            <h3 class="case-title">Sushi Palace</h3>
+            <p class="case-desc">Nuevo sitio web + estrategia de SEO local. Ahora rankean nº1 en Google para "sushi Stockholm" y han triplicado su tráfico de reservas online.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">3×</span><span class="case-stat-label">Reservas online</span></div>
+              <div class="case-stat"><span class="case-stat-num">#1</span><span class="case-stat-label">Ranking en Google</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-img"><img class="case-media" src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80" alt="" loading="lazy" /></div>
+          <div class="case-body">
+            <span class="case-tag">Redes sociales</span>
+            <h3 class="case-title">Pizzeria Roma</h3>
+            <p class="case-desc">Estrategia de TikTok con vídeos semanales de cocina. Su vídeo de "pizza-pull" se hizo viral con 500.000 visualizaciones en 48 horas.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">500K</span><span class="case-stat-label">Visualizaciones</span></div>
+              <div class="case-stat"><span class="case-stat-num">+60%</span><span class="case-stat-label">Facturación total</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-img"><img class="case-media" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80" alt="" loading="lazy" /></div>
+          <div class="case-body">
+            <span class="case-tag">Paquete completo</span>
+            <h3 class="case-title">Café Linnéa</h3>
+            <p class="case-desc">Rebrand completo con nuevo sitio web, redes sociales y sesiones de fotos. De 200 a 5.000 seguidores en Instagram en 4 meses.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">25×</span><span class="case-stat-label">Crecimiento de seguidores</span></div>
+              <div class="case-stat"><span class="case-stat-num">+35%</span><span class="case-stat-label">Aumento de facturación</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-img"><img class="case-media" src="https://images.unsplash.com/photo-1543362906-acfc16c67564?w=600&q=80" alt="" loading="lazy" /></div>
+          <div class="case-body">
+            <span class="case-tag">Publicidad</span>
+            <h3 class="case-title">Green Bowl</h3>
+            <p class="case-desc">Campaña de Meta Ads dirigida a personas de 25-40 años concienciadas con la salud en Estocolmo. ×6 de retorno en inversión publicitaria durante el lanzamiento.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">6×</span><span class="case-stat-label">ROAS</span></div>
+              <div class="case-stat"><span class="case-stat-num">2.500+</span><span class="case-stat-label">Nuevos clientes</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-img"><img class="case-media" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80" alt="" loading="lazy" /></div>
+          <div class="case-body">
+            <span class="case-tag">Redes sociales</span>
+            <h3 class="case-title">Burger Brothers</h3>
+            <p class="case-desc">Estrategia de Instagram con contenido "detrás de cámaras" y colaboraciones con influencers. Ahora uno de los restaurantes más seguidos de Malmö.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">12K</span><span class="case-stat-label">Seguidores en IG</span></div>
+              <div class="case-stat"><span class="case-stat-num">+55%</span><span class="case-stat-label">Tráfico a mediodía</span></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="case-card">
+          <div class="case-img"><img class="case-media" src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600&q=80" alt="" loading="lazy" /></div>
+          <div class="case-body">
+            <span class="case-tag">Diseño web</span>
+            <h3 class="case-title">Istanbul Kebab</h3>
+            <p class="case-desc">Nuevo sitio web con carta digital y pedidos online. Los pedidos directos aumentaron un 200% y las colas en el local se redujeron.</p>
+            <div class="case-stats">
+              <div class="case-stat"><span class="case-stat-num">+200%</span><span class="case-stat-label">Pedidos online</span></div>
+              <div class="case-stat"><span class="case-stat-num">4,8★</span><span class="case-stat-label">Valoración Google</span></div>
+            </div>
+          </div>
+        </article>
+
       </div>
 
-      <div class="testimonial-card">
-        <div class="testimonial-stat"><strong>1.200</strong> pre-registros antes de la apertura</div>
-        <div class="testimonial-stars">★★★★★</div>
-        <p class="testimonial-text">"Además de ser increíblemente amables, son altamente profesionales y comprometidos. Presentan sus ideas con claridad y luego participan activamente en nuestra opinión. El resultado — tanto en video como en imágenes — es sencillamente excepcional."</p>
-        <div class="testimonial-author">
-          <div class="author-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">MB</div>
-          <div>
-            <div class="author-name">Mansour</div>
-            <div class="author-biz">Berra Burras Kebab</div>
-          </div>
-        </div>
+      <div class="cases-cta fade-in">
+        <a href="contacto.html" class="cases-cta-btn">¿Tu restaurante puede ser el siguiente? Hablemos <span class="cases-arrow">→</span></a>
       </div>
-
     </div>
   </section>
 
