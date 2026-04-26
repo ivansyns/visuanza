@@ -203,7 +203,7 @@ Container: 580×580px, position absolute, right: -8%, rotating at 120s
 - Desktop: JS conveyor belt arc (parabolic path, 14 logos, rAF animation)
   - Visuanza hub: 140×140px circle, background: #C08B5C, triple copper box-shadow
   - Logo tiles: 120×120px, border-radius: 3px, absolute positioned
-  - Text: "Elegido por más de 800 restaurantes", centered at top:260px
+  - Text: "Elegido por más de 90 restaurantes", centered at top:260px
 - Mobile (≤768px): JS horizontal strip with blur-focus effect
   - Visuanza hub: 80×80px circle, background: #C08B5C
   - Logo tiles: 80×80px, 3px radius, absolute positioned
