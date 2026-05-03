@@ -20,15 +20,15 @@
   <!-- End Google Consent Mode v2 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Diseño web profesional para restaurantes: webs rápidas, optimizadas para Google y listas en 72 horas. Incluye Google My Business, hosting y cambios ilimitados. Visuanza." />
-  <meta property="og:title" content="Diseño Web para Restaurantes – Visuanza">
-  <meta property="og:description" content="Diseño web profesional para restaurantes: webs rápidas, optimizadas para Google y listas en 72 horas. Incluye Google My Business, hosting y cambios ilimitados. Visuanza.">
-  <meta property="og:image" content="https://visuanza.es/assets/diseno-web-restaurante.webp">
-  <meta property="og:url" content="https://visuanza.es/diseno-web.html">
+  <meta name="description" content="Google Maps optimizado + campañas Meta y Google Ads para restaurantes. Más comensales locales, mejor visibilidad. Visuanza." />
+  <meta property="og:title" content="Google y publicidad para restaurantes — Visuanza">
+  <meta property="og:description" content="Google Maps optimizado + campañas Meta y Google Ads para restaurantes. Más comensales locales, mejor visibilidad. Visuanza.">
+  <meta property="og:image" content="https://visuanza.es/assets/og-image.jpg">
+  <meta property="og:url" content="https://visuanza.es/google-publicidad.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
-  <title>Diseño Web para Restaurantes – Visuanza</title>
-  <link rel="canonical" href="https://visuanza.es/diseno-web.html" />
+  <title>Google y publicidad para restaurantes — Visuanza</title>
+  <link rel="canonical" href="https://visuanza.es/google-publicidad.html" />
   <link rel="icon" type="image/png" href="assets/hash-mark.png" />
   <link rel="apple-touch-icon" href="assets/hash-mark.png" />
 
@@ -38,7 +38,7 @@
 
   <style>
     /* ============================================================
-       VISUANZA — v6 editorial system (subpage: Diseño Web)
+       VISUANZA — v6 editorial system (subpage: Google & Publicidad)
        ============================================================ */
     :root {
       --edit-lavender: #E8E1FF;
@@ -71,16 +71,6 @@
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --font-italic: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 
-      --fs-display: clamp(2.75rem, 9vw, 7.5rem);
-      --fs-h1: clamp(2.25rem, 6vw, 5rem);
-      --fs-h2: clamp(1.75rem, 3.8vw, 3.25rem);
-      --fs-h2-lg: clamp(2.25rem, 5vw, 4rem);
-      --fs-lead: clamp(1.0625rem, 1.35vw, 1.1875rem);
-
-      --tr-display: -0.05em;
-      --tr-h1: -0.045em;
-      --tr-h2: -0.04em;
-
       --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-card: 18px; --r-pill: 9999px;
 
       --shadow-sm: 0 2px 8px rgba(15,15,16,0.06);
@@ -97,7 +87,6 @@
       --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
       --ease-quart: cubic-bezier(0.22, 1, 0.36, 1);
       --dur: 260ms;
-      --dur-slow: 500ms;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -175,12 +164,7 @@
     .pill-btn--dark { background: var(--text); color: white; }
     .pill-btn--dark .pill-btn__arrow { background: white; color: var(--text); }
     .pill-btn--lav { background: var(--edit-lavender); color: var(--text); }
-
-    .hash-mark {
-      display: inline-block;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
+    .pill-btn--peach { background: var(--edit-peach); color: var(--text); }
 
     /* ============================================================
        NAV
@@ -213,7 +197,7 @@
     .nav__logo {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       font-weight: 700;
       letter-spacing: -0.04em;
       font-size: 1rem;
@@ -301,12 +285,12 @@
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      color: var(--edit-peach);
+      color: var(--edit-olive);
       margin-bottom: 1.5rem;
     }
     .sub-hero__eyebrow .hash-mark {
-      width: 0.9em;
-      height: 0.9em;
+      width: 1em;
+      height: 1em;
       object-fit: contain;
       flex-shrink: 0;
     }
@@ -316,7 +300,7 @@
       letter-spacing: -0.045em;
       line-height: 1;
       color: white;
-      max-width: 18ch;
+      max-width: 22ch;
       margin-bottom: 1.5rem;
     }
     .sub-hero__h1 em {
@@ -335,21 +319,21 @@
     .sub-hero__cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
     /* ============================================================
-       2 · FEATURES — pastel grid
+       2 · COMO FUNCIONA — feature cards
        ============================================================ */
-    .sec-features {
+    .sec-feat {
       background: var(--bg-soft);
       padding: clamp(80px, 11vw, 140px) 0;
       color: var(--text);
     }
-    .sec-features__inner {
+    .sec-feat__inner {
       max-width: var(--container-wide);
       margin-inline: auto;
       padding-inline: var(--gutter);
     }
-    .sec-head {
-      max-width: 760px;
-      margin-bottom: clamp(40px, 5vw, 64px);
+    .sec-feat__head {
+      max-width: 720px;
+      margin-bottom: clamp(48px, 6vw, 72px);
     }
     .sec-head__label {
       font-size: 0.8125rem;
@@ -359,75 +343,78 @@
       color: var(--text-3);
       margin-bottom: 1rem;
     }
-    .sec-head__h2 {
-      font-size: clamp(2rem, 4.6vw, 3.5rem);
+    .sec-feat__h2 {
+      font-size: clamp(2.25rem, 4.8vw, 4.25rem);
       font-weight: 600;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.045em;
       line-height: 1.04;
+      margin-bottom: 1.25rem;
+      max-width: 16ch;
     }
-    .sec-head__h2 em {
+    .sec-feat__h2 em {
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
       letter-spacing: -0.02em;
     }
-    .sec-head__sub {
-      margin-top: 1rem;
+    .sec-feat__intro {
       font-size: 1.0625rem;
+      line-height: 1.6;
       color: var(--text-2);
-      line-height: 1.55;
-      max-width: 600px;
+      max-width: 540px;
     }
+
     .feat-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1.25rem;
     }
-    @media (max-width: 1024px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 600px) { .feat-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1100px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .feat-grid { grid-template-columns: 1fr; } }
+
     .feat-card {
       background: white;
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 1.75rem;
+      padding: 2rem 1.75rem;
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      transition: transform 400ms var(--ease-quart), box-shadow 400ms var(--ease-quart), border-color 300ms var(--ease);
+      min-height: 260px;
+      transition: transform 400ms var(--ease-quart), box-shadow 400ms var(--ease-quart), border-color 400ms var(--ease-quart);
     }
     .feat-card:hover {
       transform: translateY(-3px);
-      border-color: var(--border-strong);
       box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
     }
     .feat-card__icon {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      background: var(--edit-lavender);
-      color: var(--text);
+      width: 44px; height: 44px;
+      border-radius: 12px;
       display: grid; place-items: center;
-      transition: background 300ms var(--ease);
+      flex-shrink: 0;
+      color: var(--text);
     }
-    .feat-card:nth-child(2) .feat-card__icon { background: var(--edit-peach); }
-    .feat-card:nth-child(3) .feat-card__icon { background: var(--edit-olive); }
-    .feat-card:nth-child(4) .feat-card__icon { background: var(--edit-teal); color: white; }
-    .feat-card:nth-child(5) .feat-card__icon { background: var(--edit-warm); }
-    .feat-card:nth-child(6) .feat-card__icon { background: var(--edit-lavender-chip); color: white; }
     .feat-card__icon svg { width: 22px; height: 22px; }
+    .feat-card__icon--lav   { background: var(--edit-lavender); }
+    .feat-card__icon--peach { background: var(--edit-peach); }
+    .feat-card__icon--olive { background: var(--edit-olive); }
+    .feat-card__icon--cream { background: var(--edit-cream); }
     .feat-card h3 {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 600;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.015em;
       line-height: 1.25;
     }
     .feat-card p {
       font-size: 0.9375rem;
-      line-height: 1.6;
+      line-height: 1.55;
       color: var(--text-2);
+      margin-top: -0.25rem;
     }
 
     /* ============================================================
-       3 · PRICING — two cards on a lavender panel
+       3 · PRICING — two plan cards on lavender
        ============================================================ */
     .sec-pricing {
       background: var(--edit-lavender-soft);
@@ -435,24 +422,39 @@
       color: var(--text);
     }
     .sec-pricing__inner {
-      max-width: 1120px;
+      max-width: 1080px;
       margin-inline: auto;
       padding-inline: var(--gutter);
       text-align: center;
     }
-    .sec-pricing .sec-head { text-align: center; margin-inline: auto; }
-    .sec-pricing .sec-head__label,
-    .sec-pricing .sec-head__h2,
-    .sec-pricing .sec-head__sub { text-align: center; margin-inline: auto; }
-    .sec-pricing .sec-head__sub { max-width: 560px; }
+    .sec-pricing .sec-head { text-align: center; margin-inline: auto; max-width: 640px; }
+    .sec-pricing .sec-head__h2 {
+      font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+    }
+    .sec-pricing .sec-head__h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .sec-pricing .sec-head__sub {
+      margin-top: 0.875rem;
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+
     .price-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
-      margin-top: 2.5rem;
+      margin-top: 3rem;
       text-align: left;
     }
-    @media (max-width: 800px) { .price-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .price-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } }
     .price-card-wrap { position: relative; }
     .price-pop {
       position: absolute;
@@ -480,10 +482,7 @@
       height: 100%;
       transition: transform 400ms var(--ease-quart), box-shadow 400ms var(--ease-quart);
     }
-    .price-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-md);
-    }
+    .price-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
     .price-card--featured {
       background: var(--text);
       color: white;
@@ -501,9 +500,7 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
-    .price-card--featured .price-badge {
-      background: var(--edit-peach);
-    }
+    .price-card--featured .price-badge { background: var(--edit-peach); }
     .price-num {
       font-size: clamp(2.5rem, 4.8vw, 3.75rem);
       font-weight: 600;
@@ -550,28 +547,6 @@
       color: var(--text-3);
     }
     .price-card--featured .price-list li svg { color: rgba(255,255,255,0.65); }
-    .price-addon {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.625rem;
-      padding: 0.875rem 1rem;
-      background: var(--edit-peach-soft);
-      border-radius: 14px;
-      font-size: 0.875rem;
-      line-height: 1.45;
-      color: var(--text);
-    }
-    .price-card--featured .price-addon {
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.9);
-    }
-    .price-addon svg {
-      flex: 0 0 auto;
-      width: 18px; height: 18px;
-      color: var(--edit-peach-chip);
-      margin-top: 2px;
-    }
-    .price-card--featured .price-addon svg { color: var(--edit-peach); }
     .price-cta {
       margin-top: auto;
       display: inline-flex;
@@ -597,28 +572,106 @@
     .price-cta__arrow svg { width: 14px; height: 14px; }
     .price-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(0,0,0,0.25); }
     .price-cta:hover .price-cta__arrow { transform: translateX(2px); }
-    .price-card--featured .price-cta {
-      background: white;
-      color: var(--text);
-    }
-    .price-card--featured .price-cta__arrow {
-      background: var(--text);
-      color: white;
-    }
-    .price-permanencia,
-    .price-note {
-      margin-top: 2rem;
-      font-size: 0.875rem;
+    .price-card--featured .price-cta { background: white; color: var(--text); }
+    .price-card--featured .price-cta__arrow { background: var(--text); color: white; }
+    .price-foot {
+      font-size: 0.8125rem;
       color: var(--text-3);
-      max-width: 640px;
-      margin-inline: auto;
-      text-align: center;
+      line-height: 1.5;
+      margin-top: -0.5rem;
     }
-    .price-note a { text-decoration: underline; text-underline-offset: 3px; color: var(--text); }
-    .price-note a:hover { color: var(--edit-lavender-chip); }
+    .price-card--featured .price-foot { color: rgba(255,255,255,0.6); }
 
     /* ============================================================
-       4 · TRUST CTA — closing dark band
+       4 · CASE STUDY — peach pull-quote + stats
+       ============================================================ */
+    .sec-case {
+      background: var(--edit-peach);
+      padding: clamp(80px, 11vw, 140px) 0;
+      color: var(--text);
+    }
+    .sec-case__inner {
+      max-width: 1080px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      text-align: center;
+    }
+    .sec-case__quote-mark {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: clamp(4rem, 9vw, 7rem);
+      line-height: 0.7;
+      color: var(--text);
+      opacity: 0.7;
+    }
+    .sec-case__quote {
+      font-size: clamp(2rem, 4.8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+      margin-bottom: 2.5rem;
+      max-width: 22ch;
+      margin-inline: auto;
+    }
+    .sec-case__quote em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .sec-case__attr {
+      max-width: 640px;
+      margin-inline: auto;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--text-2);
+    }
+    .sec-case__attr strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+    .sec-case__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+      max-width: 720px;
+      margin-inline: auto;
+    }
+    @media (max-width: 700px) { .sec-case__stats { grid-template-columns: 1fr; } }
+    .sec-case__stat {
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(15,15,16,0.08);
+      border-radius: 18px;
+      padding: 1.5rem 1.25rem;
+      text-align: left;
+    }
+    .sec-case__stat-val {
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .sec-case__stat-val em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .sec-case__stat-cap {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.45;
+    }
+
+    /* ============================================================
+       5 · CLOSING CTA — dark
        ============================================================ */
     .sec-cta {
       background: var(--bg-dark);
@@ -648,7 +701,7 @@
       font-style: italic;
       font-weight: 400;
       letter-spacing: -0.02em;
-      color: var(--edit-peach);
+      color: var(--edit-olive);
     }
     .sec-cta p {
       margin: 1.5rem 0 2rem;
@@ -687,7 +740,7 @@
     }
 
     /* ============================================================
-       5 · FOOTER — big-mark
+       6 · FOOTER — big-mark
        ============================================================ */
     .sec-footer-big {
       background: var(--bg-dark);
@@ -723,17 +776,11 @@
       line-height: 1.5;
       margin: 0.75rem 0 1.25rem;
     }
-    .footer-big__brand .pill-btn {
-      background: white;
-      color: var(--text);
-    }
     .footer-big ul { display: flex; flex-direction: column; gap: 0.625rem; }
     .footer-big a { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
     .footer-big a:hover { color: white; }
     .footer-big li { color: rgba(255,255,255,0.7); font-size: 0.9375rem; }
-    .footer-social {
-      display: flex; gap: 0.625rem;
-    }
+    .footer-social { display: flex; gap: 0.625rem; }
     .footer-social a {
       width: 38px; height: 38px;
       border-radius: 50%;
@@ -753,7 +800,7 @@
       color: white;
       display: flex;
       align-items: center;
-      gap: 0.18em;
+      gap: 0.25em;
       flex-wrap: wrap;
       padding: clamp(32px, 5vw, 64px) 0 clamp(24px, 4vw, 48px);
       border-top: 1px solid var(--border-dark);
@@ -803,7 +850,6 @@
     .fx-up--d2 { transition-delay: 160ms; }
     .fx-up--d3 { transition-delay: 240ms; }
     .fx-up--d4 { transition-delay: 320ms; }
-    .fx-up--d5 { transition-delay: 400ms; }
 
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -835,9 +881,10 @@
 
       <div class="nav__links" role="menubar">
         <a href="index.html" role="menuitem">Inicio</a>
-        <a href="diseno-web.html" role="menuitem" class="is-active">Diseño web</a>
+        <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+        <a href="diseno-web.html" role="menuitem">Diseño web</a>
         <a href="fotografia-menu.html" role="menuitem">Fotografía</a>
-        <a href="analisis.html" role="menuitem">Análisis</a>
+        <a href="google-publicidad.html" role="menuitem" class="is-active">Google &amp; ads</a>
         <a href="blog.html" role="menuitem">Blog</a>
       </div>
 
@@ -856,29 +903,29 @@
     <!-- ═══════════════ 1 · HERO ═══════════════ -->
     <section class="sub-hero" aria-label="Hero">
       <div class="sub-hero__media" aria-hidden="true">
-        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=2400&q=85" alt="">
+        <img src="assets/publicidad.webp" alt="" loading="eager">
       </div>
 
       <div class="sub-hero__inner">
         <p class="sub-hero__eyebrow">
           <img class="hash-mark" src="assets/hash-mark-white.png" alt="" aria-hidden="true">
-          Servicio 02 · Diseño Web
+          Google &amp; Publicidad
         </p>
         <h1 class="sub-hero__h1">
-          Tu restaurante merece una web que <em>impresione.</em>
+          Más comensales desde <em>Google</em>, no solo más <em>clics</em>.
         </h1>
         <p class="sub-hero__sub">
-          Diseñamos y lanzamos webs profesionales para restaurantes en días, no en meses. Rápidas, bonitas y optimizadas para que tus clientes reserven desde el primer click.
+          Optimizamos tu ficha de Google Maps y lanzamos campañas de Meta y Google Ads pensadas para llenar mesas. Tú pones el presupuesto, nosotros lo hacemos rendir cada euro.
         </p>
         <div class="sub-hero__cta">
           <a href="contacto.html" class="pill-btn pill-btn--lav">
-            Quiero mi web ahora
+            Empezar ahora
             <span class="pill-btn__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </a>
-          <a href="#portfolio" class="pill-btn">
-            Ver ejemplos
+          <a href="#planes" class="pill-btn">
+            Ver tarifas
             <span class="pill-btn__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
@@ -887,112 +934,87 @@
       </div>
     </section>
 
-    <!-- Portfolio stub — kept hidden to preserve the OLD #portfolio anchor target -->
-    <section id="portfolio" aria-hidden="true" style="display: none;"></section>
-
-    <!-- ═══════════════ 2 · FEATURES ═══════════════ -->
-    <section class="sec-features" id="features">
-      <div class="sec-features__inner">
-        <div class="sec-head fx-up">
-          <p class="sec-head__label">Lo que incluye</p>
-          <h2 class="sec-head__h2">Todo lo que necesita tu <em class="gradient-text">restaurante</em></h2>
-          <p class="sec-head__sub">Sin complicaciones, sin sorpresas. Una web completa pensada específicamente para el sector de la restauración.</p>
+    <!-- ═══════════════ 2 · COMO FUNCIONA ═══════════════ -->
+    <section class="sec-feat">
+      <div class="sec-feat__inner">
+        <div class="sec-feat__head fx-up">
+          <p class="sec-head__label">Cómo funciona</p>
+          <h2 class="sec-feat__h2">Visibilidad <em class="gradient-text">local</em> + tráfico que <em class="gradient-text">convierte</em></h2>
+          <p class="sec-feat__intro">
+            Combinamos optimización orgánica en Google Maps con publicidad de pago en Meta y Google. Trabajamos los dos frentes para que tu restaurante aparezca cuando alguien tiene hambre cerca.
+          </p>
         </div>
 
         <div class="feat-grid">
           <article class="feat-card fx-up">
-            <span class="feat-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-            </span>
-            <h3>Diseño intuitivo</h3>
-            <p>Menú digital, galería de fotos y sistema de reservas integrado. Todo lo que tus clientes necesitan encontrar, accesible en segundos.</p>
+            <div class="feat-card__icon feat-card__icon--lav" aria-hidden="true">
+              <!-- map pin -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>Google Maps optimizado</h3>
+            <p>Tu ficha bien rellenada, con fotos de calidad, horarios al día, categorías correctas y palabras clave reales. Para que aparezcas cuando alguien busca cerca.</p>
           </article>
 
           <article class="feat-card fx-up fx-up--d1">
-            <span class="feat-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-            </span>
-            <h3>Adaptada a móvil</h3>
-            <p>El 80% de las búsquedas de restaurantes se hacen desde el móvil. Tu web se verá perfecta en cualquier dispositivo.</p>
+            <div class="feat-card__icon feat-card__icon--peach" aria-hidden="true">
+              <!-- megaphone Meta -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a2 2 0 0 0 2 2h1l4 4V5L6 9H5a2 2 0 0 0-2 2z"/><path d="M14 8a4 4 0 0 1 0 8"/><path d="M17 5a8 8 0 0 1 0 14"/></svg>
+            </div>
+            <h3>Campañas Meta Ads</h3>
+            <p>Anuncios en Instagram y Facebook con segmentación local — solo a personas en tu zona y con tu cliente ideal. Creatividades incluidas, optimización continua.</p>
           </article>
 
           <article class="feat-card fx-up fx-up--d2">
-            <span class="feat-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            </span>
-            <h3>Actualizaciones fáciles</h3>
-            <p>Cambia el menú, añade una nueva carta de temporada o actualiza tus horarios. Nosotros nos encargamos de todo, sin costes extra.</p>
+            <div class="feat-card__icon feat-card__icon--olive" aria-hidden="true">
+              <!-- magnifier search -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            </div>
+            <h3>Google Ads &amp; Search</h3>
+            <p>Aparece justo cuando alguien busca "restaurante cerca de mí". Campañas de búsqueda y de Maps con palabras clave locales y presupuesto controlado.</p>
           </article>
 
           <article class="feat-card fx-up fx-up--d3">
-            <span class="feat-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-            </span>
-            <h3>SEO optimizada</h3>
-            <p>Tu restaurante aparece cuando alguien busca en Google. Estructura técnica, velocidad de carga y metadatos optimizados desde el primer día.</p>
-          </article>
-
-          <article class="feat-card fx-up fx-up--d4">
-            <span class="feat-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </span>
-            <h3>Soporte rápido</h3>
-            <p>¿Algo no funciona? Respondemos en menos de 24 horas. No dejaremos que tu web esté caída ni un día sin solución.</p>
-          </article>
-
-          <article class="feat-card fx-up fx-up--d5">
-            <span class="feat-card__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </span>
-            <h3>Cambios ilimitados</h3>
-            <p>No pagas por cada ajuste. Mientras seas cliente, los cambios están incluidos. Tu web evolucionará con tu negocio.</p>
+            <div class="feat-card__icon feat-card__icon--cream" aria-hidden="true">
+              <!-- chart bars -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="3" y1="20" x2="21" y2="20"/></svg>
+            </div>
+            <h3>Informes mensuales claros</h3>
+            <p>Cada mes recibes un informe sin tecnicismos: alcance, clics, llamadas, rutas en Maps y reservas. Sabes en qué se gasta tu dinero y qué retorno tiene.</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ═══════════════ 3 · PRICING ═══════════════ -->
-    <section class="sec-pricing" id="precio">
+    <section class="sec-pricing" id="planes">
       <div class="sec-pricing__inner">
         <div class="sec-head fx-up">
-          <p class="sec-head__label">Precio</p>
-          <h2 class="sec-head__h2">La web que tus clientes <em class="gradient-text">esperan</em></h2>
-          <p class="sec-head__sub">Todo incluido — diseño, hosting, dominio, SEO, Google Analytics, perfil de Google y actualizaciones.</p>
+          <p class="sec-head__label" style="text-align:center;">Planes</p>
+          <h2 class="sec-head__h2">Una tarifa para cada <em class="gradient-text">objetivo</em></h2>
+          <p class="sec-head__sub">Sin permanencia. Sin letra pequeña. Tú pones el presupuesto publicitario, nosotros la gestión.</p>
         </div>
 
         <div class="price-grid">
-          <!-- Esencial -->
+
+          <!-- Tier 1 — Local -->
           <div class="price-card-wrap">
-            <article class="price-card fx-up">
-              <span class="price-badge">Esencial</span>
+            <article class="price-card fx-up fx-up--d1">
+              <span class="price-badge">Local</span>
+              <!-- TODO PRICE: confirm tier 1 €299/mes — base from v1 publicidad-digital.html -->
               <div class="price-num">
-                <sup>€</sup>49<span class="suffix">/mes</span>
+                <sup>€</sup>299<span class="suffix">/mes</span>
               </div>
-              <p class="price-desc">Tu restaurante online con todo lo necesario para que te encuentren</p>
+              <p class="price-desc">Maps + 1 plataforma de ads. Para restaurantes que quieren empezar a captar comensales locales con foco.</p>
               <ul class="price-list">
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Página web profesional</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Adaptada a móvil</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Menú digital</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Formulario de contacto</span>
-                </li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Optimización de ficha en Google Maps</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Publicaciones y fotos en Google Business</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>1 plataforma de ads a elegir: Meta o Google Ads</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Creatividades y segmentación local</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Informe mensual de resultados</span></li>
               </ul>
-              <div class="price-addon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                <span><strong>Add-on: Modelado 3D</strong> — platos, espacio o fachada en 3D interactivo integrado en tu web.</span>
-              </div>
+              <p class="price-foot">+ presupuesto publicitario gestionado por el cliente</p>
               <a href="contacto.html" class="price-cta">
-                Empezar con Esencial
+                Empezar con Local
                 <span class="price-cta__arrow" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
@@ -1000,67 +1022,82 @@
             </article>
           </div>
 
-          <!-- Profesional (Recomendado) -->
+          <!-- Tier 2 — Full Funnel (Recomendado) -->
           <div class="price-card-wrap">
             <span class="price-pop">Recomendado</span>
-            <article class="price-card price-card--featured fx-up fx-up--d1">
-              <span class="price-badge">Profesional</span>
+            <article class="price-card price-card--featured fx-up fx-up--d2">
+              <span class="price-badge">Full Funnel</span>
+              <!-- TODO PRICE: confirm tier 2 €499/mes — proposed for combined offering -->
               <div class="price-num">
-                <sup>€</sup>100<span class="suffix">/mes</span>
+                <sup>€</sup>499<span class="suffix">/mes</span>
               </div>
-              <p class="price-desc">Tu web trabajando para ti — atrayendo clientes y generando reservas</p>
+              <p class="price-desc">Maps + Meta + Google Ads. Cubrimos todo el embudo: descubrimiento, intención y conversión.</p>
               <ul class="price-list">
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Diseño multipágina personalizado</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Menú digital interactivo</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Sistema de reservas integrado</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Galería de fotos profesional</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Análisis mensual de rendimiento</span>
-                </li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Todo lo del plan Local</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Campañas Meta Ads (Instagram + Facebook)</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Campañas Google Ads + Maps Ads</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Test A/B continuo de creatividades</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Gestión de reseñas en Google</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Informe mensual ampliado con KPIs</span></li>
               </ul>
-              <div class="price-addon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                <span><strong>Add-on: Modelado 3D</strong> — platos, espacio o fachada en 3D interactivo integrado en tu web.</span>
-              </div>
+              <p class="price-foot">+ presupuesto publicitario gestionado por el cliente</p>
               <a href="contacto.html" class="price-cta">
-                Empezar con Profesional
+                Empezar con Full Funnel
                 <span class="price-cta__arrow" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </span>
               </a>
             </article>
           </div>
-        </div>
 
-        <p class="price-permanencia">Todos los planes incluyen permanencia de 2 años.</p>
-        <p class="price-note">Las secciones de galería y carta digital se entregan listas para tu contenido — si necesitas fotos profesionales, combínalas con nuestro <a href="fotografia-menu.html">servicio de fotografía</a>.</p>
+        </div>
       </div>
     </section>
 
-    <!-- ═══════════════ 4 · CTA — closing ═══════════════ -->
+    <!-- ═══════════════ 4 · CASE STUDY ═══════════════ -->
+    <!-- TODO CASE STUDY: confirm restaurant name and exact stats — currently using Stuvstagrillen (real partner from redes-sociales case) but Maps/Ads-specific numbers below are illustrative and need validation -->
+    <section class="sec-case">
+      <div class="sec-case__inner">
+        <div class="sec-case__quote-mark fx-up" aria-hidden="true">"</div>
+        <p class="sec-case__quote fx-up fx-up--d1">
+          Multiplicamos por <em class="gradient-text">3</em> las llamadas desde Google
+        </p>
+        <p class="sec-case__attr fx-up fx-up--d2">
+          <strong>— Stuvstagrillen</strong>
+          Optimizamos su ficha de Google Maps y arrancamos campañas de Meta Ads enfocadas a su barrio. En tres meses, las llamadas y rutas desde Google se dispararon, y el ROAS de la inversión publicitaria pasó a ser positivo y sostenido.
+        </p>
+
+        <div class="sec-case__stats">
+          <!-- TODO STAT: confirm "+212% rutas" — illustrative figure, replace with real GBP analytics export -->
+          <div class="sec-case__stat fx-up fx-up--d1">
+            <div class="sec-case__stat-val"><em>+</em>212%</div>
+            <div class="sec-case__stat-cap">rutas en Google Maps tras 3 meses</div>
+          </div>
+          <!-- TODO STAT: confirm "x3 llamadas" — illustrative figure -->
+          <div class="sec-case__stat fx-up fx-up--d2">
+            <div class="sec-case__stat-val">x3</div>
+            <div class="sec-case__stat-cap">llamadas mensuales desde la ficha</div>
+          </div>
+          <!-- TODO STAT: confirm "ROAS 4.8x" — illustrative figure, validate with Meta/Google data -->
+          <div class="sec-case__stat fx-up fx-up--d3">
+            <div class="sec-case__stat-val">4.8<em>x</em></div>
+            <div class="sec-case__stat-cap">ROAS medio en campañas Meta</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 5 · CLOSING CTA ═══════════════ -->
     <section class="sec-cta">
       <div class="sec-cta__inner">
         <div class="fx-up">
-          <h2>¿Listo para destacar <em>en Google?</em></h2>
+          <h2>¿Listo para que <em>Google</em> te traiga comensales?</h2>
           <p>
-            Más de 30 restaurantes ya confían en Visuanza para su presencia digital. Únete tú también.
+            Maps optimizado, ads gestionados y un informe claro cada mes. Sin permanencia. Empezamos cuando tú quieras.
           </p>
           <div class="sec-cta__buttons">
             <a href="contacto.html" class="pill-btn pill-btn--lav">
-              Quiero mi web
+              Empezar ahora
               <span class="pill-btn__arrow" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </span>
@@ -1075,15 +1112,16 @@
         </div>
 
         <aside class="sec-cta__num fx-up fx-up--d1" aria-label="Restaurantes partners">
+          <!-- TODO STAT: confirm "30+" partner count — copied from redes-sociales.html, may differ for Google/Ads service -->
           <div class="sec-cta__num-val">30<em>+</em></div>
-          <div class="sec-cta__num-cap">restaurantes ya confían en Visuanza para su presencia digital.</div>
+          <div class="sec-cta__num-cap">restaurantes ya confían en Visuanza para crecer en Google y publicidad de pago.</div>
         </aside>
       </div>
     </section>
 
   </main>
 
-  <!-- ═══════════════ 5 · FOOTER — big-mark ═══════════════ -->
+  <!-- ═══════════════ 6 · FOOTER — big-mark ═══════════════ -->
   <footer class="sec-footer-big">
     <div class="sec-footer-big__inner footer-big">
       <div class="footer-big__grid">
@@ -1098,7 +1136,7 @@
             <li><a href="redes-sociales.html">Redes Sociales</a></li>
             <li><a href="diseno-web.html">Diseño Web</a></li>
             <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
+            <li><a href="google-publicidad.html">Google &amp; Publicidad</a></li>
           </ul>
         </div>
         <div>

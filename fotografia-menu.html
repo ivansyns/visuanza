@@ -6,1557 +6,1290 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('consent', 'default', {
-      'ad_storage': 'denied',
-      'ad_user_data': 'denied',
-      'ad_personalization': 'denied',
-      'analytics_storage': 'denied',
-      'wait_for_update': 500
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500
     });
+    gtag('set', 'ads_data_redaction', true);
   </script>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X7FJ3YL00N"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-X7FJ3YL00N');
-  </script>
+  <!-- End Google Consent Mode v2 -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Fotografía profesional de menú para restaurantes. Sesión en tu local, entrega en 48 horas, formatos para web, redes y delivery. Visuanza." />
-  <meta property="og:title" content="Fotografía de Menú para Restaurantes – Visuanza">
-  <meta property="og:description" content="Fotografía profesional de menú para restaurantes. Sesión en tu local, entrega en 48 horas, formatos para web, redes y delivery. Visuanza.">
-  <meta property="og:image" content="https://visuanza.es/assets/fotografia-menu-restaurante.webp">
+  <meta name="description" content="Fotografía gastronómica profesional para restaurantes en Madrid. Sesión en tu local, edición premium y entrega en 48 horas para web, redes y delivery." />
+  <meta property="og:title" content="Fotografía gastronómica para restaurantes — Visuanza">
+  <meta property="og:description" content="Fotografía gastronómica profesional para restaurantes. Sesión en tu local, edición premium y entrega en 48 horas para web, redes y delivery.">
+  <meta property="og:image" content="https://visuanza.es/assets/og-image.jpg">
   <meta property="og:url" content="https://visuanza.es/fotografia-menu.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_ES">
-  <title>Fotografía de Menú para Restaurantes – Visuanza</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <title>Fotografía gastronómica para restaurantes — Visuanza</title>
+  <link rel="canonical" href="https://visuanza.es/fotografia-menu.html" />
+  <link rel="icon" type="image/png" href="assets/hash-mark.png" />
+  <link rel="apple-touch-icon" href="assets/hash-mark.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* ============================================================
+       VISUANZA — v6 editorial system (subpage: Fotografía de Menú)
+       ============================================================ */
     :root {
-      --blue:       #C08B5C;
-      --blue-dark:  #A67744;
-      --black:      #1A1A1A;
-      --dark:       #141414;
-      --gray-dark:  #1E1E1E;
-      --gray-mid:   #2A2420;
-      --gray-light: #F0EBE3;
-      --white:      #FAF7F2;
-      --text:       #1A1A1A;
-      --text-muted: #2A2420;
-      --border:     rgba(107,94,84,0.12);
-      --surface:    #F0EBE3;
-      --radius:     3px;
-      --radius-lg:  4px;
+      --edit-lavender: #E8E1FF;
+      --edit-lavender-soft: #F4EFFF;
+      --edit-lavender-chip: #B9A3F7;
+      --edit-peach: #FFCFA8;
+      --edit-peach-soft: #FFE6D2;
+      --edit-peach-chip: #FF9C6B;
+      --edit-olive: #E5EE9E;
+      --edit-olive-chip: #D4EB7A;
+      --edit-teal: #4EBFB8;
+      --edit-cream: #E5CDAB;
+      --edit-warm: #F5D7B8;
+
+      --bg: #FFFFFF;
+      --bg-soft: #F7F7F5;
+      --bg-tint: #F4F4F2;
+      --bg-dark: #0A0A0B;
+      --bg-dark-2: #141416;
+
+      --text: #0F0F10;
+      --text-2: #52525B;
+      --text-3: #71717A;
+      --text-muted: #A1A1AA;
+
+      --border: #EAEAE6;
+      --border-strong: #D4D4D0;
+      --border-dark: rgba(255,255,255,0.08);
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-italic: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+      --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-card: 18px; --r-pill: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(15,15,16,0.06);
+      --shadow-md: 0 8px 24px rgba(15,15,16,0.08);
+      --shadow-lg: 0 20px 48px rgba(15,15,16,0.12);
+      --shadow-nav: 0 1px 3px rgba(15,15,16,0.04), 0 8px 32px -8px rgba(15,15,16,0.08);
+
+      --container: min(1400px, 94vw);
+      --container-wide: min(1680px, 96vw);
+      --gutter: 24px;
+      --nav-h: 76px;
+
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-quart: cubic-bezier(0.22, 1, 0.36, 1);
+      --dur: 260ms;
     }
 
-    html {
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-      max-width: 100%;
-    }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 18px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.65;
       color: var(--text);
-      background: var(--white);
-      overflow-x: hidden;
-      line-height: 1.6;
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, video, svg { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul, ol { list-style: none; }
+    button { cursor: pointer; font: inherit; border: none; background: none; color: inherit; }
+    ::selection { background: rgba(255, 207, 168, 0.55); color: var(--text); }
+
+    h1, h2, h3, h4 { font-family: var(--font-sans); line-height: 1.1; font-weight: 600; }
+    em.gradient-text, .gradient-text {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: inherit;
     }
 
-    h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
-    h1 { letter-spacing: -0.04em; }
-    h2 { letter-spacing: -0.03em; }
-    h3 { letter-spacing: -0.02em; }
-
-    /* ─── GRAIN OVERLAY ─── */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      opacity: 0.028;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* ─── CONTAINER ─── */
-    .container {
-      width: 100%;
-      max-width: 1120px;
-      margin: 0 auto;
-      padding-left: clamp(16px, 4vw, 40px);
-      padding-right: clamp(16px, 4vw, 40px);
-    }
-
-    /* ─── SECTION LABEL ─── */
-    .section-label {
+    /* ── Buttons & pills ──────────────────────────────────── */
+    .btn {
       display: inline-flex;
       align-items: center;
-      font-size: 0.85rem;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      font-size: 0.9375rem;
       font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #6B5244;
-      padding-left: 10px;
-      border-left: 2px solid var(--blue);
-      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+      border-radius: var(--r-pill);
+      border: 1px solid transparent;
+      transition: transform var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+      white-space: nowrap;
     }
+    .btn:active { transform: translateY(1px); }
+    .btn--blue { background: var(--text); color: white; }
+    .btn--blue:hover { background: #27272A; transform: translateY(-1px); box-shadow: 0 8px 24px -8px rgba(0,0,0,0.25); }
+    .btn--ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+    .btn--ghost:hover { border-color: var(--text); background: var(--bg-soft); }
+    .btn--sm { padding: 0.625rem 1.125rem; font-size: 0.875rem; }
 
-    /* ─── FADE IN ─── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.625rem 0.875rem 0.625rem 1.25rem;
+      background: white;
+      color: var(--text);
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      letter-spacing: -0.005em;
+      transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
     }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .pill-btn__arrow {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--text);
+      color: white;
+      display: inline-grid; place-items: center;
+      transition: transform 300ms var(--ease-out);
     }
-    .fade-in.delay-1 { transition-delay: 0.1s; }
-    .fade-in.delay-2 { transition-delay: 0.2s; }
-    .fade-in.delay-3 { transition-delay: 0.3s; }
+    .pill-btn__arrow svg { width: 14px; height: 14px; }
+    .pill-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(0,0,0,0.25); }
+    .pill-btn:hover .pill-btn__arrow { transform: translateX(2px); }
+    .pill-btn--dark { background: var(--text); color: white; }
+    .pill-btn--dark .pill-btn__arrow { background: white; color: var(--text); }
+    .pill-btn--lav { background: var(--edit-lavender); color: var(--text); }
 
-    /* ─── NAV ─── */
-    nav {
+    /* ============================================================
+       NAV
+       ============================================================ */
+    #nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      padding: 14px clamp(8px, 1.5vw, 24px);
-      background: transparent;
-      pointer-events: none;
+      top: 16px; left: 0; right: 0;
+      z-index: 100;
+      padding-inline: var(--gutter);
+      transform: translateY(0);
+      transition: transform 400ms var(--ease-out);
     }
-
-    .nav-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 10px 20px;
+    #nav.nav--hidden { transform: translateY(calc(-100% - 32px)); }
+    .nav__inner {
+      max-width: var(--container);
+      margin-inline: auto;
+      height: 60px;
+      padding: 0 0.5rem 0 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(240,235,227,0.65);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid transparent;
-      border-radius: 999px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
-      pointer-events: auto;
+      gap: 1rem;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      box-shadow: var(--shadow-nav);
     }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .nav-logo img { height: 30px; width: auto; }
-    .nav-logo span {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #1A1A1A;
-      letter-spacing: -0.02em;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      list-style: none;
-    }
-    .nav-links li { margin-right: 33px; }
-    .nav-links li:last-child { margin-right: 0; }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #1A1A1A;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: color 0.2s, background 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 6px 12px;
-      border-radius: 999px;
-    }
-    .nav-links a:hover { color: var(--blue); background: rgba(192,139,92,0.06); }
-    .nav-links a:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .nav-links a .chevron {
-      font-size: 0.85rem;
-      opacity: 0.5;
-      transition: transform 0.2s ease;
-    }
-
-    /* ─── SERVICES DROPDOWN ─── */
-    .nav-has-dropdown { position: relative; }
-    .nav-has-dropdown::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: -10px; right: -10px;
-      height: 10px;
-      background: transparent;
-    }
-    .nav-has-dropdown > a .chevron { transition: transform 0.2s ease, opacity 0.2s; }
-    .nav-has-dropdown:hover > a .chevron { transform: rotate(180deg); opacity: 0.8; }
-
-    .nav-dropdown {
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 50%;
-      transform: translateX(-50%) translateY(-6px);
-      width: 480px;
-      background: rgba(255,255,255,0.97);
-      border: 1px solid rgba(0,0,0,0.08);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 16px 8px 8px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 200;
-    }
-    .nav-dropdown::before {
-      content: '';
-      position: absolute;
-      top: -6px; left: 50%;
-      transform: translateX(-50%) rotate(45deg);
-      width: 12px; height: 12px;
-      background: #ffffff;
-      border-left: 1px solid rgba(0,0,0,0.08);
-      border-top: 1px solid rgba(0,0,0,0.08);
-    }
-    .nav-has-dropdown:hover .nav-dropdown {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .nav-dropdown-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-    }
-    .nav-dropdown-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #0f172a;
-      transition: background 0.15s ease;
-    }
-    .nav-dropdown-item:hover { background: rgba(192,139,92,0.06); color: var(--blue); }
-    .nav-dropdown-item:hover .ndi-icon { background: var(--blue); }
-    .nav-dropdown-item:hover .ndi-icon svg { color: white; }
-    .nav-dropdown-item:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-
-    .ndi-icon {
-      flex-shrink: 0;
-      width: 36px; height: 36px;
-      border-radius: 9px;
-      background: rgba(192,139,92,0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s ease;
-      margin-top: 1px;
-    }
-    .ndi-icon svg { width: 17px; height: 17px; color: var(--blue); transition: color 0.15s ease; }
-    .ndi-text { flex: 1; }
-    .ndi-title { display: block; font-size: 0.82rem; font-weight: 700; color: #0f172a; margin-bottom: 2px; letter-spacing: -0.01em; }
-    .ndi-desc { display: block; font-size: 0.75rem; color: #2A2420; line-height: 1.4; }
-
-    @media (max-width: 900px) { .nav-dropdown { display: none; } }
-
-    .nav-right { display: flex; align-items: center; gap: 1rem; }
-
-    .btn-primary {
-      background: var(--blue);
-      color: #ffffff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: var(--radius);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 4px 20px rgba(192,139,92,0.35);
-    }
-    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(192,139,92,0.5); }
-    .btn-primary:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-
-    /* ─── HAMBURGER ─── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 5px;
-      width: 36px; height: 36px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-      border-radius: var(--radius);
-      transition: background 0.2s;
-      z-index: 300;
-      pointer-events: auto;
-      flex-shrink: 0;
-    }
-    .hamburger:hover { background: rgba(0,0,0,0.06); }
-    .hamburger:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .hamburger span {
-      display: block;
-      width: 22px; height: 2px;
-      background: #1A1A1A;
-      border-radius: 2px;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      transform-origin: center;
-    }
-    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ─── MOBILE MENU OVERLAY ─── */
-    .mobile-menu {
-      position: fixed;
-      inset: 0;
-      z-index: 150;
-      background: #ffffff;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 32px 48px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateX(100%);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    .mobile-menu.open { opacity: 1; pointer-events: auto; transform: translateX(0); }
-    .mobile-menu-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      width: 100%;
-      max-width: 320px;
-    }
-    .mobile-menu-links li { width: 100%; }
-    .mobile-menu-links a {
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      color: #0f172a;
-      font-size: 1.35rem;
-      font-weight: 600;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      letter-spacing: -0.02em;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-      transition: color 0.2s;
-    }
-    .mobile-menu-links a:hover { color: var(--blue); }
-    .mobile-menu-bottom {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      max-width: 320px;
-    }
-    .mobile-cta {
-      width: 100%;
-      text-align: center;
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      padding: 15px 24px;
-      border-radius: var(--radius);
-      font-size: 1rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: block;
-      box-shadow: 0 4px 20px rgba(192,139,92,0.35);
-      transition: background 0.2s;
-      cursor: pointer;
-    }
-    .mobile-cta:hover { background: var(--blue-dark); }
-
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      .mobile-menu { display: flex; }
-      .nav-links { display: none; }
-      .nav-right .btn-primary { display: none; }
-    }
-    @media (min-width: 769px) {
-      .mobile-menu { display: none !important; }
-    }
-
-    /* ─── HERO ─── */
-    .hero {
-      position: relative;
-      background: var(--surface);
-      overflow: hidden;
-      padding: 160px 0 100px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -200px; left: 50%;
-      transform: translateX(-50%);
-      width: 900px; height: 700px;
-      background: radial-gradient(ellipse, rgba(192,139,92,0.12) 0%, transparent 65%);
-      pointer-events: none;
-    }
-
-    .hero-inner {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .hero-eyebrow {
+    .nav__logo {
       display: inline-flex;
       align-items: center;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #6B5244;
-      padding-left: 10px;
-      border-left: 2px solid var(--blue);
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      gap: 0.5rem;
       font-weight: 700;
-      line-height: 1.1;
-      color: var(--text);
-      max-width: 700px;
-      margin-bottom: 20px;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--blue);
-    }
-
-    .hero-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 36px;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 56px;
-    }
-
-    /* ─── SHARED BUTTONS ─── */
-    .btn-fill {
-      background: var(--blue);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 4px 24px rgba(192,139,92,0.4);
-      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-fill:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(192,139,92,0.5); }
-    .btn-fill:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .btn-fill:active { transform: translateY(0); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      display: inline-block;
-      border: 1px solid var(--border);
-      transition: background 0.2s, border-color 0.2s, transform 0.15s;
-    }
-    .btn-outline:hover { background: rgba(107,94,84,0.06); border-color: rgba(107,94,84,0.25); transform: translateY(-1px); }
-    .btn-outline:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-
-    /* ─── STATS ROW ─── */
-    .stats-row {
-      display: flex;
-      gap: 0;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: var(--white);
-      overflow: hidden;
-      max-width: 520px;
-      margin: 0 auto;
-      box-shadow: 0 4px 24px rgba(107,94,84,0.08);
-    }
-    .stat-item {
-      flex: 1;
-      padding: 24px 20px;
-      text-align: center;
-      border-right: 1px solid var(--border);
-    }
-    .stat-item:last-child { border-right: none; }
-    .stat-num {
-      font-size: 1.9rem;
-      font-weight: 900;
       letter-spacing: -0.04em;
-      color: var(--text);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      line-height: 1;
+      font-size: 1rem;
+      text-transform: uppercase;
     }
-    .stat-num .accent { color: var(--blue); }
-    .stat-lbl {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-top: 5px;
+    .nav__logo .hash-mark {
+      width: 22px;
+      height: 22px;
+      display: block;
+      object-fit: contain;
+    }
+    .nav__links { display: flex; align-items: center; gap: 0.25rem; }
+    .nav__links a {
+      padding: 8px 14px;
+      border-radius: var(--r-pill);
+      font-size: 0.875rem;
       font-weight: 500;
-      line-height: 1.4;
+      color: var(--text-2);
+      transition: background var(--dur), color var(--dur);
     }
-    @media (max-width: 480px) {
-      .stats-row { flex-direction: column; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .stat-item:last-child { border-bottom: none; }
-    }
-
-    /* ─── SECTIONS ─── */
-    .section {
-      padding: clamp(72px, 9vw, 120px) 0;
-      position: relative;
-    }
-    .section-white { background: var(--white); }
-    .section-surface { background: var(--surface); }
-
-    .section-header { margin-bottom: 52px; }
-
-    .section-heading {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      margin-bottom: 16px;
-      line-height: 1.15;
-      margin-top: 8px;
-    }
-    .section-heading .accent { color: var(--blue); }
-
-    .section-sub {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 520px;
-    }
-
-    /* ─── FEATURE GRID ─── */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 52px;
-    }
-    @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px) { .feature-grid { grid-template-columns: 1fr; } }
-
-    .feature-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 28px;
-      box-shadow: 0 2px 12px rgba(107,94,84,0.06), 0 1px 4px rgba(107,94,84,0.04);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-    }
-    .feature-card:hover {
-      border-color: rgba(192,139,92,0.28);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(192,139,92,0.1), 0 2px 8px rgba(107,94,84,0.06);
-    }
-
-    .feature-icon {
-      width: 44px; height: 44px;
-      border-radius: 10px;
-      background: rgba(192,139,92,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-    .feature-icon svg { width: 20px; height: 20px; color: var(--blue); }
-
-    .feature-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-      color: var(--text);
-    }
-    .feature-card p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-    }
-
-    /* ─── INCLUDES LAYOUT ─── */
-    .includes-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      margin-top: 0;
-    }
-    @media (max-width: 860px) { .includes-layout { grid-template-columns: 1fr; gap: 36px; } }
-
-    .includes-list {
-      list-style: none;
-      display: flex;
+    .nav__links a:hover { background: var(--bg-soft); color: var(--text); }
+    .nav__links a.is-active { background: var(--bg-soft); color: var(--text); }
+    .nav__cta { display: flex; align-items: center; gap: 0.5rem; }
+    #hamburger {
+      display: none;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--text);
+      color: white;
       flex-direction: column;
-      gap: 14px;
-      margin-top: 32px;
+      align-items: center; justify-content: center;
+      gap: 4px;
+    }
+    #hamburger span { display: block; width: 14px; height: 1.5px; background: white; }
+    @media (max-width: 900px) {
+      .nav__links, .nav__cta { display: none; }
+      #hamburger { display: inline-flex; }
+    }
+
+    /* ============================================================
+       1 · SUBPAGE HERO — dark cinematic
+       ============================================================ */
+    .sub-hero {
+      position: relative;
+      padding-top: calc(var(--nav-h) + 100px);
+      padding-bottom: clamp(64px, 10vw, 120px);
+      min-height: 88vh;
+      background: var(--bg-dark);
+      color: white;
+      overflow: hidden;
+    }
+    .sub-hero__media { position: absolute; inset: 0; z-index: 0; }
+    .sub-hero__media img,
+    .sub-hero__media video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+      animation: bgSlow 18s ease-in-out infinite alternate;
+    }
+    @keyframes bgSlow {
+      from { transform: scale(1.0); }
+      to   { transform: scale(1.05); }
+    }
+    .sub-hero__media::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 60%, var(--bg-dark) 100%),
+        linear-gradient(180deg, rgba(10,10,11,0.55) 0%, rgba(10,10,11,0.1) 30%, rgba(10,10,11,0.85) 100%);
+      pointer-events: none;
+    }
+    .sub-hero__inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--container-wide);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sub-hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--edit-peach);
+      margin-bottom: 1.5rem;
+    }
+    .sub-hero__eyebrow .hash-mark {
+      width: 1em;
+      height: 1em;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .sub-hero__h1 {
+      font-size: clamp(2.5rem, 6.4vw, 5.5rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      color: white;
+      max-width: 22ch;
+      margin-bottom: 1.5rem;
+    }
+    .sub-hero__h1 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .sub-hero__sub {
+      max-width: 620px;
+      font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 2.25rem;
+    }
+    .sub-hero__cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    /* ============================================================
+       2 · DIFFERENTIATOR — copy + 6-feature stack
+       ============================================================ */
+    .sec-diff {
+      background: var(--bg-soft);
+      padding: clamp(80px, 11vw, 140px) 0;
+      color: var(--text);
+    }
+    .sec-diff__inner {
+      max-width: var(--container-wide);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sec-diff__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: flex-start;
+    }
+    @media (max-width: 900px) { .sec-diff__grid { grid-template-columns: 1fr; gap: 32px; } }
+    .sec-diff__lead { position: sticky; top: calc(var(--nav-h) + 24px); }
+    @media (max-width: 900px) { .sec-diff__lead { position: static; } }
+    .sec-head__label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 1rem;
+    }
+    .sec-diff__h2 {
+      font-size: clamp(2.25rem, 4.8vw, 4.25rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+      margin-bottom: 1.5rem;
+      max-width: 14ch;
+    }
+    .sec-diff__h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .sec-diff__body {
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--text-2);
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
+
+    /* feature cards stack */
+    .feat-stack {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .feat-card {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 1.125rem;
+      align-items: flex-start;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 1.5rem;
+      transition: transform 360ms var(--ease-quart), box-shadow 360ms var(--ease-quart), border-color 360ms var(--ease-quart);
+    }
+    .feat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
+    }
+    .feat-card__icon {
+      width: 56px; height: 56px;
+      border-radius: 16px;
+      background: var(--edit-peach-soft);
+      color: var(--text);
+      display: grid; place-items: center;
+      flex-shrink: 0;
+    }
+    .feat-card__icon svg { width: 26px; height: 26px; stroke-width: 2; }
+    .feat-card h3 {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.375rem;
+    }
+    .feat-card p {
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: var(--text-2);
+    }
+
+    /* ============================================================
+       3 · INCLUDES — peach editorial panel
+       ============================================================ */
+    .sec-includes {
+      background: var(--edit-peach-soft);
+      padding: clamp(80px, 11vw, 140px) 0;
+      color: var(--text);
+    }
+    .sec-includes__inner {
+      max-width: var(--container-wide);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sec-includes__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: center;
+    }
+    @media (max-width: 900px) { .sec-includes__grid { grid-template-columns: 1fr; gap: 40px; } }
+    .sec-includes__h2 {
+      font-size: clamp(2.25rem, 4.8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+      margin-bottom: 1.25rem;
+      max-width: 14ch;
+    }
+    .sec-includes__h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .sec-includes__body {
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--text-2);
+      max-width: 480px;
+      margin-bottom: 2rem;
+    }
+    .includes-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin-bottom: 0;
     }
     .includes-list li {
       display: flex;
+      gap: 0.75rem;
       align-items: flex-start;
-      gap: 14px;
-      font-size: 1.05rem;
-      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5;
       color: var(--text);
     }
-    .includes-list li .check {
-      flex-shrink: 0;
+    .includes-list li svg {
+      flex: 0 0 auto;
+      width: 20px; height: 20px;
       margin-top: 2px;
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: rgba(192,139,92,0.14);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .includes-list li .check svg {
-      width: 10px; height: 10px;
-      color: var(--blue);
-    }
-
-    .includes-aside {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 36px;
-      box-shadow: 0 4px 24px rgba(107,94,84,0.08), 0 1px 4px rgba(107,94,84,0.04);
-      position: relative;
-      overflow: hidden;
-    }
-    .includes-aside::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--blue), transparent);
-    }
-
-    .aside-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(192,139,92,0.1);
-      border: 1px solid rgba(192,139,92,0.22);
-      color: var(--blue);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border-radius: var(--radius);
-      margin-bottom: 20px;
-    }
-
-    .includes-aside h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
       color: var(--text);
+      stroke-width: 2.5;
+    }
+    .includes-aside {
+      background: white;
+      border: 1px solid rgba(15,15,16,0.06);
+      border-radius: 28px;
+      padding: clamp(28px, 3.5vw, 44px);
+      box-shadow: var(--shadow-sm);
+    }
+    .includes-aside .aside-badge {
+      display: inline-flex;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      background: var(--edit-lavender);
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .includes-aside h3 {
+      font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      margin-bottom: 0.875rem;
     }
     .includes-aside p {
       font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.65;
-      margin-bottom: 28px;
-    }
-    .includes-aside .btn-fill { width: 100%; text-align: center; }
-
-    /* ─── PRICING ─── */
-    .pricing-head {
-      text-align: center;
-      margin-bottom: 56px;
+      line-height: 1.55;
+      color: var(--text-2);
+      margin-bottom: 1.5rem;
     }
 
-    .pricing-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #6B5244;
-      margin-bottom: 12px;
-    }
-    .pricing-eyebrow::before {
-      content: '';
-      width: 20px; height: 2px;
-      background: var(--blue);
-      border-radius: 2px;
-    }
-
-    .pricing-head h2 {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
+    /* ============================================================
+       4 · PRICING — three plan cards on lavender
+       ============================================================ */
+    .sec-pricing {
+      background: var(--edit-lavender-soft);
+      padding: clamp(80px, 11vw, 140px) 0;
       color: var(--text);
-      margin-bottom: 14px;
     }
-    .pricing-head h2 .accent { color: var(--blue); }
-    .pricing-head p {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      max-width: 440px;
-      margin: 0 auto;
-      line-height: 1.65;
+    .sec-pricing__inner {
+      max-width: 1280px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      text-align: center;
+    }
+    .sec-pricing .sec-head { text-align: center; margin-inline: auto; max-width: 640px; }
+    .sec-pricing .sec-head__h2 {
+      font-size: clamp(2.25rem, 4.6vw, 3.75rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+    }
+    .sec-pricing .sec-head__h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .sec-pricing .sec-head__sub {
+      margin-top: 0.875rem;
+      font-size: 1.0625rem;
+      color: var(--text-2);
+      line-height: 1.55;
     }
 
-    .session-grid {
+    .price-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 1.5rem;
+      margin-top: 3rem;
+      text-align: left;
     }
-    @media (max-width: 860px) {
-      .session-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    }
-
-    .session-card {
-      padding: 36px 28px;
-      border-radius: var(--radius-lg);
-      display: flex;
-      flex-direction: column;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      position: relative;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 2px 12px rgba(107,94,84,0.06), 0 1px 4px rgba(107,94,84,0.04);
-    }
-    .session-card:hover {
-      border-color: rgba(192,139,92,0.22);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(192,139,92,0.1), 0 2px 8px rgba(107,94,84,0.06);
-    }
-
-    .session-card.session-featured {
-      background: linear-gradient(175deg, rgba(245,216,122,0.06) 0%, rgba(212,169,53,0.03) 50%, rgba(255,255,255,0) 100%);
-      border: 1px solid rgba(166,124,26,0.35);
-      box-shadow: 0 0 60px rgba(166,124,26,0.10), 0 4px 24px rgba(0,0,0,0.06);
-      overflow: hidden;
-    }
-    .session-card.session-featured::before {
-      content: '';
+    @media (max-width: 1000px) { .price-grid { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; } }
+    .price-card-wrap { position: relative; }
+    .price-pop {
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, #F5D87A, #D4A935, #A67C1A, transparent);
-    }
-    .session-card.session-featured::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 60%; height: 100%;
-      background: linear-gradient(105deg, transparent 40%, rgba(245,216,122,0.05) 45%, rgba(245,216,122,0.10) 50%, rgba(245,216,122,0.05) 55%, transparent 60%);
-      animation: shimmer-session 4s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    @keyframes shimmer-session {
-      0% { left: -100%; }
-      100% { left: 200%; }
-    }
-    .session-card.session-featured > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .session-card-wrap {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .session-pop {
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 5;
-      background: linear-gradient(135deg, #F5D87A, #D4A935, #A67C1A);
-      color: #ffffff;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 9999px;
       font-size: 0.75rem;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: var(--radius);
-      white-space: nowrap;
+      z-index: 2;
     }
-
-    .session-card.session-featured .session-price {
-      background: linear-gradient(135deg, #F5D87A 0%, #D4A935 45%, #A67C1A 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .session-card.session-featured .session-price span {
-      -webkit-text-fill-color: var(--text-muted);
-    }
-    .session-card.session-featured .session-list li .sli {
-      background: rgba(212,169,53,0.14);
-    }
-    .session-card.session-featured .session-list li .sli svg {
-      color: #A67C1A;
-    }
-    .session-card.session-featured .session-solid {
-      background: linear-gradient(135deg, #F5D87A, #D4A935 40%, #A67C1A);
-      color: #ffffff;
-      box-shadow: 0 4px 20px rgba(166,124,26,0.35);
-      border: none;
-    }
-    .session-card.session-featured .session-solid:hover {
-      background: linear-gradient(135deg, #F9E28E, #DDB940 40%, #B8891E);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 28px rgba(166,124,26,0.50);
-    }
-
-    .session-badge {
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 6px;
-    }
-
-    .session-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-      letter-spacing: -0.02em;
-    }
-
-    .session-price {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 2.6rem;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-    .session-price span {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      letter-spacing: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    .session-desc {
-      font-size: 0.84rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .session-list {
-      list-style: none;
-      flex: 1;
+    .price-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 28px;
+      gap: 1.25rem;
+      height: 100%;
+      transition: transform 400ms var(--ease-quart), box-shadow 400ms var(--ease-quart);
     }
-    .session-list li {
-      font-size: 0.84rem;
-      color: var(--text-muted);
+    .price-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .price-card--featured {
+      background: var(--text);
+      color: white;
+      border-color: var(--text);
+    }
+    .price-badge {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 5px 12px;
+      border-radius: 9999px;
+      background: var(--edit-lavender);
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .price-card--featured .price-badge { background: var(--edit-peach); }
+    .price-name {
+      font-size: 1.0625rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: inherit;
+    }
+    .price-num {
+      font-size: clamp(2.5rem, 4.8vw, 3.75rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1;
       display: flex;
+      align-items: baseline;
+      gap: 0.15em;
+    }
+    .price-num sup {
+      font-size: 0.45em;
+      vertical-align: super;
+      font-weight: 500;
+    }
+    .price-num span.suffix {
+      font-size: 0.36em;
+      font-weight: 500;
+      color: inherit;
+      opacity: 0.65;
+      letter-spacing: 0;
+    }
+    .price-card--featured .price-num span.suffix { opacity: 0.7; }
+    .price-desc {
+      font-size: 0.9375rem;
+      line-height: 1.55;
+      color: inherit;
+      opacity: 0.78;
+    }
+    .price-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .price-list li {
+      display: flex; gap: 0.5rem;
       align-items: flex-start;
-      gap: 9px;
+      font-size: 0.9375rem;
       line-height: 1.45;
     }
-    .session-list li .sli {
-      flex-shrink: 0;
-      margin-top: 1px;
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: rgba(192,139,92,0.12);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .price-list li svg {
+      flex: 0 0 auto;
+      width: 18px; height: 18px;
+      margin-top: 2px;
+      color: var(--text-3);
     }
-    .session-list li .sli svg {
-      width: 8px; height: 8px;
-      color: var(--blue);
-    }
-
-    .addon-banner {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: rgba(192,139,92,0.06);
-      border: 1px solid rgba(192,139,92,0.18);
-      border-radius: var(--radius);
-      padding: 12px 14px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
+    .price-card--featured .price-list li svg { color: rgba(255,255,255,0.65); }
+    .price-cta {
       margin-top: auto;
-      margin-bottom: 20px;
-    }
-    .addon-banner strong { color: var(--text); }
-    .addon-icon { flex-shrink: 0; color: var(--blue); margin-top: 1px; }
-
-    .session-action {
-      display: block;
-      text-align: center;
-      padding: 13px 24px;
-      border-radius: var(--radius);
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-    .session-outline {
-      background: transparent;
-      color: rgba(26,26,26,0.7);
-      border: 1px solid rgba(107,94,84,0.2);
-    }
-    .session-outline:hover { background: rgba(107,94,84,0.05); color: var(--text); border-color: rgba(107,94,84,0.3); }
-    .session-outline:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-
-    .session-solid {
-      background: var(--blue);
-      color: #fff;
-      border: none;
-      box-shadow: 0 4px 20px rgba(192,139,92,0.4);
-    }
-    .session-solid:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(192,139,92,0.5); }
-    .session-solid:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-
-    /* ─── CTA SECTION ─── */
-    .cta-section {
-      background: var(--black);
-      padding: 120px 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px; height: 400px;
-      background: radial-gradient(ellipse, rgba(192,139,92,0.12) 0%, rgba(192,139,92,0.04) 40%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .cta-inner {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-    }
-
-    .cta-eyebrow {
       display: inline-flex;
       align-items: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(192,139,92,0.85);
-      padding-left: 10px;
-      border-left: 2px solid var(--blue);
-      margin-bottom: 24px;
-    }
-
-    .cta-section h2 {
-      font-size: clamp(2rem, 3.5vw, 2.8rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      max-width: 680px;
-      margin: 0 auto 20px;
-    }
-    .cta-section h2 .accent { color: var(--blue); }
-
-    .cta-subtitle {
-      font-size: 1rem;
-      color: rgba(250,247,242,0.6);
-      max-width: 480px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-
-    .cta-buttons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn-cta-fill {
-      background: var(--blue);
-      color: #ffffff;
-      border: none;
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      text-decoration: none;
-      display: inline-block;
-      box-shadow: 0 4px 24px rgba(192,139,92,0.4);
-    }
-    .btn-cta-fill:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 6px 28px rgba(192,139,92,0.55); }
-    .btn-cta-fill:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .btn-cta-fill:active { transform: translateY(0); }
-
-    .btn-cta-outline {
-      background: transparent;
-      color: var(--white);
-      border: 1.5px solid rgba(192,139,92,0.5);
-      padding: 14px 28px;
-      border-radius: var(--radius);
-      font-size: 1.05rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.1s, border-color 0.2s;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn-cta-outline:hover { background: rgba(192,139,92,0.08); transform: translateY(-1px); border-color: rgba(192,139,92,0.8); }
-    .btn-cta-outline:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: #1A1A1A;
-      color: rgba(255,255,255,0.6);
-      padding: 60px 0 30px;
-    }
-
-    .footer-inner {
-      max-width: 1530px;
-      margin: 0 auto;
-      padding-left: clamp(8px, 1.5vw, 24px);
-      padding-right: clamp(8px, 1.5vw, 24px);
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 48px;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-      text-decoration: none;
-    }
-    .footer-logo img { height: 72px; filter: brightness(0) invert(1); }
-    .footer-logo span {
-      font-size: 2.2rem;
-      font-weight: 800;
+      gap: 0.625rem;
+      padding: 0.75rem 0.875rem 0.75rem 1.25rem;
+      background: var(--text);
       color: white;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: 0.9375rem;
+      align-self: flex-start;
+      transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out);
+    }
+    .price-cta__arrow {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: white;
+      color: var(--text);
+      display: inline-grid; place-items: center;
+      transition: transform 300ms var(--ease-out);
+    }
+    .price-cta__arrow svg { width: 14px; height: 14px; }
+    .price-cta:hover { transform: translateY(-1px); box-shadow: 0 10px 24px -8px rgba(0,0,0,0.25); }
+    .price-cta:hover .price-cta__arrow { transform: translateX(2px); }
+    .price-card--featured .price-cta { background: white; color: var(--text); }
+    .price-card--featured .price-cta__arrow { background: var(--text); color: white; }
+
+    /* ============================================================
+       5 · CASE STUDY — peach pull-quote
+       ============================================================ */
+    .sec-case {
+      background: var(--edit-peach);
+      padding: clamp(80px, 11vw, 140px) 0;
+      color: var(--text);
+    }
+    .sec-case__inner {
+      max-width: 1080px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      text-align: center;
+    }
+    .sec-case__quote-mark {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: clamp(4rem, 9vw, 7rem);
+      line-height: 0.7;
+      color: var(--text);
+      opacity: 0.7;
+    }
+    .sec-case__quote {
+      font-size: clamp(2rem, 4.8vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+      margin-bottom: 2.5rem;
+      max-width: 24ch;
+      margin-inline: auto;
+    }
+    .sec-case__quote em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
       letter-spacing: -0.02em;
     }
-
-    .footer-cta-btn {
-      display: inline-block;
-      margin-top: 18px;
-      background: var(--blue);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 9px 18px;
-      border-radius: var(--radius);
-      transition: opacity 0.2s, transform 0.2s;
+    .sec-case__attr {
+      max-width: 640px;
+      margin-inline: auto;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: var(--text-2);
     }
-    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    .footer-col h4 {
-      font-size: 0.78rem;
-      font-weight: 700;
+    .sec-case__attr strong {
+      display: block;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.9);
-      margin-bottom: 16px;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
     }
-    .footer-col ul {
-      list-style: none;
+
+    /* ============================================================
+       6 · CLOSING CTA — dark
+       ============================================================ */
+    .sec-cta {
+      background: var(--bg-dark);
+      color: white;
+      padding: clamp(80px, 11vw, 140px) 0;
+    }
+    .sec-cta__inner {
+      max-width: var(--container-wide);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+    }
+    @media (max-width: 900px) { .sec-cta__inner { grid-template-columns: 1fr; } }
+    .sec-cta h2 {
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1.04;
+      color: white;
+      max-width: 720px;
+    }
+    .sec-cta h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--edit-peach);
+    }
+    .sec-cta p {
+      margin: 1.5rem 0 2rem;
+      font-size: 1.0625rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.75);
+      max-width: 540px;
+    }
+    .sec-cta__buttons { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .sec-cta__num {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 0.5rem;
+      padding: 2rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-dark);
+      border-radius: 22px;
     }
-    .footer-col ul li a {
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
-      text-decoration-color: rgba(255,255,255,0.2);
-      color: rgba(255,255,255,0.6);
-      font-size: 0.82rem;
-      transition: color 0.2s, text-decoration-color 0.2s;
+    .sec-cta__num-val {
+      font-size: clamp(3rem, 6vw, 5.25rem);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      color: white;
     }
-    .footer-col ul li a:hover { color: rgba(255,255,255,0.9); text-decoration-color: rgba(255,255,255,0.6); }
+    .sec-cta__num-val em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--edit-olive);
+    }
+    .sec-cta__num-cap {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.5;
+    }
 
-    .footer-social-icons { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-    .footer-social-icon {
-      width: 36px; height: 36px;
-      border-radius: var(--radius);
+    /* ============================================================
+       7 · FOOTER — big-mark
+       ============================================================ */
+    .sec-footer-big {
+      background: var(--bg-dark);
+      color: white;
+      padding: clamp(64px, 9vw, 120px) 0 32px;
+      border-top: 1px solid var(--border-dark);
+    }
+    .sec-footer-big__inner {
+      max-width: var(--container-wide);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .footer-big__grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: clamp(32px, 5vw, 72px);
+      padding-bottom: clamp(48px, 7vw, 96px);
+    }
+    @media (max-width: 1024px) { .footer-big__grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .footer-big__grid { grid-template-columns: 1fr; } }
+    .footer-big h5 {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem;
+    }
+    .footer-big__brand p {
+      max-width: 320px;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      margin: 0.75rem 0 1.25rem;
+    }
+    .footer-big ul { display: flex; flex-direction: column; gap: 0.625rem; }
+    .footer-big a { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
+    .footer-big a:hover { color: white; }
+    .footer-big li { color: rgba(255,255,255,0.7); font-size: 0.9375rem; }
+    .footer-social { display: flex; gap: 0.625rem; }
+    .footer-social a {
+      width: 38px; height: 38px;
+      border-radius: 50%;
       background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--border-dark);
+      display: grid; place-items: center;
+      transition: background 200ms;
+    }
+    .footer-social a:hover { background: rgba(255,255,255,0.12); }
+    .footer-social svg { width: 16px; height: 16px; color: white; }
+    .footer-big__mark {
+      font-size: clamp(4.5rem, 22vw, 14rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: white;
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.65);
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-      text-decoration: none;
+      gap: 0.25em;
+      flex-wrap: wrap;
+      padding: clamp(32px, 5vw, 64px) 0 clamp(24px, 4vw, 48px);
+      border-top: 1px solid var(--border-dark);
     }
-    .footer-social-icon:hover { background: rgba(192,139,92,0.15); border-color: rgba(192,139,92,0.3); color: white; }
-    .footer-social-icon:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-    .footer-social-icon svg { width: 15px; height: 15px; }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding-top: 24px;
+    .footer-big__mark .hash-mark {
+      width: 0.9em;
+      height: 0.9em;
+      display: block;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .footer-big__bottom {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-dark);
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.5);
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 1rem;
     }
-    .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
-    .footer-copy a {
-      color: rgba(255,255,255,0.6);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
-      text-decoration-color: rgba(255,255,255,0.2);
-      transition: color 0.2s, text-decoration-color 0.2s;
+    .footer-big__bottom a { color: rgba(255,255,255,0.6); }
+    .footer-big__bottom a:hover { color: white; }
+    .footer-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 10px 18px;
+      border-radius: 9999px;
+      background: white;
+      color: var(--text);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: background 200ms;
     }
-    .footer-copy a:hover { color: rgba(255,255,255,0.8); text-decoration-color: rgba(255,255,255,0.6); }
-    .footer-legal { display: flex; gap: 20px; }
-    .footer-legal a {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.45);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-thickness: 1px;
-      text-decoration-color: rgba(255,255,255,0.2);
-      transition: color 0.2s, text-decoration-color 0.2s;
-    }
-    .footer-legal a:hover { color: rgba(255,255,255,0.7); text-decoration-color: rgba(255,255,255,0.6); }
+    .footer-cta-btn:hover { background: rgba(255,255,255,0.85); }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+    /* ── Reveal utility ─── */
+    .fx-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
     }
+    .fx-up.visible { opacity: 1; transform: none; }
+    .fx-up--d1 { transition-delay: 80ms; }
+    .fx-up--d2 { transition-delay: 160ms; }
+    .fx-up--d3 { transition-delay: 240ms; }
+    .fx-up--d4 { transition-delay: 320ms; }
 
-    @media (max-width: 600px) {
-      body { font-size: 16px; }
-      .hero { padding: 120px 0 80px; }
-      .section { padding: 80px 0; }
-      .cta-section { padding: 80px 0; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-brand, .footer-col { text-align: center; }
-      .footer-logo { justify-content: center; }
-      .footer-social-icons { justify-content: center; gap: 20px; }
-      .footer-social-icon { width: 48px; height: 48px; border-radius: 12px; }
-      .footer-social-icon svg { width: 20px; height: 20px; }
-      .footer-logo img { height: 36px; }
-      .footer-logo span { font-size: 1.3rem; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .cta-section h2 { font-size: 1.75rem; }
-    }
-
-    /* ─── REDUCED MOTION ─── */
     @media (prefers-reduced-motion: reduce) {
-      .fade-in { opacity: 1 !important; transform: none !important; transition: none !important; }
-      * { transition: none !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fx-up { opacity: 1; transform: none; }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--edit-lavender-chip);
+      outline-offset: 3px;
+      border-radius: 6px;
     }
   </style>
 </head>
+
 <body>
 
-  <!-- ─── NAV ─── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-        <span>Visuanza</span>
+  <!-- ═══════════════ NAV ═══════════════ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+        <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+        VISUANZA
       </a>
-      <ul class="nav-links">
-        <li class="nav-has-dropdown">
-          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
-          <div class="nav-dropdown">
-            <div class="nav-dropdown-grid">
-              <a href="redes-sociales.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Redes Sociales</span>
-                  <span class="ndi-desc">Gestión profesional para ganar visibilidad online</span>
-                </span>
-              </a>
-              <a href="diseno-web.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Diseño Web</span>
-                  <span class="ndi-desc">Páginas a medida + Google My Business incluido</span>
-                </span>
-              </a>
-              <a href="fotografia-menu.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Fotografía de Menú</span>
-                  <span class="ndi-desc">Fotos profesionales + assets digitales y print</span>
-                </span>
-              </a>
-              <a href="publicidad-digital.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Publicidad Digital</span>
-                  <span class="ndi-desc">Meta Ads y TikTok Ads que llenan mesas</span>
-                </span>
-              </a>
-            </div>
-          </div>
-        </li>
-        <li><a href="index.html#quienes">Quiénes somos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="blog.html">Blog</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
+
+      <div class="nav__links" role="menubar">
+        <a href="index.html" role="menuitem">Inicio</a>
+        <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+        <a href="diseno-web.html" role="menuitem">Diseño web</a>
+        <a href="fotografia-menu.html" role="menuitem" class="is-active">Fotografía</a>
+        <a href="google-publicidad.html" role="menuitem">Google &amp; ads</a>
+        <a href="blog.html" role="menuitem">Blog</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+
+      <div class="nav__cta">
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
+      </div>
+
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ─── MOBILE MENU ─── -->
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <ul class="mobile-menu-links">
-      <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
-      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
-      <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
-      <li><a href="blog.html" class="mobile-menu-link">Blog</a></li>
-    </ul>
-    <div class="mobile-menu-bottom">
-      <a href="contacto.html" class="mobile-cta mobile-menu-link">Pedir propuesta</a>
-    </div>
-  </div>
-
   <main>
 
-    <!-- ─── HERO ─── -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-inner">
-          <p class="hero-eyebrow fade-in">Servicio 03 · Fotografía de Menú</p>
-          <h1 class="fade-in delay-1">Cada detalle<br/><em>importa.</em></h1>
-          <p class="hero-subtitle fade-in delay-2">Fotografiamos todo tu menú con luz natural, composición profesional y edición que hace que cada plato parezca irresistible. Más clics, más pedidos.</p>
-          <div class="hero-btns fade-in delay-2">
-            <a href="contacto.html" class="btn-fill">Reservar sesión fotográfica</a>
-            <a href="servicios.html" class="btn-outline">Ver todos los servicios</a>
+    <!-- ═══════════════ 1 · HERO ═══════════════ -->
+    <section class="sub-hero" aria-label="Hero">
+      <div class="sub-hero__media" aria-hidden="true">
+        <img src="assets/services/fotografia-menu.webp" alt="" loading="eager">
+      </div>
+
+      <div class="sub-hero__inner">
+        <p class="sub-hero__eyebrow">
+          <img class="hash-mark" src="assets/hash-mark-white.png" alt="" aria-hidden="true">
+          Servicio 03 · Fotografía gastronómica
+        </p>
+        <h1 class="sub-hero__h1">
+          Cada plato merece su <em>mejor</em> retrato
+        </h1>
+        <p class="sub-hero__sub">
+          Fotografiamos toda tu carta con luz natural, composición profesional y edición premium. Imágenes que hacen que cada plato parezca irresistible — más clics, más pedidos, más mesas llenas.
+        </p>
+        <div class="sub-hero__cta">
+          <a href="contacto.html" class="pill-btn pill-btn--lav">
+            Reservar sesión
+            <span class="pill-btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+          <a href="#planes" class="pill-btn">
+            Ver tarifas
+            <span class="pill-btn__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 2 · DIFFERENTIATOR — 6 feature cards ═══════════════ -->
+    <section class="sec-diff">
+      <div class="sec-diff__inner">
+        <div class="sec-diff__grid">
+          <div class="sec-diff__lead fx-up">
+            <p class="sec-head__label">Lo que capturamos</p>
+            <h2 class="sec-diff__h2">Fotografía que <em class="gradient-text">vende</em></h2>
+            <p class="sec-diff__body">
+              Una foto mediocre de un plato excelente hace que el cliente lo pase por alto. Una foto profesional del mismo plato puede multiplicar sus pedidos por tres.
+            </p>
+            <a href="contacto.html" class="pill-btn pill-btn--dark">
+              Hablamos de tu carta
+              <span class="pill-btn__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
+          </div>
+
+          <div class="fx-up fx-up--d1">
+            <div class="feat-stack">
+              <div class="feat-card">
+                <div class="feat-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                </div>
+                <div>
+                  <h3>Sesión en tu local</h3>
+                  <p>Vamos a tu restaurante con todo el equipo. Fotografiamos los platos en su entorno real, con la luz y el contexto que los hace irresistibles.</p>
+                </div>
+              </div>
+
+              <div class="feat-card">
+                <div class="feat-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div>
+                  <h3>Entrega rápida</h3>
+                  <p>Fotos editadas y listas para usar en el menor tiempo posible. Sin esperas innecesarias.</p>
+                </div>
+              </div>
+
+              <div class="feat-card">
+                <div class="feat-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <div>
+                  <h3>Formatos para todo</h3>
+                  <p>Alta resolución para imprenta, formato web optimizado y recortes exactos para redes sociales e Instagram.</p>
+                </div>
+              </div>
+
+              <div class="feat-card">
+                <div class="feat-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div>
+                  <h3>Optimizadas para delivery</h3>
+                  <p>Tamaños perfectos para Glovo, Just Eat, Uber Eats y cualquier plataforma de pedidos online.</p>
+                </div>
+              </div>
+
+              <div class="feat-card">
+                <div class="feat-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </div>
+                <div>
+                  <h3>Retoque profesional</h3>
+                  <p>Edición de color, brillo, contraste y eliminación de imperfecciones. Cada foto sale perfecta — no solo buena.</p>
+                </div>
+              </div>
+
+              <div class="feat-card">
+                <div class="feat-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </div>
+                <div>
+                  <h3>Derechos ilimitados</h3>
+                  <p>Todas las fotos son tuyas para siempre. Web, redes, carta, menú digital — sin restricciones ni facturas adicionales.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── LO QUE CAPTURAMOS ─── -->
-    <section class="section section-white">
-      <div class="container">
-        <div class="section-header fade-in">
-          <p class="section-label">Lo que capturamos</p>
-          <h2 class="section-heading">Fotografía que <span class="accent">vende</span></h2>
-          <p class="section-sub">Una foto mediocre de un plato excelente hace que el cliente lo pase por alto. Una foto profesional del mismo plato puede multiplicar sus pedidos por tres.</p>
-        </div>
-        <div class="feature-grid">
-          <div class="feature-card fade-in">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-            </div>
-            <h3>Sesión en tu local</h3>
-            <p>Venimos a tu restaurante con todo el equipo. Fotografiamos los platos en su entorno real, con la luz y el contexto que los hace irresistibles.</p>
-          </div>
-          <div class="feature-card fade-in delay-1">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-            </div>
-            <h3>Entrega rápida</h3>
-            <p>Fotos editadas y listas para usar en el menor tiempo posible. Sin esperas innecesarias.</p>
-          </div>
-          <div class="feature-card fade-in delay-2">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-            </div>
-            <h3>Formatos para todo</h3>
-            <p>Alta resolución para imprenta, formato web optimizado y recortes exactos para redes sociales e Instagram.</p>
-          </div>
-          <div class="feature-card fade-in">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            </div>
-            <h3>Optimizadas para delivery</h3>
-            <p>Tamaños perfectos para Glovo, Just Eat, Uber Eats y cualquier plataforma de pedidos online.</p>
-          </div>
-          <div class="feature-card fade-in delay-1">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-            </div>
-            <h3>Retoque profesional</h3>
-            <p>Edición de color, brillo, contraste y eliminación de imperfecciones. Cada foto sale perfecta — no solo buena.</p>
-          </div>
-          <div class="feature-card fade-in delay-2">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            </div>
-            <h3>Derechos ilimitados</h3>
-            <p>Todas las fotos son tuyas para siempre. Web, redes, carta, menú digital — sin restricciones ni facturas adicionales.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── TODO INCLUIDO ─── -->
-    <section class="section section-surface">
-      <div class="container">
-        <div class="includes-layout">
-          <div class="fade-in">
-            <p class="section-label">Todo incluido</p>
-            <h2 class="section-heading">Lo que recibes en tu <span class="accent">sesión</span></h2>
-            <p class="section-sub">Una sesión completa pensada para maximizar el impacto visual de cada plato de tu carta, lista para usarse en todos los canales.</p>
+    <!-- ═══════════════ 3 · INCLUDES ═══════════════ -->
+    <section class="sec-includes">
+      <div class="sec-includes__inner">
+        <div class="sec-includes__grid">
+          <div class="fx-up">
+            <p class="sec-head__label">Todo incluido</p>
+            <h2 class="sec-includes__h2">Lo que recibes en tu <em class="gradient-text">sesión</em></h2>
+            <p class="sec-includes__body">
+              Una sesión completa pensada para maximizar el impacto visual de cada plato de tu carta, lista para usarse en todos los canales.
+            </p>
             <ul class="includes-list">
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Sesión fotográfica completa en tu local
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Sesión fotográfica completa en tu local</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Fotografía de todos los platos de la carta
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Fotografía de todos los platos de la carta</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Fotografías del local, ambiente e interior
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Fotografías del local, ambiente e interior</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Edición y retoque profesional de todas las fotos
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Edición y retoque profesional de todas las fotos</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Versiones para web, redes y plataformas de delivery
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Versiones para web, redes y plataformas de delivery</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Fotos en formato vertical y horizontal
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Fotos en formato vertical y horizontal</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Entrega de archivos en alta resolución en 48 horas
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Entrega de archivos en alta resolución en 48 horas</span>
               </li>
               <li>
-                <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                Derechos de uso ilimitados y permanentes
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Derechos de uso ilimitados y permanentes</span>
               </li>
             </ul>
           </div>
-          <div class="fade-in delay-1" style="align-self: center;">
-            <div class="includes-aside">
-              <span class="aside-badge">Add-on disponible</span>
-              <h3>Material Digital y Print</h3>
-              <p>Con tus fotos creamos flyers, cartas digitales, stories y assets para redes sociales listos para publicar — todo con tu identidad visual.</p>
-              <a href="contacto.html" class="btn-fill">Reservar sesión fotográfica</a>
-            </div>
+
+          <aside class="includes-aside fx-up fx-up--d1">
+            <span class="aside-badge">Add-on disponible</span>
+            <h3>Material digital y print</h3>
+            <p>Con tus fotos creamos flyers, cartas digitales, stories y assets para redes sociales listos para publicar — todo con tu identidad visual.</p>
+            <a href="contacto.html" class="pill-btn pill-btn--dark">
+              Reservar sesión
+              <span class="pill-btn__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ 4 · PRICING ═══════════════ -->
+    <section class="sec-pricing" id="planes">
+      <div class="sec-pricing__inner">
+        <div class="sec-head fx-up">
+          <p class="sec-head__label" style="text-align:center;">Planes y precios</p>
+          <h2 class="sec-head__h2">El plan que <em class="gradient-text">se adapta a ti</em></h2>
+          <p class="sec-head__sub">Sin permanencia, sin letra pequeña. Sólo fotografía que vende.</p>
+        </div>
+
+        <div class="price-grid">
+
+          <!-- TIER 1 · Sesión de Menú · €300 / sesión -->
+          <div class="price-card-wrap">
+            <article class="price-card fx-up fx-up--d1">
+              <span class="price-badge">Básica</span>
+              <p class="price-name">Sesión de Menú</p>
+              <div class="price-num">
+                <sup>€</sup>300<span class="suffix">/sesión</span>
+              </div>
+              <p class="price-desc">Para restaurantes que quieren empezar con fotos profesionales de su carta.</p>
+              <ul class="price-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Hasta 10 platos fotografiados</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Fotos editadas en alta resolución</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Formatos web y redes sociales</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Entrega rápida</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Derechos de uso ilimitados</span></li>
+              </ul>
+              <a href="contacto.html" class="price-cta">
+                Reservar sesión
+                <span class="price-cta__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+            </article>
+          </div>
+
+          <!-- TIER 2 · Sesión Completa · €500 / sesión · RECOMENDADO -->
+          <div class="price-card-wrap">
+            <span class="price-pop">Recomendado</span>
+            <article class="price-card price-card--featured fx-up fx-up--d2">
+              <span class="price-badge">Estándar</span>
+              <p class="price-name">Sesión Completa</p>
+              <div class="price-num">
+                <sup>€</sup>500<span class="suffix">/sesión</span>
+              </div>
+              <p class="price-desc">Para restaurantes que quieren fotografiar toda la carta con calidad premium.</p>
+              <ul class="price-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Carta completa fotografiada</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Hasta 25 platos editados</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Fotografías del local y ambiente</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Formatos delivery (Glovo, Just Eat…)</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Entrega rápida</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Derechos de uso ilimitados</span></li>
+              </ul>
+              <a href="contacto.html" class="price-cta">
+                Reservar sesión
+                <span class="price-cta__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+            </article>
+          </div>
+
+          <!-- TIER 3 · Pack Campaña · €800 / sesión -->
+          <div class="price-card-wrap">
+            <article class="price-card fx-up fx-up--d3">
+              <span class="price-badge">Campaña</span>
+              <p class="price-name">Pack Campaña</p>
+              <div class="price-num">
+                <sup>€</sup>800<span class="suffix">/sesión</span>
+              </div>
+              <p class="price-desc">Para restaurantes que quieren contenido completo para lanzamientos y campañas.</p>
+              <ul class="price-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Todo lo del plan Estándar</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Hasta 40 platos fotografiados</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Vídeos cortos para redes (Reels/TikTok)</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Estrategia de publicación incluida</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Assets para publicidad digital</span></li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Entrega rápida</span></li>
+              </ul>
+              <a href="contacto.html" class="price-cta">
+                Reservar sesión
+                <span class="price-cta__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+              </a>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ─── PRECIOS ─── -->
-    <section class="section section-white">
-      <div class="container">
-        <div class="pricing-head fade-in">
-          <p class="pricing-eyebrow">Planes y precios</p>
-          <h2>El plan que <span class="accent">se adapta a ti</span></h2>
-          <p>Tres niveles, un objetivo: más pedidos, más visibilidad, más ventas para tu restaurante.</p>
-        </div>
-        <div class="session-grid">
-
-          <!-- Básica -->
-          <div class="session-card fade-in delay-1">
-            <div class="session-badge">Básica</div>
-            <div class="session-name">Sesión de Menú</div>
-            <div class="session-price">€300<span> / sesión</span></div>
-            <p class="session-desc">Para restaurantes que quieren empezar con fotos profesionales de su carta.</p>
-            <ul class="session-list">
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Hasta 10 platos fotografiados</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Fotos editadas en alta resolución</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Formatos web y redes sociales</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Entrega rápida</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Derechos de uso ilimitados</li>
-            </ul>
-            <div class="addon-banner">
-              <span class="addon-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              </span>
-              <span><strong>Add-on: Material Digital y Print</strong> — flyers, cartas digitales y assets para redes listos para publicar.</span>
-            </div>
-            <a href="contacto.html" class="session-action session-outline">Reservar sesión</a>
-          </div>
-
-          <!-- Estándar (featured) -->
-          <div class="session-card-wrap">
-          <span class="session-pop">Recomendado</span>
-          <div class="session-card session-featured fade-in">
-            <div class="session-badge">Estándar</div>
-            <div class="session-name">Sesión Completa</div>
-            <div class="session-price">€500<span> / sesión</span></div>
-            <p class="session-desc">Para restaurantes que quieren fotografiar toda la carta con calidad premium.</p>
-            <ul class="session-list">
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Carta completa fotografiada</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Hasta 25 platos editados</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Fotografías del local y ambiente</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Formatos delivery (Glovo, Just Eat…)</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Entrega rápida</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Derechos de uso ilimitados</li>
-            </ul>
-            <div class="addon-banner">
-              <span class="addon-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              </span>
-              <span><strong>Add-on: Material Digital y Print</strong> — flyers, cartas digitales y assets para redes listos para publicar.</span>
-            </div>
-            <a href="contacto.html" class="session-action session-solid">Reservar sesión</a>
-          </div>
-          </div><!-- /session-card-wrap -->
-
-          <!-- Campaña -->
-          <div class="session-card fade-in delay-2">
-            <div class="session-badge">Campaña</div>
-            <div class="session-name">Pack Campaña</div>
-            <div class="session-price">€800<span> / sesión</span></div>
-            <p class="session-desc">Para restaurantes que quieren contenido completo para lanzamientos y campañas.</p>
-            <ul class="session-list">
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Todo lo del plan Estándar</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Hasta 40 platos fotografiados</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Vídeos cortos para redes (Reels/TikTok)</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Estrategia de publicación incluida</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Assets para publicidad digital</li>
-              <li><span class="sli"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Entrega rápida</li>
-            </ul>
-            <div class="addon-banner">
-              <span class="addon-icon">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              </span>
-              <span><strong>Add-on: Material Digital y Print</strong> — flyers, cartas digitales y assets para redes listos para publicar.</span>
-            </div>
-            <a href="contacto.html" class="session-action session-outline">Reservar sesión</a>
-          </div>
-
-        </div>
+    <!-- ═══════════════ 5 · CASE STUDY ═══════════════ -->
+    <!-- TODO: v1 backup did not include a fotografía-specific case study with named partner. Pull-quote uses a generic, fact-safe attribution. Replace once a real photography client testimonial is available. -->
+    <section class="sec-case">
+      <div class="sec-case__inner">
+        <div class="sec-case__quote-mark fx-up" aria-hidden="true">"</div>
+        <p class="sec-case__quote fx-up fx-up--d1">
+          Platos que se ven tan bien que <em class="gradient-text">se piden solos</em>
+        </p>
+        <p class="sec-case__attr fx-up fx-up--d2">
+          <strong>— Visuanza · Estudio de fotografía gastronómica</strong>
+          Sesión en tu local, edición premium y entrega en 48 horas. Fotografiamos cada plato con la luz, la composición y el detalle que convierten a una carta en tu mejor herramienta de venta.
+        </p>
       </div>
     </section>
 
-    <!-- ─── CTA ─── -->
-    <section class="cta-section">
-      <div class="container">
-        <div class="cta-inner fade-in">
-          <p class="cta-eyebrow">Empieza hoy</p>
-          <h2>Platos que se ven tan bien que <span class="accent">se piden solos.</span></h2>
-          <p class="cta-subtitle">Reserva tu sesión fotográfica. Sin compromiso, sin letra pequeña.</p>
-          <div class="cta-buttons">
-            <a href="contacto.html" class="btn-cta-fill">Reservar sesión fotográfica</a>
-            <a href="servicios.html" class="btn-cta-outline">Ver todos los servicios</a>
+    <!-- ═══════════════ 6 · CLOSING CTA ═══════════════ -->
+    <section class="sec-cta">
+      <div class="sec-cta__inner">
+        <div class="fx-up">
+          <h2>¿Listo para fotografiar tu <em>carta?</em></h2>
+          <p>
+            Más de 30 restaurantes ya confían en Visuanza para su crecimiento. Reserva tu sesión hoy — sin compromiso, sin letra pequeña.
+          </p>
+          <div class="sec-cta__buttons">
+            <a href="contacto.html" class="pill-btn pill-btn--lav">
+              Reservar sesión
+              <span class="pill-btn__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
+            <a href="servicios.html" class="pill-btn">
+              Ver todos los servicios
+              <span class="pill-btn__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
           </div>
         </div>
+
+        <aside class="sec-cta__num fx-up fx-up--d1" aria-label="Restaurantes partners">
+          <div class="sec-cta__num-val">30<em>+</em></div>
+          <div class="sec-cta__num-cap">restaurantes ya confían en Visuanza para su crecimiento.</div>
+        </aside>
       </div>
     </section>
 
   </main>
 
-  <!-- ─── FOOTER ─── -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-          <a href="index.html" class="footer-logo">
-            <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-            <span>Visuanza</span>
-          </a>
+  <!-- ═══════════════ 7 · FOOTER — big-mark ═══════════════ -->
+  <footer class="sec-footer-big">
+    <div class="sec-footer-big__inner footer-big">
+      <div class="footer-big__grid">
+        <div class="footer-big__brand">
+          <h5>Visuanza</h5>
+          <p>Marketing especializado en restaurantes — diseño web, redes sociales, fotografía y publicidad. Sin permanencia, sólo resultados.</p>
           <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
         </div>
-
-        <div class="footer-col">
-          <h4>Servicios</h4>
+        <div>
+          <h5>Servicios</h5>
           <ul>
             <li><a href="redes-sociales.html">Redes Sociales</a></li>
             <li><a href="diseno-web.html">Diseño Web</a></li>
@@ -1564,9 +1297,8 @@
             <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
           </ul>
         </div>
-
-        <div class="footer-col">
-          <h4>Navegar</h4>
+        <div>
+          <h5>Navegar</h5>
           <ul>
             <li><a href="index.html">Inicio</a></li>
             <li><a href="index.html#quienes">Quiénes somos</a></li>
@@ -1574,119 +1306,71 @@
             <li><a href="blog.html">Blog</a></li>
           </ul>
         </div>
-
-        <div class="footer-col">
-          <h4>Redes</h4>
-          <div class="footer-social-icons">
-            <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram">
+        <div>
+          <h5>Redes</h5>
+          <div class="footer-social">
+            <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
             </a>
-            <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" aria-label="TikTok">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg>
             </a>
-            <a href="#" class="footer-social-icon" aria-label="Facebook">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <a href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
             </a>
-            <a href="#" class="footer-social-icon" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <a href="#" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             </a>
           </div>
         </div>
-
       </div>
 
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
-        <div class="footer-legal">
-          <a href="politica-privacidad.html">Política de privacidad</a>
-        </div>
+      <div class="footer-big__mark" aria-hidden="true">
+        <img class="hash-mark" src="assets/hash-mark-white.png" alt="">VISUANZA
       </div>
-    </div><!-- /footer-inner -->
+
+      <div class="footer-big__bottom">
+        <span>© 2026 Visuanza · <a href="https://synsnumedia.se/" target="_blank" rel="noopener">Syns Nu Media</a>. Todos los derechos reservados.</span>
+        <span><a href="politica-privacidad.html">Política de privacidad</a></span>
+      </div>
+    </div>
   </footer>
 
   <script>
-    // ─── SCROLL FADE IN ───
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    (function () {
+      const nav = document.getElementById('nav');
+      if (!nav) return;
+      let lastY = window.scrollY;
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          const goingDown = y > lastY && y > 100;
+          nav.classList.toggle('nav--hidden', goingDown);
+          lastY = y;
+          ticking = false;
+        });
+      }, { passive: true });
+    })();
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Fallback: ensure nothing stays permanently hidden
-    setTimeout(() => {
-      document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
-    }, 300);
-
-    // ─── MOBILE HAMBURGER MENU ───
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    function openMenu() {
-      hamburger.classList.add('open');
-      mobileMenu.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
-      mobileMenu.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMenu() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
-    });
-
-    document.querySelectorAll('.mobile-menu-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
-    });
+    (function () {
+      const els = document.querySelectorAll('.fx-up');
+      if (!('IntersectionObserver' in window) || els.length === 0) {
+        els.forEach((el) => el.classList.add('visible'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+      els.forEach((el) => io.observe(el));
+    })();
   </script>
-
-<!-- Cookie Consent Banner -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#1a1a1a;color:#fff;padding:16px 24px;z-index:99999;font-family:inherit;font-size:0.9rem;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
-  <p style="margin:0;flex:1;min-width:200px;">Usamos cookies para analizar el tráfico de nuestra web. <a href="politica-privacidad.html" style="color:#D4A935;text-decoration:underline;">Más información</a></p>
-  <div style="display:flex;gap:10px;flex-shrink:0;">
-    <button onclick="acceptCookies()" style="background:#D4A935;color:#fff;border:none;padding:8px 20px;border-radius:4px;cursor:pointer;font-weight:600;font-size:0.85rem;">Aceptar</button>
-    <button onclick="rejectCookies()" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3);padding:8px 20px;border-radius:4px;cursor:pointer;font-size:0.85rem;">Rechazar</button>
-  </div>
-</div>
-<script>
-  function acceptCookies() {
-    gtag('consent', 'update', {
-      'ad_storage': 'granted',
-      'ad_user_data': 'granted',
-      'ad_personalization': 'granted',
-      'analytics_storage': 'granted'
-    });
-    localStorage.setItem('cookie_consent', 'granted');
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-  function rejectCookies() {
-    localStorage.setItem('cookie_consent', 'denied');
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-  (function() {
-    var consent = localStorage.getItem('cookie_consent');
-    if (consent === 'granted') {
-      gtag('consent', 'update', {
-        'ad_storage': 'granted',
-        'ad_user_data': 'granted',
-        'ad_personalization': 'granted',
-        'analytics_storage': 'granted'
-      });
-    } else if (!consent) {
-      document.getElementById('cookie-banner').style.display = 'flex';
-    }
-  })();
-</script>
 </body>
 </html>
