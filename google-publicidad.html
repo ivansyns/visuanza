@@ -920,7 +920,40 @@
         <span></span><span></span><span></span>
       </button>
     </div>
-  </nav>
+  
+    <!-- Mobile nav overlay (hidden on desktop, opened by #hamburger) -->
+    <div class="nav__mobile" id="nav-mobile" aria-hidden="true" inert>
+      <div class="nav__mobile-inner">
+        <div class="nav__mobile-head">
+          <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+            <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+            VISUANZA
+          </a>
+          <button class="nav__mobile-close" aria-label="Cerrar menú" type="button">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <nav class="nav__mobile-links" aria-label="Menú móvil">
+          <a href="index.html">Inicio</a>
+          <a href="servicios.html">Servicios</a>
+          <a href="redes-sociales.html" class="nav__mobile-sub">— Redes sociales</a>
+          <a href="diseno-web.html" class="nav__mobile-sub">— Diseño web</a>
+          <a href="fotografia-menu.html" class="nav__mobile-sub">— Fotografía de menú</a>
+          <a href="google-publicidad.html" class="nav__mobile-sub">— Google publicidad</a>
+          <a href="casos.html">Casos</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="blog.html">Blog</a>
+          <a href="contacto.html">Contacto</a>
+        </nav>
+        <div class="nav__mobile-cta">
+          <a href="contacto.html" class="btn btn--blue">Reserva una llamada</a>
+          <a href="#login" class="btn btn--ghost">Acceso clientes</a>
+        </div>
+      </div>
+    </div>
+</nav>
 
   <main>
 
@@ -1237,5 +1270,6 @@
       els.forEach((el) => io.observe(el));
     })();
   </script>
+  <script src="assets/visuanza-chrome.js" defer></script>
 </body>
 </html>

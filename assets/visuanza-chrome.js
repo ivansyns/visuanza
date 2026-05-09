@@ -41,3 +41,41 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
   els.forEach(el => io.observe(el));
 })();
+
+/* Mobile nav overlay — hamburger toggles full-screen menu.
+   Closes on: close-button click, link click, Escape key. */
+(function () {
+  const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('nav-mobile');
+  if (!hamburger || !overlay) return;
+
+  const closeBtn = overlay.querySelector('.nav__mobile-close');
+  const links = overlay.querySelectorAll('a');
+
+  function open() {
+    overlay.classList.add('is-open');
+    overlay.removeAttribute('inert');
+    overlay.setAttribute('aria-hidden', 'false');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('nav-mobile-open');
+  }
+  function close() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('inert', '');
+    overlay.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-mobile-open');
+  }
+
+  hamburger.addEventListener('click', open);
+  closeBtn && closeBtn.addEventListener('click', close);
+  links.forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+  });
+
+  // Close menu if viewport is resized to desktop
+  const mq = window.matchMedia('(min-width: 901px)');
+  const onResize = () => { if (mq.matches && overlay.classList.contains('is-open')) close(); };
+  mq.addEventListener?.('change', onResize);
+})();

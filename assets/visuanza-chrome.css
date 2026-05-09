@@ -388,3 +388,123 @@ a:focus-visible, button:focus-visible {
   outline-offset: 3px;
   border-radius: 6px;
 }
+
+/* ============================================================
+   MOBILE NAV OVERLAY — full-screen menu opened by #hamburger.
+   Hidden on desktop (>900px), shown only on mobile when toggled.
+   ============================================================ */
+.nav__mobile {
+  position: fixed;
+  inset: 0;
+  background: white;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 240ms var(--ease-out, cubic-bezier(0.22, 0.61, 0.36, 1)),
+              visibility 0s linear 240ms;
+}
+.nav__mobile.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 240ms var(--ease-out, cubic-bezier(0.22, 0.61, 0.36, 1));
+}
+.nav__mobile-inner {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 20px 32px;
+  max-width: var(--container);
+  margin-inline: auto;
+  width: 100%;
+}
+.nav__mobile-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 8px 4px;
+}
+.nav__mobile-head .nav__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--text);
+  text-decoration: none;
+}
+.nav__mobile-head .hash-mark {
+  width: 22px;
+  height: 22px;
+  display: block;
+  object-fit: contain;
+}
+.nav__mobile-close {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-radius: 9999px;
+  transition: background 160ms ease;
+}
+.nav__mobile-close:hover { background: var(--bg-soft); }
+.nav__mobile-close svg {
+  width: 22px;
+  height: 22px;
+  color: var(--text);
+}
+.nav__mobile-links {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: clamp(20px, 4vw, 32px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav__mobile-links a {
+  display: block;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 1.4rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+.nav__mobile-links a:hover { color: var(--text-2); }
+.nav__mobile-links a.nav__mobile-sub {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+  padding-left: 18px;
+  font-weight: 400;
+  border-bottom: 1px solid var(--border-soft, rgba(0,0,0,0.05));
+  padding-block: 12px;
+}
+.nav__mobile-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 20px;
+}
+.nav__mobile-cta .btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  padding-block: 14px;
+  font-size: 0.9375rem;
+}
+
+/* Lock body scroll when menu is open. JS toggles class on body. */
+body.nav-mobile-open {
+  overflow: hidden;
+}
+
+/* Hide on desktop entirely. */
+@media (min-width: 901px) {
+  .nav__mobile { display: none !important; }
+}
