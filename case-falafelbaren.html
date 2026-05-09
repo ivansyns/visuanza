@@ -1166,8 +1166,24 @@
         pin.classList.add('is-pinned');
         // Measure horizontal travel: cards width minus the viewport (sticky window) width.
         const cardsWidth = cards.scrollWidth;
-        const viewportWidth = viewport.clientWidth;
-        travel = Math.max(0, cardsWidth - viewportWidth);
+        // Use cards.clientWidth NOT viewport.clientWidth: the viewport has
+        // padding-inline gutter that's already part of the visual frame.
+        // The cards container is narrower by 2*gutter than the viewport,
+        // so this gives the correct horizontal distance for the cards to
+        // travel — and the viewport's right padding becomes the natural
+        // matching gutter that mirrors the gutter on the left side.
+        const visibleWidth = cards.clientWidth;
+        // Travel = scrollWidth - clientWidth. Viewport's right padding
+        // naturally produces a matching gutter on the right side.
+        travel = Math.max(0, cardsWidth - visibleWidth);
+        if (travel <= 0) {
+          pin.classList.remove('is-pinned');
+          pin.style.height = '';
+          cards.style.transform = '';
+          if (progressFill) progressFill.style.width = '0%';
+          pinned = false;
+          return;
+        }
         // Pin must be tall enough to cover travel + one viewport so cards
         // finish moving before the pin releases.
         const total = travel + window.innerHeight;
@@ -1179,9 +1195,9 @@
       function update() {
         if (!pinned) return;
         const rect = pin.getBoundingClientRect();
-        const max = pin.offsetHeight - window.innerHeight;
+        // Use the travel value directly as the scrollable distance.
         const scrolled = Math.max(0, -rect.top);
-        const p = max > 0 ? Math.min(1, scrolled / max) : 0;
+        const p = travel > 0 ? Math.min(1, scrolled / travel) : 0;
         cards.style.transform = 'translate3d(' + (-travel * p).toFixed(2) + 'px, 0, 0)';
         if (progressFill) progressFill.style.width = (p * 100).toFixed(2) + '%';
       }
@@ -1203,9 +1219,23 @@
       }
 
       // Initial measurement after layout settles (images/fonts).
-      const init = () => { refresh(); setTimeout(refresh, 300); };
+      const init = () => {
+        refresh();
+        setTimeout(refresh, 200);
+        setTimeout(refresh, 800);
+        setTimeout(refresh, 2000);
+      };
       if (document.readyState === 'complete') init();
       else window.addEventListener('load', init);
+
+      if (typeof ResizeObserver !== 'undefined') {
+        let raf = 0;
+        const ro = new ResizeObserver(() => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => { raf = 0; refresh(); });
+        });
+        ro.observe(cards);
+      }
 
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', refresh);

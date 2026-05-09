@@ -544,7 +544,11 @@
       background: #eeeff1;
       padding: clamp(80px, 12vw, 160px) 0 clamp(60px, 10vw, 120px);
       color: var(--text);
-      overflow: hidden;
+      /* overflow:clip not :hidden — clip prevents the carousel cards from
+         spilling outside the section while keeping descendant
+         position:sticky working. (overflow:hidden creates a containing
+         block for sticky, which makes sticky stop sticking.) */
+      overflow: clip;
     }
     .sec-collection__inner {
       max-width: var(--container-wide);
@@ -575,24 +579,19 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 1.5rem;
     }
-    /* Mobile: convert to horizontal-scroll carousel (matches SNM pattern). */
+    /* Mobile / narrow desktop: convert to horizontal-scroll carousel.
+       The scroll-jack wrapper below converts vertical page scroll into
+       horizontal translateX of this grid, so the user only ever scrolls
+       in one direction at a time. */
     @media (max-width: 1100px) {
       .sec-collection__grid[data-carousel] {
         display: flex;
         grid-template-columns: none;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
         gap: 1rem;
         padding-bottom: 0.5rem;
-        margin-right: calc(50% - 50vw);
-        padding-right: var(--gutter);
       }
-      .sec-collection__grid[data-carousel]::-webkit-scrollbar { display: none; }
       .sec-collection__grid[data-carousel] > .service-card {
         flex: 0 0 calc((100% - 1rem) / 1.4);
-        scroll-snap-align: start;
       }
       /* Below 1100 the grid fallback (without data-carousel) keeps 2 cols */
       .sec-collection__grid:not([data-carousel]) { grid-template-columns: repeat(2, 1fr); }
@@ -600,9 +599,99 @@
     @media (max-width: 600px) {
       .sec-collection__grid:not([data-carousel]) { grid-template-columns: 1fr; }
     }
-    /* Hide services nav buttons on desktop (nothing to scroll there); show on mobile */
+    /* Hide services nav buttons on desktop (nothing to scroll there) */
     @media (min-width: 1101px) {
       .sec-collection__nav[data-services-nav] { display: none; }
+    }
+    /* Hide nav buttons whenever the scroll-jack pin is active (covers both
+       wide-desktop where there's nothing to swipe AND mobile where the
+       scroll-jack already drives navigation). */
+    .sec-collection__pin.is-pinned ~ .sec-collection__nav[data-services-nav],
+    .sec-collection__pin.is-pinned .sec-collection__nav[data-services-nav] { display: none; }
+
+    /* ── Horizontal scroll-jack for the services carousel ─────────
+       Same pattern as .sec-stats__cards-pin but applied to
+       .sec-collection__grid. Active on every viewport width — services
+       are tall cards, so on mobile this prevents the simultaneous
+       up/down + side-to-side scrolling that felt disorienting. */
+    .sec-collection__pin,
+    .sec-collection__sticky,
+    .sec-collection__viewport,
+    .sec-collection__head { display: contents; }
+
+    .sec-collection__pin.is-pinned {
+      display: block;
+      position: relative;
+    }
+    .sec-collection__pin.is-pinned .sec-collection__sticky {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(28px, 3.5vw, 48px);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding-block: clamp(80px, 10vh, 140px) clamp(60px, 8vh, 100px);
+      margin-inline: calc(50% - 50vw);
+    }
+    .sec-collection__pin.is-pinned .sec-collection__head {
+      display: block;
+      padding-inline: var(--gutter);
+    }
+    .sec-collection__pin.is-pinned .sec-collection__viewport {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      padding-inline: var(--gutter);
+    }
+    .sec-collection__pin.is-pinned .sec-collection__grid[data-carousel] {
+      display: flex;
+      grid-template-columns: none;
+      overflow: visible;
+      scroll-snap-type: none;
+      gap: 1rem;
+      padding-bottom: 0.5rem;
+      margin-right: 0;
+      padding-right: 0;
+      will-change: transform;
+    }
+    .sec-collection__pin.is-pinned .sec-collection__grid[data-carousel] > .service-card {
+      flex: 0 0 calc((100% - 4 * 1rem) / 4.25);
+    }
+    @media (max-width: 1100px) {
+      .sec-collection__pin.is-pinned .sec-collection__grid[data-carousel] > .service-card {
+        flex: 0 0 calc((100% - 1rem) / 1.4);
+      }
+    }
+    /* Progress indicator at the bottom of the pinned region.
+       Hidden on mobile per Ivan — was creating a visible line that distracted
+       from the cards. Kept visible on desktop where the wider layout has
+       room for it as a subtle progress affordance. */
+    .sec-collection__progress { display: none; }
+    .sec-collection__pin.is-pinned .sec-collection__progress {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding-inline: var(--gutter);
+    }
+    @media (max-width: 1024px) {
+      .sec-collection__pin.is-pinned .sec-collection__progress { display: none; }
+    }
+    .sec-collection__progress-bar {
+      width: clamp(140px, 22vw, 260px);
+      height: 3px;
+      background: var(--border, rgba(0,0,0,0.10));
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .sec-collection__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--text);
+      border-radius: 9999px;
+      transition: width 80ms linear;
     }
     .service-card {
       position: relative;
@@ -626,6 +715,11 @@
       font-weight: 600;
       letter-spacing: -0.025em;
       margin-bottom: 0.5rem;
+      /* Reserve 2 lines so single-line names ("Diseño web") don't lift the
+         image higher than 2-line names ("Fotografía gastronómica"). Keeps
+         the visual at a consistent y-position across the carousel. */
+      min-height: calc(1.5rem * 1.2 * 2);
+      line-height: 1.2;
     }
     .service-card__desc {
       font-size: 0.9375rem;
@@ -633,6 +727,15 @@
       opacity: 0.8;
       max-width: 280px;
       margin-bottom: 0.75rem;
+    }
+    /* Mobile: reserve 5 lines for description (matches longest one — the
+       redes-sociales card wraps to 5 lines on narrow viewports). Cards with
+       shorter descriptions get whitespace below to keep the image at a
+       consistent y-position across the carousel. */
+    @media (max-width: 1100px) {
+      .service-card__desc {
+        min-height: calc(0.9375rem * 1.5 * 5);
+      }
     }
     .service-card__price { font-size: 0.9375rem; opacity: 0.75; }
     .service-card__visual {
@@ -644,14 +747,48 @@
     }
     .service-card__visual img {
       width: 100%; height: 100%;
-      min-height: 200px;
-      /* contain (not cover) so phone-mockup style images aren't clipped at the
-         bottom; service-card__visual inherits the card bg, so the breathing
-         room around a contained image blends seamlessly. */
-      object-fit: contain;
-      object-position: center bottom;
       border-radius: 12px;
       transition: transform 500ms var(--ease-quart);
+      /* object-fit + object-position set per-modifier below — each card visual
+         matches its image's intrinsic aspect ratio, so the image fills cleanly. */
+    }
+    /* Mobile: card height needs to fit within the sticky's content area
+       (sticky is 100vh, with ~150px head + ~140px vertical padding, leaving
+       ~60vh for the cards viewport). Cap card min-height at 60vh so the
+       bottom rounded corners aren't clipped by the sticky overflow. */
+    /* Per-card visual aspect ratios — each image has its own intrinsic shape
+       (7:10 portrait, 4:5 portrait, 1:1 square, plus the CSS map mockup),
+       so trying to fit them all into one shared aspect-ratio looks asymmetric.
+       Each modifier matches the actual image dimensions so they fill cleanly
+       without bottom-anchoring or wasted whitespace.
+
+       These apply on both desktop and mobile — the visible difference comes
+       from the card itself reflowing on mobile (aspect-ratio drops). */
+    .service-card__visual--7x10 { aspect-ratio: 7 / 10; }
+    .service-card__visual--4x5  { aspect-ratio: 4 / 5;  }
+    .service-card__visual--1x1  { aspect-ratio: 1 / 1;  }
+    .service-card__visual--mockup { aspect-ratio: 5 / 6; }
+
+    /* All variants: image is contained within its aspect-matched container.
+       contain (vs cover) is safer because mobile min/max-height constraints
+       can subtly break the declared aspect-ratio — contain shows the full
+       image with no cropping; cover would chop the sides off the square
+       fotografia image when the box ends up slightly non-square. */
+    .service-card__visual img { object-fit: contain; object-position: center center; }
+
+    @media (max-width: 1100px) {
+      .sec-collection__grid[data-carousel] > .service-card {
+        aspect-ratio: auto;
+        min-height: min(60vh, 480px);
+      }
+      /* Mobile: cap each visual so no single card balloons. Aspect-ratio
+         per-modifier still applies — they just shrink uniformly. */
+      .service-card__visual {
+        min-height: 220px;
+        max-height: 320px;
+        flex: 0 0 auto;
+        align-items: center;
+      }
     }
     .service-card:hover .service-card__visual img { transform: scale(1.04); }
 
@@ -939,6 +1076,16 @@
       padding-block: clamp(80px, 10vh, 140px) clamp(60px, 8vh, 100px);
       margin-inline: calc(50% - 50vw);
     }
+    /* Mobile: stack from top with smaller padding so the sticky's content
+       fills the viewport instead of leaving vertical empty space when
+       cards are shorter than the centered layout demands. */
+    @media (max-width: 1024px) {
+      .sec-stats__cards-pin.is-pinned .sec-stats__cards-sticky {
+        justify-content: flex-start;
+        gap: clamp(20px, 3vw, 32px);
+        padding-block: clamp(56px, 9vh, 96px) clamp(32px, 5vh, 56px);
+      }
+    }
     .sec-stats__cards-pin.is-pinned .sec-stats__head {
       display: block;
       padding-inline: var(--gutter);
@@ -963,12 +1110,10 @@
       transform: translate3d(0, 0, 0);
     }
     .sec-stats__cards-pin.is-pinned .sec-stats__progress {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      padding-inline: var(--gutter);
+      /* Hidden per Ivan — was creating a spurious visible line at the
+         top of the section on mobile. Keep the markup so the JS can still
+         drive its width without errors, but don't render it. */
+      display: none;
     }
     .sec-stats__progress-bar {
       width: clamp(140px, 22vw, 260px);
@@ -1213,9 +1358,11 @@
     /* Faster cadence on smaller eyebrow lines */
     .sec-stats__eyebrow[data-reveal-words] .word > span { transition-duration: 750ms; }
 
-    /* Mobile: scale down each carousel card so 1.7 cards fit on screen */
+    /* Mobile: ~1.1 cards visible per viewport — wider so the ring + body
+       text actually fit. Aspect ratio loosened to 4/5.6 to give body copy
+       enough vertical room (was being clipped at 4/5). */
     @media (max-width: 900px) {
-      .sec-stats__cards .stat-card { flex: 0 0 calc((100% - 1rem) / 1.7); aspect-ratio: 4 / 5; }
+      .sec-stats__cards .stat-card { flex: 0 0 calc((100% - 1rem) / 1.1); aspect-ratio: 4 / 5.6; }
       .sec-stats__cards.is-revealed .stat-card { transform: none; }
     }
 
@@ -1816,7 +1963,10 @@
 
       <div class="sec-transition__grid">
         <div class="sec-transition__photo fx-up fx-up--d1" data-reveal-photo>
-          <img src="assets/about/transition.jpeg" alt="Equipo de restaurante en plena hora punta" loading="lazy">
+          <picture>
+            <source srcset="assets/about/transition.webp" type="image/webp">
+            <img src="assets/about/transition.jpeg" alt="Equipo de restaurante en plena hora punta" decoding="async" fetchpriority="high">
+          </picture>
         </div>
         <div class="sec-transition__body fx-up fx-up--d2" data-reveal-body>
           <p>
@@ -1839,6 +1989,8 @@
   <!-- ═══════════════ 3 · COLLECTION ═══════════════ -->
   <section class="sec-collection" id="servicios">
     <div class="sec-collection__inner">
+      <div class="sec-collection__pin">
+       <div class="sec-collection__sticky">
       <div class="sec-collection__head">
         <h2 data-reveal-words aria-label="Servicios.">Servicios.</h2>
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 1rem;">
@@ -1856,6 +2008,7 @@
         </div>
       </div>
 
+      <div class="sec-collection__viewport">
       <div class="sec-collection__grid" data-carousel>
         <a href="redes-sociales.html" class="service-card service-card--cream fx-up">
           <div>
@@ -1863,8 +2016,8 @@
             <div class="service-card__desc">Instagram, TikTok y Facebook completos — grabación, publicación, anuncios y resultados.</div>
             <div class="service-card__price">Desde 300 €/mes</div>
           </div>
-          <div class="service-card__visual">
-            <img src="assets/services/redes-sociales.webp" alt="Producción de redes sociales para restaurante" width="700" height="1000" loading="lazy">
+          <div class="service-card__visual service-card__visual--7x10">
+            <img src="assets/services/redes-sociales.webp" alt="Producción de redes sociales para restaurante" width="700" height="1000" decoding="async">
           </div>
         </a>
 
@@ -1874,8 +2027,8 @@
             <div class="service-card__desc">Webs rápidas, móviles y optimizadas para SEO y reservas.</div>
             <div class="service-card__price">Desde 49 €/mes</div>
           </div>
-          <div class="service-card__visual">
-            <img src="assets/services/diseno-web.webp" alt="Diseño web para restaurante" width="1123" height="1401" loading="lazy">
+          <div class="service-card__visual service-card__visual--4x5">
+            <img src="assets/services/diseno-web.webp" alt="Diseño web para restaurante" width="1123" height="1401" decoding="async">
           </div>
         </a>
 
@@ -1885,8 +2038,8 @@
             <div class="service-card__desc">Imágenes que abren el apetito — iluminadas en vuestro propio local.</div>
             <div class="service-card__price">Desde 300 €/sesión</div>
           </div>
-          <div class="service-card__visual">
-            <img src="assets/services/fotografia-menu.webp" alt="Fotografía gastronómica de un plato" width="625" height="625" loading="lazy">
+          <div class="service-card__visual service-card__visual--1x1">
+            <img src="assets/services/fotografia-menu.webp" alt="Fotografía gastronómica de un plato" width="625" height="625" decoding="async">
           </div>
         </a>
 
@@ -1896,7 +2049,7 @@
             <div class="service-card__desc">Más comensales desde Google — Maps, Business Profile y campañas Meta.</div>
             <div class="service-card__price">Desde 299 €/mes</div>
           </div>
-          <div class="service-card__visual">
+          <div class="service-card__visual service-card__visual--mockup">
             <div class="gmap-mockup" role="img" aria-label="Tu restaurante mejor valorado en Google Maps">
               <div class="gmap-mockup__window">
                 <div class="gmap-mockup__topbar"><span></span><span></span><span></span></div>
@@ -1963,6 +2116,12 @@
           </div>
         </a>
       </div>
+      </div><!-- /.sec-collection__viewport -->
+       </div><!-- /.sec-collection__sticky -->
+       <div class="sec-collection__progress" aria-hidden="true">
+         <div class="sec-collection__progress-bar"><div class="sec-collection__progress-fill"></div></div>
+       </div>
+      </div><!-- /.sec-collection__pin -->
     </div>
   </section>
 
@@ -2146,7 +2305,7 @@
         </div>
         <div class="perspective-panel">
           <div class="perspective-panel__motion">
-            <img src="assets/insights/card4.jpg" alt="Plato servido en una mesa de restaurante" loading="lazy">
+            <img src="assets/insights/card4.jpg" alt="Plato servido en una mesa de restaurante" decoding="async">
             <div class="perspective-panel__cap">Marcad el objetivo. Construimos el flujo que os lleva hasta él.</div>
           </div>
         </div>
@@ -2171,7 +2330,7 @@
       <div class="sec-insights__grid">
         <a href="case-mazraa.html" class="insight-card fx-up">
           <div class="insight-card__media">
-            <img src="assets/casos/mazraa.webp" alt="Mazra'a — restaurante palestino en Estocolmo" loading="lazy">
+            <img src="assets/casos/mazraa.webp" alt="Mazra'a — restaurante palestino en Estocolmo" decoding="async">
           </div>
           <div class="insight-card__body">
             <div class="insight-card__meta">Cocina palestina · Estocolmo</div>
@@ -2194,7 +2353,7 @@
 
         <a href="case-sushirevolution.html" class="insight-card fx-up fx-up--d1">
           <div class="insight-card__media">
-            <img src="assets/casos/sushi-revolution.webp" alt="Sushi Revolution — Mall of Scandinavia" loading="lazy">
+            <img src="assets/casos/sushi-revolution.webp" alt="Sushi Revolution — Mall of Scandinavia" decoding="async">
           </div>
           <div class="insight-card__body">
             <div class="insight-card__meta">Sushi · Mall of Scandinavia</div>
@@ -2217,7 +2376,7 @@
 
         <a href="case-falafelbaren.html" class="insight-card fx-up fx-up--d2">
           <div class="insight-card__media">
-            <img src="assets/casos/falafelbaren.webp" alt="Falafelbaren — Hornsgatan, Estocolmo" loading="lazy">
+            <img src="assets/casos/falafelbaren.webp" alt="Falafelbaren — Hornsgatan, Estocolmo" decoding="async">
           </div>
           <div class="insight-card__body">
             <div class="insight-card__meta">Falafel · Hornsgatan, Estocolmo</div>
@@ -2618,75 +2777,127 @@
       track.addEventListener('scroll', onScroll, { passive: true }); // mobile path
     })();
 
-    // Horizontal scroll-jack on the home stats section. Mirrors the case-page
-    // implementation: pin on desktop (>=1025px) and convert vertical scroll
-    // into horizontal translate of the cards. Mobile keeps native swipe.
-    (function () {
-      const wide = window.matchMedia('(min-width: 1025px)');
+    // Horizontal scroll-jack — generic factory. Pins a section while
+    // converting vertical scroll into horizontal translate of an inner
+    // cards container. Active on every viewport width (mobile included)
+    // because the user explicitly asked for unified scroll-jack behavior.
+    function makeScrollJack(opts) {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      const pin = document.querySelector('.sec-stats__cards-pin');
-      const sticky = pin && pin.querySelector('.sec-stats__cards-sticky');
-      const viewport = pin && pin.querySelector('.sec-stats__cards-viewport');
-      const cards = pin && pin.querySelector('.sec-stats__cards');
-      const progressFill = pin && pin.querySelector('.sec-stats__progress-fill');
+      const pin = document.querySelector(opts.pinSelector);
+      const sticky = pin && pin.querySelector(opts.stickySelector);
+      const viewport = pin && pin.querySelector(opts.viewportSelector);
+      const cards = pin && pin.querySelector(opts.cardsSelector);
+      const progressFill = pin && pin.querySelector(opts.progressFillSelector);
       if (!pin || !sticky || !viewport || !cards) return;
 
       let pinned = false;
       let travel = 0;
+      let ticking = false;
 
-      function shouldPin() { return wide.matches && !reduced.matches; }
+      const shouldPin = () => !reduced.matches;
 
-      function teardown() {
+      const teardown = () => {
         pin.classList.remove('is-pinned');
         pin.style.height = '';
         cards.style.transform = '';
         if (progressFill) progressFill.style.width = '0%';
         pinned = false;
-      }
+      };
 
-      function setup() {
-        cards.classList.add('is-revealed');
+      const setup = () => {
+        if (opts.revealClass) cards.classList.add(opts.revealClass);
         pin.classList.add('is-pinned');
         const cardsWidth = cards.scrollWidth;
-        const viewportWidth = viewport.clientWidth;
-        travel = Math.max(0, cardsWidth - viewportWidth);
+        const visibleWidth = cards.clientWidth;
+        // Travel = scrollWidth - clientWidth. The viewport's right padding
+        // (var(--gutter)) naturally produces a matching gutter on the
+        // right when cards are fully translated, mirroring the left gutter
+        // on the first card at progress=0.
+        travel = Math.max(0, cardsWidth - visibleWidth);
+        if (travel <= 0) {
+          pin.classList.remove('is-pinned');
+          pin.style.height = '';
+          cards.style.transform = '';
+          if (progressFill) progressFill.style.width = '0%';
+          pinned = false;
+          return;
+        }
         const total = travel + window.innerHeight;
         pin.style.height = total + 'px';
         pinned = true;
         update();
-      }
+      };
 
-      function update() {
+      const update = () => {
         if (!pinned) return;
         const rect = pin.getBoundingClientRect();
-        const max = pin.offsetHeight - window.innerHeight;
+        // Use the travel value directly as the scrollable distance — pin
+        // height = travel + viewport so this is exactly the scroll range
+        // where the pin is "active". (Using pin.offsetHeight here was
+        // unreliable because some browsers report it slightly different
+        // from the inline style.height we set.)
         const scrolled = Math.max(0, -rect.top);
-        const p = max > 0 ? Math.min(1, scrolled / max) : 0;
+        const p = travel > 0 ? Math.min(1, scrolled / travel) : 0;
         cards.style.transform = 'translate3d(' + (-travel * p).toFixed(2) + 'px, 0, 0)';
         if (progressFill) progressFill.style.width = (p * 100).toFixed(2) + '%';
-      }
+      };
 
-      function refresh() {
+      const refresh = () => {
         if (shouldPin()) { if (pinned) teardown(); setup(); }
         else { if (pinned) teardown(); }
-      }
+      };
 
-      let ticking = false;
-      function onScroll() {
+      const onScroll = () => {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(() => { update(); ticking = false; });
-      }
+      };
 
-      const init = () => { refresh(); setTimeout(refresh, 300); };
+      const init = () => {
+        refresh();
+        // Repeated late refreshes — fonts, images, and lazy-loaded content
+        // can change cards.scrollWidth after the initial measurement, so
+        // re-measure several times to catch the final layout.
+        setTimeout(refresh, 200);
+        setTimeout(refresh, 800);
+        setTimeout(refresh, 2000);
+      };
       if (document.readyState === 'complete') init();
       else window.addEventListener('load', init);
 
+      // Re-measure when the cards element itself resizes (font load, image
+      // load, viewport rotation, etc.).
+      if (typeof ResizeObserver !== 'undefined') {
+        let raf = 0;
+        const ro = new ResizeObserver(() => {
+          if (raf) return;
+          raf = requestAnimationFrame(() => { raf = 0; refresh(); });
+        });
+        ro.observe(cards);
+      }
+
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', refresh);
-      wide.addEventListener && wide.addEventListener('change', refresh);
-    })();
+    }
+
+    // Stats section scroll-jack
+    makeScrollJack({
+      pinSelector: '.sec-stats__cards-pin',
+      stickySelector: '.sec-stats__cards-sticky',
+      viewportSelector: '.sec-stats__cards-viewport',
+      cardsSelector: '.sec-stats__cards',
+      progressFillSelector: '.sec-stats__progress-fill',
+      revealClass: 'is-revealed',
+    });
+
+    // Services collection scroll-jack
+    makeScrollJack({
+      pinSelector: '.sec-collection__pin',
+      stickySelector: '.sec-collection__sticky',
+      viewportSelector: '.sec-collection__viewport',
+      cardsSelector: '.sec-collection__grid[data-carousel]',
+      progressFillSelector: '.sec-collection__progress-fill',
+    });
   </script>
 </body>
 </html>
