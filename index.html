@@ -597,12 +597,12 @@
         /* Responsive card width — clamp keeps it sane across phone sizes:
            min 280px (small phones), preferred 82vw, max 400px (tablets). */
         flex: 0 0 clamp(280px, 82vw, 400px);
-        /* Explicit height tuned to fit inside the sticky's available area
-           on every phone size (100dvh - head - padding ≈ 55dvh).
-           Card ends INSIDE the viewport so its bottom border-radius stays
-           visible (no overflow clip from the viewport). */
+        /* Card height — 60dvh works on iPhone 13 mini (where URL bar can
+           push viewport to ~650dvh, leaving ~425px available). 60% of 650
+           = 390px which fits with margin. Clamp keeps it sane on tiny
+           devices and tablets. Bottom border-radius stays visible. */
         aspect-ratio: auto;
-        height: clamp(320px, 55dvh, 440px);
+        height: clamp(360px, 60dvh, 500px);
       }
       /* Below 1100 the grid fallback (without data-carousel) keeps 2 cols */
       .sec-collection__grid:not([data-carousel]) { grid-template-columns: repeat(2, 1fr); }
@@ -638,7 +638,10 @@
         aspect-ratio: auto;
         flex: 1;
         min-height: 0;
-        max-height: 220px;
+        /* Bigger visual on mobile now that the card has more room — image
+           renders larger and reads better on phones, while the cap prevents
+           it from forcing the card past the available area. */
+        max-height: 320px;
         margin-top: 0.75rem;
         align-items: center;
       }
@@ -687,6 +690,14 @@
       height: 100dvh;
       padding-block: clamp(80px, 10dvh, 140px) clamp(60px, 8dvh, 100px);
       margin-inline: calc(50% - 50vw);
+    }
+    /* Mobile: tighter sticky padding + smaller gap so the card has more
+       vertical room to breathe (frees ~70-90px for visual + height fit). */
+    @media (max-width: 1100px) {
+      .sec-collection__pin.is-pinned .sec-collection__sticky {
+        padding-block: clamp(40px, 5dvh, 70px) clamp(28px, 3.5dvh, 50px);
+        gap: clamp(16px, 2dvh, 28px);
+      }
     }
     .sec-collection__pin.is-pinned .sec-collection__head {
       display: block;
@@ -938,29 +949,18 @@
     }
 
     /* Mobile compact gmap-mockup — placed AFTER the desktop rules so it
-       wins the cascade. The desktop default has min-height: 260px + map
-       height: 110px, which overflows the 220px max-height of the mobile
-       visual area, getting top-clipped. These compact values let the
-       whole mockup render visibly inside the smaller card. */
+       wins the cascade. The desktop default has min-height: 260px which
+       was previously overflowing the mobile visual cap. With the bigger
+       visual area now (max 320px), the map can be closer to its natural
+       size — only the min-height needs to be removed so the mockup can
+       shrink if the card height is small. */
     @media (max-width: 1100px) {
       .gmap-mockup {
         min-height: 0;
         height: 100%;
       }
-      .gmap-mockup__window {
-        margin: 10px 18px 0;
-      }
       .gmap-mockup__map {
-        height: 80px;
-      }
-      .gmap-mockup__results {
-        margin: -12px 8px 10px;
-      }
-      .gmap-mockup__listing {
-        padding: 8px 12px;
-      }
-      .gmap-mockup__listing--featured {
-        padding: 10px 12px;
+        height: 120px;
       }
     }
 
@@ -2201,36 +2201,6 @@
                       <span class="gmap-mockup__reviews">(483)</span>
                     </div>
                     <div class="gmap-mockup__listing-meta">Abierto · Mejor valorado en la zona</div>
-                  </div>
-                </div>
-                <div class="gmap-mockup__listing">
-                  <div class="gmap-mockup__listing-info">
-                    <div class="gmap-mockup__listing-name">Competidor #1</div>
-                    <div class="gmap-mockup__listing-rating">
-                      <span class="gmap-mockup__score gmap-mockup__score--dim">4,2</span>
-                      <span class="gmap-mockup__stars gmap-mockup__stars--dim">★★★★☆</span>
-                      <span class="gmap-mockup__reviews">(157)</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="gmap-mockup__listing">
-                  <div class="gmap-mockup__listing-info">
-                    <div class="gmap-mockup__listing-name">Competidor #2</div>
-                    <div class="gmap-mockup__listing-rating">
-                      <span class="gmap-mockup__score gmap-mockup__score--dim">3,8</span>
-                      <span class="gmap-mockup__stars gmap-mockup__stars--dim">★★★★☆</span>
-                      <span class="gmap-mockup__reviews">(89)</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="gmap-mockup__listing">
-                  <div class="gmap-mockup__listing-info">
-                    <div class="gmap-mockup__listing-name">Competidor #3</div>
-                    <div class="gmap-mockup__listing-rating">
-                      <span class="gmap-mockup__score gmap-mockup__score--dim">3,2</span>
-                      <span class="gmap-mockup__stars gmap-mockup__stars--dim">★★★☆☆</span>
-                      <span class="gmap-mockup__reviews">(42)</span>
-                    </div>
                   </div>
                 </div>
               </div>
