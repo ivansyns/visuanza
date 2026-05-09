@@ -9,6 +9,10 @@
 
 # Dev-only puppeteer screenshots
 temporary screenshots/
+qa-screenshots/
 
 # Dev QA scripts
 scripts/
+
+# Source-only / backup assets — not deployed
+assets/raw/

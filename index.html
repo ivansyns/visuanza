@@ -108,7 +108,11 @@
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
-      letter-spacing: -0.015em;
+      /* Optical rebalance against bold Plus Jakarta — see chrome.css
+         for the same rule. Bumped size + tighter tracking compact
+         Instrument Serif's hairline italic strokes. */
+      font-size: 1.06em;
+      letter-spacing: -0.025em;
       color: inherit;
     }
 
@@ -225,6 +229,76 @@
       transition: background var(--dur), color var(--dur);
     }
     .nav__links a:hover { background: var(--bg-soft); color: var(--text); }
+
+    /* ─── Services dropdown ───
+       The Servicios link is itself a real link to servicios.html (the
+       hub), so clicking it navigates. Hovering it (or the dropdown
+       panel that sits below) reveals the 4 individual service pages. */
+    .nav__has-dropdown { position: relative; }
+    .nav__dropdown-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav__chevron {
+      width: 10px; height: 6px;
+      flex-shrink: 0;
+      transition: transform var(--dur);
+    }
+    .nav__has-dropdown:hover .nav__chevron,
+    .nav__has-dropdown:focus-within .nav__chevron { transform: rotate(180deg); }
+
+    .nav__dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-4px);
+      min-width: 220px;
+      padding: 6px;
+      background: #fff;
+      border: 1px solid #F0F0F0;
+      border-radius: 12px;
+      box-shadow: 0 12px 32px rgba(17, 24, 39, 0.10);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 220ms var(--ease, ease), transform 220ms var(--ease, ease);
+      z-index: 60;
+    }
+    /* Hover OR keyboard-focus on the parent shows the panel.
+       Hovering the panel itself keeps it open (so the cursor can travel
+       from trigger → panel → item without the panel disappearing). */
+    .nav__has-dropdown:hover .nav__dropdown,
+    .nav__has-dropdown:focus-within .nav__dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+    /* Bridge the visual gap between trigger and panel so the cursor
+       doesn't fall into a "no man's land" that closes the dropdown. */
+    .nav__dropdown::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 0; right: 0;
+      height: 10px;
+    }
+    .nav__dropdown a {
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      white-space: nowrap;
+      transition: background var(--dur), color var(--dur);
+    }
+    .nav__dropdown a:hover {
+      background: var(--bg-soft);
+      color: var(--accent, #2563EB);
+    }
     .nav__cta { display: flex; align-items: center; gap: 0.5rem; }
     .nav__login {
       padding: 8px 14px;
@@ -254,33 +328,29 @@
        ============================================================ */
     .big-hero {
       position: relative;
-      padding-top: calc(var(--nav-h) + 120px);
+      padding-top: calc(var(--nav-h) + clamp(64px, 10vw, 140px));
       padding-bottom: clamp(64px, 10vw, 120px);
       min-height: 100vh;
-      background: var(--bg-dark);
-      color: white;
+      background: #E5EE9E;
+      color: var(--text);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    .big-hero__media { position: absolute; inset: 0; z-index: 0; }
-    .big-hero__media video,
-    .big-hero__media img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0.55;
-      animation: bgSlow 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgSlow {
-      from { transform: scale(1.0); }
-      to   { transform: scale(1.06); }
-    }
-    .big-hero__media::after {
+    .big-hero::before {
       content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 50% 15%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 60%, var(--bg-dark) 100%),
-        linear-gradient(180deg, rgba(10,10,11,0.55) 0%, rgba(10,10,11,0.1) 30%, rgba(10,10,11,0.85) 100%);
+      position: absolute;
+      right: -6%;
+      bottom: -8%;
+      width: clamp(280px, 38vw, 540px);
+      aspect-ratio: 1 / 1;
+      background-image: url('assets/hash-mark.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.06;
       pointer-events: none;
+      z-index: 0;
     }
     .big-hero__inner {
       position: relative;
@@ -290,42 +360,49 @@
       padding-inline: var(--gutter);
       display: flex;
       flex-direction: column;
+      flex: 1;
+      width: 100%;
       min-height: calc(100vh - var(--nav-h) - 140px);
     }
-    .big-hero__mark {
-      font-size: var(--fs-display);
-      font-weight: 700;
-      letter-spacing: var(--tr-display);
-      line-height: 0.95;
-      text-transform: uppercase;
-      color: white;
-      display: flex;
+    .big-hero__eyebrow {
+      display: inline-flex;
       align-items: center;
-      gap: 0.25em;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: heroInUp 1200ms var(--ease-out) 200ms forwards;
-    }
-    .big-hero__mark-logo { display: inline-flex; align-items: center; gap: 0.25em; }
-    .big-hero__mark .hash-mark {
-      width: 0.9em;
-      height: 0.9em;
-      display: block;
-      object-fit: contain;
-      flex-shrink: 0;
-    }
-    .big-hero__spacer { flex: 1; min-height: 120px; }
-    .big-hero__lead {
-      max-width: 760px;
-      font-size: clamp(1.875rem, 3.4vw, 3rem);
+      gap: 0.625rem;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.65);
       font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.035em;
-      color: white;
       margin-bottom: 2rem;
+      padding: 0.4rem 0.875rem 0.4rem 0.75rem;
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 9999px;
       opacity: 0;
-      animation: heroInUp 1000ms var(--ease-out) 500ms forwards;
+      animation: heroInUp 900ms var(--ease-out) 150ms forwards;
+    }
+    .big-hero__eyebrow::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--text);
+    }
+    .big-hero__copy--mobile { display: none; }
+    @media (max-width: 600px) {
+      .big-hero__copy--desktop { display: none; }
+      .big-hero__copy--mobile { display: inline; }
+    }
+    .big-hero__lead {
+      max-width: 1080px;
+      font-size: clamp(2.5rem, 6vw, 5.25rem);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      color: var(--text);
+      margin: 0 0 2.5rem;
+      opacity: 0;
+      animation: heroInUp 1100ms var(--ease-out) 350ms forwards;
     }
     .big-hero__lead em {
       font-family: var(--font-italic);
@@ -334,32 +411,58 @@
       letter-spacing: -0.02em;
     }
     .big-hero__cta {
-      display: flex; gap: 0.75rem; flex-wrap: wrap;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
       opacity: 0;
-      animation: heroInUp 1000ms var(--ease-out) 750ms forwards;
+      animation: heroInUp 1000ms var(--ease-out) 600ms forwards;
     }
+    .big-hero__cta .pill-btn {
+      background: var(--text);
+      color: white;
+    }
+    .big-hero__cta .pill-btn .pill-btn__arrow {
+      background: white;
+      color: var(--text);
+    }
+    .big-hero__cta-link {
+      font-size: 0.9375rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.35);
+      padding-bottom: 2px;
+      transition: border-color 200ms var(--ease-out);
+    }
+    .big-hero__cta-link:hover { border-bottom-color: var(--text); }
+    .big-hero__spacer { flex: 1; min-height: 60px; }
     .big-hero__stats {
       display: grid;
       grid-template-columns: repeat(3, auto);
       gap: clamp(2rem, 5vw, 4rem);
       justify-content: flex-end;
       margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
       opacity: 0;
-      animation: heroInUp 1000ms var(--ease-out) 900ms forwards;
+      animation: heroInUp 1000ms var(--ease-out) 850ms forwards;
     }
     .big-hero__stat-val {
-      font-size: clamp(1.75rem, 2.8vw, 2.5rem);
-      font-weight: 600;
-      letter-spacing: -0.035em;
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      letter-spacing: -0.025em;
       line-height: 1;
-      color: white;
+      color: var(--text);
     }
     .big-hero__stat-label {
       font-size: 0.75rem;
-      color: rgba(255,255,255,0.6);
+      color: rgba(0, 0, 0, 0.55);
       margin-top: 0.5rem;
       font-weight: 500;
-      max-width: 160px;
+      max-width: 140px;
       letter-spacing: 0.02em;
     }
     @keyframes heroInUp {
@@ -393,12 +496,19 @@
     }
     .sec-transition__grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 0.85fr 1.15fr;
       gap: clamp(40px, 6vw, 96px);
-      align-items: start;
+      align-items: center;
     }
+    /* Photo sits noticeably smaller than the text column — mirrors the
+       Swedish layout where the image reads as an editorial accent, not
+       a 50/50 split. Capped width keeps it from blowing up at large
+       viewports; aspect 4/5 keeps the portrait format. */
     .sec-transition__photo {
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 5 / 4;
+      max-width: 480px;
+      width: 100%;
+      margin-inline-start: auto;
       overflow: hidden;
       border-radius: 22px;
       background: var(--bg-tint);
@@ -420,7 +530,11 @@
     .sec-transition__body .pill-btn { align-self: flex-start; }
     @media (max-width: 900px) {
       .sec-transition__grid { grid-template-columns: 1fr; gap: 32px; }
-      .sec-transition__photo { aspect-ratio: 4 / 3; }
+      .sec-transition__photo {
+        aspect-ratio: 4 / 3;
+        max-width: none;
+        margin-inline-start: 0;
+      }
     }
 
     /* ============================================================
@@ -531,7 +645,11 @@
     .service-card__visual img {
       width: 100%; height: 100%;
       min-height: 200px;
-      object-fit: cover;
+      /* contain (not cover) so phone-mockup style images aren't clipped at the
+         bottom; service-card__visual inherits the card bg, so the breathing
+         room around a contained image blends seamlessly. */
+      object-fit: contain;
+      object-position: center bottom;
       border-radius: 12px;
       transition: transform 500ms var(--ease-quart);
     }
@@ -794,6 +912,84 @@
     .sec-stats__cards.is-revealed .stat-card:nth-child(5) { transition-delay: 480ms; }
     .sec-stats__cards.is-revealed .stat-card:hover { transform: translate3d(0, -6px, 0); transition-duration: 400ms; }
 
+    /* ── Horizontal scroll-jack (desktop only) ──
+       Same pattern as the case-page subpages: vertical scroll within
+       .sec-stats__cards-pin is converted to horizontal translateX of
+       .sec-stats__cards. On mobile the wrappers collapse to display:contents
+       and we fall back to native horizontal scroll-snap. */
+    .sec-stats__cards-pin,
+    .sec-stats__cards-sticky,
+    .sec-stats__cards-viewport,
+    .sec-stats__head { display: contents; }
+    .sec-stats__progress { display: none; }
+
+    .sec-stats__cards-pin.is-pinned {
+      display: block;
+      position: relative;
+      /* height set by JS in px */
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards-sticky {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(28px, 3.5vw, 48px);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding-block: clamp(80px, 10vh, 140px) clamp(60px, 8vh, 100px);
+      margin-inline: calc(50% - 50vw);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__head {
+      display: block;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__head .sec-stats__title {
+      margin-bottom: 0;
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards-viewport {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards {
+      overflow: visible;
+      scroll-snap-type: none;
+      margin-right: 0;
+      padding-right: 0;
+      will-change: transform;
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards.is-revealed .stat-card {
+      transform: translate3d(0, 0, 0);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__progress {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__progress-bar {
+      width: clamp(140px, 22vw, 260px);
+      height: 3px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .sec-stats__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: white;
+      border-radius: 9999px;
+      transition: width 80ms linear;
+    }
+    /* When pinned, hide the legacy arrow nav (the scroll-jack replaces them
+       on desktop; chrome.js still wires them up for mobile native swipe). */
+    @media (min-width: 1025px) {
+      .sec-stats__cards-pin.is-pinned ~ .sec-collection__nav[data-stats-nav] { display: none; }
+    }
+
     .stat-card {
       position: relative;
       aspect-ratio: 4 / 5;
@@ -997,10 +1193,19 @@
       overflow: hidden;
       vertical-align: baseline;
       margin-right: 0.22em;
+      /* Headlines run at tight line-height (1.04–1.05). The .word's
+         overflow:hidden mask sits at that height, so descenders ("g",
+         "j", "y", italic swash-tails) clip at the bottom. Add room
+         and cancel it with negative margin so visual line-height is
+         unchanged when the word stack is multi-line. */
+      padding-bottom: 0.22em;
+      margin-bottom: -0.22em;
     }
     [data-reveal-words] .word > span {
       display: inline-block;
-      transform: translateY(110%);
+      /* 130% (was 110%) covers the new 0.22em padding-bottom on .word
+         so descenders aren't visible above the mask before reveal. */
+      transform: translateY(130%);
       transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
     }
@@ -1050,6 +1255,9 @@
     @media (max-width: 1024px) { .sec-insights__grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 640px) { .sec-insights__grid { grid-template-columns: 1fr; } }
     .insight-card {
+      display: block;
+      color: inherit;
+      text-decoration: none;
       background: white;
       border: 1px solid var(--border);
       border-radius: 18px;
@@ -1114,29 +1322,51 @@
     }
 
     /* ============================================================
-       6 · ACCEL — closing CTA panel (lavender)
+       6 · ACCEL — closing CTA panel.
+       Split layout: full-bleed video on the left, lavender body on
+       the right with heading, lead, CTAs, and the proof checklist.
+       Mirrors the Swedish "Accelerera" beat — the moving frame on
+       one side gives the static copy room to land. Stacks on mobile.
        ============================================================ */
     .sec-accel {
-      background: var(--edit-lavender);
-      padding: clamp(80px, 12vw, 160px) 0;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      min-height: 90vh;
       color: var(--text);
     }
-    .sec-accel__inner {
-      max-width: var(--container-wide);
-      margin-inline: auto;
-      padding-inline: var(--gutter);
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: clamp(48px, 6vw, 96px);
-      align-items: center;
+    .sec-accel__video {
+      position: relative;
+      background: #0A0A0B;
+      overflow: hidden;
     }
-    @media (max-width: 900px) { .sec-accel__inner { grid-template-columns: 1fr; } }
+    .sec-accel__video video,
+    .sec-accel__video img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    /* Soft left-edge wash so the lavender panel meets the dark video
+       with a touch of contrast bleed, not a hard seam. */
+    .sec-accel__video::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.28), transparent 35%);
+      pointer-events: none;
+    }
+    .sec-accel__body {
+      background: var(--edit-lavender);
+      padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(1.5rem, 3vw, 2.25rem);
+    }
     .sec-accel h2 {
-      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-size: clamp(2rem, 4vw, 3.25rem);
       font-weight: 600;
-      letter-spacing: -0.045em;
-      line-height: 1.04;
-      max-width: 760px;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      max-width: 560px;
     }
     .sec-accel h2 em {
       font-family: var(--font-italic);
@@ -1145,26 +1375,38 @@
       letter-spacing: -0.02em;
     }
     .sec-accel p {
-      font-size: 1.125rem;
+      font-size: 1.0625rem;
       line-height: 1.6;
       color: var(--text-2);
-      max-width: 540px;
-      margin: 1.5rem 0 2rem;
+      max-width: 480px;
     }
     .sec-accel__cta { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .sec-accel__list { display: flex; flex-direction: column; gap: 1rem; }
+    .sec-accel__list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      margin-top: 0.5rem;
+    }
     .sec-accel__list li {
       display: flex;
-      gap: 0.75rem;
+      gap: 0.625rem;
       align-items: flex-start;
-      font-size: 1rem;
+      font-size: 0.9375rem;
       color: var(--text);
+      line-height: 1.45;
     }
     .sec-accel__list li svg {
       flex: 0 0 auto;
-      width: 22px; height: 22px;
+      width: 18px; height: 18px;
       color: var(--text);
-      margin-top: 2px;
+      margin-top: 3px;
+    }
+    /* Stack: video on top, body below. Video gets a fixed min-height
+       so it reads as a deliberate banner rather than a thin strip. */
+    @media (max-width: 900px) {
+      .sec-accel { grid-template-columns: 1fr; min-height: auto; }
+      .sec-accel__video { min-height: 380px; }
+      .sec-accel__body { padding: clamp(2.5rem, 8vw, 4rem) var(--gutter); }
     }
 
     /* ============================================================
@@ -1196,38 +1438,16 @@
       color: rgba(255,255,255,0.5);
       margin-bottom: 1rem;
     }
-    .footer-big__brand p {
-      max-width: 320px;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.9375rem;
-      line-height: 1.5;
-      margin-bottom: 1.25rem;
-    }
-    .footer-big__form {
+    .footer-big__brand {
       display: flex;
-      gap: 0.5rem;
-      max-width: 360px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border-dark);
-      border-radius: 9999px;
-      padding: 4px 4px 4px 16px;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
-    .footer-big__form input {
-      flex: 1;
-      background: transparent;
-      border: 0;
-      color: white;
-      font-size: 0.9375rem;
-      outline: none;
-    }
-    .footer-big__form input::placeholder { color: rgba(255,255,255,0.45); }
-    .footer-big__form button {
-      padding: 8px 16px;
-      background: white;
-      color: var(--text);
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      font-weight: 600;
+    .footer-big__brand-mark {
+      width: clamp(80px, 9vw, 120px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
     }
     .footer-big ul { display: flex; flex-direction: column; gap: 0.625rem; }
     .footer-big a { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
@@ -1297,6 +1517,201 @@
       outline-offset: 3px;
       border-radius: 6px;
     }
+
+    /* ============================================================
+       PERSPECTIVES — vertical-scroll-driven horizontal pin.
+       The section is taller than the viewport; its inner __pin
+       wrapper sticks to top:0 for the whole section. As the user
+       scrolls vertically, JS maps vertical progress within the
+       section to track.scrollLeft, sliding the cards horizontally.
+       Once the last card is fully in view, the section ends and
+       vertical page scroll resumes naturally.
+       Mobile reverts to a simple horizontal carousel — no pin.
+       ============================================================ */
+    .sec-perspectives {
+      background: white;
+      color: var(--text);
+      /* Height set by JS to (100vh + horizontalRange). Fallback for
+         no-JS / before measurement: enough room to swipe through. */
+      height: 220vh;
+      position: relative;
+    }
+    .sec-perspectives__pin {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(60px, 8vw, 100px) 0;
+    }
+    .sec-perspectives__inner {
+      max-width: var(--container-wide);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      width: 100%;
+    }
+    .sec-perspectives__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(40px, 5vw, 64px);
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .sec-perspectives__head h2 {
+      font-size: var(--fs-h2-lg);
+      font-weight: 600;
+      letter-spacing: var(--tr-h2);
+      line-height: 1;
+    }
+    .sec-perspectives__head h2 em.gradient-text {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.06em;
+      letter-spacing: -0.025em;
+    }
+    /* "Sigue desplazando →" hint + thin progress bar. Fills from
+       8% (idle visual presence) up to 100% as the user scrolls
+       through the horizontal track. */
+    .perspectives-keep {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3, #6B6B6B);
+      font-weight: 500;
+    }
+    .perspectives-keep__bar {
+      width: 180px;
+      height: 6px;
+      background: #F0EBE4;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .perspectives-keep__fill {
+      height: 100%;
+      width: var(--fill-percent, 8%);
+      background: linear-gradient(90deg, var(--edit-peach, #FFCFA8), var(--edit-teal, #4EBFB8));
+      border-radius: 3px;
+      transition: width 180ms linear;
+    }
+
+    .sec-perspectives__grid {
+      display: flex;
+      gap: 1rem;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 0.5rem;
+      /* Bleed to viewport's right edge so panels can scroll off-screen,
+         and pad the right so the last card is not flush. */
+      margin-right: calc(50% - 50vw);
+      padding-right: var(--gutter);
+    }
+    .sec-perspectives__grid::-webkit-scrollbar { display: none; }
+
+    .perspective-panel {
+      position: relative;
+      flex: 0 0 calc((100% - 1rem) / 1.85);
+      aspect-ratio: 3 / 2;
+    }
+    .perspective-panel__motion {
+      position: absolute; inset: 0;
+      border-radius: var(--r-card);
+      overflow: hidden;
+      color: white;
+      background: #0A0A0B;
+      transition: transform 400ms var(--ease-quart);
+      will-change: transform;
+    }
+    .perspective-panel__motion:hover { transform: translate3d(0, -4px, 0); }
+    .perspective-panel__motion img,
+    .perspective-panel__motion video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    /* Bottom gradient scrim — keeps captions readable against any
+       frame regardless of brightness. */
+    .perspective-panel__motion::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,0.65) 100%);
+      pointer-events: none;
+    }
+    .perspective-panel__cap {
+      position: absolute;
+      inset: auto 1.75rem 1.75rem;
+      z-index: 2;
+      font-size: clamp(1.0625rem, 1.4vw, 1.5rem);
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      max-width: 90%;
+    }
+
+    /* Tablet: tighter cards, 1.4 visible. */
+    @media (max-width: 1024px) {
+      .perspective-panel { flex-basis: calc((100% - 1rem) / 1.4); }
+    }
+    /* Mobile (≤768px): drop the pin. Section becomes a normal-flow
+       horizontal carousel with snap, panels stack into one-per-view
+       portrait cards. Touch users swipe naturally. */
+    @media (max-width: 768px) {
+      .sec-perspectives {
+        height: auto;
+        padding: clamp(60px, 12vw, 100px) 0;
+      }
+      .sec-perspectives__pin {
+        position: static;
+        min-height: 0;
+        padding: 0;
+      }
+      .sec-perspectives__grid {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-padding-inline-end: var(--gutter);
+        gap: 0.875rem;
+      }
+      .perspective-panel {
+        flex-basis: calc(100% - 3rem);
+        aspect-ratio: 3 / 4;
+        scroll-snap-align: start;
+      }
+      .perspective-panel__cap {
+        inset: auto 1.25rem 1.25rem;
+        font-size: 1.0625rem;
+      }
+      .perspectives-keep__bar { width: 140px; }
+    }
+
+    /* ── 3-dot mark used in the bottom big-mark lockup.
+       Tiny editorial dots that sit just to the left of the
+       VISUANZA wordmark — same trick the Swedish site uses next
+       to "SYNS NU MEDIA". em-sized so they always scale with the
+       wordmark, regardless of viewport. */
+    .tri-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.08em;
+      margin-right: 0.18em;
+      vertical-align: baseline;
+    }
+    .tri-dot b {
+      width: 0.22em;
+      height: 0.22em;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .tri-dot b:nth-child(1) { background: var(--edit-peach, #FFCFA8); }
+    .tri-dot b:nth-child(2) { background: var(--edit-teal, #4EBFB8); }
+    .tri-dot b:nth-child(3) { background: var(--edit-lavender, #E8E1FF); }
   </style>
 </head>
 
@@ -1311,16 +1726,35 @@
       </a>
 
       <div class="nav__links" role="menubar">
-        <a href="#producto" role="menuitem">Inicio</a>
-        <a href="#servicios" role="menuitem">Servicios</a>
-        <a href="#casos" role="menuitem">Casos</a>
-        <a href="#equipo" role="menuitem">Nosotros</a>
-        <a href="#contacto" role="menuitem">Blog</a>
+        <a href="index.html" role="menuitem">Inicio</a>
+
+        <!-- Servicios — clicking navigates to the hub page, hovering
+             reveals the dropdown with the 4 individual service pages.
+             Mobile (≤900px) hides the whole nav__links block; mobile
+             menu is handled separately by the hamburger. -->
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
+          </div>
+        </div>
+
+        <a href="casos.html" role="menuitem">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
+        <a href="blog.html" role="menuitem">Blog</a>
       </div>
 
       <div class="nav__cta">
         <a href="#login" class="nav__login">Acceso clientes</a>
-        <a href="#contacto" class="btn btn--blue btn--sm">Reserva una llamada</a>
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
       </div>
 
       <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -1331,40 +1765,30 @@
 
   <!-- ═══════════════ 1 · HERO ═══════════════ -->
   <section class="big-hero" aria-label="Hero" id="producto">
-    <div class="big-hero__media" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="metadata"
-             poster="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=2400&q=85">
-        <source src="https://storage.googleapis.com/msgsndr/1FYpgqYgXr6SzFnCzKew/media/66fae28a5cef956031c6d083.mp4" type="video/mp4">
-      </video>
-    </div>
-
     <div class="big-hero__inner">
-      <h1 class="big-hero__mark" aria-label="Visuanza">
-        <span class="big-hero__mark-logo">
-          <img class="hash-mark" src="assets/hash-mark-white.png" alt="" aria-hidden="true">VISUANZA
-        </span>
+      <div class="big-hero__eyebrow">
+        <span class="big-hero__copy--desktop">Agencia de marketing especializada en restaurantes</span>
+        <span class="big-hero__copy--mobile">Marketing para restaurantes</span>
+      </div>
+
+      <h1 class="big-hero__lead">
+        Marketing que de verdad llena <em>mesas</em> — no que cuenta likes.
       </h1>
 
-      <div class="big-hero__spacer"></div>
-
-      <p class="big-hero__lead">
-        Marketing que de verdad llena <em>mesas</em> — no que cuenta likes.
-      </p>
-
       <div class="big-hero__cta">
-        <a href="#servicios" class="pill-btn">
+        <a href="servicios.html" class="pill-btn">
           Ver cómo trabajamos
           <span class="pill-btn__arrow" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </span>
         </a>
-        <a href="#contacto" class="pill-btn pill-btn--lav">
-          Reserva una llamada gratis
-          <span class="pill-btn__arrow" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
+        <a href="contacto.html" class="big-hero__cta-link">
+          <span class="big-hero__copy--desktop">Reserva una llamada gratis →</span>
+          <span class="big-hero__copy--mobile">Reservar llamada →</span>
         </a>
       </div>
+
+      <div class="big-hero__spacer"></div>
 
       <div class="big-hero__stats" aria-label="Datos clave">
         <div>
@@ -1392,7 +1816,7 @@
 
       <div class="sec-transition__grid">
         <div class="sec-transition__photo fx-up fx-up--d1" data-reveal-photo>
-          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=85" alt="Interior de restaurante de noche, mesas llenas">
+          <img src="assets/about/transition.jpeg" alt="Equipo de restaurante en plena hora punta" loading="lazy">
         </div>
         <div class="sec-transition__body fx-up fx-up--d2" data-reveal-body>
           <p>
@@ -1401,11 +1825,8 @@
           <p>
             Nada de jergas, nada de informes con cifras vacías. Trabajamos con vosotros mes a mes — sin contratos largos — y os enseñamos en qué se traduce cada acción: en reservas, en comensales, en repetidores.
           </p>
-          <p style="font-size: 0.95rem; color: var(--text-3);">
-            Sin permanencia. Cancelación mensual.
-          </p>
-          <a href="#servicios" class="pill-btn pill-btn--dark">
-            Ver qué hacemos
+          <a href="casos.html" class="pill-btn pill-btn--dark">
+            Ver casos de clientes
             <span class="pill-btn__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
@@ -1548,8 +1969,10 @@
   <!-- ═══════════════ 4 · COMBINED ═══════════════ -->
   <section class="sec-combined" id="sec-lifestyle-stats">
     <div class="sec-combined__bg" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="metadata">
-        <source src="https://assets.cdn.filesafe.space/1FYpgqYgXr6SzFnCzKew/media/685f252da8f9d370ede1ff6f.mp4" type="video/mp4">
+      <video autoplay muted loop playsinline preload="metadata"
+             poster="assets/combined-bg/combined-bg-poster.jpg">
+        <source src="assets/combined-bg/combined-bg.webm" type="video/webm">
+        <source src="assets/combined-bg/combined-bg.mp4" type="video/mp4">
       </video>
     </div>
 
@@ -1569,11 +1992,15 @@
 
     <div class="sec-combined__stats">
       <div class="sec-combined__inner">
-        <div class="sec-stats__eyebrow" data-reveal-words aria-label="Pruebas en cifras">Pruebas en cifras</div>
-        <h2 class="sec-stats__title" data-reveal-words aria-label="Medimos el éxito en reservas y caja — no en likes.">
-          Medimos el éxito en <em class="gradient-text">reservas y caja</em> — no en likes.
-        </h2>
-
+        <div class="sec-stats__cards-pin">
+         <div class="sec-stats__cards-sticky">
+          <div class="sec-stats__head">
+            <div class="sec-stats__eyebrow" data-reveal-words aria-label="Pruebas en cifras">Pruebas en cifras</div>
+            <h2 class="sec-stats__title" data-reveal-words aria-label="Medimos el éxito en reservas y caja — no en likes.">
+              Medimos el éxito en <em class="gradient-text">reservas y caja</em> — no en likes.
+            </h2>
+          </div>
+          <div class="sec-stats__cards-viewport">
         <div class="sec-stats__cards" data-reveal-cards>
           <!-- Card 1: Multi-segment ring + 3 floating badges. Headline metric =
                total followers across FB / IG / TikTok with comma-decimal "K" suffix.
@@ -1592,7 +2019,7 @@
                 <circle class="seg" data-seg-dash="81 371"  stroke="#D7C2FF" cx="90" cy="90" r="72" stroke-dasharray="0 452" stroke-dashoffset="-350"/>
               </svg>
               <div class="stat-card__ring-text">
-                <div class="stat-card__ring-val" data-count="10170" data-divisor="1000" data-decimals="2" data-suffix="K">0</div>
+                <div class="stat-card__ring-val" data-count="10170" data-suffix="K">0</div>
                 <div class="stat-card__ring-label">Seguidores</div>
               </div>
             </div>
@@ -1602,7 +2029,10 @@
           <!-- Card 2: Photo / video card with bottom caption.
                TODO: swap to a Spanish restaurant case video before publish -->
           <div class="stat-card stat-card--photo">
-            <video src="https://assets.cdn.filesafe.space/1FYpgqYgXr6SzFnCzKew/media/69eb311b9fe87a999495342b.mov" autoplay muted loop playsinline preload="metadata"></video>
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/stats/card2-poster.jpg">
+              <source src="assets/stats/card2.webm" type="video/webm">
+              <source src="assets/stats/card2.mp4" type="video/mp4">
+            </video>
             <div class="stat-card__cap">+1 845 seguidores nuevos en Instagram — +39,47% de crecimiento.</div>
           </div>
 
@@ -1633,7 +2063,10 @@
           <!-- Card 4: Photo / video card.
                TODO: swap to a Spanish restaurant case video before publish -->
           <div class="stat-card stat-card--photo">
-            <video src="https://assets.cdn.filesafe.space/1FYpgqYgXr6SzFnCzKew/media/69eb3184717d5dd4e19349da.mov" autoplay muted loop playsinline preload="metadata"></video>
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/stats/card4-poster.jpg">
+              <source src="assets/stats/card4.webm" type="video/webm">
+              <source src="assets/stats/card4.mp4" type="video/mp4">
+            </video>
             <div class="stat-card__cap">1 millón de visualizaciones en 3,5 meses — +856% sobre el periodo anterior.</div>
           </div>
 
@@ -1649,6 +2082,12 @@
             </div>
           </div>
         </div>
+          </div><!-- /.sec-stats__cards-viewport -->
+         </div><!-- /.sec-stats__cards-sticky -->
+         <div class="sec-stats__progress" aria-hidden="true">
+           <div class="sec-stats__progress-bar"><div class="sec-stats__progress-fill"></div></div>
+         </div>
+        </div><!-- /.sec-stats__cards-pin -->
 
         <div class="sec-collection__nav fx-up" style="margin-top: 2rem; justify-content: flex-end;" aria-label="Controles del carrusel" data-stats-nav>
           <button class="sec-nav-btn" aria-label="Anterior" type="button">
@@ -1662,12 +2101,66 @@
     </div>
   </section>
 
+  <!-- ═══════════════ 4.5 · PERSPECTIVES ═══════════════
+       Editorial moment between the stats card-deck and the case-studies
+       grid: 4 short captions over filmed/photographed restaurant moments,
+       scrolled horizontally. Mirrors the Swedish "Våra insikter" beat. -->
+  <section class="sec-perspectives" data-perspectives-section>
+   <div class="sec-perspectives__pin">
+    <div class="sec-perspectives__inner">
+      <div class="sec-perspectives__head">
+        <h2 data-reveal-words aria-label="Lo que vemos en cada restaurante.">Lo que vemos en cada <em class="gradient-text">restaurante</em>.</h2>
+        <div class="perspectives-keep fx-up">
+          Sigue desplazando
+          <div class="perspectives-keep__bar"><div class="perspectives-keep__fill"></div></div>
+        </div>
+      </div>
+
+      <div class="sec-perspectives__grid" data-perspectives-track>
+        <div class="perspective-panel">
+          <div class="perspective-panel__motion">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/insights/card1-poster.jpg" aria-hidden="true">
+              <source src="assets/insights/card1.webm" type="video/webm">
+              <source src="assets/insights/card1.mp4" type="video/mp4">
+            </video>
+            <div class="perspective-panel__cap">Filmamos el oficio justo donde ocurre.</div>
+          </div>
+        </div>
+        <div class="perspective-panel">
+          <div class="perspective-panel__motion">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/insights/card2-poster.jpg" aria-hidden="true">
+              <source src="assets/insights/card2.webm" type="video/webm">
+              <source src="assets/insights/card2.mp4" type="video/mp4">
+            </video>
+            <div class="perspective-panel__cap">Sabemos si los clientes vienen — antes de que reserven.</div>
+          </div>
+        </div>
+        <div class="perspective-panel">
+          <div class="perspective-panel__motion">
+            <video autoplay muted loop playsinline preload="metadata" poster="assets/insights/card3-poster.jpg" aria-hidden="true">
+              <source src="assets/insights/card3.webm" type="video/webm">
+              <source src="assets/insights/card3.mp4" type="video/mp4">
+            </video>
+            <div class="perspective-panel__cap">Señales que se notan en caja — no solo en likes.</div>
+          </div>
+        </div>
+        <div class="perspective-panel">
+          <div class="perspective-panel__motion">
+            <img src="assets/insights/card4.jpg" alt="Plato servido en una mesa de restaurante" loading="lazy">
+            <div class="perspective-panel__cap">Marcad el objetivo. Construimos el flujo que os lleva hasta él.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+  </section>
+
   <!-- ═══════════════ 5 · INSIGHTS ═══════════════ -->
   <section class="sec-insights" id="casos">
     <div class="sec-insights__inner">
       <div class="sec-insights__head">
         <h2 data-reveal-words aria-label="Resultados reales de restaurantes reales.">Resultados reales de restaurantes reales.</h2>
-        <a href="#casos" class="pill-btn pill-btn--dark fx-up fx-up--d1">
+        <a href="casos.html" class="pill-btn pill-btn--dark fx-up fx-up--d1">
           Ver todos los casos
           <span class="pill-btn__arrow" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -1676,100 +2169,108 @@
       </div>
 
       <div class="sec-insights__grid">
-        <article class="insight-card fx-up">
+        <a href="case-mazraa.html" class="insight-card fx-up">
           <div class="insight-card__media">
-            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=1200&q=85" alt="Pizzería Roma — sala llena">
+            <img src="assets/casos/mazraa.webp" alt="Mazra'a — restaurante palestino en Estocolmo" loading="lazy">
           </div>
           <div class="insight-card__body">
-            <div class="insight-card__meta">Pizzería · Madrid</div>
-            <h3 class="insight-card__title">Pizzería Roma duplica reservas en 4 meses</h3>
+            <div class="insight-card__meta">Cocina palestina · Estocolmo</div>
+            <h3 class="insight-card__title">Mazra'a multiplica sus interacciones por 135</h3>
             <p class="insight-card__desc">
-              Rediseño web, sesión de platos y un calendario de redes sostenido. La caja del fin de semana subió un 62 %.
+              Plan Pro desde noviembre de 2025. En 5,5 meses pasaron de presencia testimonial a 1,42M de visualizaciones — datos verificados en Metricool.
             </p>
             <div class="insight-card__stats">
               <div>
-                <div class="insight-card__stat-num">+62%</div>
-                <div class="insight-card__stat-label">Caja viernes-sábado</div>
+                <div class="insight-card__stat-num">1,42M</div>
+                <div class="insight-card__stat-label">Visualizaciones</div>
               </div>
               <div>
-                <div class="insight-card__stat-num">2×</div>
-                <div class="insight-card__stat-label">Reservas online</div>
+                <div class="insight-card__stat-num">+13.499%</div>
+                <div class="insight-card__stat-label">Interacciones</div>
               </div>
             </div>
           </div>
-        </article>
+        </a>
 
-        <article class="insight-card fx-up fx-up--d1">
+        <a href="case-sushirevolution.html" class="insight-card fx-up fx-up--d1">
           <div class="insight-card__media">
-            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=85" alt="Bistró del Mercado — interior de noche">
+            <img src="assets/casos/sushi-revolution.webp" alt="Sushi Revolution — Mall of Scandinavia" loading="lazy">
           </div>
           <div class="insight-card__body">
-            <div class="insight-card__meta">Bistró · Barcelona</div>
-            <h3 class="insight-card__title">Bistró del Mercado: top 3 en Google Maps</h3>
+            <div class="insight-card__meta">Sushi · Mall of Scandinavia</div>
+            <h3 class="insight-card__title">Sushi Revolution: 2,56M visualizaciones desde la apertura</h3>
             <p class="insight-card__desc">
-              Optimizamos su Business Profile, fotos y reseñas. Pasaron de la página 2 al podio en su zona en 90 días.
+              Plan Pro desde noviembre de 2025. Cuentas nuevas, 3.655 seguidores conseguidos desde cero y 1,72M de visualizaciones solo en TikTok en 7,5 meses.
             </p>
             <div class="insight-card__stats">
               <div>
-                <div class="insight-card__stat-num">#1</div>
-                <div class="insight-card__stat-label">Cocina de mercado</div>
+                <div class="insight-card__stat-num">2,56M</div>
+                <div class="insight-card__stat-label">Visualizaciones</div>
               </div>
               <div>
-                <div class="insight-card__stat-num">+340%</div>
-                <div class="insight-card__stat-label">Vistas Maps</div>
+                <div class="insight-card__stat-num">3.655</div>
+                <div class="insight-card__stat-label">Seguidores desde cero</div>
               </div>
             </div>
           </div>
-        </article>
+        </a>
 
-        <article class="insight-card fx-up fx-up--d2">
+        <a href="case-falafelbaren.html" class="insight-card fx-up fx-up--d2">
           <div class="insight-card__media">
-            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&q=85" alt="Burger Brothers — hamburguesa con queso">
+            <img src="assets/casos/falafelbaren.webp" alt="Falafelbaren — Hornsgatan, Estocolmo" loading="lazy">
           </div>
           <div class="insight-card__body">
-            <div class="insight-card__meta">Burger · Valencia</div>
-            <h3 class="insight-card__title">Burger Brothers ×3 pedidos en Glovo</h3>
+            <div class="insight-card__meta">Falafel · Hornsgatan, Estocolmo</div>
+            <h3 class="insight-card__title">Falafelbaren: 1M de visualizaciones en 3,5 meses</h3>
             <p class="insight-card__desc">
-              Una semana de rodaje, anuncios en Meta y un menú reformateado para delivery. Triplicaron pedidos en 60 días.
+              De cero presencia en TikTok a más de un millón de visualizaciones y +41% de seguidores en sus canales — todo medido en Metricool.
             </p>
             <div class="insight-card__stats">
               <div>
-                <div class="insight-card__stat-num">3×</div>
-                <div class="insight-card__stat-label">Pedidos en Glovo</div>
+                <div class="insight-card__stat-num">1M</div>
+                <div class="insight-card__stat-label">Visualizaciones</div>
               </div>
               <div>
-                <div class="insight-card__stat-num">+1.2M</div>
-                <div class="insight-card__stat-label">Vistas en TikTok</div>
+                <div class="insight-card__stat-num">+41%</div>
+                <div class="insight-card__stat-label">Seguidores</div>
               </div>
             </div>
           </div>
-        </article>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════ 6 · ACCEL ═══════════════ -->
   <section class="sec-accel" id="contacto">
-    <div class="sec-accel__inner">
+    <div class="sec-accel__video">
+      <video autoplay muted loop playsinline preload="metadata" poster="assets/accel/accel-poster.jpg" aria-hidden="true">
+        <source src="assets/accel/accel.webm" type="video/webm">
+        <source src="assets/accel/accel.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="sec-accel__body">
       <div class="fx-up">
         <h2>
           ¿Listos para llenar mesas con <em>mucho menos</em> ruido?
         </h2>
+      </div>
+      <div class="fx-up fx-up--d1">
         <p>
           Reservad una llamada de 30 minutos con nosotros. Os contamos qué partes ya están bien, qué cuesta arreglar lo demás y si tiene sentido que trabajemos juntos. Sin compromiso, sin presentación de 40 diapositivas.
         </p>
         <div class="sec-accel__cta">
-          <a href="#contacto" class="pill-btn pill-btn--dark">
+          <a href="contacto.html" class="pill-btn pill-btn--dark">
             Reserva una llamada
             <span class="pill-btn__arrow" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </span>
           </a>
-          <a href="tel:+34600000000" class="btn btn--ghost">+34 600 000 000</a>
+          <a href="tel:+34646853773" class="btn btn--ghost">+34 646 853 773</a>
         </div>
       </div>
 
-      <ul class="sec-accel__list fx-up fx-up--d1">
+      <ul class="sec-accel__list fx-up fx-up--d2">
         <li>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           <span>Sin permanencia. Cancelación mensual.</span>
@@ -1795,44 +2296,39 @@
     <div class="sec-footer-big__inner footer-big">
       <div class="footer-big__grid">
         <div class="footer-big__brand">
-          <h5>Quedaos con nosotros</h5>
-          <p>Artículos, recursos y promos para hosteleros — una vez al mes, sin spam.</p>
-          <form class="footer-big__form" onsubmit="event.preventDefault(); this.innerHTML='<span style=\'padding: 10px 16px; color: white; font-size: 0.875rem;\'>✓ ¡Gracias!</span>';">
-            <input type="email" placeholder="tu@email.es" required aria-label="Tu correo">
-            <button type="submit">Suscribirme</button>
-          </form>
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
         </div>
         <div>
           <h5>Visuanza</h5>
           <ul>
-            <li><a href="#equipo">Nosotros</a></li>
-            <li><a href="#casos">Casos</a></li>
-            <li><a href="#contacto">Blog</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="casos.html">Casos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
           </ul>
         </div>
         <div>
           <h5>Servicios</h5>
           <ul>
-            <li><a href="#servicios">Redes sociales</a></li>
-            <li><a href="#servicios">Diseño web</a></li>
-            <li><a href="#servicios">Fotografía</a></li>
-            <li><a href="#servicios">Google y publicidad</a></li>
+            <li><a href="redes-sociales.html">Redes sociales</a></li>
+            <li><a href="diseno-web.html">Diseño web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía</a></li>
+            <li><a href="google-publicidad.html">Google y publicidad</a></li>
           </ul>
         </div>
         <div>
           <h5>Trabajad con nosotros</h5>
           <ul>
-            <li><a href="#contacto">Cadenas y grupos</a></li>
-            <li><a href="#contacto">Franquicias</a></li>
-            <li><a href="#contacto">Sé creador</a></li>
+            <li><a href="contacto.html">Cadenas y grupos</a></li>
+            <li><a href="contacto.html">Franquicias</a></li>
+            <li><a href="contacto.html">Sé creador</a></li>
           </ul>
         </div>
         <div>
           <h5>Contacto</h5>
           <ul>
-            <li><a href="tel:+34600000000">+34 600 000 000</a></li>
-            <li><a href="mailto:hola@visuanza.es">hola@visuanza.es</a></li>
+            <li><a href="tel:+34646853773">+34 646 853 773</a></li>
+            <li><a href="mailto:ivan@synsnumedia.com">ivan@synsnumedia.com</a></li>
             <li>Madrid, España</li>
           </ul>
         </div>
@@ -1840,13 +2336,13 @@
 
       <div class="footer-big__mark fx-up" aria-hidden="true">
         <span class="footer-big__mark-logo">
-          <img class="hash-mark" src="assets/hash-mark-white.png" alt="">VISUANZA
+          <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
         </span>
       </div>
 
       <div class="footer-big__bottom">
-        <span>© 2026 Visuanza · Syns Nu Media. Todos los derechos reservados.</span>
-        <span><a href="#privacidad">Privacidad</a> · <a href="#terminos">Términos</a></span>
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
+        <span><a href="politica-privacidad.html">Privacidad</a> · <a href="politica-privacidad.html">Términos</a></span>
       </div>
     </div>
   </footer>
@@ -2059,6 +2555,137 @@
       track.addEventListener('scroll', updateState, { passive: true });
       window.addEventListener('resize', updateState);
       updateState();
+    })();
+
+    /* Perspectives — vertical-scroll-driven horizontal pin.
+       Section is sized to (100vh + horizontalRange). As the user
+       scrolls vertically, the inner pin sticks to top:0 and we map
+       vertical progress within the section to track.scrollLeft.
+       The progress bar mirrors the same value.
+       Mobile (≤768px) skips this and uses native horizontal scroll. */
+    (function(){
+      const sec = document.querySelector('[data-perspectives-section]');
+      const track = document.querySelector('[data-perspectives-track]');
+      const fill = document.querySelector('.sec-perspectives .perspectives-keep__fill');
+      if (!sec || !track || !fill) return;
+      const mqMobile = window.matchMedia('(max-width: 768px)');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let range = 0;
+      const measure = () => {
+        if (mqMobile.matches || reduced) {
+          sec.style.height = '';
+          return;
+        }
+        range = Math.max(0, track.scrollWidth - track.clientWidth);
+        sec.style.height = (window.innerHeight + range) + 'px';
+      };
+
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        if (mqMobile.matches || reduced) {
+          /* Mobile path: bar reflects the user's manual horizontal scroll. */
+          const m = track.scrollWidth - track.clientWidth;
+          const p = m > 0 ? (track.scrollLeft / m) * 100 : 0;
+          fill.style.setProperty('--fill-percent', Math.max(8, Math.min(100, p || 8)) + '%');
+          return;
+        }
+        if (range <= 0) {
+          fill.style.setProperty('--fill-percent', '8%');
+          return;
+        }
+        const r = sec.getBoundingClientRect();
+        /* -r.top grows from 0 (section top hits viewport top) to range
+           (section's last horizontal frame is the moment vertical resumes). */
+        const progress = Math.max(0, Math.min(range, -r.top));
+        track.scrollLeft = progress;
+        const pct = (progress / range) * 100;
+        fill.style.setProperty('--fill-percent', Math.max(8, Math.min(100, pct || 8)) + '%');
+      };
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      };
+
+      const onResize = () => { measure(); update(); };
+      measure();
+      update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize);
+      mqMobile.addEventListener?.('change', onResize);
+      track.addEventListener('scroll', onScroll, { passive: true }); // mobile path
+    })();
+
+    // Horizontal scroll-jack on the home stats section. Mirrors the case-page
+    // implementation: pin on desktop (>=1025px) and convert vertical scroll
+    // into horizontal translate of the cards. Mobile keeps native swipe.
+    (function () {
+      const wide = window.matchMedia('(min-width: 1025px)');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const pin = document.querySelector('.sec-stats__cards-pin');
+      const sticky = pin && pin.querySelector('.sec-stats__cards-sticky');
+      const viewport = pin && pin.querySelector('.sec-stats__cards-viewport');
+      const cards = pin && pin.querySelector('.sec-stats__cards');
+      const progressFill = pin && pin.querySelector('.sec-stats__progress-fill');
+      if (!pin || !sticky || !viewport || !cards) return;
+
+      let pinned = false;
+      let travel = 0;
+
+      function shouldPin() { return wide.matches && !reduced.matches; }
+
+      function teardown() {
+        pin.classList.remove('is-pinned');
+        pin.style.height = '';
+        cards.style.transform = '';
+        if (progressFill) progressFill.style.width = '0%';
+        pinned = false;
+      }
+
+      function setup() {
+        cards.classList.add('is-revealed');
+        pin.classList.add('is-pinned');
+        const cardsWidth = cards.scrollWidth;
+        const viewportWidth = viewport.clientWidth;
+        travel = Math.max(0, cardsWidth - viewportWidth);
+        const total = travel + window.innerHeight;
+        pin.style.height = total + 'px';
+        pinned = true;
+        update();
+      }
+
+      function update() {
+        if (!pinned) return;
+        const rect = pin.getBoundingClientRect();
+        const max = pin.offsetHeight - window.innerHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const p = max > 0 ? Math.min(1, scrolled / max) : 0;
+        cards.style.transform = 'translate3d(' + (-travel * p).toFixed(2) + 'px, 0, 0)';
+        if (progressFill) progressFill.style.width = (p * 100).toFixed(2) + '%';
+      }
+
+      function refresh() {
+        if (shouldPin()) { if (pinned) teardown(); setup(); }
+        else { if (pinned) teardown(); }
+      }
+
+      let ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { update(); ticking = false; });
+      }
+
+      const init = () => { refresh(); setTimeout(refresh, 300); };
+      if (document.readyState === 'complete') init();
+      else window.addEventListener('load', init);
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', refresh);
+      wide.addEventListener && wide.addEventListener('change', refresh);
     })();
   </script>
 </body>

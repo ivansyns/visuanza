@@ -34,6 +34,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/visuanza-chrome.css" />
   <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -136,8 +138,6 @@
     /* ─── SECTION LABEL ─── */
     .section-label { display: inline-flex; align-items: center; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); padding-left: 10px; border-left: 2px solid var(--blue); margin-bottom: 1rem; }
 
-    .footer-cta-btn { display: inline-block; margin-top: 18px; background: #C08B5C; color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: var(--radius); transition: opacity 0.2s, transform 0.2s; }
-    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     /* ─── FOOTER ─── */
     footer { background: #1A1A1A; color: rgba(255,255,255,0.6); padding: 60px 0 30px; }
     .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
@@ -380,49 +380,259 @@
       padding: 10px 14px;
     }
     .form-error.visible { display: block; }
+
+    /* ============================================================
+       ANALISIS — v6 single-form lead-magnet page.
+       Centered card on a soft gradient, hCaptcha-friendly. Uses
+       ana-* prefix so legacy .main-section / .analysis-form /
+       .section-header / .trust-* / .success-* styles become dead.
+       ============================================================ */
+    main { padding-top: var(--nav-h); background: var(--bg); }
+    .ana-shell {
+      padding: clamp(80px, 10vw, 140px) 0 clamp(80px, 10vw, 140px);
+      background:
+        radial-gradient(60% 40% at 50% 0%, var(--edit-lavender-soft) 0%, transparent 60%),
+        radial-gradient(60% 40% at 50% 100%, var(--edit-peach-soft) 0%, transparent 60%);
+    }
+    .ana-container {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    .ana-eyebrow {
+      display: inline-block;
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 600;
+      margin-bottom: 0.875rem;
+    }
+    .ana-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto clamp(32px, 4vw, 48px);
+    }
+    .ana-header h1 {
+      font-size: var(--fs-h1);
+      letter-spacing: var(--tr-h1);
+      line-height: 1.04;
+    }
+    .ana-lead {
+      margin-top: 1.25rem;
+      color: var(--text-2);
+      font-size: var(--fs-lead);
+      line-height: 1.55;
+    }
+    .ana-badges {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .ana-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+      color: var(--text);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-weight: 500;
+    }
+    .ana-badge svg { width: 14px; height: 14px; color: var(--text-2); }
+
+    /* Form card */
+    .ana-form {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: clamp(28px, 3.5vw, 44px);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .ana-form__row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 600px) { .ana-form__row { grid-template-columns: 1fr; } }
+    .ana-field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .ana-field label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .ana-req { color: var(--edit-peach-chip); }
+    .ana-field input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font: inherit;
+      font-size: 1rem;
+      background: var(--bg-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      outline: none;
+      transition: border-color var(--dur), background var(--dur), box-shadow var(--dur);
+    }
+    .ana-field input::placeholder { color: var(--text-3); }
+    .ana-field input:focus {
+      border-color: var(--text);
+      background: var(--bg);
+      box-shadow: 0 0 0 4px rgba(15,15,16,0.06);
+    }
+    .ana-hint {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      font-style: italic;
+      font-family: var(--font-italic);
+    }
+
+    .ana-captcha {
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+    }
+    .ana-error {
+      display: none;
+      font-size: 0.875rem;
+      color: #B91C1C;
+      background: rgba(220,38,38,0.07);
+      border: 1px solid rgba(220,38,38,0.2);
+      border-radius: var(--r-md);
+      padding: 10px 14px;
+    }
+    .ana-error.visible { display: block; }
+
+    .ana-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1.5rem;
+      background: var(--text);
+      color: white;
+      border-radius: 9999px;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+    }
+    .ana-submit:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -8px rgba(0,0,0,0.35); }
+    .ana-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+    .ana-submit svg { width: 18px; height: 18px; }
+
+    /* Success state — hidden by default; revealed by JS. */
+    .ana-success {
+      display: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: clamp(28px, 3.5vw, 44px);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+    }
+    .ana-success.visible { display: block; }
+    .ana-success__icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--edit-teal);
+      color: white;
+      display: grid; place-items: center;
+      margin: 0 auto 1.25rem;
+    }
+    .ana-success__icon svg { width: 28px; height: 28px; }
+    .ana-success h2 {
+      font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+      letter-spacing: -0.025em;
+    }
+    .ana-success > p {
+      margin-top: 0.875rem;
+      color: var(--text-2);
+      font-size: 1rem;
+      max-width: 480px;
+      margin-inline: auto;
+    }
+    .ana-timeline {
+      list-style: none;
+      margin: 1.75rem auto 0;
+      padding: 0;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+    }
+    .ana-timeline li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .ana-timeline__dot {
+      flex: 0 0 auto;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--edit-lavender);
+      color: var(--text);
+      display: grid; place-items: center;
+      font-weight: 700;
+      font-size: 0.8125rem;
+    }
+    .ana-timeline strong { display: block; font-size: 0.9375rem; }
+    .ana-timeline span { display: block; font-size: 0.875rem; color: var(--text-2); margin-top: 2px; line-height: 1.5; }
+    .ana-success__back {
+      display: inline-block;
+      margin-top: 1.75rem;
+      color: var(--text-2);
+      font-size: 0.875rem;
+      transition: color var(--dur);
+    }
+    .ana-success__back:hover { color: var(--text); }
   </style>
 </head>
 <body>
   <div class="bg-glow"></div>
 
-  <!-- ─── NAV ─── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-        <span>Visuanza</span>
+  <!-- ═══════════════ NAV (v6) ═══════════════ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+        <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+        VISUANZA
       </a>
-      <ul class="nav-links">
-        <li class="nav-has-dropdown">
-          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
-          <div class="nav-dropdown">
-            <div class="nav-dropdown-grid">
-              <a href="redes-sociales.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Redes Sociales</span><span class="ndi-desc">Gestión profesional para ganar visibilidad online</span></span>
-              </a>
-              <a href="diseno-web.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Diseño Web</span><span class="ndi-desc">Páginas a medida + Google My Business incluido</span></span>
-              </a>
-              <a href="fotografia-menu.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Fotografía de Menú</span><span class="ndi-desc">Fotos profesionales + assets digitales y print</span></span>
-              </a>
-              <a href="publicidad-digital.html" class="nav-dropdown-item">
-                <span class="ndi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-                <span class="ndi-text"><span class="ndi-title">Publicidad Digital</span><span class="ndi-desc">Meta Ads y TikTok Ads que llenan mesas</span></span>
-              </a>
-            </div>
+      <div class="nav__links" role="menubar">
+        <a href="index.html" role="menuitem">Inicio</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
           </div>
-        </li>
-        <li><a href="index.html#quienes">Quiénes somos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
+        </div>
+        <a href="casos.html" role="menuitem">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
+        <a href="blog.html" role="menuitem">Blog</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
+      </div>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -431,8 +641,11 @@
   <!-- ─── MOBILE MENU ─── -->
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul class="mobile-menu-links">
+      <li><a href="index.html" class="mobile-menu-link">Inicio</a></li>
       <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
-      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
+      <li><a href="casos.html" class="mobile-menu-link">Casos</a></li>
+      <li><a href="nosotros.html" class="mobile-menu-link">Nosotros</a></li>
+      <li><a href="blog.html" class="mobile-menu-link">Blog</a></li>
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
@@ -440,144 +653,159 @@
     </div>
   </div>
 
-  <!-- ─── MAIN ─── -->
-  <main class="main-section">
+  <main>
+    <section class="ana-shell">
+      <div class="ana-container">
 
-    <!-- Header -->
-    <div class="section-header fade-in">
-      <p class="section-label" style="justify-content:center;">Gratis · Sin compromiso</p>
-      <h2>Análisis SEO<br /><span class="accent">para tu restaurante</span></h2>
-      <p>Introduce la web de tu restaurante y recibirás un informe detallado con todo lo que está frenando tu visibilidad en Google — completamente gratis.</p>
-      <div class="trust-badges">
-        <span class="trust-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          100% gratuito
-        </span>
-        <span class="trust-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Resultado en menos de 24h
-        </span>
-        <span class="trust-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Enviado a tu email
-        </span>
-      </div>
-    </div>
-
-    <!-- Form -->
-    <form class="analysis-form fade-in" id="analysisForm" novalidate>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="nombre">Tu nombre <span class="required">*</span></label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ana García" required />
-        </div>
-        <div class="form-group">
-          <label for="restaurante">Nombre del restaurante <span class="required">*</span></label>
-          <input type="text" id="restaurante" name="restaurante" placeholder="Restaurante Casa Ana" required />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="url">Web del restaurante <span class="required">*</span></label>
-        <input type="url" id="url" name="url" placeholder="https://turestaurante.es" required />
-        <span class="url-hint">Incluye https://</span>
-      </div>
-      <div class="form-group">
-        <label for="email">Email donde recibir el análisis <span class="required">*</span></label>
-        <input type="email" id="email" name="email" placeholder="tu@email.com" required />
-      </div>
-
-      <!-- hCaptcha -->
-      <div class="captcha-wrapper">
-        <div class="h-captcha" data-sitekey="02f802f2-a63c-4ee0-8aa0-451ccde22f00"></div>
-      </div>
-
-      <div class="form-error" id="formError"></div>
-
-      <button type="submit" class="submit-btn" id="submitBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <span id="submitText">Solicitar análisis gratuito</span>
-      </button>
-    </form>
-
-    <!-- Success state -->
-    <div class="success-state" id="successState">
-      <div class="success-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </div>
-      <h3>¡Solicitud recibida!</h3>
-      <p>Hemos recibido tu solicitud. Analizaremos la web de tu restaurante y te enviaremos el informe completo en menos de <strong>24 horas</strong>.</p>
-      <div class="success-timeline">
-        <div class="timeline-item">
-          <div class="timeline-dot">1</div>
-          <div class="timeline-text">
-            <strong>Análisis en curso</strong>
-            <span>Revisamos tu web, velocidad, SEO técnico y presencia en Google.</span>
+        <!-- ═══════════════ HEADER ═══════════════ -->
+        <header class="ana-header fx-up">
+          <span class="ana-eyebrow">Gratis · Sin compromiso</span>
+          <h1>Análisis SEO para vuestro <em class="gradient-text">restaurante</em>.</h1>
+          <p class="ana-lead">
+            Pegáis la URL, recibís un informe en menos de 24h con todo lo que está frenando vuestra visibilidad en Google — y los 3 cambios que más mueven la aguja en hostelería local.
+          </p>
+          <div class="ana-badges">
+            <span class="ana-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              100% gratuito
+            </span>
+            <span class="ana-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Informe en menos de 24h
+            </span>
+            <span class="ana-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Te llega al email
+            </span>
           </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">2</div>
-          <div class="timeline-text">
-            <strong>Informe personalizado</strong>
-            <span>Preparamos un informe claro con los puntos a mejorar y cómo hacerlo.</span>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-dot">3</div>
-          <div class="timeline-text">
-            <strong>En tu bandeja en &lt;24h</strong>
-            <span>Recibirás el análisis directamente en el email que nos has dado.</span>
-          </div>
-        </div>
-      </div>
-      <a href="index.html" class="success-back">← Volver al inicio</a>
-    </div>
+        </header>
 
+        <!-- ═══════════════ FORM ═══════════════ -->
+        <form class="ana-form fx-up fx-up--d1" id="analysisForm" novalidate>
+          <div class="ana-form__row">
+            <div class="ana-field">
+              <label for="nombre">Tu nombre <span class="ana-req" aria-hidden="true">*</span></label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ana García" required />
+            </div>
+            <div class="ana-field">
+              <label for="restaurante">Nombre del restaurante <span class="ana-req" aria-hidden="true">*</span></label>
+              <input type="text" id="restaurante" name="restaurante" placeholder="Restaurante Casa Ana" required />
+            </div>
+          </div>
+
+          <div class="ana-field">
+            <label for="url">Web del restaurante <span class="ana-req" aria-hidden="true">*</span></label>
+            <input type="url" id="url" name="url" placeholder="https://turestaurante.es" required />
+            <span class="ana-hint">Incluye https://</span>
+          </div>
+
+          <div class="ana-field">
+            <label for="email">Email donde enviar el informe <span class="ana-req" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" placeholder="tu@email.es" required />
+          </div>
+
+          <div class="ana-captcha">
+            <div class="h-captcha" data-sitekey="02f802f2-a63c-4ee0-8aa0-451ccde22f00"></div>
+          </div>
+
+          <div class="ana-error" id="formError"></div>
+
+          <button type="submit" class="ana-submit" id="submitBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span id="submitText">Solicitar análisis gratuito</span>
+          </button>
+        </form>
+
+        <!-- ═══════════════ SUCCESS ═══════════════ -->
+        <div class="ana-success" id="successState">
+          <div class="ana-success__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h2>¡Solicitud recibida!</h2>
+          <p>Recibimos vuestra solicitud. Analizamos la web del restaurante y os enviamos el informe completo en menos de <strong>24 horas</strong>.</p>
+          <ol class="ana-timeline">
+            <li>
+              <span class="ana-timeline__dot">1</span>
+              <div>
+                <strong>Análisis en curso</strong>
+                <span>Revisamos web, velocidad, SEO técnico y presencia en Google Business.</span>
+              </div>
+            </li>
+            <li>
+              <span class="ana-timeline__dot">2</span>
+              <div>
+                <strong>Informe personalizado</strong>
+                <span>Preparamos un documento claro con los puntos a mejorar y cómo hacerlo.</span>
+              </div>
+            </li>
+            <li>
+              <span class="ana-timeline__dot">3</span>
+              <div>
+                <strong>En tu bandeja en &lt;24h</strong>
+                <span>El análisis llega directamente al email que nos habéis dado.</span>
+              </div>
+            </li>
+          </ol>
+          <a href="index.html" class="ana-success__back">← Volver al inicio</a>
+        </div>
+
+      </div>
+    </section>
   </main>
 
-  <!-- ─── FOOTER ─── -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html" class="footer-logo">
-            <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-            <span>Visuanza</span>
-          </a>
-                <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
-</div>
-        <div class="footer-col">
-          <h4>Servicios</h4>
-          <ul>
-            <li><a href="redes-sociales.html">Redes Sociales</a></li>
-            <li><a href="diseno-web.html">Diseño Web</a></li>
-            <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-            <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
-          </ul>
+
+  <!-- ═══════════════ FOOTER (v6 big-mark) ═══════════════ -->
+  <footer class="sec-footer-big">
+    <div class="sec-footer-big__inner footer-big">
+      <div class="footer-big__grid">
+        <div class="footer-big__brand">
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
         </div>
-        <div class="footer-col">
-          <h4>Navegar</h4>
+        <div>
+          <h5>Visuanza</h5>
           <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="index.html#quienes">Quiénes somos</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="casos.html">Casos</a></li>
+            <li><a href="blog.html">Blog</a></li>
             <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="blog.html">Blog</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Redes</h4>
-          <div class="footer-social-icons">
-            <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-            <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg></a>
-            <a href="#" class="footer-social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-            <a href="#" class="footer-social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
-          </div>
+        <div>
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="redes-sociales.html">Redes sociales</a></li>
+            <li><a href="diseno-web.html">Diseño web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía</a></li>
+            <li><a href="google-publicidad.html">Google y publicidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Trabajad con nosotros</h5>
+          <ul>
+            <li><a href="contacto.html">Cadenas y grupos</a></li>
+            <li><a href="contacto.html">Franquicias</a></li>
+            <li><a href="contacto.html">Sé creador</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="tel:+34646853773">+34 646 853 773</a></li>
+            <li><a href="mailto:ivan@synsnumedia.com">ivan@synsnumedia.com</a></li>
+            <li>Madrid, España</li>
+          </ul>
         </div>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
-        <div class="footer-legal">
-          <a href="politica-privacidad.html">Política de privacidad</a>
-        </div>
+
+      <div class="footer-big__mark fx-up" aria-hidden="true">
+        <span class="footer-big__mark-logo">
+          <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
+        </span>
+      </div>
+
+      <div class="footer-big__bottom">
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
+        <span><a href="politica-privacidad.html">Privacidad</a> · <a href="politica-privacidad.html">Términos</a></span>
       </div>
     </div>
   </footer>
@@ -698,5 +926,6 @@
     }
   })();
 </script>
+<script src="assets/visuanza-chrome.js" defer></script>
 </body>
 </html>

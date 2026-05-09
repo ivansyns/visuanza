@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — Visuanza</title>
+  <meta name="description" content="Visuanza es la rama española de Syns Nu Media, la mayor agencia de marketing para restaurantes de Suecia. Con sede en Madrid.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/visuanza-chrome.css" />
+
+  <link rel="icon" type="image/png" href="assets/hash-mark.png">
+
+  <style>
+    /* ── Page-specific styles for "Nosotros" ── */
+    body { padding-top: 0; }
+    main { padding-top: var(--nav-h); }
+
+    .container {
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+
+    /* Page hero — eyebrow + big headline + subtitle, top of page. */
+    .page-hero {
+      padding: clamp(80px, 10vw, 140px) 0 clamp(48px, 6vw, 80px);
+      text-align: center;
+    }
+    .page-hero__inner { max-width: 820px; margin-inline: auto; }
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .page-hero h1 {
+      font-size: var(--fs-h1);
+      letter-spacing: var(--tr-h1);
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+    .page-hero__subtitle {
+      font-size: var(--fs-lead);
+      color: var(--text-2);
+      max-width: 640px;
+      margin-inline: auto;
+      line-height: 1.55;
+    }
+
+    /* Story split — image left, prose right. */
+    .section { padding: clamp(64px, 8vw, 112px) 0; }
+    .section--soft { background: var(--bg-soft); }
+    .section--tight { padding-block: clamp(40px, 5vw, 72px); }
+    .section-head { text-align: center; max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); }
+    .section-head h2 {
+      font-size: var(--fs-h2-lg);
+      letter-spacing: var(--tr-h2);
+      line-height: 1.05;
+      margin-top: 0.5rem;
+    }
+    .split-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: clamp(40px, 5vw, 80px);
+      align-items: center;
+    }
+    @media (max-width: 900px) { .split-grid { grid-template-columns: 1fr; } }
+    .story-image {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      background: var(--bg-dark);
+      box-shadow: var(--shadow-lg);
+    }
+    .story-image img {
+      width: 100%; height: 100%; object-fit: cover;
+    }
+    .story-image::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(15,15,16,0.4) 100%);
+      pointer-events: none;
+    }
+    .story-image__badge {
+      position: absolute; top: 1.5rem; left: 1.5rem;
+      background: rgba(255,255,255,0.95);
+      padding: 0.625rem 1rem;
+      border-radius: var(--r-md);
+      backdrop-filter: blur(10px);
+    }
+    .story-image__badge-label {
+      font-size: 0.6875rem;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    .story-image__badge-value {
+      font-size: 1.75rem;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .story-prose h2 {
+      font-size: var(--fs-h2-lg);
+      letter-spacing: var(--tr-h2);
+      line-height: 1.05;
+      margin-top: 0.5rem;
+    }
+    .story-prose p {
+      margin-top: 1rem;
+      color: var(--text-2);
+      font-size: 1.0625rem;
+      line-height: 1.6;
+    }
+    .story-prose em { font-family: var(--font-italic); font-style: italic; color: var(--text); }
+
+    /* Feature card grid — used for values + team. */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(16px, 2vw, 24px);
+    }
+    @media (max-width: 1024px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .feature-grid { grid-template-columns: 1fr; } }
+
+    /* Two-card variant — centered with capped width so two cards don't stretch
+       awkwardly across the full container. */
+    .feature-grid--two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 720px;
+      margin-inline: auto;
+    }
+    @media (max-width: 600px) {
+      .feature-grid--two { grid-template-columns: 1fr; }
+    }
+
+    /* Region labels above each sub-grid (España, Suecia). */
+    .team-region {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      text-align: center;
+      margin: clamp(32px, 4vw, 56px) 0 clamp(20px, 2.5vw, 32px);
+    }
+    .team-region:first-of-type { margin-top: 0; }
+    .feature-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--r-card);
+      padding: clamp(20px, 2.5vw, 32px);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+    }
+    .feature-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .feature-card h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem;
+    }
+    .feature-card p {
+      color: var(--text-2);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+    }
+    .icon-chip {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--edit-lavender-soft);
+      color: var(--text);
+      display: grid; place-items: center;
+    }
+    .icon-chip--peach { background: var(--edit-peach-soft); }
+    .icon-chip--teal  { background: rgba(78,191,184,0.18); }
+    .icon-chip--olive { background: rgba(229,238,158,0.6); }
+
+    /* Team card — round photo on top, name + role below. */
+    .team-card { text-align: center; padding: 1.5rem 1.25rem 1.75rem; }
+    .team-card img {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      object-fit: cover;
+      display: block;
+    }
+    .team-card h3 { font-size: 1.0625rem; margin-bottom: 0.25rem; }
+    .team-card p { font-size: 0.875rem; color: var(--text-2); }
+    .team-card .team-card__placeholder {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, var(--edit-peach-soft), var(--edit-lavender-soft));
+      display: grid; place-items: center;
+      font-family: var(--font-italic);
+      font-size: 2.25rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    /* Stats strip — gradient panel. Honest framing for an early-stage
+       Spain branch backed by Sweden's track record. */
+    .stat-strip {
+      background: linear-gradient(135deg, var(--edit-lavender-soft) 0%, var(--bg-soft) 50%, var(--edit-peach-soft) 100%);
+      border-radius: var(--r-xl);
+      padding: clamp(32px, 4vw, 56px) clamp(24px, 4vw, 56px);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(20px, 3vw, 40px);
+    }
+    @media (max-width: 720px) { .stat-strip { grid-template-columns: repeat(2, 1fr); } }
+    .stat-strip__item { text-align: center; }
+    .stat-strip__value {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .stat-strip__label {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      margin-top: 0.5rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* CTA banner — dark panel before the signature/footer. */
+    .cta-banner {
+      max-width: var(--container);
+      margin: clamp(40px, 5vw, 72px) auto 0;
+      padding-inline: var(--gutter);
+    }
+    .cta-banner__inner {
+      background: var(--bg-dark);
+      color: white;
+      border-radius: var(--r-xl);
+      padding: clamp(32px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .cta-banner__inner h2 {
+      color: white;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .cta-banner__inner p {
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+    .cta-banner .pill-btn {
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ═══════════════ NAV (v6) ═══════════════ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+        <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+        VISUANZA
+      </a>
+      <div class="nav__links" role="menubar">
+        <a href="index.html" role="menuitem">Inicio</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
+          </div>
+        </div>
+        <a href="casos.html" role="menuitem">Casos</a>
+        <a href="nosotros.html" role="menuitem" class="is-active">Nosotros</a>
+        <a href="blog.html" role="menuitem">Blog</a>
+      </div>
+      <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
+      </div>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="page-hero__inner fx-up">
+          <span class="eyebrow">Nosotros</span>
+          <h1>Nos apasiona la <em class="gradient-text">hostelería</em></h1>
+          <p class="page-hero__subtitle">
+            Visuanza nació para llevar a España el método con el que Syns Nu Media ha hecho crecer a 170+ restaurantes en Suecia.
+            Sin jergas, sin contratos infinitos — solo trabajo que se ve en caja.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ HISTORIA ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="split-grid">
+          <div class="story-image fx-up">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=85" alt="Cocina de restaurante en plena hora punta" loading="lazy">
+            <div class="story-image__badge">
+              <div class="story-image__badge-label">Lanzado en</div>
+              <div class="story-image__badge-value">2026</div>
+            </div>
+          </div>
+          <div class="story-prose fx-up fx-up--d1">
+            <span class="eyebrow">Nuestra historia</span>
+            <h2>Hijo de <em class="gradient-text">Syns Nu Media</em>, hecho en Madrid.</h2>
+            <p>
+              Visuanza es la rama española de Syns Nu Media, fundada en Estocolmo en 2021. En cuatro años Syns Nu se ha convertido en la mayor agencia de marketing para restaurantes de Suecia — 170+ clientes activos, casos con +1.000.000 de visualizaciones y un sistema probado para llenar mesas.
+            </p>
+            <p>
+              En 2026 trasladamos ese sistema a España. No copiamos campañas: replicamos el método, lo adaptamos al mercado local y lo ejecutamos desde Madrid con un equipo que entiende el día a día de un restaurante en España — el ticket medio, el servicio del fin de semana, el cliente repetidor, las plataformas de delivery, las temporadas.
+            </p>
+            <p>
+              Trabajamos <em>solo</em> con restaurantes. Nada de SaaS, nada de e-commerce, nada de bufetes de abogados. Esa especialización es la diferencia entre una agencia que entiende vuestro negocio y una que os trata como una entrada más en el CRM.
+            </p>
+            <a href="contacto.html" class="pill-btn pill-btn--dark" style="margin-top: 1.75rem;">
+              Hablemos
+              <span class="pill-btn__arrow" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ VALORES ═══════════════ -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section-head fx-up">
+          <span class="eyebrow">Nuestros valores</span>
+          <h2>Los principios que <em class="gradient-text">nos mueven</em></h2>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card fx-up">
+            <div class="icon-chip icon-chip--peach">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            </div>
+            <h3>Foco en resultados</h3>
+            <p>Medimos el éxito en reservas, comensales y caja del día — no en likes ni alcance. Cada acción tiene que mover una métrica que sienta el restaurante.</p>
+          </div>
+          <div class="feature-card fx-up fx-up--d1">
+            <div class="icon-chip icon-chip--teal">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3>Equipo, no proveedor</h3>
+            <p>Trabajamos como una extensión de vuestra cocina y vuestra sala. Vuestro éxito es el nuestro — sin permanencia, sin barreras, con una línea directa cada día.</p>
+          </div>
+          <div class="feature-card fx-up fx-up--d2">
+            <div class="icon-chip icon-chip--olive">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <h3>Transparencia</h3>
+            <p>Precios claros, comunicación honesta y reportes mensuales en términos que entendéis: reservas, comensales, repetidores. Sin letra pequeña, sin promesas vagas.</p>
+          </div>
+          <div class="feature-card fx-up fx-up--d3">
+            <div class="icon-chip">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3>Especialización</h3>
+            <p>Solo restaurantes. Esa restricción nos da un conocimiento del sector que ninguna agencia generalista puede igualar — y se nota desde la primera reunión.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EQUIPO ═══════════════ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head fx-up">
+          <span class="eyebrow">El equipo</span>
+          <h2>Las personas detrás de <em class="gradient-text">Visuanza</em></h2>
+        </div>
+
+        <h3 class="team-region fx-up">España</h3>
+        <div class="feature-grid feature-grid--two">
+          <div class="feature-card team-card fx-up">
+            <div class="team-card__placeholder" aria-hidden="true">I</div>
+            <h3>Ivan Alzamora</h3>
+            <p>Director de operaciones · Madrid</p>
+          </div>
+          <div class="feature-card team-card fx-up fx-up--d1">
+            <div class="team-card__placeholder" aria-hidden="true">R</div>
+            <h3>Ruben</h3>
+            <p>Redes y estrategia de marca · Madrid</p>
+          </div>
+        </div>
+
+        <h3 class="team-region fx-up">Suecia</h3>
+        <div class="feature-grid feature-grid--two">
+          <div class="feature-card team-card fx-up">
+            <div class="team-card__placeholder" aria-hidden="true">E</div>
+            <h3>Emanuel Boyaci</h3>
+            <p>Co-fundador · Estocolmo</p>
+          </div>
+          <div class="feature-card team-card fx-up fx-up--d1">
+            <div class="team-card__placeholder" aria-hidden="true">+10</div>
+            <h3>Equipo SynsNuMedia</h3>
+            <p>Diseño, redes, fotografía, vídeo y publicidad · Estocolmo</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ STATS — Sweden's track record ═══════════════ -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="stat-strip fx-up">
+          <div class="stat-strip__item">
+            <div class="stat-strip__value">170+</div>
+            <div class="stat-strip__label">Restaurantes con Syns Nu Media</div>
+          </div>
+          <div class="stat-strip__item">
+            <div class="stat-strip__value">+1M</div>
+            <div class="stat-strip__label">Visualizaciones generadas</div>
+          </div>
+          <div class="stat-strip__item">
+            <div class="stat-strip__value">5</div>
+            <div class="stat-strip__label">Años de método probado</div>
+          </div>
+          <div class="stat-strip__item">
+            <div class="stat-strip__value">100%</div>
+            <div class="stat-strip__label">Foco en hostelería</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ CTA BANNER ═══════════════ -->
+    <div class="cta-banner">
+      <div class="cta-banner__inner fx-up">
+        <div>
+          <h2>¿Listos para trabajar con nosotros?</h2>
+          <p>Reservad una llamada gratis de 30 minutos. Vemos qué tenéis, qué falta y si tiene sentido seguir.</p>
+        </div>
+        <a href="contacto.html" class="pill-btn pill-btn--lav">
+          Reserva una llamada
+          <span class="pill-btn__arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="sec-footer-big">
+    <div class="sec-footer-big__inner footer-big">
+      <div class="footer-big__grid">
+        <div class="footer-big__brand">
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
+        </div>
+        <div>
+          <h5>Visuanza</h5>
+          <ul>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="casos.html">Casos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="redes-sociales.html">Redes sociales</a></li>
+            <li><a href="diseno-web.html">Diseño web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía</a></li>
+            <li><a href="google-publicidad.html">Google y publicidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Trabajad con nosotros</h5>
+          <ul>
+            <li><a href="contacto.html">Cadenas y grupos</a></li>
+            <li><a href="contacto.html">Franquicias</a></li>
+            <li><a href="contacto.html">Sé creador</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="tel:+34646853773">+34 646 853 773</a></li>
+            <li><a href="mailto:ivan@synsnumedia.com">ivan@synsnumedia.com</a></li>
+            <li>Madrid, España</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-big__mark fx-up" aria-hidden="true">
+        <span class="footer-big__mark-logo">
+          <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
+        </span>
+      </div>
+
+      <div class="footer-big__bottom">
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
+        <span><a href="politica-privacidad.html">Privacidad</a> · <a href="politica-privacidad.html">Términos</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/visuanza-chrome.js" defer></script>
+</body>
+</html>

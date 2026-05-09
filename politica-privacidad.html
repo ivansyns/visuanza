@@ -34,6 +34,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/visuanza-chrome.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -136,8 +138,6 @@
     @media (max-width: 768px) { .hamburger { display: flex; } .mobile-menu { display: flex; } .nav-links, .nav-right { display: none !important; } }
     @media (min-width: 769px) { .mobile-menu { display: none !important; } }
 
-    .footer-cta-btn { display: inline-block; margin-top: 18px; background: #C08B5C; color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 600; padding: 9px 18px; border-radius: var(--radius); transition: opacity 0.2s, transform 0.2s; }
-    .footer-cta-btn:hover { opacity: 0.88; transform: translateY(-1px); }
     /* ─── FOOTER ─── */
     footer { background: #1A1A1A; border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 0 32px; }
     .footer-inner { max-width: 1530px; margin: 0 auto; padding-left: clamp(8px,1.5vw,24px); padding-right: clamp(8px,1.5vw,24px); }
@@ -339,73 +339,89 @@
       .contact-box { padding: 20px; }
     }
 
+    /* ============================================================
+       POLITICA-PRIVACIDAD — light v6 pass on the hero only.
+       Body content keeps its existing typography (it's long-form
+       legal text — no need for editorial flourishes).
+       ============================================================ */
+    main { padding-top: var(--nav-h); background: var(--bg); }
+    .pol-hero {
+      padding: clamp(80px, 10vw, 140px) 0 clamp(40px, 5vw, 64px);
+    }
+    .pol-hero__inner {
+      max-width: 720px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .pol-eyebrow {
+      display: inline-block;
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 600;
+      margin-bottom: 0.875rem;
+    }
+    .pol-hero h1 {
+      font-size: var(--fs-h1);
+      letter-spacing: var(--tr-h1);
+      line-height: 1.04;
+    }
+    .pol-hero p {
+      margin-top: 1.25rem;
+      color: var(--text-2);
+      font-size: var(--fs-lead);
+      line-height: 1.55;
+    }
+    .pol-meta {
+      margin-top: 1.5rem;
+      padding: 0.875rem 1.25rem;
+      background: var(--edit-lavender-soft);
+      border: 1px solid rgba(185,163,247,0.25);
+      border-radius: var(--r-md);
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+    .pol-meta strong { color: var(--text); font-weight: 600; }
   </style>
 </head>
 <body>
   <div class="bg-glow"></div>
 
-    <!-- ─── NAV ─── -->
-    <!-- ─── NAV ─── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-        <span>Visuanza</span>
+  <!-- ═══════════════ NAV (v6) ═══════════════ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+        <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+        VISUANZA
       </a>
-      <ul class="nav-links">
-        <li class="nav-has-dropdown">
-          <a href="servicios.html">Servicios <span class="chevron">▾</span></a>
-          <div class="nav-dropdown">
-            <div class="nav-dropdown-grid">
-              <a href="redes-sociales.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Redes Sociales</span>
-                  <span class="ndi-desc">Gestión profesional para ganar visibilidad online</span>
-                </span>
-              </a>
-              <a href="diseno-web.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Diseño Web</span>
-                  <span class="ndi-desc">Páginas a medida + Google My Business incluido</span>
-                </span>
-              </a>
-              <a href="fotografia-menu.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Fotografía de Menú</span>
-                  <span class="ndi-desc">Fotos profesionales + assets digitales y print</span>
-                </span>
-              </a>
-              <a href="publicidad-digital.html" class="nav-dropdown-item">
-                <span class="ndi-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                </span>
-                <span class="ndi-text">
-                  <span class="ndi-title">Publicidad Digital</span>
-                  <span class="ndi-desc">Meta Ads y TikTok Ads que llenan mesas</span>
-                </span>
-              </a>
-            </div>
+      <div class="nav__links" role="menubar">
+        <a href="index.html" role="menuitem">Inicio</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
           </div>
-        </li>
-        <li><a href="index.html#quienes">Quiénes somos</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="contacto.html" class="btn-primary">Pedir propuesta</a>
+        </div>
+        <a href="casos.html" role="menuitem">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
+        <a href="blog.html" role="menuitem">Blog</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
+      </div>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
@@ -413,8 +429,11 @@
   <!-- ─── MOBILE MENU ─── -->
     <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <ul class="mobile-menu-links">
+      <li><a href="index.html" class="mobile-menu-link">Inicio</a></li>
       <li><a href="servicios.html" class="mobile-menu-link">Servicios</a></li>
-      <li><a href="index.html#quienes" class="mobile-menu-link">Quiénes somos</a></li>
+      <li><a href="casos.html" class="mobile-menu-link">Casos</a></li>
+      <li><a href="nosotros.html" class="mobile-menu-link">Nosotros</a></li>
+      <li><a href="blog.html" class="mobile-menu-link">Blog</a></li>
       <li><a href="contacto.html" class="mobile-menu-link">Contacto</a></li>
     </ul>
     <div class="mobile-menu-bottom">
@@ -424,14 +443,14 @@
 
   <main>
 
-  <!-- ─── HERO ─── -->
-  <section class="policy-hero">
-    <div class="policy-hero-inner fade-in">
-      <p class="policy-eyebrow">Legal</p>
-      <h1>Política de <span class="accent">Privacidad</span></h1>
-      <p>En Visuanza nos tomamos en serio la protección de tus datos personales. Esta política explica qué información recogemos, para qué la usamos y cuáles son tus derechos.</p>
-      <div class="policy-meta">
-        <strong>Última actualización:</strong> marzo de 2026 &nbsp;·&nbsp; <strong>Aplicable a:</strong> visuanza.com y todos los formularios de contacto asociados
+  <!-- ═══════════════ HERO (v6) ═══════════════ -->
+  <section class="pol-hero">
+    <div class="pol-hero__inner fx-up">
+      <span class="pol-eyebrow">Legal</span>
+      <h1>Política de <em class="gradient-text">privacidad</em>.</h1>
+      <p>En Visuanza nos tomamos en serio la protección de vuestros datos personales. Esta política explica qué información recogemos, para qué la usamos y cuáles son vuestros derechos.</p>
+      <div class="pol-meta">
+        <strong>Última actualización:</strong> mayo de 2026 &nbsp;·&nbsp; <strong>Aplicable a:</strong> visuanza.es y todos los formularios de contacto asociados
       </div>
     </div>
   </section>
@@ -579,57 +598,61 @@
 
   </main>
 
-    <!-- ─── FOOTER ─── -->
-    <footer>
-    <div class="footer-inner">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          <img src="assets/SynsLogo.png" alt="Logo de Visuanza" />
-          <span>Visuanza</span>
-        </a>
-              <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
-</div>
 
-      <div class="footer-col">
-        <h4>Servicios</h4>
-        <ul>
-          <li><a href="redes-sociales.html">Redes Sociales</a></li>
-          <li><a href="diseno-web.html">Diseño Web</a></li>
-          <li><a href="fotografia-menu.html">Fotografía de Menú</a></li>
-          <li><a href="publicidad-digital.html">Publicidad Digital</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Navegar</h4>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="index.html#quienes">Quiénes somos</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-          <li><a href="blog.html">Blog</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Redes</h4>
-        <div class="footer-social-icons">
-          <a href="https://www.instagram.com/visuanza/" target="_blank" rel="noopener" class="footer-social-icon" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
-          <a href="https://www.tiktok.com/@visaunza" target="_blank" rel="noopener" class="footer-social-icon" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.73a4.85 4.85 0 01-1-.04z"/></svg></a>
-          <a href="#" class="footer-social-icon" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="#" class="footer-social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+  <!-- ═══════════════ FOOTER (v6 big-mark) ═══════════════ -->
+  <footer class="sec-footer-big">
+    <div class="sec-footer-big__inner footer-big">
+      <div class="footer-big__grid">
+        <div class="footer-big__brand">
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
+        </div>
+        <div>
+          <h5>Visuanza</h5>
+          <ul>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="casos.html">Casos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="redes-sociales.html">Redes sociales</a></li>
+            <li><a href="diseno-web.html">Diseño web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía</a></li>
+            <li><a href="google-publicidad.html">Google y publicidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Trabajad con nosotros</h5>
+          <ul>
+            <li><a href="contacto.html">Cadenas y grupos</a></li>
+            <li><a href="contacto.html">Franquicias</a></li>
+            <li><a href="contacto.html">Sé creador</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="tel:+34646853773">+34 646 853 773</a></li>
+            <li><a href="mailto:ivan@synsnumedia.com">ivan@synsnumedia.com</a></li>
+            <li>Madrid, España</li>
+          </ul>
         </div>
       </div>
 
-    </div>
+      <div class="footer-big__mark fx-up" aria-hidden="true">
+        <span class="footer-big__mark-logo">
+          <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
+        </span>
+      </div>
 
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2026 Visuanza · Powered by <a href="https://synsnumedia.se/" target="_blank" rel="noopener">SynsNu</a></div>
-      <div class="footer-legal">
-        <a href="politica-privacidad.html">Política de privacidad</a>
+      <div class="footer-big__bottom">
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
+        <span><a href="politica-privacidad.html">Privacidad</a> · <a href="politica-privacidad.html">Términos</a></span>
       </div>
     </div>
-    </div><!-- /footer-inner -->
   </footer>
 
   <script>
@@ -691,5 +714,6 @@
     }
   })();
 </script>
+<script src="assets/visuanza-chrome.js" defer></script>
 </body>
 </html>

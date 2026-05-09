@@ -35,6 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/visuanza-chrome.css" />
 
   <style>
     /* ============================================================
@@ -111,7 +112,8 @@
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
-      letter-spacing: -0.015em;
+      font-size: 1.06em;
+      letter-spacing: -0.025em;
       color: inherit;
     }
 
@@ -828,12 +830,16 @@
       color: rgba(255,255,255,0.5);
       margin-bottom: 1rem;
     }
-    .footer-big__brand p {
-      max-width: 320px;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.9375rem;
-      line-height: 1.5;
-      margin: 0.75rem 0 1.25rem;
+    .footer-big__brand {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+    .footer-big__brand-mark {
+      width: clamp(80px, 9vw, 120px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
     }
     .footer-big ul { display: flex; flex-direction: column; gap: 0.625rem; }
     .footer-big a { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
@@ -884,20 +890,6 @@
     }
     .footer-big__bottom a { color: rgba(255,255,255,0.6); }
     .footer-big__bottom a:hover { color: white; }
-    .footer-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 10px 18px;
-      border-radius: 9999px;
-      background: white;
-      color: var(--text);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: background 200ms;
-    }
-    .footer-cta-btn:hover { background: rgba(255,255,255,0.85); }
-
     /* ── Reveal utility ─── */
     .fx-up {
       opacity: 0;
@@ -925,6 +917,25 @@
       outline-offset: 3px;
       border-radius: 6px;
     }
+
+    /* ── Brand chrome v6: tri-dot mark + signature stamp ── */
+    .tri-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.08em;
+      margin-right: 0.18em;
+      vertical-align: baseline;
+    }
+    .tri-dot b {
+      width: 0.22em;
+      height: 0.22em;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .tri-dot b:nth-child(1) { background: var(--edit-peach, #FFCFA8); }
+    .tri-dot b:nth-child(2) { background: var(--edit-teal, #4EBFB8); }
+    .tri-dot b:nth-child(3) { background: var(--edit-lavender, #E8E1FF); }
+
   </style>
 </head>
 
@@ -940,14 +951,27 @@
 
       <div class="nav__links" role="menubar">
         <a href="index.html" role="menuitem">Inicio</a>
-        <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
-        <a href="diseno-web.html" role="menuitem">Diseño web</a>
-        <a href="fotografia-menu.html" role="menuitem" class="is-active">Fotografía</a>
-        <a href="google-publicidad.html" role="menuitem">Google &amp; ads</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger is-active" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem" class="is-active">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
+          </div>
+        </div>
+        <a href="casos.html" role="menuitem">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
         <a href="blog.html" role="menuitem">Blog</a>
       </div>
 
       <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
         <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
       </div>
 
@@ -1279,14 +1303,13 @@
 
   </main>
 
+
   <!-- ═══════════════ 7 · FOOTER — big-mark ═══════════════ -->
   <footer class="sec-footer-big">
     <div class="sec-footer-big__inner footer-big">
       <div class="footer-big__grid">
         <div class="footer-big__brand">
-          <h5>Visuanza</h5>
-          <p>Marketing especializado en restaurantes — diseño web, redes sociales, fotografía y publicidad. Sin permanencia, sólo resultados.</p>
-          <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
         </div>
         <div>
           <h5>Servicios</h5>
@@ -1326,11 +1349,11 @@
       </div>
 
       <div class="footer-big__mark" aria-hidden="true">
-        <img class="hash-mark" src="assets/hash-mark-white.png" alt="">VISUANZA
+        <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
       </div>
 
       <div class="footer-big__bottom">
-        <span>© 2026 Visuanza · <a href="https://synsnumedia.se/" target="_blank" rel="noopener">Syns Nu Media</a>. Todos los derechos reservados.</span>
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
         <span><a href="politica-privacidad.html">Política de privacidad</a></span>
       </div>
     </div>

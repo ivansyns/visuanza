@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casos — Visuanza</title>
+  <meta name="description" content="Resultados reales medidos en Metricool. Restaurantes de Syns Nu Media en Suecia — el mismo método que aplicamos en España.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/visuanza-chrome.css" />
+
+  <link rel="icon" type="image/png" href="assets/hash-mark.png">
+
+  <style>
+    body { padding-top: 0; }
+    main { padding-top: var(--nav-h); }
+
+    /* Page hero — eyebrow + giant editorial headline + lede. */
+    .cases-hero {
+      padding: clamp(80px, 10vw, 140px) 0 clamp(48px, 6vw, 80px);
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      text-align: left;
+    }
+    .cases-hero__eyebrow {
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .cases-hero h1 {
+      font-size: var(--fs-h1);
+      letter-spacing: var(--tr-h1);
+      line-height: 1.04;
+      max-width: 880px;
+    }
+    .cases-hero h1 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+    .cases-hero__lead {
+      margin-top: 1.5rem;
+      max-width: 720px;
+      color: var(--text-2);
+      font-size: var(--fs-lead);
+      line-height: 1.6;
+    }
+
+    /* Notice banner — honest framing about Spain branch being new. */
+    .cases-notice {
+      max-width: var(--container);
+      margin: clamp(16px, 2vw, 32px) auto clamp(40px, 5vw, 64px);
+      padding: 1rem clamp(20px, 3vw, 32px);
+      background: var(--edit-lavender-soft);
+      border: 1px solid rgba(185, 163, 247, 0.3);
+      border-radius: var(--r-md);
+      margin-inline: var(--gutter);
+      font-size: 0.9375rem;
+      color: var(--text-2);
+      line-height: 1.55;
+    }
+    .cases-notice strong { color: var(--text); font-weight: 600; }
+    @media (min-width: 1456px) { .cases-notice { margin-inline: auto; } }
+
+    /* Case grid — 2-up feature cards. */
+    .sec-cases {
+      padding: clamp(40px, 5vw, 72px) 0 clamp(80px, 10vw, 140px);
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sec-cases__head {
+      max-width: 720px;
+      margin-bottom: clamp(40px, 5vw, 64px);
+    }
+    .sec-cases__eyebrow {
+      font-size: 0.6875rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 600;
+    }
+    .sec-cases__title {
+      font-size: var(--fs-h2-lg);
+      letter-spacing: var(--tr-h2);
+      line-height: 1.05;
+      margin-top: 0.75rem;
+    }
+    .sec-cases__title em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+    .sec-cases__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(20px, 3vw, 36px);
+    }
+    @media (max-width: 900px) {
+      .sec-cases__grid { grid-template-columns: 1fr; }
+    }
+
+    .case-feature {
+      display: flex;
+      flex-direction: column;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out), border-color var(--dur) var(--ease-out);
+      color: inherit;
+    }
+    .case-feature:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-strong);
+    }
+    .case-feature__img {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: var(--bg-dark);
+    }
+    .case-feature__img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 600ms var(--ease-out);
+    }
+    .case-feature:hover .case-feature__img img { transform: scale(1.04); }
+    .case-feature__body {
+      padding: clamp(20px, 3vw, 36px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      flex: 1;
+    }
+    .case-feature__tag {
+      align-self: flex-start;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text);
+      background: var(--edit-peach-soft);
+      padding: 4px 12px;
+      border-radius: 9999px;
+    }
+    .case-feature h3 {
+      font-size: clamp(1.25rem, 2vw, 1.625rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .case-feature h3 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+    }
+    .case-feature__lead {
+      color: var(--text-2);
+      font-size: 0.9375rem;
+      line-height: 1.55;
+    }
+    /* Stat grid: 2×2 boxed layout (mirrors the Swedish kundcase
+       layout). Each stat gets its own bordered chip so they read as
+       discrete proof-points rather than a flowing row.
+       margin-top: auto pins the block to the bottom of the card body
+       so all cards in a row align their stats on the same baseline,
+       regardless of how long their lead paragraph runs. */
+    .case-feature__stats {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.625rem;
+      border-top: 1px solid var(--border);
+    }
+    .case-feature__stat {
+      padding: 0.75rem 0.875rem;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+    }
+    @media (max-width: 480px) { .case-feature__stats { grid-template-columns: 1fr; } }
+    .case-feature__stat-val {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .case-feature__stat-label {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      margin-top: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .sec-cases__note {
+      margin-top: clamp(40px, 5vw, 64px);
+      text-align: center;
+      color: var(--text-3);
+      font-size: 0.9375rem;
+      max-width: 640px;
+      margin-inline: auto;
+    }
+
+    /* CTA */
+    .sec-cta-cases {
+      background: var(--bg-dark);
+      color: white;
+      padding: clamp(64px, 9vw, 120px) 0;
+    }
+    .sec-cta-cases__inner {
+      max-width: 880px;
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+      text-align: center;
+    }
+    .sec-cta-cases h2 {
+      font-size: var(--fs-h2-lg);
+      letter-spacing: var(--tr-h2);
+      line-height: 1.05;
+      color: white;
+    }
+    .sec-cta-cases h2 em {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--edit-peach);
+    }
+    .sec-cta-cases p {
+      margin-top: 1rem;
+      color: rgba(255,255,255,0.72);
+      font-size: var(--fs-lead);
+    }
+    .sec-cta-cases__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.625rem;
+      margin-top: 2rem;
+      padding: 0.875rem 1rem 0.875rem 1.5rem;
+      background: white;
+      color: var(--text);
+      border-radius: 9999px;
+      font-weight: 500;
+      transition: transform var(--dur) var(--ease-out), box-shadow var(--dur) var(--ease-out);
+    }
+    .sec-cta-cases__btn:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -8px rgba(0,0,0,0.35); }
+    .sec-cta-cases__btn-arrow {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--text);
+      color: white;
+      display: inline-grid; place-items: center;
+    }
+    .sec-cta-cases__btn-arrow svg { width: 14px; height: 14px; }
+  </style>
+</head>
+
+<body>
+  <!-- ═══════════════ NAV (v6) ═══════════════ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+        <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+        VISUANZA
+      </a>
+      <div class="nav__links" role="menubar">
+        <a href="index.html" role="menuitem">Inicio</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
+          </div>
+        </div>
+        <a href="casos.html" role="menuitem" class="is-active">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
+        <a href="blog.html" role="menuitem">Blog</a>
+      </div>
+      <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
+      </div>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ═══════════════ HERO ═══════════════ -->
+    <section class="cases-hero">
+      <div class="fx-up">
+        <div class="cases-hero__eyebrow">Casos</div>
+        <h1>Resultados reales de <em>restaurantes reales</em>.</h1>
+      </div>
+      <p class="cases-hero__lead fx-up fx-up--d1">
+        Aquí mostramos solo restaurantes con los que el grupo ha trabajado de verdad — cifras reales sacadas de Metricool, sin estadísticas maquilladas. Conforme cerremos clientes en España, los publicaremos aquí también.
+      </p>
+    </section>
+
+    <!-- Honest notice — Spain branch is new. -->
+    <div class="cases-notice fx-up">
+      <strong>Nota:</strong> Visuanza es la rama española de Syns Nu Media (Estocolmo).
+      Los casos de abajo son del equipo en Suecia — el mismo método y los mismos sistemas que aplicamos aquí.
+      En España estamos cerrando los primeros restaurantes ahora; los publicaremos en cuanto tengan datos de un trimestre completo.
+    </div>
+
+    <!-- ═══════════════ CASES ═══════════════ -->
+    <section class="sec-cases">
+      <div class="sec-cases__head fx-up">
+        <span class="sec-cases__eyebrow">Resultados del grupo</span>
+        <h2 class="sec-cases__title">Restaurantes donde las cifras hicieron <em>el trabajo de verdad</em>.</h2>
+      </div>
+
+      <div class="sec-cases__grid">
+        <a href="case-fluffy-house.html" class="case-feature fx-up">
+          <div class="case-feature__img">
+            <img src="assets/casos/fluffy-house.webp" decoding="async" width="1400" height="1750" alt="Fluffy House — pancakes japoneses" fetchpriority="high">
+          </div>
+          <div class="case-feature__body">
+            <span class="case-feature__tag">Redes sociales</span>
+            <h3>Fluffy House — <em>de cero a dos ciudades</em></h3>
+            <p class="case-feature__lead">Estocolmo · Uppsala. Plan Turbo desde septiembre 2025. En 8 meses: 8,68M visualizaciones, 25.100 seguidores en tres plataformas y dos expansiones físicas.</p>
+            <div class="case-feature__stats">
+              <div class="case-feature__stat"><div class="case-feature__stat-val">8,68M</div><div class="case-feature__stat-label">Visualizaciones</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">201K</div><div class="case-feature__stat-label">Interacciones</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">25,1K</div><div class="case-feature__stat-label">Seguidores (3 plataformas)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">261</div><div class="case-feature__stat-label">Posts en 8 meses</div></div>
+            </div>
+          </div>
+        </a>
+
+        <a href="case-mazraa.html" class="case-feature fx-up fx-up--d1">
+          <div class="case-feature__img">
+            <img src="assets/casos/mazraa.webp" decoding="async" width="1400" height="1750" alt="Mazra'a — restaurante palestino en Estocolmo" loading="lazy">
+          </div>
+          <div class="case-feature__body">
+            <span class="case-feature__tag">Redes sociales</span>
+            <h3>Mazra'a — <em>una clásica palestina encuentra su voz digital</em></h3>
+            <p class="case-feature__lead">Skånegatan, Estocolmo. Plan Pro desde noviembre 2025. En 5,5 meses: 1,42 millones de visualizaciones y +13.499% de interacciones.</p>
+            <div class="case-feature__stats">
+              <div class="case-feature__stat"><div class="case-feature__stat-val">1,42M</div><div class="case-feature__stat-label">Visualizaciones (+640%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">47,9K</div><div class="case-feature__stat-label">Interacciones (+13.499%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">+46%</div><div class="case-feature__stat-label">Seguidores Instagram</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">78</div><div class="case-feature__stat-label">Posts (+1.460%)</div></div>
+            </div>
+          </div>
+        </a>
+
+        <a href="case-falafelbaren.html" class="case-feature fx-up">
+          <div class="case-feature__img">
+            <img src="assets/casos/falafelbaren.webp" decoding="async" width="1400" height="1750" alt="Falafelbaren — Hornsgatan, Estocolmo" loading="lazy">
+          </div>
+          <div class="case-feature__body">
+            <span class="case-feature__tag">Redes sociales</span>
+            <h3>Falafelbaren — <em>un favorito local encuentra más comensales</em></h3>
+            <p class="case-feature__lead">Hornsgatan, Estocolmo. De cero TikTok a +1 millón de visualizaciones en 3,5 meses — datos verificados en Metricool.</p>
+            <div class="case-feature__stats">
+              <div class="case-feature__stat"><div class="case-feature__stat-val">1M</div><div class="case-feature__stat-label">Visualizaciones (+856%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">39,6K</div><div class="case-feature__stat-label">Interacciones (+3.760%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">10,17K</div><div class="case-feature__stat-label">Seguidores (+41%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">+3.481%</div><div class="case-feature__stat-label">Crecimiento TikTok</div></div>
+            </div>
+          </div>
+        </a>
+
+        <a href="case-sushirevolution.html" class="case-feature fx-up fx-up--d1">
+          <div class="case-feature__img">
+            <img src="assets/casos/sushi-revolution.webp" decoding="async" width="1400" height="1750" alt="Sushi Revolution — Mall of Scandinavia" loading="lazy">
+          </div>
+          <div class="case-feature__body">
+            <span class="case-feature__tag">Redes sociales</span>
+            <h3>Sushi Revolution — <em>de la apertura a 2,56M de visualizaciones</em></h3>
+            <p class="case-feature__lead">Mall of Scandinavia, Solna. Plan Pro desde noviembre 2025. Cuentas nuevas — 3.655 seguidores y 1,72M visualizaciones en TikTok en 7,5 meses.</p>
+            <div class="case-feature__stats">
+              <div class="case-feature__stat"><div class="case-feature__stat-val">2,56M</div><div class="case-feature__stat-label">Visualizaciones</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">133K</div><div class="case-feature__stat-label">Interacciones</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">3.655</div><div class="case-feature__stat-label">Seguidores (desde cero)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">7,46%</div><div class="case-feature__stat-label">Engagement TikTok</div></div>
+            </div>
+          </div>
+        </a>
+
+        <a href="case-brams-burgers.html" class="case-feature fx-up">
+          <div class="case-feature__img">
+            <img src="assets/casos/brams-burgers.webp" decoding="async" width="1400" height="1750" alt="Brams Burgers — smashburger en Estocolmo" loading="lazy">
+          </div>
+          <div class="case-feature__body">
+            <span class="case-feature__tag">Redes sociales</span>
+            <h3>Brams Burgers — <em>de Skärholmen a tres ciudades</em></h3>
+            <p class="case-feature__lead">Estocolmo · Uppsala · Gotemburgo. Plan Turbo desde 2025. En 14 meses: 4,30M visualizaciones, 25.540 seguidores en cuatro plataformas y dos aperturas nuevas.</p>
+            <div class="case-feature__stats">
+              <div class="case-feature__stat"><div class="case-feature__stat-val">4,30M</div><div class="case-feature__stat-label">Visualizaciones (+4.971%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">88,5K</div><div class="case-feature__stat-label">Interacciones (+8.264%)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">25.540</div><div class="case-feature__stat-label">Seguidores (4 plataformas)</div></div>
+              <div class="case-feature__stat"><div class="case-feature__stat-val">423</div><div class="case-feature__stat-label">Posts (+1.310%)</div></div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <p class="sec-cases__note fx-up">
+        Más casos del grupo se publican conforme van cerrando trimestre. Los primeros casos de España aparecerán aquí en cuanto los nuevos clientes acumulen 3 meses de datos.
+      </p>
+    </section>
+
+    <!-- ═══════════════ CTA ═══════════════ -->
+    <section class="sec-cta-cases">
+      <div class="sec-cta-cases__inner">
+        <div class="fx-up">
+          <h2>Vuestro restaurante puede ser <em>el siguiente</em>.</h2>
+          <p>Reserva una llamada gratis de 30 minutos y vemos si tiene sentido aplicar este método a vuestro caso.</p>
+        </div>
+        <a href="contacto.html" class="sec-cta-cases__btn fx-up fx-up--d1">
+          Reserva una llamada
+          <span class="sec-cta-cases__btn-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="sec-footer-big">
+    <div class="sec-footer-big__inner footer-big">
+      <div class="footer-big__grid">
+        <div class="footer-big__brand">
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
+        </div>
+        <div>
+          <h5>Visuanza</h5>
+          <ul>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="casos.html">Casos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="redes-sociales.html">Redes sociales</a></li>
+            <li><a href="diseno-web.html">Diseño web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía</a></li>
+            <li><a href="google-publicidad.html">Google y publicidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Trabajad con nosotros</h5>
+          <ul>
+            <li><a href="contacto.html">Cadenas y grupos</a></li>
+            <li><a href="contacto.html">Franquicias</a></li>
+            <li><a href="contacto.html">Sé creador</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="tel:+34646853773">+34 646 853 773</a></li>
+            <li><a href="mailto:ivan@synsnumedia.com">ivan@synsnumedia.com</a></li>
+            <li>Madrid, España</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-big__mark fx-up" aria-hidden="true">
+        <span class="footer-big__mark-logo">
+          <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
+        </span>
+      </div>
+
+      <div class="footer-big__bottom">
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
+        <span><a href="politica-privacidad.html">Privacidad</a> · <a href="politica-privacidad.html">Términos</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/visuanza-chrome.js" defer></script>
+</body>
+</html>

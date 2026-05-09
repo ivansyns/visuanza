@@ -35,6 +35,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/visuanza-chrome.css" />
 
   <style>
     /* ============================================================
@@ -122,7 +123,8 @@
       font-family: var(--font-italic);
       font-style: italic;
       font-weight: 400;
-      letter-spacing: -0.015em;
+      font-size: 1.06em;
+      letter-spacing: -0.025em;
       color: inherit;
     }
 
@@ -453,6 +455,60 @@
       text-align: left;
     }
     @media (max-width: 800px) { .price-grid { grid-template-columns: 1fr; } }
+    /* Guarantees panel — sits below the two pricing cards, applies to both
+       tiers. Visual treatment intentionally different from the bullet list:
+       cream-tinted card with a 4-up icon row, no checkmark column, larger
+       gutters. Mirrors Sweden's hemsida.html "deliverable guarantees" aside. */
+    .price-guarantees {
+      margin-top: 1.5rem;
+      padding: clamp(1.5rem, 3vw, 2.25rem);
+      background: var(--bg-tint, #F4F4F2);
+      border: 1px solid var(--border, #EAEAE6);
+      border-radius: 22px;
+    }
+    .price-guarantees__label {
+      display: block;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-3, #71717A);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .price-guarantees__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 800px) { .price-guarantees__grid { grid-template-columns: repeat(2, 1fr); } }
+    .price-guarantee {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.625rem;
+      padding: 0.5rem 0.75rem;
+    }
+    .price-guarantee__icon {
+      width: 36px; height: 36px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      background: rgba(15, 15, 16, 0.06);
+      color: var(--text);
+    }
+    .price-guarantee__icon svg {
+      width: 18px; height: 18px;
+      stroke: currentColor; stroke-width: 1.8;
+      stroke-linecap: round; stroke-linejoin: round;
+      fill: none;
+    }
+    .price-guarantee__text {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.35;
+    }
     .price-card-wrap { position: relative; }
     .price-pop {
       position: absolute;
@@ -716,16 +772,16 @@
       color: rgba(255,255,255,0.5);
       margin-bottom: 1rem;
     }
-    .footer-big__brand p {
-      max-width: 320px;
-      color: rgba(255,255,255,0.7);
-      font-size: 0.9375rem;
-      line-height: 1.5;
-      margin: 0.75rem 0 1.25rem;
+    .footer-big__brand {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
     }
-    .footer-big__brand .pill-btn {
-      background: white;
-      color: var(--text);
+    .footer-big__brand-mark {
+      width: clamp(80px, 9vw, 120px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
     }
     .footer-big ul { display: flex; flex-direction: column; gap: 0.625rem; }
     .footer-big a { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
@@ -778,20 +834,6 @@
     }
     .footer-big__bottom a { color: rgba(255,255,255,0.6); }
     .footer-big__bottom a:hover { color: white; }
-    .footer-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 10px 18px;
-      border-radius: 9999px;
-      background: white;
-      color: var(--text);
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: background 200ms;
-    }
-    .footer-cta-btn:hover { background: rgba(255,255,255,0.85); }
-
     /* ── Reveal utility ─── */
     .fx-up {
       opacity: 0;
@@ -820,6 +862,25 @@
       outline-offset: 3px;
       border-radius: 6px;
     }
+
+    /* ── Brand chrome v6: tri-dot mark + signature stamp ── */
+    .tri-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.08em;
+      margin-right: 0.18em;
+      vertical-align: baseline;
+    }
+    .tri-dot b {
+      width: 0.22em;
+      height: 0.22em;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .tri-dot b:nth-child(1) { background: var(--edit-peach, #FFCFA8); }
+    .tri-dot b:nth-child(2) { background: var(--edit-teal, #4EBFB8); }
+    .tri-dot b:nth-child(3) { background: var(--edit-lavender, #E8E1FF); }
+
   </style>
 </head>
 
@@ -835,13 +896,27 @@
 
       <div class="nav__links" role="menubar">
         <a href="index.html" role="menuitem">Inicio</a>
-        <a href="diseno-web.html" role="menuitem" class="is-active">Diseño web</a>
-        <a href="fotografia-menu.html" role="menuitem">Fotografía</a>
-        <a href="analisis.html" role="menuitem">Análisis</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger is-active" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem" class="is-active">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
+          </div>
+        </div>
+        <a href="casos.html" role="menuitem">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
         <a href="blog.html" role="menuitem">Blog</a>
       </div>
 
       <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
         <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
       </div>
 
@@ -972,19 +1047,35 @@
               <ul class="price-list">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Página web profesional</span>
+                  <span>Diseño a medida (sin plantillas)</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Adaptada a móvil</span>
+                  <span>5–10 páginas (inicio, menú, sobre nosotros, contacto…)</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Menú digital</span>
+                  <span>Adaptada a móvil + optimizada para velocidad</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Menú digital con código QR</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   <span>Formulario de contacto</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Certificado SSL</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Google Analytics</span>
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>3 meses de soporte gratuito</span>
                 </li>
               </ul>
               <div class="price-addon">
@@ -1012,23 +1103,23 @@
               <ul class="price-list">
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Diseño multipágina personalizado</span>
+                  <span><strong>Todo del plan Esencial,</strong> más:</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Menú digital interactivo</span>
+                  <span>SEO base + Google Local</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Sistema de reservas integrado</span>
+                  <span>Integración con sistema de reservas</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Galería de fotos profesional</span>
+                  <span>Google Search Console</span>
                 </li>
                 <li>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Análisis mensual de rendimiento</span>
+                  <span>Soporte y cambios ilimitados</span>
                 </li>
               </ul>
               <div class="price-addon">
@@ -1042,6 +1133,38 @@
                 </span>
               </a>
             </article>
+          </div>
+        </div>
+
+        <!-- Guarantees panel — applies to BOTH tiers, separate visual treatment.
+             Mirrors Sweden hemsida.html's deliverable-guarantees aside. -->
+        <div class="price-guarantees fx-up">
+          <span class="price-guarantees__label">Incluido en todos los planes</span>
+          <div class="price-guarantees__grid">
+            <div class="price-guarantee">
+              <span class="price-guarantee__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+              </span>
+              <span class="price-guarantee__text">Entrega en 3 semanas</span>
+            </div>
+            <div class="price-guarantee">
+              <span class="price-guarantee__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polyline points="3 11 8 6 8 9 14 9 14 14"/><polyline points="21 13 16 18 16 15 10 15 10 10"/></svg>
+              </span>
+              <span class="price-guarantee__text">Revisiones ilimitadas</span>
+            </div>
+            <div class="price-guarantee">
+              <span class="price-guarantee__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3 a14 14 0 0 1 0 18 a14 14 0 0 1 0 -18"/></svg>
+              </span>
+              <span class="price-guarantee__text">Dominio &amp; hosting incluidos el primer año</span>
+            </div>
+            <div class="price-guarantee">
+              <span class="price-guarantee__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11 V7 a4 4 0 0 1 8 0 V11"/></svg>
+              </span>
+              <span class="price-guarantee__text">Certificado SSL</span>
+            </div>
           </div>
         </div>
 
@@ -1083,14 +1206,13 @@
 
   </main>
 
+
   <!-- ═══════════════ 5 · FOOTER — big-mark ═══════════════ -->
   <footer class="sec-footer-big">
     <div class="sec-footer-big__inner footer-big">
       <div class="footer-big__grid">
         <div class="footer-big__brand">
-          <h5>Visuanza</h5>
-          <p>Marketing especializado en restaurantes — diseño web, redes sociales, fotografía y publicidad. Sin permanencia, sólo resultados.</p>
-          <a href="analisis.html" class="footer-cta-btn">Analiza tu negocio gratis →</a>
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
         </div>
         <div>
           <h5>Servicios</h5>
@@ -1130,11 +1252,11 @@
       </div>
 
       <div class="footer-big__mark" aria-hidden="true">
-        <img class="hash-mark" src="assets/hash-mark-white.png" alt="">VISUANZA
+        <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
       </div>
 
       <div class="footer-big__bottom">
-        <span>© 2026 Visuanza · <a href="https://synsnumedia.se/" target="_blank" rel="noopener">Syns Nu Media</a>. Todos los derechos reservados.</span>
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservado</span>
         <span><a href="politica-privacidad.html">Política de privacidad</a></span>
       </div>
     </div>

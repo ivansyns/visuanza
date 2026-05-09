@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caso: Fluffy House — 8,68M visualizaciones y dos aperturas | Visuanza</title>
+  <meta name="description" content="Cómo Fluffy House, los pancakes japoneses, pasó de cero a 8,68M de visualizaciones y dos aperturas físicas en 8 meses con el método de Syns Nu Media.">
+  <meta name="keywords" content="caso de éxito restaurante, marketing pancakes japoneses, Fluffy House Estocolmo Uppsala, Syns Nu Media, expansión restaurante, Visuanza casos">
+  <link rel="canonical" href="https://visuanza.es/case-fluffy-house.html">
+
+  <meta property="og:title" content="Caso Fluffy House: 8,68M visualizaciones y dos aperturas">
+  <meta property="og:description" content="Fluffy House construyó marca desde cero — 25.100 seguidores, 8,68M de visualizaciones y colas el día 1 de cada apertura.">
+  <meta property="og:image" content="https://visuanza.es/assets/casos/fluffy-house/hero.webp">
+  <meta property="og:url" content="https://visuanza.es/case-fluffy-house.html">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="es_ES">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/visuanza-chrome.css">
+  <link rel="icon" type="image/png" href="assets/hash-mark.png">
+
+  <style>
+    /* ════════════════════════════════════════════════════════════════
+       Case page — Fluffy House
+       1:1 v6 clone of the Swedish parent template, in Spanish.
+       Sticky hero image · stats panels · 3 story sections · expanding quote.
+       ════════════════════════════════════════════════════════════════ */
+
+    body.case-page { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0A0A0B; color: white; }
+    body.case-page main { padding-top: 0; }
+    /* Nav inside the case-page body — keep the floating-pill nav
+       text dark like the index, regardless of body.case-page's
+       global white text color. */
+    body.case-page #nav .nav__inner { color: var(--text); }
+
+    /* Local case-page tokens — slightly different from Visuanza global tokens
+       to match the Swedish parent's darker case-page aesthetic. */
+    body.case-page {
+      --case-text: #0A0A0B;
+      --case-text-2: #2A2A2E;
+      --case-text-3: #6B6B70;
+    }
+
+    /* ── Hero entrance animations ─────────────── */
+    @keyframes caseHeroImgIn {
+      from { opacity: 0; transform: scale(1.08); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes caseHeroOverlayIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes casePillIn {
+      from { opacity: 0; transform: translateY(-14px); filter: blur(6px); }
+      to   { opacity: 1; transform: translateY(0);     filter: blur(0); }
+    }
+    @keyframes caseTitleWordIn {
+      from { transform: translateY(110%); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes caseMetaIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes caseMetaBorderIn {
+      from { transform: scaleX(0); opacity: 0; }
+      to   { transform: scaleX(1); opacity: 1; }
+    }
+
+    /* ── Combined: sticky image bg + header + stats panels ──── */
+    .sec-combined {
+      position: relative;
+      background: #0A0A0B;
+      color: white;
+    }
+    .sec-combined__bg {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .sec-combined__bg img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      animation: caseHeroImgIn 1800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .sec-combined__bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(100deg,
+          rgba(10,10,11,0.78) 0%,
+          rgba(10,10,11,0.55) 40%,
+          rgba(10,10,11,0.25) 75%,
+          rgba(10,10,11,0.1) 100%),
+        linear-gradient(180deg, rgba(10,10,11,0.3) 0%, transparent 30%, rgba(10,10,11,0.55) 100%);
+      animation: caseHeroOverlayIn 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+    }
+
+    .case-header {
+      position: relative;
+      z-index: 1;
+      margin-top: -100vh;
+      min-height: 100vh;
+      padding: calc(var(--nav-h, 76px) + clamp(80px, 10vw, 160px)) 0 clamp(60px, 8vw, 100px);
+      color: white;
+      display: flex;
+      align-items: flex-end;
+    }
+    .case-header__inner {
+      max-width: min(1680px, 96vw);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      width: 100%;
+    }
+    .case-header__back,
+    .case-header__label {
+      position: absolute;
+      top: calc(var(--nav-h, 76px) + 1.5rem);
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.875rem 0.5rem 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.88);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: background 200ms, color 200ms;
+    }
+    .case-header__back {
+      left: calc(var(--gutter) + 0.5rem);
+      animation: casePillIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 350ms both;
+    }
+    .case-header__back:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+    }
+    .case-header__label {
+      right: calc(var(--gutter) + 0.5rem);
+      padding: 0.5rem 0.875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      animation: casePillIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 500ms both;
+    }
+    .case-header__label::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--edit-teal, #4EBFB8);
+      box-shadow: 0 0 10px var(--edit-teal, #4EBFB8);
+    }
+    .case-header__title {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 700;
+      letter-spacing: -0.045em;
+      line-height: 0.9;
+      margin: 0 0 2.5rem;
+      color: white;
+      text-shadow: 0 2px 32px rgba(0, 0, 0, 0.45);
+    }
+    .case-header__title em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+    }
+    .case-header__title .word {
+      display: inline-block;
+      overflow: hidden;
+      vertical-align: baseline;
+      margin-right: 0.15em;
+    }
+    .case-header__title .word > span {
+      display: inline-block;
+      animation: caseTitleWordIn 1100ms cubic-bezier(0.22, 1, 0.36, 1) 600ms both;
+    }
+    .case-header__meta {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: clamp(1.25rem, 2vw, 2rem);
+      padding-top: 1.75rem;
+      border-top: 1px solid transparent;
+      max-width: 960px;
+    }
+    .case-header__meta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.18);
+      transform-origin: left;
+      animation: caseMetaBorderIn 900ms cubic-bezier(0.22, 1, 0.36, 1) 950ms both;
+    }
+    .case-header__meta-item {
+      animation: caseMetaIn 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .case-header__meta-item:nth-child(1) { animation-delay: 1050ms; }
+    .case-header__meta-item:nth-child(2) { animation-delay: 1200ms; }
+    .case-header__meta-item:nth-child(3) { animation-delay: 1350ms; }
+    .case-header__meta-item label {
+      display: block;
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 0.375rem;
+      font-weight: 500;
+    }
+    .case-header__meta-item span {
+      font-size: 0.9375rem;
+      color: white;
+      font-weight: 500;
+    }
+    @media (max-width: 640px) {
+      .case-header__title { font-size: clamp(2.75rem, 14vw, 4.5rem); }
+    }
+
+    /* ── Stats section ──────────────────────────── */
+    .sec-stats {
+      position: relative;
+      z-index: 2;
+      padding: clamp(60px, 8vw, 120px) 0 clamp(80px, 10vw, 140px);
+      color: white;
+      background: linear-gradient(180deg,
+        rgba(10,10,11,0) 0%,
+        rgba(10,10,11,0.3) 8%,
+        rgba(10,10,11,0.55) 30%,
+        rgba(10,10,11,0.6) 100%);
+    }
+    .sec-stats__inner {
+      position: relative;
+      max-width: min(1680px, 96vw);
+      margin-inline: auto;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__eyebrow {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 1.25rem;
+    }
+    .sec-stats__eyebrow .word {
+      display: inline-block; overflow: hidden; vertical-align: baseline; margin-right: 0.22em;
+    }
+    .sec-stats__eyebrow .word > span {
+      display: inline-block; transform: translateY(110%);
+      transition: transform 750ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sec-stats__eyebrow.is-revealed .word > span { transform: translateY(0); }
+    .sec-stats__title {
+      font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      max-width: 720px;
+      margin: 0 0 clamp(40px, 5vw, 64px);
+      color: white;
+    }
+    .sec-stats__title em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic; font-weight: 400; letter-spacing: -0.015em;
+    }
+    .sec-stats__title .word {
+      display: inline-block; overflow: hidden; vertical-align: baseline; margin-right: 0.22em;
+    }
+    .sec-stats__title .word > span {
+      display: inline-block; transform: translateY(110%);
+      transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .sec-stats__title.is-revealed .word > span { transform: translateY(0); }
+
+    .sec-stats__cards {
+      display: flex;
+      gap: 1rem;
+      align-items: stretch;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.5rem;
+      margin-right: calc(50% - 50vw);
+      padding-right: var(--gutter);
+      scroll-padding-inline-end: var(--gutter);
+    }
+    .sec-stats__cards::-webkit-scrollbar { display: none; }
+    .sec-stats__cards .stat-card {
+      flex: 0 0 calc((100% - 4 * 1rem) / 4.25);
+      scroll-snap-align: start;
+      opacity: 0;
+      transform: translate3d(80px, 0, 0);
+      backface-visibility: hidden;
+      transition:
+        opacity 950ms cubic-bezier(0.22, 1, 0.36, 1),
+        transform 950ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: opacity, transform;
+    }
+    .sec-stats__cards.is-revealed .stat-card { opacity: 1; transform: translate3d(0, 0, 0); }
+    .sec-stats__cards.is-revealed .stat-card:nth-child(1) { transition-delay: 0ms; }
+    .sec-stats__cards.is-revealed .stat-card:nth-child(2) { transition-delay: 120ms; }
+    .sec-stats__cards.is-revealed .stat-card:nth-child(3) { transition-delay: 240ms; }
+    .sec-stats__cards.is-revealed .stat-card:nth-child(4) { transition-delay: 360ms; }
+    .sec-stats__cards.is-revealed .stat-card:nth-child(5) { transition-delay: 480ms; }
+    .sec-stats__cards.is-revealed .stat-card:hover { transform: translate3d(0, -6px, 0); transition-duration: 400ms; }
+
+    /* ── Horizontal scroll-jack (desktop only) ──
+       Vertical scroll within .sec-stats__cards-pin is converted to
+       horizontal translateX of .sec-stats__cards. Pin height is calculated
+       by JS — total = horizontal travel + 100vh. On mobile the wrappers
+       collapse to display:contents and we fall back to native horizontal
+       scroll-snap inside .sec-stats__cards. */
+    .sec-stats__cards-pin,
+    .sec-stats__cards-sticky,
+    .sec-stats__cards-viewport,
+    .sec-stats__head { display: contents; }
+    .sec-stats__progress { display: none; }
+
+    .sec-stats__cards-pin.is-pinned {
+      display: block;
+      position: relative;
+      /* height set by JS in px */
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards-sticky {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(28px, 3.5vw, 48px);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding-block: clamp(80px, 10vh, 140px) clamp(60px, 8vh, 100px);
+      margin-inline: calc(50% - 50vw);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__head {
+      display: block;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__head .sec-stats__title {
+      margin-bottom: 0; /* gap on parent handles vertical rhythm */
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards-viewport {
+      display: block;
+      width: 100%;
+      overflow: hidden;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards {
+      overflow: visible;
+      scroll-snap-type: none;
+      margin-right: 0;
+      padding-right: 0;
+      will-change: transform;
+    }
+    /* When pinned, the cards container itself is being transformed by scroll
+       progress, so the per-card travel-in transition would fight that.
+       Hold cards in their final position once revealed. */
+    .sec-stats__cards-pin.is-pinned .sec-stats__cards.is-revealed .stat-card {
+      transform: translate3d(0, 0, 0);
+    }
+    /* Progress indicator below cards (desktop, while pinned) */
+    .sec-stats__cards-pin.is-pinned .sec-stats__progress {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding-inline: var(--gutter);
+    }
+    .sec-stats__progress-bar {
+      width: clamp(140px, 22vw, 260px);
+      height: 3px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .sec-stats__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: white;
+      border-radius: 9999px;
+      transition: width 80ms linear;
+    }
+
+    .stat-card {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 18px;
+      padding: 1.5rem;
+      background: #141416;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      color: white;
+      overflow: hidden;
+      transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .stat-card--photo { padding: 0; }
+    .stat-card--photo img,
+    .stat-card--photo video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .stat-card--photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 0%, transparent 60%, rgba(0,0,0,0.5) 100%);
+    }
+    .stat-card--photo .stat-card__cap {
+      position: absolute;
+      inset: auto 1.5rem 1.5rem;
+      z-index: 2;
+      color: white;
+      font-size: 0.9375rem;
+      font-weight: 500;
+    }
+    .stat-card__ring {
+      width: min(300px, 88%);
+      aspect-ratio: 1 / 1;
+      position: relative;
+      flex-shrink: 0;
+      align-self: center;
+      margin-top: 0.25rem;
+    }
+    .stat-card__ring svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .stat-card__ring .track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 18; }
+    .stat-card__ring .seg {
+      fill: none;
+      stroke-width: 18;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  stroke-dasharray 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+    }
+    .stat-card__ring-text {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding-inline: 1rem;
+    }
+    .stat-card__ring-val {
+      font-size: clamp(2rem, 2.6vw, 2.75rem);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .stat-card__ring-label {
+      font-size: 0.625rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.5rem;
+      letter-spacing: 0.14em;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .stat-card__body {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.5;
+      margin-top: auto;
+      text-align: left;
+    }
+    .stat-card__badge {
+      position: absolute;
+      padding: 0.25rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--case-text);
+      box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.35);
+      z-index: 3;
+    }
+    .stat-card__badge--a { top: 14px; right: 30%; background: #EBF3B6; }
+    .stat-card__badge--b { top: 44%; right: 10px; background: #F9D4B5; }
+    .stat-card__badge--c { bottom: 32%; left: 12px; background: #E6D4F5; }
+
+    .stat-card--quote {
+      background: var(--edit-olive, #E5EE9E);
+      color: var(--case-text);
+      padding: 2rem;
+      gap: 0;
+      justify-content: flex-start;
+    }
+    .stat-card__quote-mark {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 5.5rem;
+      line-height: 0.65;
+      color: rgba(0, 0, 0, 0.2);
+      margin-bottom: 0.75rem;
+    }
+    .stat-card__quote {
+      font-size: 1.0625rem;
+      line-height: 1.5;
+      color: var(--case-text);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: auto;
+    }
+    .stat-card__quote-attr {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.12);
+    }
+    .stat-card__quote-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--case-text);
+      letter-spacing: -0.01em;
+    }
+    .stat-card__quote-role {
+      font-size: 0.75rem;
+      color: rgba(0, 0, 0, 0.6);
+      margin-top: 3px;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 1024px) {
+      .sec-stats__cards .stat-card { flex: 0 0 calc((100% - 1rem) / 1.7); aspect-ratio: 4 / 5; }
+    }
+    @media (max-width: 640px) {
+      .sec-stats__cards { gap: 0.875rem; }
+      .sec-stats__cards .stat-card {
+        flex: 0 0 calc((100% - 0.875rem) / 1.15);
+        transform: none;
+      }
+      .sec-stats__cards.is-revealed .stat-card { transform: none; }
+    }
+
+    /* ── Story sections (image + text, alternating) ── */
+    .case-story {
+      padding: clamp(80px, 10vw, 140px) 0;
+    }
+    .case-story--light { background: #F7F3E0; color: var(--case-text); }
+    .case-story--dark { background: #0F0F11; color: white; }
+    .case-story__inner {
+      max-width: min(1280px, 94vw);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+    .case-story__split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: center;
+    }
+    .case-story__split--reversed .case-story__media { order: 2; }
+    .case-story__media {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #141416;
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.3);
+    }
+    .case-story__media img,
+    .case-story__media video {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+    .case-story__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, 0.6);
+      margin-bottom: 1.25rem;
+      font-weight: 500;
+    }
+    .case-story--dark .case-story__label { color: rgba(255, 255, 255, 0.55); }
+    .case-story__label-num {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: 0.9375rem;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      color: currentColor;
+      opacity: 0.8;
+    }
+    .case-story__heading {
+      font-size: clamp(1.875rem, 3.6vw, 3rem);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      margin: 0 0 1.5rem;
+    }
+    .case-story__heading em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.015em;
+    }
+    .case-story__body p {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: rgba(0, 0, 0, 0.72);
+      margin: 0 0 1.25rem;
+      max-width: 46ch;
+    }
+    .case-story--dark .case-story__body p { color: rgba(255, 255, 255, 0.72); }
+    .case-story__list {
+      list-style: none;
+      padding: 0;
+      margin: 2rem 0 0;
+    }
+    .case-story__list li {
+      padding: 0.875rem 0 0.875rem 1.75rem;
+      position: relative;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.82);
+    }
+    .case-story--dark .case-story__list li {
+      border-top-color: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.82);
+    }
+    .case-story__list li:first-child { border-top: none; padding-top: 0; }
+    .case-story__list li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 1.25rem;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--edit-teal, #4EBFB8);
+    }
+    .case-story__list li:first-child::before { top: 0.5rem; }
+
+    @media (max-width: 768px) {
+      .case-story__split { grid-template-columns: 1fr; }
+      .case-story__split--reversed .case-story__media { order: 0; }
+      .case-story__media { aspect-ratio: 4 / 3; max-width: 520px; }
+    }
+
+    /* ── Scroll-expanding testimonial ───── */
+    .case-quote {
+      position: relative;
+      min-height: 200vh;
+      background: #0A0A0B;
+    }
+    .case-quote__sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: clamp(1rem, 3vw, 2rem);
+      overflow: hidden;
+    }
+    .case-quote__card {
+      --p: 0;
+      width: calc(min(720px, 86vw) + (min(1680px, 94vw) - min(720px, 86vw)) * var(--p));
+      height: calc(min(640px, 72vh) + (min(94vh, 900px) - min(640px, 72vh)) * var(--p));
+      max-width: 94vw;
+      max-height: 94vh;
+      background: var(--edit-olive, #E5EE9E);
+      color: var(--case-text);
+      border-radius: calc(24px + 4px * (1 - var(--p)));
+      padding: calc(2rem + 3rem * var(--p));
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.45);
+      will-change: width, height;
+    }
+    .case-quote__mark {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-size: calc(4rem + 6rem * var(--p, 0));
+      line-height: 0.6;
+      color: rgba(0, 0, 0, 0.2);
+      margin-bottom: calc(0.75rem + 1rem * var(--p, 0));
+    }
+    .case-quote__text {
+      font-size: calc(1.125rem + 1.875rem * var(--p, 0));
+      line-height: 1.3;
+      color: var(--case-text);
+      font-weight: 500;
+      letter-spacing: -0.015em;
+      margin: 0 0 auto;
+      max-width: 30ch;
+    }
+    .case-quote__attr {
+      margin-top: calc(1.5rem + 1.5rem * var(--p, 0));
+      padding-top: calc(1.25rem + 0.5rem * var(--p, 0));
+      border-top: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .case-quote__name {
+      font-size: calc(0.9375rem + 0.5rem * var(--p, 0));
+      font-weight: 600;
+      color: var(--case-text);
+      letter-spacing: -0.01em;
+    }
+    .case-quote__role {
+      font-size: calc(0.75rem + 0.25rem * var(--p, 0));
+      color: rgba(0, 0, 0, 0.6);
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+    .case-quote__cta {
+      margin-top: calc(1.5rem + 1rem * var(--p, 0));
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: calc(0.75rem + 0.25rem * var(--p, 0)) 1rem calc(0.75rem + 0.25rem * var(--p, 0)) 1.5rem;
+      background: var(--case-text);
+      color: white;
+      border-radius: 9999px;
+      font-weight: 500;
+      font-size: calc(0.9375rem + 0.25rem * var(--p, 0));
+      text-decoration: none;
+      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .case-quote__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -8px rgba(0, 0, 0, 0.35);
+    }
+    .case-quote__cta-arrow {
+      width: calc(28px + 6px * var(--p, 0));
+      height: calc(28px + 6px * var(--p, 0));
+      border-radius: 50%;
+      background: white;
+      color: var(--case-text);
+      display: grid; place-items: center;
+      transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .case-quote__cta:hover .case-quote__cta-arrow { transform: translateX(4px); }
+    .case-quote__cta-arrow svg { width: 14px; height: 14px; }
+
+    @media (max-width: 640px) {
+      .case-quote__card {
+        width: calc(min(360px, 62vw) + (94vw - min(360px, 62vw)) * var(--p));
+        height: calc(min(480px, 58vh) + (94vh - min(480px, 58vh)) * var(--p));
+        padding: calc(1.5rem + 1.25rem * var(--p));
+        border-radius: calc(22px + 2px * (1 - var(--p)));
+      }
+      .case-quote__mark { font-size: calc(3.25rem + 2rem * var(--p, 0)); }
+      .case-quote__text { font-size: calc(1rem + 0.625rem * var(--p, 0)); max-width: 22ch; }
+      .case-quote__attr {
+        margin-top: calc(1.25rem + 0.75rem * var(--p, 0));
+        padding-top: calc(1rem + 0.25rem * var(--p, 0));
+      }
+      .case-quote__name { font-size: calc(0.875rem + 0.25rem * var(--p, 0)); }
+      .case-quote__role { font-size: calc(0.75rem + 0.125rem * var(--p, 0)); }
+      .case-quote__cta {
+        margin-top: calc(1.25rem + 0.5rem * var(--p, 0));
+        font-size: calc(0.875rem + 0.125rem * var(--p, 0));
+        padding: 0.75rem 1rem 0.75rem 1.25rem;
+      }
+      .case-quote__cta-arrow {
+        width: calc(26px + 4px * var(--p, 0));
+        height: calc(26px + 4px * var(--p, 0));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sec-stats__title .word > span,
+      .sec-stats__eyebrow .word > span,
+      .sec-stats__cards .stat-card,
+      .sec-combined__bg img,
+      .sec-combined__bg::after,
+      .case-header__back,
+      .case-header__label,
+      .case-header__title .word > span,
+      .case-header__meta::before,
+      .case-header__meta-item {
+        animation: none !important;
+        transform: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+      }
+      .case-quote { min-height: 100vh; }
+      .case-quote__card { --p: 0.5 !important; }
+    }
+  </style>
+</head>
+
+<body class="case-page">
+  <!-- ═══════════════ NAV (v6) ═══════════════ -->
+  <nav id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner">
+      <a class="nav__logo" href="index.html" aria-label="Visuanza — Inicio">
+        <img class="hash-mark" src="assets/hash-mark.png" alt="" aria-hidden="true">
+        VISUANZA
+      </a>
+      <div class="nav__links" role="menubar">
+        <a href="index.html" role="menuitem">Inicio</a>
+        <div class="nav__has-dropdown">
+          <a href="servicios.html" role="menuitem" class="nav__dropdown-trigger" aria-haspopup="true">
+            Servicios
+            <svg class="nav__chevron" viewBox="0 0 12 8" aria-hidden="true">
+              <path d="M2 2 L6 6 L10 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <div class="nav__dropdown" role="menu">
+            <a href="redes-sociales.html" role="menuitem">Redes sociales</a>
+            <a href="diseno-web.html" role="menuitem">Diseño web</a>
+            <a href="fotografia-menu.html" role="menuitem">Fotografía de menú</a>
+            <a href="google-publicidad.html" role="menuitem">Google publicidad</a>
+          </div>
+        </div>
+        <a href="casos.html" role="menuitem" class="is-active">Casos</a>
+        <a href="nosotros.html" role="menuitem">Nosotros</a>
+        <a href="blog.html" role="menuitem">Blog</a>
+      </div>
+      <div class="nav__cta">
+        <a href="#login" class="nav__login">Acceso clientes</a>
+        <a href="contacto.html" class="btn btn--blue btn--sm">Reserva una llamada</a>
+      </div>
+      <button id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ═══════════════ STICKY IMAGE BG + HEADER + STATS ═══════════════ -->
+    <section class="sec-combined">
+      <div class="sec-combined__bg" aria-hidden="true">
+        <img src="assets/casos/fluffy-house/hero.webp" alt="">
+      </div>
+
+      <div class="case-header">
+        <a href="casos.html" class="case-header__back">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Todos los casos
+        </a>
+        <div class="case-header__label">Caso</div>
+
+        <div class="case-header__inner">
+          <h1 class="case-header__title" data-reveal-words aria-label="Fluffy House">Fluffy House</h1>
+          <div class="case-header__meta">
+            <div class="case-header__meta-item">
+              <label>Servicio</label>
+              <span>Redes sociales — Plan Turbo</span>
+            </div>
+            <div class="case-header__meta-item">
+              <label>Plataformas</label>
+              <span>Instagram · TikTok · Facebook</span>
+            </div>
+            <div class="case-header__meta-item">
+              <label>Ubicación</label>
+              <span>Estocolmo · Uppsala</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS / PROOF -->
+      <section class="sec-stats">
+        <div class="sec-stats__inner">
+          <div class="sec-stats__cards-pin">
+           <div class="sec-stats__cards-sticky">
+            <div class="sec-stats__head">
+              <div class="sec-stats__eyebrow" data-reveal-words aria-label="La prueba en cifras">La prueba en cifras</div>
+              <h2 class="sec-stats__title" data-reveal-words aria-label="Medimos el éxito en cola fuera de la puerta — no en likes.">
+                Medimos el éxito en cola fuera de la puerta — <em>no en likes.</em>
+              </h2>
+            </div>
+            <div class="sec-stats__cards-viewport">
+          <div class="sec-stats__cards" data-reveal-cards>
+            <!-- Card 1 — Followers ring -->
+            <div class="stat-card">
+              <div class="stat-card__badge stat-card__badge--a">+11.400%</div>
+              <div class="stat-card__badge stat-card__badge--b">+60.200%</div>
+              <div class="stat-card__badge stat-card__badge--c">+6.100%</div>
+              <div class="stat-card__ring">
+                <svg viewBox="0 0 180 180">
+                  <circle class="track" cx="90" cy="90" r="72"/>
+                  <circle class="seg" data-seg-dash="320 132" stroke="#4EBFB8" cx="90" cy="90" r="72" stroke-dasharray="0 452" stroke-dashoffset="0"/>
+                  <circle class="seg" data-seg-dash="112 340" stroke="#E5EE9E" cx="90" cy="90" r="72" stroke-dasharray="0 452" stroke-dashoffset="-320"/>
+                  <circle class="seg" data-seg-dash="20 432"  stroke="#D7C2FF" cx="90" cy="90" r="72" stroke-dasharray="0 452" stroke-dashoffset="-432"/>
+                </svg>
+                <div class="stat-card__ring-text">
+                  <div class="stat-card__ring-val" data-count="25100" data-divisor="1000" data-decimals="2" data-suffix="K">0</div>
+                  <div class="stat-card__ring-label">Seguidores</div>
+                </div>
+              </div>
+              <div class="stat-card__body">Total entre Instagram, TikTok y Facebook — construido prácticamente desde cero en 8 meses.</div>
+            </div>
+
+            <!-- Card 2 — Video with caption -->
+            <div class="stat-card stat-card--photo">
+              <video autoplay muted loop playsinline preload="metadata" poster="assets/casos/fluffy-house/stat-card2-poster.jpg">
+                <source src="assets/casos/fluffy-house/stat-card2.webm" type="video/webm">
+                <source src="assets/casos/fluffy-house/stat-card2.mp4" type="video/mp4">
+              </video>
+              <div class="stat-card__cap">Reel top: 502.520 visualizaciones, 15.730 interacciones — «Pancakes sin gluten».</div>
+            </div>
+
+            <!-- Card 3 — Engagement growth (semicircle) -->
+            <div class="stat-card" style="background:#0F1013;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="#E8E1FF" aria-hidden="true">
+                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-.88-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/>
+                </svg>
+              </div>
+              <div class="stat-card__ring" style="align-self: flex-start; margin-left: -1rem;">
+                <svg viewBox="0 0 180 180" style="transform: none;">
+                  <path class="track" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="18" stroke-linecap="round" d="M 90 20 A 70 70 0 0 0 90 160"/>
+                  <path class="seg" data-pct="100" fill="none" stroke="#4EBFB8" stroke-width="18" stroke-linecap="round" d="M 90 20 A 70 70 0 0 0 90 160" stroke-dasharray="220" stroke-dashoffset="220"/>
+                </svg>
+                <div class="stat-card__ring-text" style="align-items: flex-end; padding-right: 1rem; padding-left: 0;">
+                  <div style="display:flex; align-items:baseline; gap:4px;">
+                    <div class="stat-card__ring-val" data-count="6.87" data-decimals="2" data-suffix="M" style="font-size: clamp(3rem, 4.5vw, 4.75rem);">0</div>
+                  </div>
+                  <div class="stat-card__ring-label" style="text-align: right;">Visualizaciones Instagram</div>
+                </div>
+              </div>
+              <div class="stat-card__body">6,87 millones de visualizaciones en Instagram — el canal dominante dentro del total de 8,68M en tres plataformas.</div>
+            </div>
+
+            <!-- Card 4 — Video with caption -->
+            <div class="stat-card stat-card--photo">
+              <video autoplay muted loop playsinline preload="metadata" poster="assets/casos/fluffy-house/stat-card4-poster.jpg">
+                <source src="assets/casos/fluffy-house/stat-card4.webm" type="video/webm">
+                <source src="assets/casos/fluffy-house/stat-card4.mp4" type="video/mp4">
+              </video>
+              <div class="stat-card__cap">Apertura en Uppsala: 70K + 41K visualizaciones — la cola estaba ya formada cuando abrieron las puertas el 21 de marzo.</div>
+            </div>
+
+            <!-- Card 5 — Quote -->
+            <div class="stat-card stat-card--quote">
+              <div class="stat-card__quote-mark" aria-hidden="true">"</div>
+              <p class="stat-card__quote">Abrimos en S:t Eriksgatan el 10 de octubre de 2025 y en Uppsala el 21 de marzo de 2026. Los clips de lanzamiento construyeron la cola antes incluso de abrir las puertas.</p>
+              <div class="stat-card__quote-attr">
+                <div class="stat-card__quote-name">Fluffy House × Syns Nu Media</div>
+                <div class="stat-card__quote-role">Estocolmo · Uppsala</div>
+              </div>
+            </div>
+          </div>
+            </div><!-- /.sec-stats__cards-viewport -->
+           </div><!-- /.sec-stats__cards-sticky -->
+           <div class="sec-stats__progress" aria-hidden="true">
+             <div class="sec-stats__progress-bar"><div class="sec-stats__progress-fill"></div></div>
+           </div>
+          </div><!-- /.sec-stats__cards-pin -->
+        </div>
+      </section>
+    </section><!-- /.sec-combined -->
+
+    <!-- ═══════════════ STORY 01 — EL RETO ═══════════════ -->
+    <section class="case-story case-story--light">
+      <div class="case-story__inner">
+        <div class="case-story__split">
+          <div class="case-story__media">
+            <img src="assets/casos/fluffy-house/story-01.webp" alt="Fluffy House — sala y producto" loading="lazy">
+          </div>
+          <div class="case-story__text">
+            <div class="case-story__label">
+              <span class="case-story__label-num">01</span> El reto
+            </div>
+            <h2 class="case-story__heading">Un formato viral sin público sueco — <em>y sin cola</em> todavía.</h2>
+            <div class="case-story__body">
+              <p>Los pancakes japoneses fluffy habían tomado el mundo por asalto — pero en Suecia el formato nunca había llegado a aterrizar. Fluffy House tenía que construir la marca desde cero. Sin local físico que enseñar, sin clientela, sin cuentas establecidas. Todo había que construirlo en redes antes de que las puertas abrieran en S:t Eriksgatan, Estocolmo.</p>
+              <p>Calculado sobre el período de baseline, todos los canales estaban prácticamente a cero. Facebook inexistente. Instagram recién creado. TikTok en pañales. Sin medición continua, sin plan de cómo las redes iban a empujar tanto el día de apertura como una expansión futura a la siguiente ciudad.</p>
+            </div>
+            <ul class="case-story__list">
+              <li>Facebook: prácticamente cero seguidores y cero publicaciones al inicio</li>
+              <li>Instagram: cuenta nueva con alcance limitado</li>
+              <li>TikTok: sin uso — el formato viral esperaba en la mesa</li>
+              <li>Sin conexión entre redes y aperturas físicas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ STORY 02 — NUESTRO ENFOQUE ═══════════════ -->
+    <section class="case-story case-story--dark">
+      <div class="case-story__inner">
+        <div class="case-story__split case-story__split--reversed">
+          <div class="case-story__media">
+            <img src="assets/casos/fluffy-house/story-02.webp" alt="Fluffy House — producción en el local" loading="lazy">
+          </div>
+          <div class="case-story__text">
+            <div class="case-story__label">
+              <span class="case-story__label-num">02</span> Nuestro enfoque
+            </div>
+            <h2 class="case-story__heading">Una vez al mes en el café. Un <em>formato</em> hecho para compartir.</h2>
+            <div class="case-story__body">
+              <p>No hay atajos. Una vez al mes estamos en Fluffy House con cámara — junto a la sartén, en caja, en la cola. Capturamos la esponjosidad de los pancakes, los sabores, los momentos con los clientes. Contenido cercano al producto, cálido y montado para ser compartido.</p>
+              <p>La estrategia: tres semanas de prelanzamiento con Reels-teaser antes de abrir S:t Eriksgatan. El día del lanzamiento como evento («MAÑANA REVIENTA» — 174.950 visualizaciones). Después, reveals de producto continuos — el lanzamiento sin gluten en diciembre tiró de un único Reel a 502.520 visualizaciones, y la apertura de Uppsala en marzo repitió el mismo ritmo con cola ya el primer día.</p>
+            </div>
+            <ul class="case-story__list">
+              <li>Una visita de producción al local al mes</li>
+              <li>Prelanzamiento de 3 semanas antes de cada apertura</li>
+              <li>Reveals de producto que han subido a top — sin gluten, matcha, mango</li>
+              <li>Estrategia de lanzamiento específica por ciudad para cada nueva unidad</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ STORY 03 — LA PRODUCCIÓN ═══════════════ -->
+    <section class="case-story case-story--light">
+      <div class="case-story__inner">
+        <div class="case-story__split">
+          <div class="case-story__media">
+            <img src="assets/casos/fluffy-house/story-03.webp" alt="Fluffy House — producción y oficio" loading="lazy">
+          </div>
+          <div class="case-story__text">
+            <div class="case-story__label">
+              <span class="case-story__label-num">03</span> La producción
+            </div>
+            <h2 class="case-story__heading">261 publicaciones en <em>8 meses</em>.</h2>
+            <div class="case-story__body">
+              <p>Volumen sin relevancia no llega a nadie. Relevancia sin volumen no se ve. Entre todos publicamos 261 piezas en el período — 115 en Facebook, 102 en Instagram y 44 en TikTok. Cada plataforma con su papel: Reels de Instagram para alcance y marca, TikTok para viralidad, Facebook para una demografía mayor (un 33% de la audiencia de Instagram tiene entre 35 y 44 años).</p>
+              <p>El Reel top «Pancakes fluffy sin gluten» aterrizó en 502.520 visualizaciones y 15.730 interacciones — en una sola publicación. El lanzamiento de Uppsala en marzo: 70.000 visualizaciones en TikTok y 41.000 en Instagram — y el 21 de marzo la cola estaba ya allí, desde la primera hora.</p>
+            </div>
+            <ul class="case-story__list">
+              <li>261 publicaciones en tres plataformas</li>
+              <li>8,68M de visualizaciones · 201.120 interacciones</li>
+              <li>Reel top «Pancakes sin gluten»: 502.520 visualizaciones</li>
+              <li>Dos expansiones físicas — S:t Eriksgatan (10 oct 2025) y Uppsala (21 mar 2026)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ EXPANDING TESTIMONIAL ═══════════════ -->
+    <section class="case-quote">
+      <div class="case-quote__sticky">
+        <div class="case-quote__card">
+          <div class="case-quote__mark" aria-hidden="true">"</div>
+          <p class="case-quote__text">8,68 millones de visualizaciones. 25.100 seguidores en tres plataformas. Dos locales físicos con cola desde el primer día — en 8 meses.</p>
+          <div class="case-quote__attr">
+            <div class="case-quote__name">Fluffy House × Syns Nu Media</div>
+            <div class="case-quote__role">Estocolmo · Uppsala</div>
+          </div>
+          <a href="contacto.html" class="case-quote__cta">
+            ¿Resultados parecidos? Reservad llamada
+            <span class="case-quote__cta-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer class="sec-footer-big">
+    <div class="sec-footer-big__inner footer-big">
+      <div class="footer-big__grid">
+        <div class="footer-big__brand">
+          <img class="footer-big__brand-mark" src="assets/hash-mark-white.png" alt="Visuanza" />
+        </div>
+        <div>
+          <h5>Visuanza</h5>
+          <ul>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="casos.html">Casos</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Servicios</h5>
+          <ul>
+            <li><a href="redes-sociales.html">Redes sociales</a></li>
+            <li><a href="diseno-web.html">Diseño web</a></li>
+            <li><a href="fotografia-menu.html">Fotografía</a></li>
+            <li><a href="google-publicidad.html">Google y publicidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Trabajad con nosotros</h5>
+          <ul>
+            <li><a href="contacto.html">Cadenas y grupos</a></li>
+            <li><a href="contacto.html">Franquicias</a></li>
+            <li><a href="contacto.html">Sé creador</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contacto</h5>
+          <ul>
+            <li><a href="tel:+34646853773">+34 646 853 773</a></li>
+            <li><a href="mailto:ivan@synsnumedia.com">ivan@synsnumedia.com</a></li>
+            <li>Madrid, España</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-big__mark fx-up" aria-hidden="true">
+        <span class="footer-big__mark-logo">
+          <span class="tri-dot"><b></b><b></b><b></b></span>VISUANZA
+        </span>
+      </div>
+
+      <div class="footer-big__bottom">
+        <span>© 2026 Visuanza · Syns Nu AB. Todos los derechos reservados.</span>
+        <span><a href="politica-privacidad.html">Privacidad</a> · <a href="politica-privacidad.html">Términos</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/visuanza-chrome.js" defer></script>
+  <script>
+    // Horizontal scroll-jack on the stats section. Desktop with mouse only;
+    // touch / coarse-pointer devices keep native scroll-snap horizontal swipe.
+    (function () {
+      // Width-only gate: pin on desktop layouts (>=1025px), let mobile keep
+      // its native horizontal swipe. Reduced-motion users skip the pin too.
+      const wide = window.matchMedia('(min-width: 1025px)');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const pin = document.querySelector('.sec-stats__cards-pin');
+      const sticky = pin && pin.querySelector('.sec-stats__cards-sticky');
+      const viewport = pin && pin.querySelector('.sec-stats__cards-viewport');
+      const cards = pin && pin.querySelector('.sec-stats__cards');
+      const progressFill = pin && pin.querySelector('.sec-stats__progress-fill');
+      if (!pin || !sticky || !viewport || !cards) return;
+
+      let pinned = false;
+      let travel = 0;
+
+      function shouldPin() {
+        return wide.matches && !reduced.matches;
+      }
+
+      function teardown() {
+        pin.classList.remove('is-pinned');
+        pin.style.height = '';
+        cards.style.transform = '';
+        if (progressFill) progressFill.style.width = '0%';
+        pinned = false;
+      }
+
+      function setup() {
+        // Force a reveal so cards aren't held off-screen with their initial transform.
+        cards.classList.add('is-revealed');
+        pin.classList.add('is-pinned');
+        // Measure horizontal travel: cards width minus the viewport (sticky window) width.
+        const cardsWidth = cards.scrollWidth;
+        const viewportWidth = viewport.clientWidth;
+        travel = Math.max(0, cardsWidth - viewportWidth);
+        // Pin must be tall enough to cover travel + one viewport so cards
+        // finish moving before the pin releases.
+        const total = travel + window.innerHeight;
+        pin.style.height = total + 'px';
+        pinned = true;
+        update();
+      }
+
+      function update() {
+        if (!pinned) return;
+        const rect = pin.getBoundingClientRect();
+        const max = pin.offsetHeight - window.innerHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const p = max > 0 ? Math.min(1, scrolled / max) : 0;
+        cards.style.transform = 'translate3d(' + (-travel * p).toFixed(2) + 'px, 0, 0)';
+        if (progressFill) progressFill.style.width = (p * 100).toFixed(2) + '%';
+      }
+
+      function refresh() {
+        if (shouldPin()) {
+          if (pinned) { teardown(); }
+          setup();
+        } else {
+          if (pinned) teardown();
+        }
+      }
+
+      let ticking = false;
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { update(); ticking = false; });
+      }
+
+      // Initial measurement after layout settles (images/fonts).
+      const init = () => { refresh(); setTimeout(refresh, 300); };
+      if (document.readyState === 'complete') init();
+      else window.addEventListener('load', init);
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', refresh);
+      wide.addEventListener && wide.addEventListener('change', refresh);
+    })();
+
+    // Word-split reveal — wraps each word in a span and slides them up
+    (function(){
+      const wrapAsWord = (contentNode) => {
+        const word = document.createElement('span');
+        word.className = 'word';
+        const inner = document.createElement('span');
+        inner.appendChild(contentNode);
+        word.appendChild(inner);
+        return word;
+      };
+      const processNode = (node) => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const frag = document.createDocumentFragment();
+          node.textContent.split(/(\s+)/).forEach(chunk => {
+            if (!chunk) return;
+            if (/^\s+$/.test(chunk)) { frag.appendChild(document.createTextNode(chunk)); return; }
+            frag.appendChild(wrapAsWord(document.createTextNode(chunk)));
+          });
+          node.parentNode.replaceChild(frag, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const clone = node.cloneNode(true);
+          const word = wrapAsWord(clone);
+          node.parentNode.replaceChild(word, node);
+        }
+      };
+      document.querySelectorAll('[data-reveal-words]').forEach(title => {
+        Array.from(title.childNodes).forEach(processNode);
+        title.querySelectorAll('.word > span').forEach((s, i) => {
+          s.style.transitionDelay = (i * 55) + 'ms';
+        });
+      });
+
+      const targets = Array.from(document.querySelectorAll('[data-reveal-words], [data-reveal-cards]'));
+      if (!('IntersectionObserver' in window)) {
+        targets.forEach(el => el.classList.add('is-revealed'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-revealed');
+              io.unobserve(e.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        targets.forEach(el => io.observe(el));
+        setTimeout(() => {
+          targets.forEach(el => { if (!el.classList.contains('is-revealed')) el.classList.add('is-revealed'); });
+        }, 4000);
+      }
+    })();
+
+    // Expanding testimonial — card grows from small to fill viewport as you scroll
+    (function(){
+      const section = document.querySelector('.case-quote');
+      if (!section) return;
+      const card = section.querySelector('.case-quote__card');
+      if (!card) return;
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) {
+        card.style.setProperty('--p', '0.6');
+        return;
+      }
+
+      let ticking = false;
+      const update = () => {
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const sh = section.offsetHeight;
+        const scrolled = Math.max(0, -rect.top);
+        const scrollable = Math.max(1, sh - vh);
+        const progress = Math.max(0, Math.min(1, scrolled / scrollable));
+        card.style.setProperty('--p', progress.toFixed(4));
+        ticking = false;
+      };
+      const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+
+    // Count-up on stat rings — Spanish formatting (comma decimal separator)
+    (function(){
+      const nums = document.querySelectorAll('.stat-card__ring-val[data-count]');
+      if (!('IntersectionObserver' in window) || nums.length === 0) return;
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const el = e.target;
+          io.unobserve(el);
+          const target = parseFloat(el.dataset.count);
+          const divisor = parseFloat(el.dataset.divisor || '1');
+          const decimals = parseInt(el.dataset.decimals || '0', 10);
+          const suffix = el.dataset.suffix || '';
+          const dur = 1400;
+          const start = performance.now();
+          function format(n) { return n.toFixed(decimals).replace('.', ','); }
+          function step(now) {
+            const p = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            const current = (target * eased) / divisor;
+            el.textContent = format(current) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+
+          const card = el.closest('.stat-card');
+          if (card) {
+            card.querySelectorAll('.seg').forEach(seg => {
+              if (seg.dataset.segDash) {
+                setTimeout(() => { seg.setAttribute('stroke-dasharray', seg.dataset.segDash); }, 150);
+                return;
+              }
+              if (seg.dataset.pct) {
+                const pct = parseFloat(seg.dataset.pct) || 0;
+                const dash = parseFloat(seg.getAttribute('stroke-dasharray')) || 345;
+                const offset = dash - (pct / 100) * dash;
+                setTimeout(() => { seg.style.strokeDashoffset = offset; }, 150);
+              }
+            });
+          }
+        });
+      }, { threshold: 0.3 });
+      nums.forEach(n => io.observe(n));
+    })();
+  </script>
+</body>
+</html>

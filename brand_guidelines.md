@@ -1,82 +1,83 @@
-# Visuanza Brand Guidelines
+# Visuanza Brand Guidelines — v6 (CIRLO direction)
+
+Visuanza is the Spanish branch of **Syns Nu Media** (Stockholm). The visual system mirrors the Swedish v6 spec exactly so Stockholm and Madrid read as the same brand. **The source of truth is `index.html` and `assets/visuanza-chrome.css`** — this doc summarizes; the code is canonical.
 
 ## Identity
 
 - **Agency name**: Visuanza
-- **Tagline**: Visibilidad digital para restaurantes
-- **Parent company**: SynsNu (Sweden)
-- **Market**: Spain and Latin America
-- **Niche**: Marketing agency specializing in restaurants
+- **Parent company**: Syns Nu AB (Stockholm)
+- **Voice**: Spanish, "vosotros" register, direct, value-led, no padding
+- **Lockup**: tri-dot (peach · teal · lavender) + "VISUANZA" wordmark in the bottom big-mark; floating hash-mark + VISUANZA in the nav pill
+- **Tagline**: "Marketing que de verdad llena mesas — no que cuenta likes."
 
-## Colors
+## Color tokens
 
-- **Primary accent**: Cobalt blue `#2563EB`
-- **Secondary accent**: Electric blue `#3B82F6`
-- **Dark background**: `#0F0F0F`
-- **Light background**: `#FFFFFF`
-- **Section background**: `#F8F9FA`
-- **Text primary**: `#111827`
-- **Text secondary**: `#6B7280`
-- **Gradient**: `linear-gradient(135deg, #EEF2FF 0%, #F8F9FA 50%, #EFF6FF 100%)`
-- **Accent purple (subtle)**: `#818CF8` — used only for decorative gradients
+Defined in `:root` of `assets/visuanza-chrome.css`. Use the variables, not the literal hex.
+
+**Editorial palette (accents, dots, buttons):**
+- `--edit-peach` `#FFCFA8` · `--edit-peach-soft` `#FFE6D2` · `--edit-peach-chip` `#FF9C6B`
+- `--edit-teal` `#4EBFB8`
+- `--edit-lavender` `#E8E1FF` · `--edit-lavender-soft` `#F4EFFF` · `--edit-lavender-chip` `#B9A3F7`
+- `--edit-olive` `#E5EE9E` · `--edit-olive-chip` `#D4EB7A`
+- `--edit-cream` `#E5CDAB` · `--edit-warm` `#F5D7B8`
+
+**Neutrals:**
+- `--bg` `#FFFFFF` · `--bg-soft` `#F7F7F5` · `--bg-tint` `#F4F4F2`
+- `--bg-dark` `#0A0A0B` · `--bg-dark-2` `#141416`
+- `--text` `#0F0F10` · `--text-2` `#52525B` · `--text-3` `#71717A` · `--text-muted` `#A1A1AA`
+- `--border` `#EAEAE6` · `--border-strong` `#D4D4D0` · `--border-dark` `rgba(255,255,255,0.08)`
+
+The cobalt blue (`#2563EB`) of the v5 era is **deprecated**. Don't introduce new accents — combine the editorial palette tones for chips, gradients, and emphasis.
 
 ## Typography
 
-- **Primary font**: Plus Jakarta Sans (Google Fonts)
-- **Headings**: Plus Jakarta Sans, weight 700-800, tight letter spacing
-- **Body**: Plus Jakarta Sans, weight 400-500, relaxed line height 1.6
-- **Accent text** (highlighted words): Cobalt blue `#2563EB`
-- **Font sizes**:
-  - H1: clamp(2rem, 5vw, 3.5rem)
-  - H2: clamp(1.5rem, 3vw, 2.5rem)
-  - Body: 1rem / 1.125rem
-  - Small: 0.875rem
+- **Sans**: `Plus Jakarta Sans` (300–800), used for everything except italic display
+- **Italic display**: `Instrument Serif` (italic), used for `.gradient-text` / `<em>` inside headlines for editorial emphasis
+- **Sizes**: `--fs-display` (hero), `--fs-h1`, `--fs-h2-lg`, `--fs-h2`, `--fs-lead`. Don't hand-size headings — use the tokens.
+- **Tracking**: `--tr-display` `-0.05em`, `--tr-h1` `-0.045em`, `--tr-h2` `-0.04em`. Negative tracking on headlines, normal on body.
+- **Weights**: 600 for headlines, 500 for medium-emphasis UI, 400 for body, 700 for the giant footer wordmark only.
 
-## Logo
+## Layout & spacing
 
-- File: `SynsLogo.png` located in project root
-- Always use on white or very light backgrounds
-- Minimum size: 32px height
-- Never add drop shadows or filters to the logo
+- `--container` `min(1400px, 94vw)` for content
+- `--container-wide` `min(1680px, 96vw)` for full-bleed sections
+- `--gutter` `24px` horizontal padding
+- `--nav-h` `76px` nav offset for `<main>` padding-top
+- Section padding: `clamp(64px, 9vw, 120px)` vertical
+- Grid gaps: `clamp(20px, 3vw, 40px)`
+- Radii: `--r-md` `14px` (chips/inputs) · `--r-card` `18px` (cards) · `--r-xl` `28px` (hero panels) · `--r-pill` `9999px`
 
-## Tone of Voice
+## Components
 
-- Professional and trustworthy — never casual or salesy
-- Direct and clear — no filler words
-- Data-driven — back claims with numbers when possible
-- Spanish by default — formal "usted" register avoided, use "tú"
+Defined in `assets/visuanza-chrome.css`:
 
-## UI Style
+- **Nav** — `#nav` floating pill, `.nav__inner`, `.nav__logo`, `.nav__links`, `.nav__has-dropdown`, `.nav__dropdown`, `.nav__cta`, `#hamburger`. Hides on scroll-down via `chrome.js`.
+- **Buttons** — `.btn` `.btn--blue` `.btn--ghost` `.btn--sm`. Pill-style: `.pill-btn` `.pill-btn--dark` `.pill-btn--lav` with `.pill-btn__arrow` circle arrow.
+- **Tri-dot mark** — `.tri-dot` with three `<b>` children. Sized in `em` so it scales with the parent font.
+- **Signature stamp** — `.sec-signature` dark panel with centered hash mark and "SYNS NU MEDIA · MADRID" eyebrow. Always sits between page body and big-mark footer.
+- **Big-mark footer** — `.sec-footer-big`, 5-col grid (`.footer-big__grid`), giant `.footer-big__mark` lockup with tri-dot + VISUANZA, bottom strip with copyright.
+- **Reveal utility** — `.fx-up` (+ `--d1` `--d2` `--d3` delays). Triggered by `chrome.js` IntersectionObserver.
 
-- Clean, minimal, lots of white space
-- Rounded corners: 12px for cards, 8px for buttons
-- Shadows: soft and subtle — `box-shadow: 0 4px 24px rgba(0,0,0,0.08)`
-- Buttons: dark filled (`#111827`) or cobalt blue (`#2563EB`)
-- Cards: white background, subtle border `1px solid #F0F0F0`
-- Animations: smooth, subtle — 0.3s ease transitions on scroll
+## Tone of voice
 
-## Layout
+- Spanish, "vosotros" register (mirrors the existing index copy)
+- Direct, no jargon, no filler
+- Lead with value (reservas, comensales, caja del día) — not vanity (likes, alcance)
+- Editorial italics for emphasis on key nouns: `<em class="gradient-text">restaurante</em>`, `<em>mesas</em>`, etc.
+- No salesy language — "Reservad una llamada", not "¡No te pierdas esta oportunidad!"
 
-- Max content width: 1440px
-- Responsive padding: `clamp(8px, 1.5vw, 24px)`
-- Section vertical padding: `clamp(60px, 8vw, 120px)`
-- Grid: 12-column, gap 24px
+## Where things live
 
-## Key Pages
+- **Pages**: 13 HTML files at the project root (index, servicios, redes-sociales, diseno-web, fotografia-menu, google-publicidad, publicidad-digital, contacto, blog, casos, nosotros, analisis, politica-privacidad)
+- **Shared chrome**: `assets/visuanza-chrome.css` + `assets/visuanza-chrome.js`
+- **Hash mark assets**: `assets/hash-mark.png` (dark on light) · `assets/hash-mark-white.png` (light on dark)
+- **Page-specific media**: `assets/insights/`, `assets/accel/`, etc.
 
-- Homepage: `index.html`
-- Assets: `brand_assets/` folder
-- Logo: `SynsLogo.png`
-- Phone mockup: `brand_assets/phoneMock.png`
+## Updating the brand
+
+If you change a token in `assets/visuanza-chrome.css`, every page picks it up. If you change `index.html`'s inline `<style>` tokens, only index changes — make sure to mirror to chrome.css when the change is brand-wide.
 
 ## Reference
 
-- Design inspiration: https://www.riserank.com/es
-- Style: Modern SaaS landing page, clean and conversion focused
-
-## Visual Reference
-
-Full page screenshot of design reference is located at:
-/home/aromazla/Desktop/WEB/temporary screenshots/screenshot-N-reference.png
-
-Match this design closely for all visual decisions.
+- Swedish source: <https://syns-nu-media.vercel.app/>
+- This is the parent agency's live v6 site. Treat it as the visual reference for any decision not documented here.
