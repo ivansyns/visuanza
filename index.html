@@ -588,26 +588,63 @@
         display: flex;
         grid-template-columns: none;
         gap: 1rem;
-        padding: 0 var(--gutter) 0.5rem;
-        margin: 0 calc(var(--gutter) * -1);
-        /* Touch-swipe carousel: scroll-jack is disabled below 1100px because
-           cards there exceed 100dvh — let users naturally swipe through. */
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scroll-snap-type: x mandatory;
-        scroll-padding-inline: var(--gutter);
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.5rem;
+        /* No touch overflow-x — scroll-jack drives card translation by
+           hijacking vertical page scroll. Cards must NOT be horizontally
+           draggable, otherwise users get conflicting interactions. */
       }
-      .sec-collection__grid[data-carousel]::-webkit-scrollbar { display: none; }
       .sec-collection__grid[data-carousel] > .service-card {
-        /* ~87% of viewport per card on mobile — one dominant card with a
-           small peek of the next to signal swipeability. */
-        flex: 0 0 calc((100% - 1rem) / 1.15);
-        scroll-snap-align: start;
+        /* Responsive card width — clamp keeps it sane across phone sizes:
+           min 280px (small phones), preferred 82vw, max 400px (tablets). */
+        flex: 0 0 clamp(280px, 82vw, 400px);
+        /* Explicit height tuned to fit inside the sticky's available area
+           on every phone size (100dvh - head - padding ≈ 55dvh).
+           Card ends INSIDE the viewport so its bottom border-radius stays
+           visible (no overflow clip from the viewport). */
+        aspect-ratio: auto;
+        height: clamp(320px, 55dvh, 440px);
       }
       /* Below 1100 the grid fallback (without data-carousel) keeps 2 cols */
       .sec-collection__grid:not([data-carousel]) { grid-template-columns: repeat(2, 1fr); }
+
+      /* Compact card content on mobile so total height fits inside the
+         sticky's 100dvh viewport (minus head + padding ≈ 380-440px usable). */
+      .service-card { padding: 1.25rem; }
+      .service-card__name {
+        font-size: 1.125rem;
+        /* Reserve 2 lines for symmetry across cards (some headings wrap) */
+        min-height: calc(1.125rem * 1.2 * 2);
+        margin-bottom: 0.375rem;
+      }
+      .service-card__desc {
+        font-size: 0.8125rem;
+        max-width: none;
+        /* 3 lines reserved — fits the typical wrapping at this width */
+        min-height: calc(0.8125rem * 1.5 * 3);
+        margin-bottom: 0.5rem;
+      }
+      .service-card__price { font-size: 0.8125rem; }
+      /* Mobile visual: override the per-card aspect ratios from desktop —
+         on mobile, the visual takes whatever height remains (flex:1) up to a
+         max so the card stays within 100dvh. Image is centered with contain,
+         so each image's natural shape is preserved within a uniform box —
+         giving cross-card symmetry from the container while letting the
+         image itself fill or letterbox as needed. */
+      .service-card__visual,
+      .service-card__visual--7x10,
+      .service-card__visual--4x5,
+      .service-card__visual--1x1,
+      .service-card__visual--mockup {
+        aspect-ratio: auto;
+        flex: 1;
+        min-height: 0;
+        max-height: 220px;
+        margin-top: 0.75rem;
+        align-items: center;
+      }
+      /* (Mobile gmap-mockup rules live AFTER the desktop defaults, see
+         further down — placing them here gets cascade-overridden by the
+         later non-media-query rules of the same specificity.) */
     }
     @media (max-width: 600px) {
       .sec-collection__grid:not([data-carousel]) { grid-template-columns: 1fr; }
@@ -745,15 +782,9 @@
       max-width: 280px;
       margin-bottom: 0.75rem;
     }
-    /* Mobile: reserve 5 lines for description (matches longest one — the
-       redes-sociales card wraps to 5 lines on narrow viewports). Cards with
-       shorter descriptions get whitespace below to keep the image at a
-       consistent y-position across the carousel. */
-    @media (max-width: 1100px) {
-      .service-card__desc {
-        min-height: calc(0.9375rem * 1.5 * 5);
-      }
-    }
+    /* Mobile description min-height is set in the carousel-specific
+       mobile block below (smaller font + 4 lines reserved to fit the
+       sticky's 100dvh viewport). */
     .service-card__price { font-size: 0.9375rem; opacity: 0.75; }
     .service-card__visual {
       flex: 1;
@@ -793,20 +824,10 @@
        fotografia image when the box ends up slightly non-square. */
     .service-card__visual img { object-fit: contain; object-position: center center; }
 
-    @media (max-width: 1100px) {
-      .sec-collection__grid[data-carousel] > .service-card {
-        aspect-ratio: auto;
-        min-height: min(60dvh, 480px);
-      }
-      /* Mobile: cap each visual so no single card balloons. Aspect-ratio
-         per-modifier still applies — they just shrink uniformly. */
-      .service-card__visual {
-        min-height: 220px;
-        max-height: 320px;
-        flex: 0 0 auto;
-        align-items: center;
-      }
-    }
+    /* Mobile-specific service card sizing is consolidated in the
+       max-width:1100px block higher up (around line 586). The card height
+       is set there with clamp() so it always fits the sticky's available
+       area and the bottom border-radius stays visible (no overflow clip). */
     .service-card:hover .service-card__visual img { transform: scale(1.04); }
 
     /* ── Google Maps mockup (used inside the olive service card instead of an image) ── */
@@ -914,6 +935,33 @@
     .gmap-mockup__listing-meta {
       font-size: 0.625rem;
       color: #6B7280;
+    }
+
+    /* Mobile compact gmap-mockup — placed AFTER the desktop rules so it
+       wins the cascade. The desktop default has min-height: 260px + map
+       height: 110px, which overflows the 220px max-height of the mobile
+       visual area, getting top-clipped. These compact values let the
+       whole mockup render visibly inside the smaller card. */
+    @media (max-width: 1100px) {
+      .gmap-mockup {
+        min-height: 0;
+        height: 100%;
+      }
+      .gmap-mockup__window {
+        margin: 10px 18px 0;
+      }
+      .gmap-mockup__map {
+        height: 80px;
+      }
+      .gmap-mockup__results {
+        margin: -12px 8px 10px;
+      }
+      .gmap-mockup__listing {
+        padding: 8px 12px;
+      }
+      .gmap-mockup__listing--featured {
+        padding: 10px 12px;
+      }
     }
 
     /* ============================================================
@@ -2853,12 +2901,10 @@
 
     // Horizontal scroll-jack — generic factory. Pins a section while
     // converting vertical scroll into horizontal translate of an inner
-    // cards container. Disabled on mobile (≤1100px) because cards there
-    // are taller than the 100dvh sticky viewport and got their bottoms
-    // clipped — mobile uses a normal horizontal-swipe carousel instead.
+    // cards container. Active on every viewport width (mobile included)
+    // because the user explicitly asked for unified scroll-jack behavior.
     function makeScrollJack(opts) {
       const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const desktop = window.matchMedia('(min-width: 1101px)');
       const pin = document.querySelector(opts.pinSelector);
       const sticky = pin && pin.querySelector(opts.stickySelector);
       const viewport = pin && pin.querySelector(opts.viewportSelector);
@@ -2870,7 +2916,7 @@
       let travel = 0;
       let ticking = false;
 
-      const shouldPin = () => !reduced.matches && desktop.matches;
+      const shouldPin = () => !reduced.matches;
 
       const teardown = () => {
         pin.classList.remove('is-pinned');
